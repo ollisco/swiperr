@@ -10,19 +10,22 @@ const Stack = createNativeStackNavigator();
 
 const StackNavigator: React.FC = () => {
 
-  const { user } = useAuth();
-  return (
-    <Stack.Navigator>
-      {user ? (
-        <>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Chat" component={ChatScreen} />
-        </> 
-      ) : (
-        <Stack.Screen name="Login" component={LoginScreen} />
-      )}
-    </Stack.Navigator>
-  )
-}
+    const { user } = useAuth();
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Login" component={LoginScreen} />
+            { /*
+            {user ? (
+                <>
+                    <Stack.Screen name="Home" component={HomeScreen} />
+                    <Stack.Screen name="Chat" component={ChatScreen} />
+                </> 
+            ) : (
+                <Stack.Screen name="Login" component={LoginScreen} />
+            )}
+            */}
+        </Stack.Navigator>
+    );
+};
 
-export default StackNavigator
+export default StackNavigator;
