@@ -42,6 +42,11 @@ export default StyleSheet.create({
   matchesTextCardItem: {
     color: WHITE,
   },
+  volumeSlider: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
   descriptionCardItem: {
     color: GRAY,
     textAlign: "center",

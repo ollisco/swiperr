@@ -2,14 +2,18 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import TrackPlayer from 'react-native-track-player';
 import { Home, Liked, Messages, Profile } from "./screens";
 import { PRIMARY_COLOR, DARK_GRAY, BLACK, WHITE } from "./assets/styles";
-import TabBarIcon from "./components/TabBarIcon";
+import TabBarIcon from "./components/TabBarIcon"
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const App = () => (
+
+const App = () => {
+  return (
   <NavigationContainer>
     <Stack.Navigator
     screenOptions={{
@@ -103,6 +107,8 @@ const App = () => (
       </Stack.Screen>
     </Stack.Navigator>
   </NavigationContainer>
-);
+)};
+
+
 
 export default App;

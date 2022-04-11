@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "module": "esnext",
     "allowSyntheticDefaultImports": true,
     "jsx": "react-native",
     "lib": [
@@ -12,4 +13,5 @@
     "resolveJsonModule": true,
     "strict": true
   },
+  "extends": "expo/tsconfig.base"
 }
