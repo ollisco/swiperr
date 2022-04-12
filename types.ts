@@ -7,12 +7,15 @@ export type CardItemT = {
   matches?: string;
   name: string;
   previousVolume?: number;
-  setVolume?: any;
+  setVolume?: (val: number) => void;
+  color?: string;
 };
 
-export type VolumeContextT = {
+export type SwipedCardContextT = {
   volume: number;
   updateVolume: (value: number) => void;
+  rgb: string;
+  setRGB: (value: string) => void;
 }
 
 

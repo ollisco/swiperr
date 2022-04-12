@@ -4,7 +4,7 @@ export const PRIMARY_COLOR = "#7444C0";
 export const SECONDARY_COLOR = "#5636B8";
 export const WHITE = "#FFFFFF";
 export const GRAY = "#757E90";
-export const DARK_GRAY = "#363636";
+export const DARK_GRAY = "#363636"; // rgb(54, 54, 54)
 export const BLACK = "#000000";
 export const DARKER_GRAY = "#303030";
 
@@ -108,8 +108,8 @@ export default StyleSheet.create({
     shadowOffset: { height: 10, width: 0 },
   },
 
-  // COMPONENT - CITY
-  city: {
+  // COMPONENT - SETTINGS
+  settings: {
     backgroundColor: WHITE,
     padding: 10,
     borderRadius: 20,
@@ -120,7 +120,7 @@ export default StyleSheet.create({
     shadowColor: BLACK,
     shadowOffset: { height: 0, width: 0 },
   },
-  cityText: {
+  settingsText: {
     color: DARK_GRAY,
     fontSize: 13,
     textAlign: "center",
@@ -320,4 +320,27 @@ export default StyleSheet.create({
   iconMenu: {
     alignItems: "center",
   },
+
+  // RESULT ICON
+  resultIcon: {
+    visibility: "visible",
+    opacity: 1,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: WHITE,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    zIndex: 1,
+    marginLeft: DIMENSION_WIDTH/2 - 30,
+    marginTop: DIMENSION_HEIGHT/2 - 25,
+  },
+
+  resultIconHidden: {
+    visibility: "hidden",
+    opacity: 0,
+    transition: "visibility 0s 2s, opacity 2s linear",
+  }
+
 });

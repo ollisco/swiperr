@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Text, View, Image, Dimensions, TouchableOpacity } from "react-native";
 import Icon from "./Icon";
-import { CardItemT, VolumeContextT } from "../types";
+import { CardItemT, SwipedCardContextT } from "../types";
 import Slider from '@react-native-community/slider';
 import IMAGE_TRANSPARENT from "../assets/images/transparent.png";
 
@@ -15,7 +15,7 @@ import styles, {
   DARK_GRAY,
   BLACK,
 } from "../assets/styles";
-import {VolumeContext} from "./VolumeContext";
+import {SwipeCardContext} from "./VolumeContext";
 
 const CardItem = ({
   hasActions,
@@ -24,10 +24,11 @@ const CardItem = ({
   artist,
   matches,
   name,
+  color
 }: CardItemT) => {
   const fullWidth = Dimensions.get("window").width;
 
-  const {volume, updateVolume} = useContext(VolumeContext) as VolumeContextT;
+  const {volume, updateVolume, rgb} = useContext(SwipeCardContext) as SwipedCardContextT;
   // TODO: Has variant can be removed 
   const imageStyle = [
     {
@@ -47,8 +48,9 @@ const CardItem = ({
     },
   ];
 
+
   return (
-    <View style={styles.containerCardItem}>
+    <View style={[styles.containerCardItem, {backgroundColor: rgb}]}>
       {/* IMAGE */}
       <Image source={image} style={imageStyle} />
 
@@ -62,6 +64,8 @@ const CardItem = ({
           </Text>
         </View>
       )}
+
+    {console.log()}
     {hasActions &&  (
     
     <Slider

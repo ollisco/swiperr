@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Text, View, Image, Dimensions, TouchableOpacity } from "react-native";
 import Icon from "./Icon";
-import { CardItemT, VolumeContextT } from "../types";
+import { CardItemT, SwipedCardContextT } from "../types";
 import Slider from '@react-native-community/slider';
 import IMAGE_TRANSPARENT from "../assets/images/transparent.png";
 
@@ -9,7 +9,7 @@ import IMAGE_TRANSPARENT from "../assets/images/transparent.png";
 import styles, {
   WHITE,
 } from "../assets/styles";
-import {VolumeContext} from "./VolumeContext";
+import {SwipeCardContext} from "./VolumeContext";
 
 const CardItemSmall = ({
   hasVariant,
