@@ -54,7 +54,7 @@ const App = () => {
                 tabBarIcon: ({ focused }) => (
                   <TabBarIcon
                     focused={focused}
-                    iconName="search"
+                    iconName="musical-notes"
                     text="Explore"
                   />
                 ),

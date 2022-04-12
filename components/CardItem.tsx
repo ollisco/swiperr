@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Text, View, Image, Dimensions, TouchableOpacity } from "react-native";
 import Icon from "./Icon";
-import { CardItemT } from "../types";
+import { CardItemT, VolumeContextT } from "../types";
 import Slider from '@react-native-community/slider';
 import IMAGE_TRANSPARENT from "../assets/images/transparent.png";
 
@@ -15,6 +15,7 @@ import styles, {
   DARK_GRAY,
   BLACK,
 } from "../assets/styles";
+import {VolumeContext} from "./VolumeContext";
 
 const CardItem = ({
   hasActions,
@@ -26,6 +27,9 @@ const CardItem = ({
 }: CardItemT) => {
   // Custom styling
   const fullWidth = Dimensions.get("window").width;
+
+  const {volume, updateVolume} = useContext(VolumeContext) as VolumeContextT;
+  
 
   const imageStyle = [
     {
@@ -85,12 +89,14 @@ const CardItem = ({
       <View style={styles.volumeSlider}>
         <Icon name="md-volume-low" color={WHITE} size={20}></Icon>
         <Slider
-          style={{width: 200, height: 40}}
+          style={{width: 200, height: 20}}
           minimumValue={0}
-          maximumValue={1}
+          maximumValue={100}
           minimumTrackTintColor="#FFFFFF"
           maximumTrackTintColor="#000000"
           thumbTintColor="#FFFFFF"
+          value={volume}
+          onValueChange={(value) => updateVolume(value)}
         />
         <Icon name="md-volume-high" color={WHITE} size={20}></Icon>
       </View>
@@ -99,26 +105,28 @@ const CardItem = ({
       {/* ACTIONS */}
       {hasActions && (
         <View style={styles.actionsCardItem}>
-          <TouchableOpacity style={styles.miniButton}>
-            <Icon name="add" color={STAR_ACTIONS} size={20} />
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.button}>
-            <Icon name="heart" color={LIKE_ACTIONS} size={20} />
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.button}>
-            <Icon name="pause" color={DISLIKE_ACTIONS} size={30} />
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.button}>
-            {/*send */}
-            <Icon name="arrow-redo" color={BLACK} size={20} /> 
-          </TouchableOpacity>
+          
           
           <TouchableOpacity style={styles.miniButton}>
             <Icon name="volume-mute" color={FLASH_ACTIONS} size={14} />
           </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            {/*send */}
+            <Icon name="arrow-redo" color={BLACK} size={20} /> 
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button}>
+            <Icon name="pause" color={DISLIKE_ACTIONS} size={30}  />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button}>
+            <Icon name="heart" color={LIKE_ACTIONS} size={20} />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.miniButton}>
+            <Icon name="add" color={STAR_ACTIONS} size={20} />
+          </TouchableOpacity>
+
+          
         </View>
       )}
     </View>

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Icon, Message } from "../components";
 import DEMO from "../assets/data/dummy_data_profiles";
-import styles, { DARK_GRAY } from "../assets/styles";
+import styles, { DARK_GRAY, GRAY } from "../assets/styles";
 
 const Messages = () => (
   <ImageBackground
@@ -20,7 +20,7 @@ const Messages = () => (
       <View style={styles.top}>
         <Text style={styles.title}>Messages</Text>
         <TouchableOpacity>
-          <Icon name="ellipsis-vertical" color={DARK_GRAY} size={20} />
+          <Icon name="person-add" color={GRAY} size={20} style={styles.topIconRight} />
         </TouchableOpacity>
       </View>
 

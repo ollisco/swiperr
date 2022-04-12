@@ -32,7 +32,7 @@ const Profile = () => {
           <View style={styles.top}>
             <TouchableOpacity>
               <Icon
-                name="chevron-back"
+                name="swap-horizontal-outline"  
                 size={20}
                 color={WHITE}
                 style={styles.topIconLeft}

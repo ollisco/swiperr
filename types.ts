@@ -6,13 +6,22 @@ export type CardItemT = {
   artist: string;
   matches?: string;
   name: string;
+  previousVolume?: number;
+  setVolume?: any;
 };
+
+export type VolumeContextT = {
+  volume: number;
+  updateVolume: (value: number) => void;
+}
+
 
 export type IconT = {
   name: any;
   size: number;
   color: string;
   style?: any;
+  onPress?: (e: any) => void;
 };
 
 export type MessageT = {
