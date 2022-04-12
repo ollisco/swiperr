@@ -12,13 +12,13 @@ const CardStackHandler = () => {
     
 
     function convertRGBgreen(d: number) {
-      const m = d > 100 ? 100 : d;
-      return `rgb(${54-(54*d/300)}, ${m}, ${54-(54*d/300)})`
+      const m = d > 125 ? 125 : d;
+      return `rgb(${54-(54*d/300)+20}, ${m}, ${54-(54*d/300)+20})`
     }    
 
     function convertRGBred(d: number) {
-      const m = d < 150 ? 150 : d;
-      return `rgb(${m}, ${54-(54*d/300)}, ${54-(54*d/300)})`
+      const m = d < 125 ? 125 : -d;
+      return `rgb(${m}, ${54-(54*-d/300)+20}, ${54-(54*-d/300)+20})`
     }  
 
 
