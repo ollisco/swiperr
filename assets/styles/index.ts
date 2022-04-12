@@ -322,25 +322,5 @@ export default StyleSheet.create({
   },
 
   // RESULT ICON
-  resultIcon: {
-    visibility: "visible",
-    opacity: 1,
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: WHITE,
-    justifyContent: "center",
-    alignItems: "center",
-    position: "absolute",
-    zIndex: 1,
-    marginLeft: DIMENSION_WIDTH/2 - 30,
-    marginTop: DIMENSION_HEIGHT/2 - 25,
-  },
-
-  resultIconHidden: {
-    visibility: "hidden",
-    opacity: 0,
-    transition: "visibility 0s 2s, opacity 2s linear",
-  }
 
 });

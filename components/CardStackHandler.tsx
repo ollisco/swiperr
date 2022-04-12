@@ -10,6 +10,7 @@ const CardStackHandler = () => {
     const [swiper, setSwiper] = useState<CardStack | null>(null);
     const {rgb, setRGB} = useContext(SwipeCardContext) as SwipedCardContextT;
     
+    const swipeColorLimit = 100;
 
     function convertRGBgreen(d: number) {
       const m = d > 125 ? 125 : d;
@@ -19,7 +20,7 @@ const CardStackHandler = () => {
     function convertRGBred(d: number) {
       const m = d < 125 ? 125 : -d;
       return `rgb(${m}, ${54-(54*-d/300)+20}, ${54-(54*-d/300)+20})`
-    }  
+    }   
 
 
     return (
@@ -29,10 +30,9 @@ const CardStackHandler = () => {
           renderNoMoreCards={() => null}
           ref={(newSwiper): void => setSwiper(newSwiper)}
           onSwipe={(x, _y) => {
-              console.log(x)
-              if (x > 10) {
+              if (x > swipeColorLimit) {
                 setRGB(convertRGBgreen(x)); 
-              } else if (x < -10) {
+              } else if (x < -swipeColorLimit) {
                 setRGB(convertRGBred(x))
               } else {
                 setRGB(DARK_GRAY);
