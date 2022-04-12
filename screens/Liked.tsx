@@ -8,8 +8,9 @@ import {
   FlatList,
 } from "react-native";
 import { CardItem, Icon } from "../components";
-import DEMO from "../assets/data/dumm_data_songs";
+import DATA from "../assets/data/dummy_data_songs";
 import styles, { DARK_GRAY } from "../assets/styles";
+import CardItemSmall from "../components/CardItemSmall";
 
 const Liked = () => (
   <ImageBackground
@@ -26,11 +27,11 @@ const Liked = () => (
 
       <FlatList
         numColumns={2}
-        data={DEMO}
+        data={DATA}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity>
-            <CardItem
+            <CardItemSmall
               image={item.image}
               name={item.track}
               artist={item.artist}

@@ -3,7 +3,7 @@ import { View, ImageBackground } from "react-native";
 import CardStack, { Card } from "react-native-card-stack-swiper";
 import { Settings, Filters, CardItem } from "../components";
 import styles from "../assets/styles";
-import DEMO from "../assets/data/dumm_data_songs";
+import DATA from "../assets/data/dummy_data_songs";
 import VolumeContext from "../components/VolumeContext";
 import VolumeProvider from "../components/VolumeContext";
 
@@ -29,7 +29,7 @@ const Home = () => {
           renderNoMoreCards={() => null}
           ref={(newSwiper): void => setSwiper(newSwiper)}
         >
-          {DEMO.map((item) => (
+          {DATA.map((item) => (
             <Card key={item.id}>
               <CardItem
                 hasActions

@@ -25,12 +25,10 @@ const CardItem = ({
   matches,
   name,
 }: CardItemT) => {
-  // Custom styling
   const fullWidth = Dimensions.get("window").width;
 
   const {volume, updateVolume} = useContext(VolumeContext) as VolumeContextT;
-  
-
+  // TODO: Has variant can be removed 
   const imageStyle = [
     {
       borderRadius: 8,
@@ -64,7 +62,8 @@ const CardItem = ({
           </Text>
         </View>
       )}
-    {hasActions && (
+    {hasActions &&  (
+    
     <Slider
         style={{width: 300, height: 10, marginTop: 10}}
         minimumValue={0}
@@ -85,7 +84,9 @@ const CardItem = ({
         <Text style={styles.statusText}>{artist}</Text>
       </View>
       
-      {hasActions && (
+      {hasActions && 
+      
+      (
       <View style={styles.volumeSlider}>
         <Icon name="md-volume-low" color={WHITE} size={20}></Icon>
         <Slider
@@ -108,18 +109,11 @@ const CardItem = ({
           
           
           <TouchableOpacity style={styles.miniButton}>
-            <Icon name="volume-mute" color={FLASH_ACTIONS} size={14} />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            {/*send */}
-            <Icon name="arrow-redo" color={BLACK} size={20} /> 
+            <Icon name="arrow-redo" color={FLASH_ACTIONS} size={14} />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button}>
             <Icon name="pause" color={DISLIKE_ACTIONS} size={30}  />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
-            <Icon name="heart" color={LIKE_ACTIONS} size={20} />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.miniButton}>

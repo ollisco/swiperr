@@ -94,8 +94,8 @@ export default StyleSheet.create({
     shadowOffset: { height: 10, width: 0 },
   },
   miniButton: {
-    width: 40,
-    height: 40,
+    width: 45,
+    height: 45,
     borderRadius: 30,
     backgroundColor: WHITE,
     marginHorizontal: 7,
