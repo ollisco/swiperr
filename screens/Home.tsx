@@ -26,27 +26,7 @@ const Home = () => {
 
         <SwipeCardProvider >
           <CardStackHandler />
-        {/* <CardStack
-          loop
-          verticalSwipe={false}
-          renderNoMoreCards={() => null}
-          ref={(newSwiper): void => setSwiper(newSwiper)}
-          onSwipe={(x, y) => setDist(x)}
-        >
-          {DATA.map((item) => (
-            <Card key={item.id}>
-              <CardItem
-                hasActions
-                image={item.image}
-                name={item.track}
-                description={item.artist}
-                matches={item.match}
-                artist={item.artist}
-          
-              />
-            </Card>
-          ))}
-        </CardStack> */}
+        
         </SwipeCardProvider>
       
           </View>
