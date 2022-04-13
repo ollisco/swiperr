@@ -107,7 +107,7 @@ export default StyleSheet.create({
     shadowColor: DARK_GRAY,
     shadowOffset: { height: 10, width: 0 },
   },
-  // SMALL CARD
+  // SMALL CARD (CARDITEMSMALL)
   smallImageStyle: {
       borderRadius: 8,
       width: DIMENSION_WIDTH / 2 - 30 ,
@@ -120,6 +120,22 @@ export default StyleSheet.create({
       color: WHITE,
       fontSize: 15,
     },
+  // LARGE CARD (CARDITEM)
+  imageStyle: {
+      borderRadius: 8,
+      width:  DIMENSION_WIDTH - 80,
+      height: 350,
+      margin: 20,
+    },
+  
+
+  nameStyle: {
+      paddingTop: 15,
+      paddingBottom: 7,
+      color: WHITE,
+      fontSize: 30,
+  },
+
 
   // COMPONENT - SETTINGS
   settings: {

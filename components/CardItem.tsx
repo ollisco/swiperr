@@ -1,60 +1,33 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Text, View, Image, Dimensions, TouchableOpacity } from "react-native";
 import Icon from "./Icon";
 import { CardItemT, SwipedCardContextT } from "../types";
 import Slider from '@react-native-community/slider';
-import IMAGE_TRANSPARENT from "../assets/images/transparent.png";
 
 
 import styles, {
   DISLIKE_ACTIONS,
   FLASH_ACTIONS,
-  LIKE_ACTIONS,
   STAR_ACTIONS,
   WHITE,
-  DARK_GRAY,
-  BLACK,
 } from "../assets/styles";
 import {SwipeCardContext} from "./VolumeContext";
 
 const CardItem = ({
   hasActions,
-  hasVariant,
   image,
   artist,
   matches,
   track: name,
-  color
 }: CardItemT) => {
-  const fullWidth = Dimensions.get("window").width;
 
   const {volume, updateVolume, rgb} = useContext(SwipeCardContext) as SwipedCardContextT;
-  // TODO: Has variant can be removed 
-  const imageStyle = [
-    {
-      borderRadius: 8,
-      width: hasVariant ? fullWidth / 2 - 30 : fullWidth - 80,
-      height: hasVariant ? 170 : 350,
-      margin: hasVariant ? 0 : 20,
-    },
-  ];
-
-  const nameStyle = [
-    {
-      paddingTop: hasVariant ? 10 : 15,
-      paddingBottom: hasVariant ? 5 : 7,
-      color: WHITE,
-      fontSize: hasVariant ? 15 : 30,
-    },
-  ];
-
 
   return (
+      
     <View style={[styles.containerCardItem, {backgroundColor: rgb}]}>
       {/* IMAGE */}
-      <Image source={image} style={imageStyle} />
-
-      
+      <Image source={image} style={styles.imageStyle} />
 
       {/* MATCHES */}
       {matches && (
@@ -82,11 +55,11 @@ const CardItem = ({
       )}
 
       {/* NAME */}
-      <Text style={nameStyle}>{name}</Text>
+      <Text style={styles.nameStyle}>{name}</Text>
 
-      <View style={styles.status}>
-        <Text style={styles.statusText}>{artist}</Text>
-      </View>
+      
+      <Text style={[styles.status, styles.statusText]}>{artist}</Text>
+      
       
       {hasActions && 
       
@@ -111,7 +84,6 @@ const CardItem = ({
       {hasActions && (
         <View style={styles.actionsCardItem}>
           
-          
           <TouchableOpacity style={styles.miniButton}>
             <Icon name="arrow-redo" color={FLASH_ACTIONS} size={14} />
           </TouchableOpacity>
@@ -124,7 +96,6 @@ const CardItem = ({
             <Icon name="add" color={STAR_ACTIONS} size={20} />
           </TouchableOpacity>
 
-          
         </View>
       )}
     </View>
