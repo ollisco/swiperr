@@ -53,7 +53,7 @@ const CardStackHandler = () => {
               <CardItem
                 hasActions
                 image={item.image}
-                name={item.track}
+                track={item.track}
                 description={item.artist}
                 matches={item.match}
                 artist={item.artist}

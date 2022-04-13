@@ -5,7 +5,7 @@ export type CardItemT = {
   image: any;
   artist: string;
   matches?: string;
-  name: string;
+  track: string;
   previousVolume?: number;
   setVolume?: (val: number) => void;
   color?: string;

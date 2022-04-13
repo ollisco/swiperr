@@ -23,7 +23,7 @@ const CardItem = ({
   image,
   artist,
   matches,
-  name,
+  track: name,
   color
 }: CardItemT) => {
   const fullWidth = Dimensions.get("window").width;

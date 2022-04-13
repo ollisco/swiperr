@@ -33,9 +33,9 @@ const Liked = () => (
           <TouchableOpacity>
             <CardItemSmall
               image={item.image}
-              name={item.track}
+              track={item.track}
               artist={item.artist}
-              hasVariant
+              
             />
           </TouchableOpacity>
         )}
