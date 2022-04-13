@@ -107,6 +107,19 @@ export default StyleSheet.create({
     shadowColor: DARK_GRAY,
     shadowOffset: { height: 10, width: 0 },
   },
+  // SMALL CARD
+  smallImageStyle: {
+      borderRadius: 8,
+      width: DIMENSION_WIDTH / 2 - 30 ,
+      height: 170 ,
+      margin: 0,
+  },
+  smallNameStyle: {
+      paddingTop: 10,
+      paddingBottom: 5 ,
+      color: WHITE,
+      fontSize: 15,
+    },
 
   // COMPONENT - SETTINGS
   settings: {
