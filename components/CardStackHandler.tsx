@@ -1,13 +1,13 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import CardStack, { Card } from "react-native-card-stack-swiper";
 import DATA from "../assets/data/dummy_data_songs";
-import { BLACK, WHITE, DARK_GRAY } from "../assets/styles";
+import { DARK_GRAY } from "../assets/styles";
 import { SwipedCardContextT } from "../types";
 import CardItem from "./CardItem";
-import SwipeCardProvider, { SwipeCardContext } from "./VolumeContext";
+import { SwipeCardContext } from "./VolumeContext";
 
 const CardStackHandler = () => {
-    const [swiper, setSwiper] = useState<CardStack | null>(null);
+    const [_swiper, setSwiper] = useState<CardStack | null>(null);
     const {rgb, setRGB} = useContext(SwipeCardContext) as SwipedCardContextT;
     
     const swipeColorLimit = 100;
@@ -41,8 +41,12 @@ const CardStackHandler = () => {
           }
           onSwiped={(_) => {
             setRGB(DARK_GRAY)
+            }
           }
-        }
+          onSwipeEnd={() => {
+            setRGB(DARK_GRAY)
+            }
+          }
         >
           {DATA.map((item) => (
             <Card key={item.id}>
