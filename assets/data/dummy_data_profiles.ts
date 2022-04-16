@@ -1,14 +1,14 @@
 import { DataProfile } from "../../types";
-import IMAGE_01 from "../images/01.jpg";
-import IMAGE_02 from "../images/02.jpg";
-import IMAGE_03 from "../images/03.jpg";
-import IMAGE_04 from "../images/04.jpg";
-import IMAGE_05 from "../images/05.jpg";
-import IMAGE_06 from "../images/06.jpg";
-import IMAGE_07 from "../images/07.jpg";
-import IMAGE_08 from "../images/08.jpg";
-import IMAGE_09 from "../images/09.jpg";
-import IMAGE_10 from "../images/10.jpg";
+import IMAGE_01 from "../images/photo01.avif";
+import IMAGE_02 from "../images/photo02.avif";
+import IMAGE_03 from "../images/photo03.avif";
+import IMAGE_04 from "../images/photo04.avif";
+import IMAGE_05 from "../images/photo05.avif";
+import IMAGE_06 from "../images/photo06.avif";
+import IMAGE_07 from "../images/photo07.avif";
+import IMAGE_08 from "../images/photo08.avif";
+import IMAGE_09 from "../images/photo09.avif";
+import IMAGE_10 from "../images/photo10.avif";
 
 const data: DataProfile[] = [
   {
