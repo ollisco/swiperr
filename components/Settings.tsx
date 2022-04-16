@@ -5,7 +5,7 @@ import styles, { DARK_GRAY } from "../assets/styles";
 import { useSpotifyAuth } from "../hooks/useAuth";
 
 const Settings = () => {
-  const { response, promptAsync } = useSpotifyAuth();
+  const { request, response, promptAsync } = useSpotifyAuth();
 
 
   return (
@@ -13,6 +13,7 @@ const Settings = () => {
     <Text style={styles.settingsText}>
       <Icon name="settings-sharp" size={15} color={DARK_GRAY} onPress={promptAsync} />
     </Text>
+    {/*console.log(response)*/}
   </TouchableOpacity>
 )};
 
