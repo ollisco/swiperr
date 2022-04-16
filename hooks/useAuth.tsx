@@ -1,13 +1,17 @@
 import { View, Text } from 'react-native';
 import React, { createContext, useContext, useState } from 'react';
-import * as Google from 'expo-auth-session/providers/google';
+//import * as Google from 'expo-auth-session/providers/google';
+import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
 
+const CLIENT_ID = "561ad9eddee0418d8773090ae22723db" //TODO: import from .env
+WebBrowser.maybeCompleteAuthSession();
 
-interface AuthContextType {
-    user?: string;
-    accessToken?: string | undefined;
-}
+// Endpoint
+const discovery = {
+    authorizationEndpoint: 'https://accounts.spotify.com/authorize',
+    tokenEndpoint: 'https://accounts.spotify.com/api/token',
+};
 
 const AuthContext: React.Context<{
     user: any,
@@ -22,6 +26,53 @@ const AuthContext: React.Context<{
 });
 
 
+const SpotifyAuthContext: React.Context<{
+    promptAsync: any
+    response: any
+}> = createContext({
+    promptAsync: null,
+    response: null,
+});
+
+
+WebBrowser.maybeCompleteAuthSession();
+
+
+
+
+WebBrowser.maybeCompleteAuthSession();
+
+
+
+// This is the functional component
+export const SpotifyAuthProvider: React.FC = ({ children }) => {
+    const [request, response, promptAsync] = useAuthRequest({
+      clientId: CLIENT_ID,
+      scopes: ['user-read-email', 'playlist-modify-public'],
+      // In order to follow the "Authorization Code Flow" to fetch token after authorizationEndpoint
+      // this must be set to false
+      usePKCE: false,
+      //redirectUri: 'exp://localhost:19002/',
+      redirectUri: 'exp://localhost:19000/',
+    }, discovery);
+
+    React.useEffect(() => {
+      if (response?.type === 'success') {
+      const { code } = response.params;
+      }
+    }, [response]);
+
+    return (
+        <SpotifyAuthContext.Provider
+            value={{
+                response,
+                promptAsync,
+            }}>
+            {children}
+        </SpotifyAuthContext.Provider>
+    );
+    
+}
 
 export const AuthProvider: React.FC = ({ children }) => {
     const [accessToken, setAccessToken] = React.useState<string | undefined>();
@@ -68,4 +119,8 @@ export const AuthProvider: React.FC = ({ children }) => {
 
 export default function useAuth() {
     return useContext(AuthContext);
+}
+
+export function useSpotifyAuth() {
+    return useContext(SpotifyAuthContext);
 }

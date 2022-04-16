@@ -4,7 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/HomeScreen';
 import ChatScreen from './screens/ChatScreen';
 import LoginScreen from './screens/LoginScreen';
-import useAuth from './hooks/useAuth';
+import useAuth, { useSpotifyAuth } from './hooks/useAuth';
 
 const Stack = createNativeStackNavigator();
 

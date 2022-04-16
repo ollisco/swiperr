@@ -11,7 +11,7 @@ import styles, {
   STAR_ACTIONS,
   WHITE,
 } from "../assets/styles";
-import {SwipeCardContext} from "./VolumeContext";
+import {SwipeCardContext} from "./SwipeCardProvider";
 
 const CardItem = ({
   hasActions,

@@ -2,10 +2,15 @@ import React from "react";
 import { View, ImageBackground } from "react-native";
 import { Settings, Filters } from "../components";
 import styles from "../assets/styles";
-import SwipeCardProvider from "../components/VolumeContext";
+import SwipeCardProvider from "../components/SwipeCardProvider";
 import CardStackHandler from "../components/CardStackHandler";
+import { SpotifyAuthProvider } from "../hooks/useAuth";
+
 
 const Home = () => {
+
+  //promptAsync();
+
   return (
     <ImageBackground
       source={require("../assets/images/bg2.jpg")}
@@ -13,7 +18,8 @@ const Home = () => {
     >
       <View style={styles.containerHome}>
         <View style={styles.top}>
-          <Settings />
+          {/* Testing spotify login in settings component */}
+          <Settings /> 
           <Filters />
         </View>
 

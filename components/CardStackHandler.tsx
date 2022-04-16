@@ -4,7 +4,7 @@ import DATA from "../assets/data/dummy_data_songs";
 import { DARK_GRAY } from "../assets/styles";
 import { SwipedCardContextT } from "../types";
 import CardItem from "./CardItem";
-import { SwipeCardContext } from "./VolumeContext";
+import { SwipeCardContext } from "./SwipeCardProvider";
 
 const CardStackHandler = () => {
     const [_swiper, setSwiper] = useState<CardStack | null>(null);
