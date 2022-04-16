@@ -5,7 +5,9 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "lint": "eslint --ext .tsx --ext .ts App.tsx StackNavigator.tsx screens/ hooks/",
+    "lint:fix": "eslint --fix --ext .tsx --ext .ts App.tsx StackNavigator.tsx screens/ hooks/"
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
