@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from 'react';
 import { useAuthRequest } from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
+import { Platform } from 'react-native';
 
 const CLIENT_ID = '561ad9eddee0418d8773090ae22723db'; // TODO: import from .env
 WebBrowser.maybeCompleteAuthSession();
@@ -28,14 +29,21 @@ WebBrowser.maybeCompleteAuthSession();
 // This is the functional component
 export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const [accessToken, setAccessToken] = React.useState<string>('');
+
+  /* eslint-disable no-unused-vars */
+  const phoneRedirectUri = 'exp://localhost:19000/';
+  const webRedirectUri = 'http://localhost:19006/';
+  /* eslint-enable no-unused-vars */
+  const redirectUri = Platform.OS === 'web' ? webRedirectUri : phoneRedirectUri;
+
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
     scopes: ['user-read-email', 'playlist-modify-public'],
-    // In order to follow the "Authorization Code Flow" to fetch token after authorizationEndpoint
+    // In order to follow the 'Authorization Code Flow',
+    // to fetch token after authorizationEndpoint,
     // this must be set to false
     usePKCE: false,
-    redirectUri: 'exp://127.0.0.1:19006/',
-    // redirectUri: 'http://localhost:19006/',
+    redirectUri,
   }, discovery);
 
   React.useEffect(() => {
@@ -47,7 +55,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     }
   }, [response]);
 
-  console.log('rendering');
   return (
 
     <SpotifyAuthContext.Provider
