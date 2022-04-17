@@ -6,8 +6,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "lint": "eslint --ext .tsx --ext .ts App.tsx StackNavigator.tsx screens/ hooks/",
-    "lint:fix": "eslint --fix --ext .tsx --ext .ts App.tsx StackNavigator.tsx screens/ hooks/"
+    "lint": "eslint --ext .tsx --ext .ts App.tsx screens/ hooks/",
+    "lint:fix": "eslint --fix --ext .tsx --ext .ts App.tsx screens/ hooks/"
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
@@ -19,6 +19,7 @@
     "expo-auth-session": "^3.5.0",
     "expo-random": "^12.1.2",
     "expo-status-bar": "~1.2.0",
+    "expo-web-browser": "^10.1.1",
     "metro-react-native-babel-preset": "^0.70.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
@@ -38,8 +39,22 @@
     "@types/react": "~17.0.21",
     "@types/react-dom": "~17.0.9",
     "@types/react-native": "~0.64.12",
+    "@typescript-eslint/eslint-plugin": "^5.19.0",
+    "@typescript-eslint/parser": "^5.19.0",
+    "eslint": "^8.13.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.4.0",
     "prettier": "^2.2.1",
     "typescript": "~4.3.5"
   },
-  "private": true
+  "private": true,
+  "name": "swiperr",
+  "version": "1.0.0",
+  "description": "A swiping music app",
+  "repository": "git@github.com:ollisco/app.git",
+  "author": "Olle Jernström <ollejer@ug.kth.se>",
+  "license": "MIT"
 }
