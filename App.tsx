@@ -2,13 +2,12 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import TrackPlayer from 'react-native-track-player';
 import { SpotifyAuthProvider } from './hooks/useAuth';
 import {
-  Home, Liked, Messages, Profile,
+  Explore, Liked, Messages, Profile,
 } from './screens';
 import {
-  PRIMARY_COLOR, DARK_GRAY, BLACK, WHITE,
+  PRIMARY_COLOR, DARK_GRAY, BLACK,
 } from './assets/styles';
 import TabBarIcon from './components/TabBarIcon';
 
@@ -54,7 +53,7 @@ function App() {
               >
                 <Tab.Screen
                   name="Explore"
-                  component={Home}
+                  component={Explore}
                   options={{
                     tabBarIcon: ({ focused }) => (
                       <TabBarIcon

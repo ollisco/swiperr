@@ -6,8 +6,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "lint": "eslint --ext .tsx --ext .ts App.tsx StackNavigator.tsx screens/ hooks/",
-    "lint:fix": "eslint --fix --ext .tsx --ext .ts App.tsx StackNavigator.tsx screens/ hooks/"
+    "lint": "eslint --ext .tsx --ext .ts App.tsx screens/ hooks/",
+    "lint:fix": "eslint --fix --ext .tsx --ext .ts App.tsx screens/ hooks/"
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
@@ -19,6 +19,7 @@
     "expo-auth-session": "^3.5.0",
     "expo-random": "^12.1.2",
     "expo-status-bar": "~1.2.0",
+    "expo-web-browser": "^10.1.1",
     "metro-react-native-babel-preset": "^0.70.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",

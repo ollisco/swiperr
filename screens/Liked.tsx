@@ -1,21 +1,21 @@
 import React from 'react';
 import {
-  ScrollView,
   View,
   Text,
   TouchableOpacity,
   ImageBackground,
   FlatList,
 } from 'react-native';
-import { CardItem, Icon } from '../components';
+import { Icon } from '../components';
 import DATA from '../assets/data/dummy_data_songs';
 import styles, { DARK_GRAY } from '../assets/styles';
 import CardItemSmall from '../components/CardItemSmall';
+import BG_IMAGE from '../assets/images/bg2.jpg';
 
 function Liked() {
   return (
     <ImageBackground
-      source={require('../assets/images/bg2.jpg')}
+      source={BG_IMAGE}
       style={styles.bg}
     >
       <View style={styles.containerMatches}>

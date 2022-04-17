@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  ScrollView,
   Text,
   TouchableOpacity,
   ImageBackground,
@@ -9,12 +8,13 @@ import {
 } from 'react-native';
 import { Icon, Message } from '../components';
 import DEMO from '../assets/data/dummy_data_profiles';
-import styles, { DARK_GRAY, GRAY } from '../assets/styles';
+import styles, { GRAY } from '../assets/styles';
+import BG_IMAGE from '../assets/images/bg2.jpg';
 
 function Messages() {
   return (
     <ImageBackground
-      source={require('../assets/images/bg2.jpg')}
+      source={BG_IMAGE}
       style={styles.bg}
     >
       <View style={styles.containerMessages}>

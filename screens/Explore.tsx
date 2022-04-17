@@ -4,14 +4,12 @@ import { Settings, Filters } from '../components';
 import styles from '../assets/styles';
 import SwipeCardProvider from '../components/SwipeCardProvider';
 import CardStackHandler from '../components/CardStackHandler';
-import { SpotifyAuthProvider } from '../hooks/useAuth';
+import BG_IMAGE from '../assets/images/bg2.jpg';
 
-function Home() {
-  // promptAsync();
-
+function Explore() {
   return (
     <ImageBackground
-      source={require('../assets/images/bg2.jpg')}
+      source={BG_IMAGE}
       style={styles.bg}
     >
       <View style={styles.containerHome}>
@@ -30,4 +28,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Explore;

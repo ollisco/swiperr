@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import { Icon, ProfileItem } from '../components';
 import DEMO from '../assets/data/dummy_data_profiles';
-import styles, { WHITE, BLACK } from '../assets/styles';
+import styles, { WHITE } from '../assets/styles';
+import BG_IMAGE from '../assets/images/bg2.jpg';
 
 function Profile() {
   const {
@@ -24,7 +25,7 @@ function Profile() {
 
   return (
     <ImageBackground
-      source={require('../assets/images/bg2.jpg')}
+      source={BG_IMAGE}
       style={styles.bg}
     >
       <ScrollView style={styles.containerProfile}>
