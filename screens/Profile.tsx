@@ -1,16 +1,16 @@
-import React from "react";
+import React from 'react';
 import {
   ScrollView,
   View,
   Text,
   ImageBackground,
   TouchableOpacity,
-} from "react-native";
-import { Icon, ProfileItem } from "../components";
-import DEMO from "../assets/data/dummy_data_profiles";
-import styles, { WHITE, BLACK } from "../assets/styles";
+} from 'react-native';
+import { Icon, ProfileItem } from '../components';
+import DEMO from '../assets/data/dummy_data_profiles';
+import styles, { WHITE, BLACK } from '../assets/styles';
 
-const Profile = () => {
+function Profile() {
   const {
     age,
     image,
@@ -24,7 +24,7 @@ const Profile = () => {
 
   return (
     <ImageBackground
-      source={require("../assets/images/bg2.jpg")}
+      source={require('../assets/images/bg2.jpg')}
       style={styles.bg}
     >
       <ScrollView style={styles.containerProfile}>
@@ -32,7 +32,7 @@ const Profile = () => {
           <View style={styles.top}>
             <TouchableOpacity>
               <Icon
-                name="swap-horizontal-outline"  
+                name="swap-horizontal-outline"
                 size={20}
                 color={WHITE}
                 style={styles.topIconLeft}
@@ -73,6 +73,6 @@ const Profile = () => {
       </ScrollView>
     </ImageBackground>
   );
-};
+}
 
 export default Profile;
