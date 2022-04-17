@@ -49,7 +49,7 @@ const CardStackHandler = () => {
           }
         >
           {DATA.map((item) => (
-            <Card key={item.id}>
+            <Card key={item.id}>  
               <CardItem
                 hasActions
                 image={item.image}

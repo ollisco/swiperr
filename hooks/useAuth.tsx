@@ -5,7 +5,7 @@ import { makeRedirectUri, useAuthRequest } from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
 
 const CLIENT_ID = "561ad9eddee0418d8773090ae22723db" //TODO: import from .env
-WebBrowser.maybeCompleteAuthSession();
+//WebBrowser.maybeCompleteAuthSession();
 
 // Endpoint
 const discovery = {
@@ -55,21 +55,24 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       scopes: ['user-read-email', 'playlist-modify-public'],
       // In order to follow the "Authorization Code Flow" to fetch token after authorizationEndpoint
       // this must be set to false
-      usePKCE: true,
-      //redirectUri: 'exp://localhost:19002/',
-      redirectUri: 'http://localhost:19006/',
+      usePKCE: false,
+      redirectUri: 'exp://127.0.0.1:19000/',
+      //redirectUri: 'http://localhost:19006/',
     }, discovery);
 
     React.useEffect(() => {
-        console.log('success', response);
         if (response?.type === 'success') {
+            
             // const ensureToken = response.authentication ? response.authentication?.accessToken : '';
             const { code } = response.params;
-            setAccessToken(code);
+            console.log('sucessfully recieve token: '+ code);
+            setAccessToken(code);   
         }
     }, [response]);
 
+    console.log('rendering');
     return (
+      
         <SpotifyAuthContext.Provider
             value={{
                 response,

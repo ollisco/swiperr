@@ -25,7 +25,6 @@ const Home = () => {
 
         <SwipeCardProvider >
           <CardStackHandler />
-        
         </SwipeCardProvider>
       
           </View>

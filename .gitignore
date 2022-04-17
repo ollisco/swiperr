@@ -16,3 +16,6 @@ web-build/
 # Keys
 GoogleService-Info.plist
 google-services.json
+
+# Vs Code
+.vscode
