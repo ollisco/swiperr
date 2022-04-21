@@ -2,11 +2,8 @@ import { exchangeCodeAsync, TokenResponse } from 'expo-auth-session';
 import React from 'react';
 import { Platform } from 'react-native';
 import useMounted from './useMounted';
-//import { CLIENT_ID, CLIENT_SECRET } from '@env';
+import { CLIENT_ID, CLIENT_SECRET } from '@env';
 
-
-const CLIENT_ID = '561ad9eddee0418d8773090ae22723db'; // TODO: import from .env
-const CLIENT_SECRET = '53d22b4eb34e4dbc906bf29f17212252';
 
 /* eslint-disable no-unused-vars */
 const phoneRedirectUri = 'exp://localhost:19000/';
