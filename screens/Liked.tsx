@@ -18,30 +18,31 @@ function Liked() {
       <ImageBackground
         source={BG_IMAGE}
         style={styles.bg}
-      />
-      <View style={styles.containerMatches}>
-        <View style={styles.top}>
-          <Text style={styles.title}>Liked Songs</Text>
-          <TouchableOpacity>
-            <Icon name="ellipsis-vertical" color={DARK_GRAY} size={20} />
-          </TouchableOpacity>
-        </View>
-
-        <FlatList
-          numColumns={2}
-          data={DATA}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
+      >
+        <View style={styles.containerMatches}>
+          <View style={styles.top}>
+            <Text style={styles.title}>Liked Songs</Text>
             <TouchableOpacity>
-              <CardItemSmall
-                image={item.image}
-                track={item.track}
-                artist={item.artist}
-              />
+              <Icon name="ellipsis-vertical" color={DARK_GRAY} size={20} />
             </TouchableOpacity>
-          )}
-        />
-      </View>
+          </View>
+
+          <FlatList
+            numColumns={2}
+            data={DATA}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <TouchableOpacity>
+                <CardItemSmall
+                  image={item.image}
+                  track={item.track}
+                  artist={item.artist}
+                />
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+      </ImageBackground>
     </View>
   );
 }

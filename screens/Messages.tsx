@@ -17,29 +17,30 @@ function Messages() {
       <ImageBackground
         source={BG_IMAGE}
         style={styles.bg}
-      />
-      <View style={styles.containerMessages}>
-        <View style={styles.top}>
-          <Text style={styles.title}>Messages</Text>
-          <TouchableOpacity>
-            <Icon name="person-add" color={GRAY} size={20} style={styles.topIconRight} />
-          </TouchableOpacity>
-        </View>
-
-        <FlatList
-          data={DEMO}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => (
+      >
+        <View style={styles.containerMessages}>
+          <View style={styles.top}>
+            <Text style={styles.title}>Messages</Text>
             <TouchableOpacity>
-              <Message
-                image={item.image}
-                name={item.name}
-                lastMessage={item.message}
-              />
+              <Icon name="person-add" color={GRAY} size={20} style={styles.topIconRight} />
             </TouchableOpacity>
-          )}
-        />
-      </View>
+          </View>
+
+          <FlatList
+            data={DEMO}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => (
+              <TouchableOpacity>
+                <Message
+                  image={item.image}
+                  name={item.name}
+                  lastMessage={item.message}
+                />
+              </TouchableOpacity>
+            )}
+          />
+        </View>
+      </ImageBackground>
     </View>
   );
 }

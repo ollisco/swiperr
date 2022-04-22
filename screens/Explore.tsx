@@ -12,7 +12,7 @@ function Explore() {
       <ImageBackground
         source={BG_IMAGE}
         style={styles.bg}
-      />
+      >
       <View style={styles.containerHome}>
         <View style={styles.top}>
           {/* Testing spotify login in settings component */}
@@ -25,6 +25,7 @@ function Explore() {
         </SwipeCardProvider>
 
       </View>
+      </ImageBackground>
     </View>
   );
 }
