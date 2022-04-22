@@ -5,7 +5,10 @@
     "jsx": "react-native",
     "lib": [
       "dom",
-      "esnext"
+      "esnext",
+      "es5",
+      "es6",
+      "dom.iterable"
     ],
     "moduleResolution": "node",
     "noEmit": true,

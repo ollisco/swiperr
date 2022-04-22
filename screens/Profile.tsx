@@ -1,16 +1,17 @@
-import React from "react";
+import React from 'react';
 import {
   ScrollView,
   View,
   Text,
   ImageBackground,
   TouchableOpacity,
-} from "react-native";
-import { Icon, ProfileItem } from "../components";
-import DEMO from "../assets/data/dummy_data_profiles";
-import styles, { WHITE, BLACK } from "../assets/styles";
+} from 'react-native';
+import { Icon, ProfileItem } from '../components';
+import DEMO from '../assets/data/dummy_data_profiles';
+import styles, { WHITE } from '../assets/styles';
+import BG_IMAGE from '../assets/images/bg2.jpg';
 
-const Profile = () => {
+function Profile() {
   const {
     age,
     image,
@@ -23,32 +24,32 @@ const Profile = () => {
   } = DEMO[7];
 
   return (
-    <ImageBackground
-      source={require("../assets/images/bg2.jpg")}
-      style={styles.bg}
-    >
+    <View>
+      <ImageBackground
+        source={BG_IMAGE}
+        style={styles.bg}
+      />
       <ScrollView style={styles.containerProfile}>
-        <ImageBackground source={image} style={styles.photo}>
-          <View style={styles.top}>
-            <TouchableOpacity>
-              <Icon
-                name="swap-horizontal-outline"  
-                size={20}
-                color={WHITE}
-                style={styles.topIconLeft}
-              />
-            </TouchableOpacity>
+        <ImageBackground source={image} style={styles.photo} />
+        <View style={styles.top}>
+          <TouchableOpacity>
+            <Icon
+              name="swap-horizontal-outline"
+              size={20}
+              color={WHITE}
+              style={styles.topIconLeft}
+            />
+          </TouchableOpacity>
 
-            <TouchableOpacity>
-              <Icon
-                name="ellipsis-vertical"
-                size={20}
-                color={WHITE}
-                style={styles.topIconRight}
-              />
-            </TouchableOpacity>
-          </View>
-        </ImageBackground>
+          <TouchableOpacity>
+            <Icon
+              name="ellipsis-vertical"
+              size={20}
+              color={WHITE}
+              style={styles.topIconRight}
+            />
+          </TouchableOpacity>
+        </View>
 
         <ProfileItem
           matches={match}
@@ -71,8 +72,8 @@ const Profile = () => {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    </ImageBackground>
+    </View>
   );
-};
+}
 
 export default Profile;

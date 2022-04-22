@@ -1,17 +1,14 @@
-import React from "react";
-import { Text, View, Image } from "react-native";
-import { CardItemT } from "../types";
+import React from 'react';
+import { Text, View, Image } from 'react-native';
+import { CardItemT } from '../types';
 
+import styles from '../assets/styles';
 
-import styles from "../assets/styles";
-
-const CardItemSmall = ({
+function CardItemSmall({
   image,
   artist,
   track: name,
-}: CardItemT) => {
-
-
+}: CardItemT) {
   return (
     <View style={styles.containerCardItem}>
       {/* IMAGE */}
@@ -24,6 +21,6 @@ const CardItemSmall = ({
       </View>
     </View>
   );
-};
+}
 
 export default CardItemSmall;
