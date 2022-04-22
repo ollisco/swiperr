@@ -25,31 +25,31 @@ function Profile() {
 
   return (
     <View>
-    <ImageBackground
-      source={BG_IMAGE}
-      style={styles.bg}
-    />
+      <ImageBackground
+        source={BG_IMAGE}
+        style={styles.bg}
+      />
       <ScrollView style={styles.containerProfile}>
-        <ImageBackground source={image} style={styles.photo}/>
-          <View style={styles.top}>
-            <TouchableOpacity>
-              <Icon
-                name="swap-horizontal-outline"
-                size={20}
-                color={WHITE}
-                style={styles.topIconLeft}
-              />
-            </TouchableOpacity>
+        <ImageBackground source={image} style={styles.photo} />
+        <View style={styles.top}>
+          <TouchableOpacity>
+            <Icon
+              name="swap-horizontal-outline"
+              size={20}
+              color={WHITE}
+              style={styles.topIconLeft}
+            />
+          </TouchableOpacity>
 
-            <TouchableOpacity>
-              <Icon
-                name="ellipsis-vertical"
-                size={20}
-                color={WHITE}
-                style={styles.topIconRight}
-              />
-            </TouchableOpacity>
-          </View>
+          <TouchableOpacity>
+            <Icon
+              name="ellipsis-vertical"
+              size={20}
+              color={WHITE}
+              style={styles.topIconRight}
+            />
+          </TouchableOpacity>
+        </View>
 
         <ProfileItem
           matches={match}

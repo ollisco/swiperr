@@ -31,6 +31,8 @@ export default StyleSheet.create({
     shadowRadius: 10,
     shadowColor: BLACK,
     shadowOffset: { height: 0, width: 0 },
+    // center children
+    justifyContent: "center",
   },
   matchesCardItem: {
     marginTop: -35,

@@ -25,7 +25,7 @@ function CardItem({
 
   return (
 
-    <View style={[styles.containerCardItem, { backgroundColor: rgb }]}>
+    <View style={[styles.containerCardItem, {backgroundColor: rgb}]}>
       {/* IMAGE */}
       <Image source={image} style={styles.imageStyle} />
 
@@ -45,7 +45,7 @@ function CardItem({
       {hasActions && (
 
       <Slider
-        style={{ width: 300, height: 10, marginTop: 10 }}
+        style={{ width: 250, height: 10, marginTop: 10 }}
         minimumValue={0}
         maximumValue={20}
         minimumTrackTintColor="#FFFFFF"
