@@ -6,8 +6,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "lint": "eslint --ext .tsx --ext .ts App.tsx screens/ hooks/",
-    "lint:fix": "eslint --fix --ext .tsx --ext .ts App.tsx screens/ hooks/"
+    "lint": "eslint --ext .tsx --ext .ts App.tsx screens/ hooks/ components/",
+    "lint:fix": "eslint --fix --ext .tsx --ext .ts App.tsx screens/ hooks/ components/"
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",

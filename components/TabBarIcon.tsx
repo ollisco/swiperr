@@ -1,10 +1,12 @@
-import React from "react";
-import { Text, View } from "react-native";
-import Icon from "./Icon";
-import styles, { DARK_GRAY, GRAY, WHITE, PRIMARY_COLOR } from "../assets/styles";
-import { TabBarIconT } from "../types";
+import React from 'react';
+import { Text, View } from 'react-native';
+import Icon from './Icon';
+import styles, {
+  DARK_GRAY, GRAY, WHITE, PRIMARY_COLOR,
+} from '../assets/styles';
+import { TabBarIconT } from '../types';
 
-const TabBarIcon = ({ focused, iconName, text }: TabBarIconT) => {
+function TabBarIcon({ focused, iconName, text }: TabBarIconT) {
   const iconFocused = focused ? WHITE : GRAY;
 
   return (
@@ -13,6 +15,6 @@ const TabBarIcon = ({ focused, iconName, text }: TabBarIconT) => {
       <Text style={[styles.tabButtonText, { color: iconFocused }]}>{text}</Text>
     </View>
   );
-};
+}
 
 export default TabBarIcon;
