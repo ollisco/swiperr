@@ -7,9 +7,14 @@ const webRedirectUri = 'http://localhost:19006/';
 const redirectUri = Platform.OS === 'web' ? webRedirectUri : phoneRedirectUri;
 /* eslint-enable no-unused-vars */
 
+const authorizationEndpoint = 'https://accounts.spotify.com/authorize';
+const tokenEndpoint = 'https://accounts.spotify.com/api/token';
+const meEndpoint = 'https://api.spotify.com/v1/me';
+
+
 const discovery = {
-  authorizationEndpoint: 'https://accounts.spotify.com/authorize',
-  tokenEndpoint: 'https://accounts.spotify.com/api/token',
+  authorizationEndpoint,
+  tokenEndpoint,
 };
 
-export { redirectUri, discovery };
+export { redirectUri, discovery, meEndpoint };

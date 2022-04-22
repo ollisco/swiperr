@@ -5,7 +5,6 @@ import { ProfileItemT } from '../types';
 import styles, { DARK_GRAY, WHITE } from '../assets/styles';
 
 function ProfileItem({
-  age,
   info1,
   info2,
   info3,
@@ -28,9 +27,6 @@ function ProfileItem({
       <Text style={styles.name}>{name}</Text>
 
       <Text style={styles.descriptionProfileItem}>
-        {age}
-        {' '}
-        -
         {location}
       </Text>
 
