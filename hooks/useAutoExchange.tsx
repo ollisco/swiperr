@@ -1,21 +1,9 @@
 import { exchangeCodeAsync, TokenResponse } from 'expo-auth-session';
 import React from 'react';
 import { Platform } from 'react-native';
-import useMounted from './useMounted';
 import { CLIENT_ID, CLIENT_SECRET } from '@env';
-
-
-/* eslint-disable no-unused-vars */
-const phoneRedirectUri = 'exp://localhost:19000/';
-const webRedirectUri = 'http://localhost:19006/';
-// TODO: can maybe be replaced with: getRedirectUrl from expo auth session
-/* eslint-enable no-unused-vars */
-const redirectUri = Platform.OS === 'web' ? webRedirectUri : phoneRedirectUri;
-
-const discovery = {
-  authorizationEndpoint: 'https://accounts.spotify.com/authorize',
-  tokenEndpoint: 'https://accounts.spotify.com/api/token',
-};
+import useMounted from './useMounted';
+import { discovery, redirectUri } from './utils/auth-utils';
 
 type State = {
   token: TokenResponse | null;

@@ -4,16 +4,11 @@ import {
 } from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
 import { Platform } from 'react-native';
-import useAutoExchange from './useAutoExchange';
 import { CLIENT_ID, CLIENT_SECRET } from '@env';
+import useAutoExchange from './useAutoExchange';
+import { discovery, redirectUri } from './utils/auth-utils';
 
 WebBrowser.maybeCompleteAuthSession();
-
-// Endpoint
-const discovery = {
-  authorizationEndpoint: 'https://accounts.spotify.com/authorize',
-  tokenEndpoint: 'https://accounts.spotify.com/api/token',
-};
 
 // TODO: Remove any
 const SpotifyAuthContext: React.Context<{
@@ -26,20 +21,8 @@ const SpotifyAuthContext: React.Context<{
 
 WebBrowser.maybeCompleteAuthSession();
 
-/* eslint-disable no-unused-vars */
-const phoneRedirectUri = 'exp://localhost:19000/';
-const webRedirectUri = 'http://localhost:19006/';
-// TODO: can maybe be replaced with: getRedirectUrl from expo auth session
-/* eslint-enable no-unused-vars */
-const redirectUri = Platform.OS === 'web' ? webRedirectUri : phoneRedirectUri;
-
-// This is the functional component
 export const SpotifyAuthProvider: React.FC = ({ children }) => {
-  const [code, setCode] = React.useState<string>('');
-  const [accessToken, setAccessToken] = React.useState<string>('');
-  const [refreshToken, setRefreshToken] = React.useState<string>('');
-
-  const [codeRequest, codeResponse, getCode] = useAuthRequest({
+  const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
     scopes: ['user-read-email', 'playlist-modify-public', 'user-read-private'],
     /*
@@ -52,9 +35,9 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     clientSecret: CLIENT_SECRET,
   }, discovery);
 
-  // The token will be auto exchanged after auth completes.
+  // Token will be auto exchanged after auth completes.
   const { token, tokenExchangeError: exchangeError } = useAutoExchange(
-    codeResponse?.type === 'success' ? codeResponse.params.code : undefined,
+    response?.type === 'success' ? response.params.code : undefined,
   );
 
   React.useEffect(() => {
@@ -67,7 +50,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
 
     <SpotifyAuthContext.Provider
       value={{
-        promptAsync: getCode,
+        promptAsync,
         token,
       }}
     >
