@@ -6,12 +6,12 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
+import { countries } from 'country-data';
 import { Icon, ProfileItem } from '../components';
 import DEMO from '../assets/data/dummy_data_profiles';
 import styles, { WHITE } from '../assets/styles';
 import BG_IMAGE from '../assets/images/bg2.jpg';
 import useSpotifyAuth from '../hooks/useAuth';
-import { countries } from 'country-data';
 
 function Profile() {
   const { user } = useSpotifyAuth();
@@ -30,7 +30,7 @@ function Profile() {
     const codePoints = countryCode
       .toUpperCase()
       .split('')
-      .map(char =>  127397 + char.charCodeAt(0));
+      .map((char) => 127397 + char.charCodeAt(0));
     return String.fromCodePoint(...codePoints);
   }
 
@@ -39,11 +39,11 @@ function Profile() {
     const flagEmoji = getFlagEmoji(countryCode);
     // get country name
     const country = countries[countryCode].name;
-    return country + ' ' + flagEmoji;
+    return `${country} ${flagEmoji}`;
   }
 
   return (
-    
+
     <View>
       {user ? (
         <View>
@@ -75,6 +75,7 @@ function Profile() {
 
             <ProfileItem
               matches={match}
+              followerCount={user.followers.total}
               name={user.display_name}
               location={getLocation(user.country)}
               info1={info1}

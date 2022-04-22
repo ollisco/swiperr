@@ -11,7 +11,6 @@ const authorizationEndpoint = 'https://accounts.spotify.com/authorize';
 const tokenEndpoint = 'https://accounts.spotify.com/api/token';
 const meEndpoint = 'https://api.spotify.com/v1/me';
 
-
 const discovery = {
   authorizationEndpoint,
   tokenEndpoint,

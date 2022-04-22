@@ -5,9 +5,10 @@ import {
 import * as WebBrowser from 'expo-web-browser';
 import { Platform } from 'react-native';
 import { CLIENT_ID, CLIENT_SECRET } from '@env';
+import axios from 'axios';
 import useAutoExchange from './useAutoExchange';
 import { discovery, redirectUri, meEndpoint } from './utils/auth-utils';
-import axios from 'axios';
+import DEMO from '../assets/data/dummy_data_songs';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -31,7 +32,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const [userTopItems, setUserTopItems] = useState(null);
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
-    scopes: ['user-read-email', 'playlist-modify-public', 'user-read-private'],
+    scopes: ['user-read-email', 'user-read-private', 'user-top-read'],
     /*
       In order to follow the 'Authorization Code Flow',
       to fetch token after authorizationEndpoint,
@@ -49,41 +50,39 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
 
   async function getUserData(accessToken: string) {
     const config = {
-      headers: { Authorization: `Bearer ${accessToken}` }
+      headers: { Authorization: `Bearer ${accessToken}` },
     };
-    
+
     await axios.get(meEndpoint, config)
-      .then(res => {
+      .then((res) => {
         console.log(res);
         setUser(res.data);
       })
-      .catch(res => console.log('E: ', res));
+      .catch((res) => console.log('E: ', res));
   }
 
   async function getTopUserItems(accessToken: string, item: string) {
     // item should be 'tracks' or 'artists'
     const config = {
-      headers: { 
+      headers: {
         Authorization: `Bearer ${accessToken}`,
-      }        
+      },
     };
     await axios.get(`${meEndpoint}/top/${item}`, config)
-      .then(res => {
+      .then((res) => {
         console.log(res);
         setUserTopItems(res.data);
       })
-      .catch(res => console.log('E: ', res));
+      .catch((res) => console.log('E: ', res));
   }
 
   React.useEffect(() => {
     if (token) {
       console.log('My Token:', token);
-      
-      getUserData(token.accessToken);
-      //getTopUserItems(token.accessToken, 'tracks');
-      
 
-      }
+      getUserData(token.accessToken);
+      getTopUserItems(token.accessToken, 'tracks');
+    }
   }, [token]);
 
   return (

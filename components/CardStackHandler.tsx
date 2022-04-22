@@ -2,11 +2,14 @@ import React, { useContext, useState } from 'react';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import DATA from '../assets/data/dummy_data_songs';
 import { DARK_GRAY } from '../assets/styles';
+import useSpotifyAuth from '../hooks/useAuth';
 import { SwipedCardContextT } from '../types';
 import CardItem from './CardItem';
 import { SwipeCardContext } from './SwipeCardProvider';
 
 function CardStackHandler() {
+  const { userTopItems } = useSpotifyAuth();
+
   const [_swiper, setSwiper] = useState<CardStack | null>(null);
   const { rgb, setRGB } = useContext(SwipeCardContext) as SwipedCardContextT;
 
@@ -45,7 +48,20 @@ function CardStackHandler() {
         setRGB(DARK_GRAY);
       }}
     >
-      {DATA.map((item) => (
+
+      {userTopItems ? userTopItems?.items.map((item: any) => (
+
+        <Card key={item.id}>
+          <CardItem
+            hasActions
+            image={item.album.images[0].url}
+            track={item.name}
+            description={item.artists[0].name}
+            matches={item.match}
+            artist={item.artists[0].name}
+          />
+        </Card>
+      )) : (DATA.map((item) => (
         <Card key={item.id}>
           <CardItem
             hasActions
@@ -56,7 +72,7 @@ function CardStackHandler() {
             artist={item.artist}
           />
         </Card>
-      ))}
+      )))}
     </CardStack>
   );
 }

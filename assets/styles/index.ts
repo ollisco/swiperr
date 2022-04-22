@@ -53,14 +53,14 @@ export default StyleSheet.create({
     color: GRAY,
     textAlign: "center",
   },
-  status: {
+  artist: {
     paddingBottom: 10,
     flexDirection: "row",
     alignItems: "center",
   },
-  statusText: {
+  artistText: {
     color: GRAY,
-    fontSize: 12,
+    fontSize: 18,
   },
   online: {
     width: 6,

@@ -16,8 +16,8 @@ function CardItemSmall({
       {/* NAME */}
       <Text style={styles.smallNameStyle}>{name}</Text>
 
-      <View style={styles.status}>
-        <Text style={styles.statusText}>{artist}</Text>
+      <View style={styles.artist}>
+        <Text style={styles.artistText}>{artist}</Text>
       </View>
     </View>
   );

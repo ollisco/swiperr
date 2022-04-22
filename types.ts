@@ -34,7 +34,7 @@ export type MessageT = {
 };
 
 export type ProfileItemT = {
-  age?: string;
+  followerCount?: string;
   info1?: string;
   info2?: string;
   info3?: string;

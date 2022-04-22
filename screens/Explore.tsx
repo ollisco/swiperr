@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, ImageBackground } from 'react-native';
 import { Settings, Filters } from '../components';
 import styles from '../assets/styles';
@@ -13,18 +13,17 @@ function Explore() {
         source={BG_IMAGE}
         style={styles.bg}
       >
-      <View style={styles.containerHome}>
-        <View style={styles.top}>
-          {/* Testing spotify login in settings component */}
-          <Settings />
-          <Filters />
+        <View style={styles.containerHome}>
+          <View style={styles.top}>
+            {/* Testing spotify login in settings component */}
+            <Settings />
+            <Filters />
+          </View>
+          <SwipeCardProvider>
+            <CardStackHandler />
+          </SwipeCardProvider>
+
         </View>
-
-        <SwipeCardProvider>
-          <CardStackHandler />
-        </SwipeCardProvider>
-
-      </View>
       </ImageBackground>
     </View>
   );

@@ -25,7 +25,7 @@ function CardItem({
 
   return (
 
-    <View style={[styles.containerCardItem, {backgroundColor: rgb}]}>
+    <View style={[styles.containerCardItem, { backgroundColor: rgb }]}>
       {/* IMAGE */}
       <Image source={image} style={styles.imageStyle} />
 
@@ -59,7 +59,7 @@ function CardItem({
       {/* NAME */}
       <Text style={styles.nameStyle}>{name}</Text>
 
-      <Text style={[styles.status, styles.statusText]}>{artist}</Text>
+      <Text style={[styles.artist, styles.artistText]}>{artist}</Text>
 
       {hasActions
 

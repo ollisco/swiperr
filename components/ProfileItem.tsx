@@ -5,6 +5,7 @@ import { ProfileItemT } from '../types';
 import styles, { DARK_GRAY, WHITE } from '../assets/styles';
 
 function ProfileItem({
+  followerCount,
   info1,
   info2,
   info3,
@@ -27,6 +28,10 @@ function ProfileItem({
       <Text style={styles.name}>{name}</Text>
 
       <Text style={styles.descriptionProfileItem}>
+        {followerCount}
+        {' followers '}
+        -
+        {' '}
         {location}
       </Text>
 
