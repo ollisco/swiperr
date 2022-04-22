@@ -24,12 +24,13 @@ function Profile() {
   } = DEMO[7];
 
   return (
+    <View>
     <ImageBackground
       source={BG_IMAGE}
       style={styles.bg}
-    >
+    />
       <ScrollView style={styles.containerProfile}>
-        <ImageBackground source={image} style={styles.photo}>
+        <ImageBackground source={image} style={styles.photo}/>
           <View style={styles.top}>
             <TouchableOpacity>
               <Icon
@@ -49,7 +50,6 @@ function Profile() {
               />
             </TouchableOpacity>
           </View>
-        </ImageBackground>
 
         <ProfileItem
           matches={match}
@@ -72,7 +72,7 @@ function Profile() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    </ImageBackground>
+    </View>
   );
 }
 

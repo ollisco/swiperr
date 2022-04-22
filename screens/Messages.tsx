@@ -13,10 +13,11 @@ import BG_IMAGE from '../assets/images/bg2.jpg';
 
 function Messages() {
   return (
+    <View>
     <ImageBackground
       source={BG_IMAGE}
       style={styles.bg}
-    >
+    />
       <View style={styles.containerMessages}>
         <View style={styles.top}>
           <Text style={styles.title}>Messages</Text>
@@ -39,7 +40,7 @@ function Messages() {
           )}
         />
       </View>
-    </ImageBackground>
+    </View>
   );
 }
 

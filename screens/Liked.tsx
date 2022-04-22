@@ -14,10 +14,11 @@ import BG_IMAGE from '../assets/images/bg2.jpg';
 
 function Liked() {
   return (
-    <ImageBackground
-      source={BG_IMAGE}
-      style={styles.bg}
-    >
+    <View>
+      <ImageBackground
+        source={BG_IMAGE}
+        style={styles.bg}
+      />
       <View style={styles.containerMatches}>
         <View style={styles.top}>
           <Text style={styles.title}>Liked Songs</Text>
@@ -41,7 +42,7 @@ function Liked() {
           )}
         />
       </View>
-    </ImageBackground>
+    </View>
   );
 }
 

@@ -8,10 +8,11 @@ import BG_IMAGE from '../assets/images/bg2.jpg';
 
 function Explore() {
   return (
-    <ImageBackground
-      source={BG_IMAGE}
-      style={styles.bg}
-    >
+    <View>
+      <ImageBackground
+        source={BG_IMAGE}
+        style={styles.bg}
+      />
       <View style={styles.containerHome}>
         <View style={styles.top}>
           {/* Testing spotify login in settings component */}
@@ -24,7 +25,7 @@ function Explore() {
         </SwipeCardProvider>
 
       </View>
-    </ImageBackground>
+    </View>
   );
 }
 
