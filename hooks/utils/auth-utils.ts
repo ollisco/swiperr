@@ -10,10 +10,11 @@ const redirectUri = Platform.OS === 'web' ? webRedirectUri : phoneRedirectUri;
 const authorizationEndpoint = 'https://accounts.spotify.com/authorize';
 const tokenEndpoint = 'https://accounts.spotify.com/api/token';
 const meEndpoint = 'https://api.spotify.com/v1/me';
+const recomendationEndpoint = 'https://api.spotify.com/v1/recommendations';
 
 const discovery = {
   authorizationEndpoint,
   tokenEndpoint,
 };
 
-export { redirectUri, discovery, meEndpoint };
+export { redirectUri, discovery, meEndpoint, recomendationEndpoint };

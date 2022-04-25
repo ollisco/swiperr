@@ -25,8 +25,14 @@ function CardStackHandler() {
     return `rgb(${m}, ${54 - (54 * -d / 300) + 20}, ${54 - (54 * -d / 300) + 20})`;
   }
 
-  return (
+  // React use effect block
+  React.useEffect(() => {
+    if (userTopItems) {
+      console.log('U', userTopItems);
+    }
+  }, [userTopItems]);
 
+  return (
     <CardStack
       loop
       verticalSwipe={false}
@@ -48,9 +54,9 @@ function CardStackHandler() {
         setRGB(DARK_GRAY);
       }}
     >
-
-      {userTopItems ? userTopItems?.items.map((item: any) => (
-
+      {/* userTopItems ? console.log(0) : console.log(-1) */}
+      {userTopItems ? userTopItems?.map((item: any) => (
+        
         <Card key={item.id}>
           <CardItem
             hasActions
