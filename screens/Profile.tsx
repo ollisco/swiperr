@@ -52,7 +52,9 @@ function Profile() {
             style={styles.bg}
           />
           <ScrollView style={styles.containerProfile}>
+            {user.images ? (
             <ImageBackground source={user.images[0].url} style={styles.photo} />
+            ) : (<></>) }
             <View style={styles.top}>
               <TouchableOpacity>
                 <Icon
