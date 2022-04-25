@@ -5,6 +5,7 @@
 - Fix web issue where assets dissapear after fetching token
 - Extract all aritsts from api call in mapping function inside carditem
 - Fix forced card sizes (long track titles cause new lines expanding the card size)
+- Setup mock profile page instead of "No profile loaded"
 
 
 
