@@ -126,7 +126,7 @@ export default StyleSheet.create({
   imageStyle: {
       borderRadius: 8,
       width:  DIMENSION_WIDTH - 80,
-      height: 350,
+      height: DIMENSION_WIDTH - 80,
       margin: 20,
     },
   
