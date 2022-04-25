@@ -76,7 +76,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
 
     await axios.get(`${recomendationEndpoint}/available-genre-seeds`, config)
       .then((res: any) => {
-        console.log(res);
         // loop over the genres and add them to the available genres
         res.data.genres.forEach((genre: any) => {
           availableGenres.push(genre);
@@ -87,7 +86,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
 
     await axios.get(`${meEndpoint}/top/tracks`, config)
       .then((res) => {
-        console.log(res);
         //setUserTopItems(res.data);
         for (let i = 0; i < 5; i++) {
           tracks.push(res.data.items[i].id);
@@ -98,8 +96,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     
     await axios.get(`${meEndpoint}/top/artists`, config)
     .then((res) => {
-      console.log(res);
-      //setUserTopItems(res.data);
       for (let i = 0; i < 5; i++) {
         artists.push(res.data.items[i].id);
       }
@@ -147,16 +143,10 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       }
     };
 
-    // console.log(availableGenres);
-    // console.log(otherGenres);
-    // console.log(allGenres);
-    // console.log(genres);
-    // console.log(seed_genres, seed_artists, seed_tracks);
 
     await axios.get(recomendationEndpoint, config2)
       .then((res) => {
-        console.log('R', res.data);
-        console.log('R2', res.data.tracks);
+        console.log('Recomendations: ', res.data);
         setUserTopItems(res.data.tracks);
         //setUserTopItems(res.data);
       })

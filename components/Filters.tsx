@@ -8,9 +8,7 @@ function Filters() {
   const { promptAsync } = useSpotifyAuth();
   // TODO: this should be moved to useAuth hook
   async function awaitPromptAsync() {
-    console.log('start promptAsync');
     await promptAsync();
-    console.log('end promptAsync');
   }
 
   return (
