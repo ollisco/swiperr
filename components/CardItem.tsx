@@ -29,17 +29,16 @@ function CardItem({
       {/* IMAGE */}
       <Image source={image} style={styles.imageStyle} />
 
-      {/* MATCHES */}
-      {matches && (
-        <View style={styles.matchesCardItem}>
-          <Text style={styles.matchesTextCardItem}>
-            <Icon name="heart" color={WHITE} size={13} />
-            {' '}
-            {matches}
-            % Match!
-          </Text>
-        </View>
-      )}
+      
+      <View style={styles.matchesCardItem}>
+        <Text style={styles.matchesTextCardItem}>
+          <Icon name="heart" color={WHITE} size={13} />
+          {' '}
+          {matches}
+          % Popularity
+        </Text>
+      </View>
+   
 
       {console.log()}
       {hasActions && (

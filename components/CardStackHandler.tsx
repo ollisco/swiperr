@@ -63,7 +63,7 @@ function CardStackHandler() {
             image={item.album.images[0].url}
             track={item.name}
             description={item.artists[0].name}
-            matches={item.match}
+            matches={item.popularity}
             artist={item.artists[0].name}
           />
         </Card>
