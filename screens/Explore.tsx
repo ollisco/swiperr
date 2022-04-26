@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View, ImageBackground } from 'react-native';
 import { Settings, Filters } from '../components';
 import styles from '../assets/styles';
 import SwipeCardProvider from '../components/SwipeCardProvider';
 import CardStackHandler from '../components/CardStackHandler';
-import BG_IMAGE from '../assets/images/bg2.jpg';
 
 function Explore() {
+  const backgroundLink = 'https://ollisco.se/assets/bg2.jpg'; // To avoid bg dissapearing after API call
   return (
     <View>
       <ImageBackground
-        source={BG_IMAGE}
+        source={backgroundLink} // To avoid bg dissapearing after API call
         style={styles.bg}
       >
         <View style={styles.containerHome}>

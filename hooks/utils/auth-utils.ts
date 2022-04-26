@@ -17,4 +17,6 @@ const discovery = {
   tokenEndpoint,
 };
 
-export { redirectUri, discovery, meEndpoint, recomendationEndpoint };
+export {
+  redirectUri, discovery, meEndpoint, recomendationEndpoint,
+};

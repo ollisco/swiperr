@@ -11,7 +11,7 @@ function CardStackHandler() {
   const { userTopItems } = useSpotifyAuth();
 
   const [_swiper, setSwiper] = useState<CardStack | null>(null);
-  const { rgb, setRGB } = useContext(SwipeCardContext) as SwipedCardContextT;
+  const { setRGB } = useContext(SwipeCardContext) as SwipedCardContextT;
 
   const swipeColorLimit = 100;
 
@@ -25,13 +25,12 @@ function CardStackHandler() {
     return `rgb(${m}, ${54 - (54 * -d / 300) + 20}, ${54 - (54 * -d / 300) + 20})`;
   }
 
-
   return (
     <CardStack
       loop
       verticalSwipe={false}
       renderNoMoreCards={() => null}
-      ref={(newSwiper): void => setSwiper(newSwiper)}
+      ref={(newSwiper): void => setSwiper(null)}
       onSwipe={(x, _y) => {
         if (x > swipeColorLimit) {
           setRGB(convertRGBgreen(x));
@@ -49,7 +48,7 @@ function CardStackHandler() {
       }}
     >
       {userTopItems ? userTopItems?.map((item: any) => (
-        
+
         <Card key={item.id}>
           <CardItem
             hasActions

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import {
-  Text, View, Image, Dimensions, TouchableOpacity,
+  Text, View, Image, TouchableOpacity,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 import Icon from './Icon';
@@ -29,7 +29,6 @@ function CardItem({
       {/* IMAGE */}
       <Image source={image} style={styles.imageStyle} />
 
-      
       <View style={styles.matchesCardItem}>
         <Text style={styles.matchesTextCardItem}>
           <Icon name="heart" color={WHITE} size={13} />
@@ -38,7 +37,6 @@ function CardItem({
           % Popularity
         </Text>
       </View>
-   
 
       {console.log()}
       {hasActions && (

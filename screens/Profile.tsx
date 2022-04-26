@@ -16,13 +16,10 @@ import useSpotifyAuth from '../hooks/useAuth';
 function Profile() {
   const { user } = useSpotifyAuth();
   const {
-    age,
     image,
     infoPersonal: info1,
     infoMusic: info2,
-    location,
     match,
-    name,
     lastSeen,
   } = DEMO[7];
 
@@ -53,9 +50,9 @@ function Profile() {
           />
           <ScrollView style={styles.containerProfile}>
             {user.images.length > 0 ? (
-            <ImageBackground source={user.images[0].url} style={styles.photo} />
+              <ImageBackground source={user.images[0].url} style={styles.photo} />
             ) : (
-            <ImageBackground source={image} style={styles.photo} /> )}
+              <ImageBackground source={image} style={styles.photo} />)}
             <View style={styles.top}>
               <TouchableOpacity>
                 <Icon
