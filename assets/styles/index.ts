@@ -57,10 +57,11 @@ export default StyleSheet.create({
     paddingBottom: 10,
     flexDirection: "row",
     alignItems: "center",
+    marginTop: 10,
   },
   artistText: {
     color: GRAY,
-    fontSize: 18,
+    fontSize: 20,
   },
   online: {
     width: 6,
@@ -131,11 +132,21 @@ export default StyleSheet.create({
     },
   
 
-  nameStyle: {
+  trackStyle: {
       paddingTop: 15,
       paddingBottom: 7,
       color: WHITE,
-      fontSize: 30,
+      width: "100%",
+      textAlign: "center",
+      height: 60,
+  },
+
+  trackStyleShort: {
+    fontSize: 25,
+  },
+
+  trackStyleLong: {
+    fontSize: 20,
   },
 
 
@@ -168,8 +179,22 @@ export default StyleSheet.create({
     shadowRadius: 10,
     shadowColor: BLACK,
     shadowOffset: { height: 0, width: 0 },
+    alignItems: "center",
   },
-  filtersText: {
+
+  login: {
+    backgroundColor: WHITE,
+    padding: 10,
+    borderRadius: 20,
+    width: 80,
+    elevation: 1,
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    shadowColor: BLACK,
+    shadowOffset: { height: 0, width: 0 },
+  },
+
+  loginText: {
     color: DARK_GRAY,
     fontSize: 13,
     textAlign: "center",

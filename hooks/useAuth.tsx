@@ -8,8 +8,6 @@ import {
   discovery, redirectUri, meEndpoint, recomendationEndpoint,
 } from './utils/auth-utils';
 
-const BG_IMAGE = require('../assets/images/bg2.jpg');
-
 WebBrowser.maybeCompleteAuthSession();
 
 // TODO: Remove any
@@ -18,13 +16,15 @@ const SpotifyAuthContext: React.Context<{
   token: any,
   user: any,
   userTopItems: any,
-  bg: any,
+  getTopUserItems: any,
+  likeSong: any,
 }> = createContext({
   promptAsync: null,
   token: null,
   user: null,
   userTopItems: null,
-  bg: null,
+  getTopUserItems: null,
+  likeSong: null,
 });
 
 WebBrowser.maybeCompleteAuthSession();
@@ -32,10 +32,11 @@ WebBrowser.maybeCompleteAuthSession();
 export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userTopItems, setUserTopItems] = useState(null);
-  const [bg, setBg] = useState(BG_IMAGE);
+  const [userPlaylists, setUserPlaylists] = useState(null);
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
-    scopes: ['user-read-email', 'user-read-private', 'user-top-read'],
+    scopes: ['user-read-email', 'user-read-private', 'user-top-read', 'user-library-read',
+      'user-library-modify'],
     /*
       In order to follow the 'Authorization Code Flow',
       to fetch token after authorizationEndpoint,
@@ -51,6 +52,27 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     response?.type === 'success' ? response.params.code : undefined,
   );
 
+  async function likeSong(accessToken: string, trackUri: string) {
+    // config
+    if (token) {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token.accessToken}`,
+        },
+      };
+      await axios.put(
+        'https://api.spotify.com/v1/me/tracks',
+        // send trackid as "ids" parameter
+        { ids: [trackUri] },
+        config,
+      ).then((res) => {
+        console.log('Saved track to user library');
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
+  }
+
   async function getUserData(accessToken: string) {
     const config = {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -58,10 +80,22 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
 
     await axios.get(meEndpoint, config)
       .then((res) => {
-        console.log(res);
         setUser(res.data);
+        getUserPlaylists(accessToken, res.data.id);
       })
       .catch((res) => console.log('E1: ', res));
+  }
+
+  async function getUserPlaylists(accessToken: string, userid: string) {
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    };
+    const uri = 'https://api.spotify.com/v1/users/me/tracks?limit=50';
+    await axios.get(uri, config)
+      .then((res) => {
+        setUserPlaylists(res.data);
+      })
+      .catch((res) => console.log('E7: ', res));
   }
 
   async function getTopUserItems(accessToken: string) {
@@ -94,7 +128,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     await axios.get(`${meEndpoint}/top/tracks`, config)
       .then((res) => {
         // setUserTopItems(res.data);
-        for (let i = 0; i < count; i++) {
+        for (let i = 0; i < res.data.items.length; i += 1) {
           allTracks.push(res.data.items[i].id);
         }
       })
@@ -102,12 +136,12 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
 
     await axios.get(`${meEndpoint}/top/artists`, config)
       .then((res) => {
-        for (let i = 0; i < count; i++) {
+        for (let i = 0; i < res.data.items.length; i += 1) {
           allArtists.push(res.data.items[i].id);
         }
         res.data.items.forEach((item: any) => {
         // loop over the genres and push them to genres
-          for (let i = 0; i < item.genres.length; i++) {
+          for (let i = 0; i < item.genres.length; i += 1) {
             const genre = item.genres[i];
             if (availableGenres.includes(genre) && !allGenres.includes(genre)) {
               allGenres.push(genre);
@@ -120,13 +154,13 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       .catch((res) => console.log('E: ', res));
 
     // Get 1 random items in allGenres and place them in genres
-    for (let i = 0; i < 1; i++) {
+    for (let i = 0; i < 1; i += 1) {
       const randomIndex = Math.floor(Math.random() * allGenres.length);
       genres.push(allGenres[randomIndex]);
     }
 
     // Get two random items from allTracks and place them in tracks
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 2; i += 1) {
       if (allTracks.length !== 0) {
         const random = Math.floor(Math.random() * allTracks.length);
         const selectedTrack = allTracks[random];
@@ -136,7 +170,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     }
 
     // Get two random items from allArtists and place them in artists
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 2; i += 1) {
       if (allArtists.length !== 0) {
         const random = Math.floor(Math.random() * allArtists.length);
         const selectedArtist = allArtists[random];
@@ -146,36 +180,34 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     }
 
     // WARNING: the length of seed genres + seed artists + seed tracks <= 5 (MAX 5)
-    const seed_genres = genres[0];
-    const seed_artists = `${allArtists[0]},${allArtists[1]}`;
-    const seed_tracks = `${allTracks[0]},${allTracks[1]}`;
+    const seedGenres = genres[0];
+    const seedArtists = `${allArtists[0]},${allArtists[1]}`;
+    const seedTracks = `${allTracks[0]},${allTracks[1]}`;
 
     const config2 = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
       params: {
-        seed_artists,
-        seed_genres,
-        seed_tracks,
+        seed_artists: seedArtists,
+        seed_genres: seedGenres,
+        seed_tracks: seedTracks,
       },
     };
 
-    console.log(config2);
     await axios.get(recomendationEndpoint, config2)
       .then((res) => {
         console.log('Recomendations: ', res.data);
-        setUserTopItems(res.data.tracks);
+        const { tracks } = res.data;
+        // get a slice of the first 5 tracks
+        // const slicedTracks = tracks.slice(0, 5);
+        setUserTopItems(tracks);
       })
       .catch((res) => console.log('E: ', res));
-
-    setBg(require('../assets/images/bg2.jpg'));
   }
 
   React.useEffect(() => {
     if (token) {
-      console.log('My Token:', token);
-
       getUserData(token.accessToken);
       getTopUserItems(token.accessToken);
     }
@@ -188,7 +220,8 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         token,
         user,
         userTopItems,
-        bg: BG_IMAGE,
+        getTopUserItems,
+        likeSong,
       }}
     >
       {children}
@@ -196,6 +229,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   );
 };
 
-export default function useSpotifyAuth() {
+export default function useSpotifyContext() {
   return useContext(SpotifyAuthContext);
 }

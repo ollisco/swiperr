@@ -19,9 +19,12 @@ function CardItem({
   image,
   artist,
   matches,
-  track: name,
+  track,
 }: CardItemT) {
   const { volume, updateVolume, rgb } = useContext(SwipeCardContext) as SwipedCardContextT;
+
+  // check if track is longer than 50 chars long
+  const trackTextStyle = track.length > 50 ? styles.trackStyleLong : styles.trackStyleShort;
 
   return (
 
@@ -54,7 +57,7 @@ function CardItem({
       )}
 
       {/* NAME */}
-      <Text style={styles.nameStyle}>{name}</Text>
+      <Text style={[styles.trackStyle, trackTextStyle]}>{track}</Text>
 
       <Text style={[styles.artist, styles.artistText]}>{artist}</Text>
 

@@ -11,10 +11,10 @@ import { Icon, ProfileItem } from '../components';
 import DEMO from '../assets/data/dummy_data_profiles';
 import styles, { WHITE } from '../assets/styles';
 import BG_IMAGE from '../assets/images/bg2.jpg';
-import useSpotifyAuth from '../hooks/useAuth';
+import useSpotifyContext from '../hooks/useAuth';
 
 function Profile() {
-  const { user } = useSpotifyAuth();
+  const { user } = useSpotifyContext();
   const {
     image,
     infoPersonal: info1,

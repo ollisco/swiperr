@@ -2,27 +2,28 @@ import React, { useContext, useState } from 'react';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import DATA from '../assets/data/dummy_data_songs';
 import { DARK_GRAY } from '../assets/styles';
-import useSpotifyAuth from '../hooks/useAuth';
+import useSpotifyContext from '../hooks/useAuth';
 import { SwipedCardContextT } from '../types';
 import CardItem from './CardItem';
 import { SwipeCardContext } from './SwipeCardProvider';
 
 function CardStackHandler() {
-  const { userTopItems } = useSpotifyAuth();
+  const {
+    userTopItems, getTopUserItems, token, likeSong,
+  } = useSpotifyContext();
 
-  const [_swiper, setSwiper] = useState<CardStack | null>(null);
   const { setRGB } = useContext(SwipeCardContext) as SwipedCardContextT;
 
   const swipeColorLimit = 100;
 
   function convertRGBgreen(d: number) {
     const m = d > 125 ? 125 : d;
-    return `rgb(${54 - (54 * d / 300) + 20}, ${m}, ${54 - (54 * d / 300) + 20})`;
+    return `rgb(${54 - ((54 * d) / 300) + 20}, ${m}, ${54 - ((54 * d) / 300) + 20})`;
   }
 
   function convertRGBred(d: number) {
     const m = d < 125 ? 125 : -d;
-    return `rgb(${m}, ${54 - (54 * -d / 300) + 20}, ${54 - (54 * -d / 300) + 20})`;
+    return `rgb(${m}, ${54 - ((54 * -d) / 300) + 20}, ${54 - ((54 * -d) / 300) + 20})`;
   }
 
   return (
@@ -30,7 +31,6 @@ function CardStackHandler() {
       loop
       verticalSwipe={false}
       renderNoMoreCards={() => null}
-      ref={(newSwiper): void => setSwiper(null)}
       onSwipe={(x, _y) => {
         if (x > swipeColorLimit) {
           setRGB(convertRGBgreen(x));
@@ -40,15 +40,22 @@ function CardStackHandler() {
           setRGB(DARK_GRAY);
         }
       }}
-      onSwiped={(_) => {
+      onSwiped={() => {
         setRGB(DARK_GRAY);
       }}
       onSwipeEnd={() => {
         setRGB(DARK_GRAY);
       }}
-    >
-      {userTopItems ? userTopItems?.map((item: any) => (
 
+      onSwipedAll={() => {
+        getTopUserItems(token.accessToken);
+      }}
+      onSwipedRight={(index: number) => {
+        likeSong(token.accessToken, userTopItems[index].id);
+      }}
+    >
+
+      {userTopItems ? userTopItems?.map((item: any) => (
         <Card key={item.id}>
           <CardItem
             hasActions
@@ -72,6 +79,7 @@ function CardStackHandler() {
         </Card>
       )))}
     </CardStack>
+
   );
 }
 

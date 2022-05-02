@@ -1,12 +1,14 @@
 import React from 'react';
 import { View, ImageBackground } from 'react-native';
-import { Settings, Filters } from '../components';
+import { Settings, Filters, Login } from '../components';
 import styles from '../assets/styles';
 import SwipeCardProvider from '../components/SwipeCardProvider';
 import CardStackHandler from '../components/CardStackHandler';
+import useSpotifyContext from '../hooks/useAuth';
 
 function Explore() {
   const backgroundLink = 'https://ollisco.se/assets/bg2.jpg'; // To avoid bg dissapearing after API call
+  const { user } = useSpotifyContext();
   return (
     <View>
       <ImageBackground
@@ -17,6 +19,7 @@ function Explore() {
           <View style={styles.top}>
             {/* Testing spotify login in settings component */}
             <Settings />
+            {user ? <></> : <Login />}
             <Filters />
           </View>
           <SwipeCardProvider>

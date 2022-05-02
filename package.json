@@ -21,6 +21,7 @@
     "expo-auth-session": "^3.5.0",
     "expo-random": "^12.1.2",
     "expo-status-bar": "~1.2.0",
+    "expo-updates": "~0.11.7",
     "expo-web-browser": "^10.1.1",
     "metro-react-native-babel-preset": "^0.70.1",
     "react": "17.0.1",

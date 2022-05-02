@@ -2,10 +2,10 @@ import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import Icon from './Icon';
 import styles, { DARK_GRAY } from '../assets/styles';
-import useSpotifyAuth from '../hooks/useAuth';
+import useSpotifyContext from '../hooks/useAuth';
 
 function Settings() {
-  const { token } = useSpotifyAuth();
+  const { token } = useSpotifyContext();
 
   return (
     <TouchableOpacity style={styles.settings}>
