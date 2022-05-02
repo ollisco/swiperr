@@ -5,7 +5,7 @@ import { ProfileItemT } from '../types';
 import styles, { DARK_GRAY, WHITE } from '../assets/styles';
 
 function ProfileItem({
-  age,
+  followerCount,
   info1,
   info2,
   info3,
@@ -28,9 +28,10 @@ function ProfileItem({
       <Text style={styles.name}>{name}</Text>
 
       <Text style={styles.descriptionProfileItem}>
-        {age}
-        {' '}
+        {followerCount}
+        {' followers '}
         -
+        {' '}
         {location}
       </Text>
 

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import {
-  Text, View, Image, Dimensions, TouchableOpacity,
+  Text, View, Image, TouchableOpacity,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 import Icon from './Icon';
@@ -19,27 +19,27 @@ function CardItem({
   image,
   artist,
   matches,
-  track: name,
+  track,
 }: CardItemT) {
   const { volume, updateVolume, rgb } = useContext(SwipeCardContext) as SwipedCardContextT;
 
+  // check if track is longer than 50 chars long
+  const trackTextStyle = track.length > 50 ? styles.trackStyleLong : styles.trackStyleShort;
+
   return (
 
-    <View style={[styles.containerCardItem, {backgroundColor: rgb}]}>
+    <View style={[styles.containerCardItem, { backgroundColor: rgb }]}>
       {/* IMAGE */}
       <Image source={image} style={styles.imageStyle} />
 
-      {/* MATCHES */}
-      {matches && (
-        <View style={styles.matchesCardItem}>
-          <Text style={styles.matchesTextCardItem}>
-            <Icon name="heart" color={WHITE} size={13} />
-            {' '}
-            {matches}
-            % Match!
-          </Text>
-        </View>
-      )}
+      <View style={styles.matchesCardItem}>
+        <Text style={styles.matchesTextCardItem}>
+          <Icon name="heart" color={WHITE} size={13} />
+          {' '}
+          {matches}
+          % Popularity
+        </Text>
+      </View>
 
       {console.log()}
       {hasActions && (
@@ -57,9 +57,9 @@ function CardItem({
       )}
 
       {/* NAME */}
-      <Text style={styles.nameStyle}>{name}</Text>
+      <Text style={[styles.trackStyle, trackTextStyle]}>{track}</Text>
 
-      <Text style={[styles.status, styles.statusText]}>{artist}</Text>
+      <Text style={[styles.artist, styles.artistText]}>{artist}</Text>
 
       {hasActions
 
