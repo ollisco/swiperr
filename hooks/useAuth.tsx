@@ -18,6 +18,7 @@ const SpotifyAuthContext: React.Context<{
   userTopItems: any,
   getTopUserItems: any,
   likeSong: any,
+  info: any,
 }> = createContext({
   promptAsync: null,
   token: null,
@@ -25,6 +26,7 @@ const SpotifyAuthContext: React.Context<{
   userTopItems: null,
   getTopUserItems: null,
   likeSong: null,
+  info: null
 });
 
 WebBrowser.maybeCompleteAuthSession();
@@ -36,8 +38,9 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
     scopes: ['user-read-email', 'user-read-private', 'user-top-read', 'user-library-read',
-      'user-library-modify'],
-    /*
+      'user-library-modify', 'user-read-playback-state', 'user-modify-playback-state',
+    'app-remote-control'],
+      /*
       In order to follow the 'Authorization Code Flow',
       to fetch token after authorizationEndpoint,
       this must be set to false
@@ -51,6 +54,25 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const { token, tokenExchangeError: exchangeError } = useAutoExchange(
     response?.type === 'success' ? response.params.code : undefined,
   );
+
+  async function playerInfo() {
+    // config
+    if (token) {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token.accessToken}`,
+        },
+      };
+      await axios.get('https://api.spotify.com/v1/me/player/devices', config)
+        .then((res) => {
+          console.log('Device:', res);
+        }).catch((err) => {
+          console.log('Device Error:', err);
+        });
+        
+
+    }
+  }
 
   async function likeSong(accessToken: string, trackUri: string) {
     // config
@@ -195,6 +217,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       },
     };
 
+
     await axios.get(recomendationEndpoint, config2)
       .then((res) => {
         console.log('Recomendations: ', res.data);
@@ -202,8 +225,39 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         // get a slice of the first 5 tracks
         // const slicedTracks = tracks.slice(0, 5);
         setUserTopItems(tracks);
+        const firstTrackUri = tracks[0]['uri'];
+        //const firstTrackUri = 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh';
+        console.log('uri: ', firstTrackUri);
+
+        
+        const q = {
+          data: {'uuh': 'uuh'},
+          query: {
+            uri: firstTrackUri,
+          }
+        }
+
+        // TODO: Figure out how to send the query nicely with axios
+        axios.post(
+          `https://api.spotify.com/v1/me/player/queue?uri=${firstTrackUri}`,
+          {},
+          config,
+        ).then((res) => {
+          console.log(res)
+          axios.post(
+            `https://api.spotify.com/v1/me/player/next`,
+            {},
+            config,
+          ).then((res) => {
+            console.log(res)
+          }).catch((err) => console.log('Error Next: ', err));
+        }).catch((err) => console.log('Error Queue: ', err));
+
+        
+
       })
-      .catch((res) => console.log('E: ', res));
+      .catch((res) => console.log('Erec: ', res));
+    
   }
 
   React.useEffect(() => {
@@ -222,6 +276,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         userTopItems,
         getTopUserItems,
         likeSong,
+        info: playerInfo,
       }}
     >
       {children}
