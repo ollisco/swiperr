@@ -11,8 +11,22 @@ import DATA from '../assets/data/dummy_data_songs';
 import styles, { DARK_GRAY } from '../assets/styles';
 import CardItemSmall from '../components/CardItemSmall';
 import BG_IMAGE from '../assets/images/bg2.jpg';
+import useSpotifyContext from '../hooks/useAuth';
 
 function Liked() {
+  const { likedSongs, getLikedSongs, token } = useSpotifyContext();
+
+
+  React.useEffect(() => {
+    likedSongs ? console.log('Yes') : console.log('No');
+    if (!likedSongs && token !== null) {
+      console.log('Getting tokens');
+      getLikedSongs(token.accessToken);
+      console.log('L:', likedSongs);
+    }
+  }, [likedSongs, getLikedSongs, token]);
+
+
   return (
     <View>
       <ImageBackground
@@ -27,7 +41,23 @@ function Liked() {
             </TouchableOpacity>
           </View>
 
-          <FlatList
+          {likedSongs ? (
+            <FlatList
+              numColumns={2}
+              data={likedSongs}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => (
+                <TouchableOpacity>
+                  <CardItemSmall
+                    image={item.track.album.images[0].url}
+                    track={item.track.name}
+                    artist={item.track.artists[0].name}
+                  />
+                </TouchableOpacity>
+              )}
+            />
+          ) : (
+            <FlatList
             numColumns={2}
             data={DATA}
             keyExtractor={(item, index) => index.toString()}
@@ -41,6 +71,8 @@ function Liked() {
               </TouchableOpacity>
             )}
           />
+          )}
+          
         </View>
       </ImageBackground>
     </View>

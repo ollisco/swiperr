@@ -9,8 +9,8 @@ import { SwipeCardContext } from './SwipeCardProvider';
 
 function CardStackHandler() {
   const {
-    userTopItems, getTopUserItems, token, likeSong,
-    playNextCard, isPlaying, switchPlayingState
+    userRecommendedTracks: userTopItems, getUserRecommendedTracks: getTopUserItems, token, likeSong,
+    playNextCard, isPlaying, switchPlayingState,
   } = useSpotifyContext();
 
   const { setRGB } = useContext(SwipeCardContext) as SwipedCardContextT;

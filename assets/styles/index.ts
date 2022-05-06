@@ -34,6 +34,21 @@ export default StyleSheet.create({
     // center children
     justifyContent: "center",
   },
+  containerCardItemSmall: {
+    backgroundColor: DARK_GRAY,
+    borderRadius: 8,
+    alignItems: "center",
+    margin: 10,
+    elevation: 1,
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    shadowColor: BLACK,
+    shadowOffset: { height: 0, width: 0 },
+    width: (DIMENSION_WIDTH / 2) - 30,
+    // center children
+    justifyContent: "center",
+  },
+
   matchesCardItem: {
     marginTop: -35,
     backgroundColor: PRIMARY_COLOR,
@@ -57,11 +72,18 @@ export default StyleSheet.create({
     paddingBottom: 10,
     flexDirection: "row",
     alignItems: "center",
+    textAlign: "center",
     marginTop: 10,
   },
   artistText: {
     color: GRAY,
     fontSize: 20,
+    textAlign: "center",
+  },
+  reminderText: {
+    color: GRAY,
+    fontSize: 15,
+    textAlign: "center",
   },
   online: {
     width: 6,
@@ -113,7 +135,7 @@ export default StyleSheet.create({
   // SMALL CARD (CARDITEMSMALL)
   smallImageStyle: {
       borderRadius: 8,
-      width: DIMENSION_WIDTH / 2 - 30 ,
+      width: DIMENSION_WIDTH / 2 - 40 ,
       height: 170 ,
       margin: 0,
   },
@@ -122,6 +144,7 @@ export default StyleSheet.create({
       paddingBottom: 5 ,
       color: WHITE,
       fontSize: 15,
+      textAlign: "center",
     },
   // LARGE CARD (CARDITEM)
   imageStyle: {
@@ -143,10 +166,12 @@ export default StyleSheet.create({
 
   trackStyleShort: {
     fontSize: 25,
+    textAlign: "center",
   },
 
   trackStyleLong: {
     fontSize: 20,
+    textAlign: "center",
   },
 
 
