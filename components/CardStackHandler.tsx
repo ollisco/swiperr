@@ -9,7 +9,8 @@ import { SwipeCardContext } from './SwipeCardProvider';
 
 function CardStackHandler() {
   const {
-    userTopItems, getTopUserItems, token, likeSong,
+    userRecommendedTracks: userTopItems, getUserRecommendedTracks: getTopUserItems, token, likeSong,
+    playNextCard, isPlaying, switchPlayingState,
   } = useSpotifyContext();
 
   const { setRGB } = useContext(SwipeCardContext) as SwipedCardContextT;
@@ -40,8 +41,9 @@ function CardStackHandler() {
           setRGB(DARK_GRAY);
         }
       }}
-      onSwiped={() => {
+      onSwiped={(index: number) => {
         setRGB(DARK_GRAY);
+        playNextCard(token.accessToken, index + 1);
       }}
       onSwipeEnd={() => {
         setRGB(DARK_GRAY);

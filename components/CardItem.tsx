@@ -13,6 +13,7 @@ import styles, {
   WHITE,
 } from '../assets/styles';
 import { SwipeCardContext } from './SwipeCardProvider';
+import useSpotifyContext from '../hooks/useAuth';
 
 function CardItem({
   hasActions,
@@ -22,6 +23,9 @@ function CardItem({
   track,
 }: CardItemT) {
   const { volume, updateVolume, rgb } = useContext(SwipeCardContext) as SwipedCardContextT;
+  const {
+    isPlaying, switchPlayingState, token, setVolume,
+  } = useSpotifyContext();
 
   // check if track is longer than 50 chars long
   const trackTextStyle = track.length > 50 ? styles.trackStyleLong : styles.trackStyleShort;
@@ -41,7 +45,6 @@ function CardItem({
         </Text>
       </View>
 
-      {console.log()}
       {hasActions && (
 
       <Slider
@@ -70,11 +73,19 @@ function CardItem({
           style={{ width: 200, height: 20 }}
           minimumValue={0}
           maximumValue={100}
+          step={1}
           minimumTrackTintColor="#FFFFFF"
           maximumTrackTintColor="#000000"
           thumbTintColor="#FFFFFF"
           value={volume}
-          onValueChange={(value) => updateVolume(value)}
+          onValueChange={(value: number) => {
+            updateVolume(value);
+            // Cant set volume here due to exceeding API rate limit
+          }}
+          onSlidingComplete={(value: number) => {
+            console.log(value);
+            setVolume(token.accessToken, value);
+          }}
         />
         <Icon name="md-volume-high" color={WHITE} size={20} />
       </View>
@@ -89,7 +100,10 @@ function CardItem({
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button}>
-            <Icon name="pause" color={DISLIKE_ACTIONS} size={30} />
+            {isPlaying
+              ? <Icon name="pause" color={DISLIKE_ACTIONS} size={30} onPress={() => switchPlayingState(token.accessToken)} />
+              : <Icon name="play" color={DISLIKE_ACTIONS} size={30} onPress={() => switchPlayingState(token.accessToken)} />}
+
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.miniButton}>
@@ -98,6 +112,12 @@ function CardItem({
 
         </View>
       )}
+      <View>
+        <Text style={[styles.reminderText, { fontSize: 15 }]}>
+          You need to have the spotify app active to use this application.
+          Try playing and pausing your current song, and clear your queue.
+        </Text>
+      </View>
     </View>
   );
 }
