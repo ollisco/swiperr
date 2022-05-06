@@ -13,6 +13,7 @@ import styles, {
   WHITE,
 } from '../assets/styles';
 import { SwipeCardContext } from './SwipeCardProvider';
+import useSpotifyContext from '../hooks/useAuth';
 
 function CardItem({
   hasActions,
@@ -22,6 +23,7 @@ function CardItem({
   track,
 }: CardItemT) {
   const { volume, updateVolume, rgb } = useContext(SwipeCardContext) as SwipedCardContextT;
+  const { isPlaying, switchPlayingState, token } = useSpotifyContext();
 
   // check if track is longer than 50 chars long
   const trackTextStyle = track.length > 50 ? styles.trackStyleLong : styles.trackStyleShort;
@@ -89,7 +91,15 @@ function CardItem({
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button}>
-            <Icon name="pause" color={DISLIKE_ACTIONS} size={30} />
+            {isPlaying ? 
+            <Icon name="pause" color={DISLIKE_ACTIONS} size={30} onPress={() => switchPlayingState(token.accessToken)}/>
+            :
+            <Icon name="play" color={DISLIKE_ACTIONS} size={30} onPress={() => switchPlayingState(token.accessToken)}/>
+            }
+            
+          
+
+            
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.miniButton}>

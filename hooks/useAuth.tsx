@@ -19,6 +19,10 @@ const SpotifyAuthContext: React.Context<{
   getTopUserItems: any,
   likeSong: any,
   info: any,
+  playNextCard: any,
+  isPlaying: any,
+  switchPlayingState: any,
+
 }> = createContext({
   promptAsync: null,
   token: null,
@@ -26,7 +30,11 @@ const SpotifyAuthContext: React.Context<{
   userTopItems: null,
   getTopUserItems: null,
   likeSong: null,
-  info: null
+  info: null,
+  playNextCard: null,
+  isPlaying: null,
+  switchPlayingState: null,
+
 });
 
 WebBrowser.maybeCompleteAuthSession();
@@ -35,12 +43,14 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userTopItems, setUserTopItems] = useState(null);
   const [userPlaylists, setUserPlaylists] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
     scopes: ['user-read-email', 'user-read-private', 'user-top-read', 'user-library-read',
       'user-library-modify', 'user-read-playback-state', 'user-modify-playback-state',
-    'app-remote-control'],
-      /*
+      'app-remote-control'],
+    /*
       In order to follow the 'Authorization Code Flow',
       to fetch token after authorizationEndpoint,
       this must be set to false
@@ -54,6 +64,14 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const { token, tokenExchangeError: exchangeError } = useAutoExchange(
     response?.type === 'success' ? response.params.code : undefined,
   );
+
+  function switchPlayingState(accessToken: string) {
+    if (isPlaying) {
+      pause(accessToken);
+    } else {
+      play(accessToken);
+    }
+  }
 
   async function playerInfo() {
     // config
@@ -69,8 +87,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         }).catch((err) => {
           console.log('Device Error:', err);
         });
-        
-
     }
   }
 
@@ -217,47 +233,75 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       },
     };
 
-
     await axios.get(recomendationEndpoint, config2)
       .then((res) => {
         console.log('Recomendations: ', res.data);
         const { tracks } = res.data;
-        // get a slice of the first 5 tracks
-        // const slicedTracks = tracks.slice(0, 5);
         setUserTopItems(tracks);
-        const firstTrackUri = tracks[0]['uri'];
-        //const firstTrackUri = 'spotify:track:4iV5W9uYEdYUVa79Axb7Rh';
-        console.log('uri: ', firstTrackUri);
-
-        
-        const q = {
-          data: {'uuh': 'uuh'},
-          query: {
-            uri: firstTrackUri,
-          }
-        }
-
-        // TODO: Figure out how to send the query nicely with axios
-        axios.post(
-          `https://api.spotify.com/v1/me/player/queue?uri=${firstTrackUri}`,
-          {},
-          config,
-        ).then((res) => {
-          console.log(res)
-          axios.post(
-            `https://api.spotify.com/v1/me/player/next`,
-            {},
-            config,
-          ).then((res) => {
-            console.log(res)
-          }).catch((err) => console.log('Error Next: ', err));
-        }).catch((err) => console.log('Error Queue: ', err));
-
-        
-
+        const firstTrackUri = tracks[0].uri;
+        queueSongAndSkip(accessToken, firstTrackUri);
       })
       .catch((res) => console.log('Erec: ', res));
-    
+  }
+  function nextCardSong(accessToken: string, index: number) {
+    // make sure userTopItems is not null
+    if (userTopItems !== null) {
+      const trackUri = userTopItems[index]['uri'];
+      queueSongAndSkip(accessToken, trackUri);
+    }
+  }
+
+  async function pause(accessToken: string) {
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    };
+    await axios.put('https://api.spotify.com/v1/me/player/pause', null, config)
+      .then((res) => {
+        console.log('Paused');
+        setIsPlaying(false);
+      })
+      .catch((res) => console.log('Error Pausing: ', res));
+  }
+
+  async function play(accessToken: string) {
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    };
+    await axios.put('https://api.spotify.com/v1/me/player/play', null, config)
+      .then((res) => {
+        console.log('Playing');
+        setIsPlaying(true);
+      })
+      .catch((res) => console.log('Error Playing: ', res));
+  }
+
+  async function queueSongAndSkip(accessToken: string, trackUri: string) {
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    };
+    // TODO: Figure out how to send the query nicely with axios
+    axios.post(
+      `https://api.spotify.com/v1/me/player/queue?uri=${trackUri}`,
+      {},
+      config,
+    ).then(() => {
+      playNextSong(accessToken);
+    }).catch((err) => console.log('Error Queue: ', err));
+  }
+
+  async function playNextSong(accessToken: string) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+    axios.post(
+      'https://api.spotify.com/v1/me/player/next',
+      {},
+      config,
+    ).catch((err) => console.log('Error Next: ', err));
+
+    setIsPlaying(true);
   }
 
   React.useEffect(() => {
@@ -277,6 +321,9 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         getTopUserItems,
         likeSong,
         info: playerInfo,
+        playNextCard: nextCardSong,
+        isPlaying,  
+        switchPlayingState,
       }}
     >
       {children}
