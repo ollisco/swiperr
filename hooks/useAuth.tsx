@@ -47,7 +47,7 @@ WebBrowser.maybeCompleteAuthSession();
 
 export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [userRecommendedTracks, getUserRecommendedTracks] = useState(null);
+  const [userRecommendedTracks, setUserRecommendedTracks] = useState(null);
   const [userPlaylists, setUserPlaylists] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [likedSongs, setLikedSongs] = useState(null)
@@ -228,8 +228,8 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
 
     // WARNING: the length of seed genres + seed artists + seed tracks <= 5 (MAX 5)
     const seedGenres = genres[0];
-    const seedArtists = `${allArtists[0]},${allArtists[1]}`;
-    const seedTracks = `${allTracks[0]},${allTracks[1]}`;
+    const seedArtists = allArtists[1] ? `${allArtists[0]},${allArtists[1]}`: '';
+    const seedTracks = allTracks[1] ? `${allTracks[0]},${allTracks[1]}` : '';
 
     const config2 = {
       headers: {
@@ -246,11 +246,13 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       .then((res) => {
         console.log('Recomendations: ', res.data);
         const { tracks } = res.data;
-        getUserRecommendedTracks(tracks);
+        setUserRecommendedTracks(tracks);
         const firstTrackUri = tracks[0].uri;
         queueSongAndSkip(accessToken, firstTrackUri);
       })
       .catch((res) => console.log('Erec: ', res));
+
+    setVolume(accessToken, 50);
   }
 
   function nextCardSong(accessToken: string, index: number) {
@@ -268,9 +270,8 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
 
     await axios.get(`${meEndpoint}/tracks`, config)
       .then((res) => {
-        console.log('SL:', res.data.items);
-        const { tracks } = res.data.items;
-        setLikedSongs(res.data.items);
+        const tracks = res.data.items;
+        setLikedSongs(tracks);
       })
       .catch((res) => console.log('E4: ', res));
   }
@@ -338,7 +339,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
 
     setIsPlaying(true);
   }
-
+ 
   React.useEffect(() => {
     if (token) {
       getUserData(token.accessToken);

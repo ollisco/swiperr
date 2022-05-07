@@ -45,7 +45,8 @@ function CardItem({
         </Text>
       </View>
 
-      {hasActions && (
+      {/* Player slider */}
+      {/* {hasActions && (
 
       <Slider
         style={{ width: 250, height: 10, marginTop: 10 }}
@@ -57,7 +58,7 @@ function CardItem({
         thumbTintColor="#00000000"
         value={10}
       />
-      )}
+      )} */}
 
       {/* NAME */}
       <Text style={[styles.trackStyle, trackTextStyle]}>{track}</Text>
@@ -83,7 +84,6 @@ function CardItem({
             // Cant set volume here due to exceeding API rate limit
           }}
           onSlidingComplete={(value: number) => {
-            console.log(value);
             setVolume(token.accessToken, value);
           }}
         />
@@ -115,7 +115,7 @@ function CardItem({
       <View>
         <Text style={[styles.reminderText, { fontSize: 15 }]}>
           You need to have the spotify app active to use this application.
-          Try playing and pausing your current song, and clear your queue.
+          Try playing and pausing your current song, and make sure your queue is empty.
         </Text>
       </View>
     </View>
