@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import {
-  Text, View, Image, TouchableOpacity,
+  Text, View, Image, TouchableOpacity, Platform,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 import Icon from './Icon';
@@ -21,10 +21,13 @@ function CardItem({
   artist,
   matches,
   track,
+  id: index,
 }: CardItemT) {
-  const { volume, updateVolume, rgb } = useContext(SwipeCardContext) as SwipedCardContextT;
   const {
-    isPlaying, switchPlayingState, token, setVolume,
+    volume, updateVolume, rgb, setPressedTrack, setShowPlaylists,
+  } = useContext(SwipeCardContext) as SwipedCardContextT;
+  const {
+    isPlaying, switchPlayingState, token, setVolume, userRecommendedTracks,
   } = useSpotifyContext();
 
   // check if track is longer than 50 chars long
@@ -64,9 +67,7 @@ function CardItem({
 
       <Text style={[styles.artist, styles.artistText]}>{artist}</Text>
 
-      {hasActions
-
-      && (
+      {Platform.OS === 'web' && (
       <View style={styles.volumeSlider}>
         <Icon name="md-volume-low" color={WHITE} size={20} />
         <Slider
@@ -105,9 +106,18 @@ function CardItem({
               : <Icon name="play" color={DISLIKE_ACTIONS} size={30} onPress={() => switchPlayingState(token.accessToken)} />}
 
           </TouchableOpacity>
-
           <TouchableOpacity style={styles.miniButton}>
-            <Icon name="add" color={STAR_ACTIONS} size={20} />
+            <Icon
+              name="add"
+              color={STAR_ACTIONS}
+              size={20}
+              onPress={() => {
+                setPressedTrack(userRecommendedTracks[index].uri);
+                setShowPlaylists(true);
+                console.log('URT: ', userRecommendedTracks[index]);
+              }}
+            />
+
           </TouchableOpacity>
 
         </View>

@@ -7,6 +7,8 @@ const SwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
   const [volume, setVolume] = useState<number>(50);
   // const [swipedDistance, setSwipedDistance] = useState<number>(0);
   const [rgb, setRGB] = useState<string>('rgb(54, 54, 54)');
+  const [pressedTrack, setPressedTrack] = useState<string>('');
+  const [showPlaylists, setShowPlaylists] = useState<boolean>(false);
 
   const updateVolume = (value: number) => {
     setVolume(value);
@@ -18,6 +20,10 @@ const SwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
       updateVolume,
       rgb,
       setRGB,
+      pressedTrack,
+      setPressedTrack,
+      showPlaylists,
+      setShowPlaylists,
     }}
     >
       {children}

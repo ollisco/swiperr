@@ -17,7 +17,7 @@ function CardItemSmall({
       <Text style={styles.smallNameStyle}>{name}</Text>
 
       <View style={styles.artist}>
-        <Text style={[styles.artistText, {fontSize: 10}]}>{artist}</Text>
+        <Text style={[styles.artistText, { fontSize: 10 }]}>{artist}</Text>
       </View>
     </View>
   );

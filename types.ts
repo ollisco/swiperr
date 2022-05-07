@@ -9,13 +9,23 @@ export type CardItemT = {
   previousVolume?: number;
   setVolume?: (val: number) => void;
   color?: string;
+  id: number,
 };
+
+export type CardItemRowT = {
+  name: string;
+  image: any;
+}
 
 export type SwipedCardContextT = {
   volume: number;
   updateVolume: (value: number) => void;
   rgb: string;
   setRGB: (value: string) => void;
+  pressedTrack: string;
+  setPressedTrack: (value: string) => void;
+  showPlaylists: boolean;
+  setShowPlaylists: (value: boolean) => void;
 }
 
 

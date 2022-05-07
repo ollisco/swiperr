@@ -49,6 +49,27 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
 
+  containerCardItemRow: {
+    backgroundColor: DARK_GRAY,
+    borderRadius: 8,
+    flexDirection: "row",
+    alignItems: "center",
+    margin: 10,
+    elevation: 1,
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
+    shadowColor: BLACK,
+    shadowOffset: { height: 0, width: 0 },
+    width: DIMENSION_WIDTH - 30,
+  },
+  playlistText: {
+    fontSize: 30,
+    color: WHITE,
+    textAlign: "center",  
+    // align center horizontally
+    alignItems: "center",
+  },
+
   matchesCardItem: {
     marginTop: -35,
     backgroundColor: PRIMARY_COLOR,
@@ -139,6 +160,13 @@ export default StyleSheet.create({
       height: 170 ,
       margin: 0,
   },
+  playlistImage: {
+    borderRadius: 8,
+    height:  120,
+    width: 120,
+    margin: 0,
+  },
+
   smallNameStyle: {
       paddingTop: 10,
       paddingBottom: 5 ,
@@ -336,10 +364,16 @@ export default StyleSheet.create({
   // CONTAINER - HOME
   containerHome: {
     marginHorizontal: 10,
+    //display: "none",
+  },
+
+  containerPlaylists: {
+    flex: 1,
+    backgroundColor: BLACK,
   },
 
   // CONTAINER - MATCHES
-  containerMatches: {
+  containerLiked: {
     justifyContent: "space-between",
     flex: 1,
     paddingHorizontal: 10,
