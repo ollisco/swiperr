@@ -60,8 +60,9 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
     scopes: ['user-read-email', 'user-read-private', 'user-top-read', 'user-library-read',
-      'user-read-playback-state', 'user-modify-playback-state',
-      'app-remote-control', 'playlist-read-private', 'playlist-modify-private',
+      'user-library-modify', 'playlist-read-private', 'playlist-read-collaborative',
+    'user-read-playback-state', 'user-modify-playback-state',
+      'app-remote-control', 'playlist-modify-private', 'playlist-modify-public'
     ],
     /*
       In order to follow the 'Authorization Code Flow',
