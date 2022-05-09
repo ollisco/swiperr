@@ -1,3 +1,5 @@
+import CardStack from "react-native-card-stack-swiper";
+
 export type CardItemT = {
   description?: string;
   hasActions?: boolean;
@@ -26,6 +28,8 @@ export type SwipedCardContextT = {
   setPressedTrack: (value: string) => void;
   showPlaylists: boolean;
   setShowPlaylists: (value: boolean) => void;
+  swiper: CardStack | null;
+  setSwiper: (value: CardStack | null) => void;
 }
 
 

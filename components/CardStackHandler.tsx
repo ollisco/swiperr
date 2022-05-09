@@ -14,7 +14,7 @@ function CardStackHandler(style: any) {
     playNextCard, isPlaying, switchPlayingState,
   } = useSpotifyContext();
 
-  const { setRGB } = useContext(SwipeCardContext) as SwipedCardContextT;
+  const { setRGB, setSwiper } = useContext(SwipeCardContext) as SwipedCardContextT;
 
   const swipeColorLimit = 100;
 
@@ -34,6 +34,7 @@ function CardStackHandler(style: any) {
         loop
         verticalSwipe={false}
         renderNoMoreCards={() => null}
+        ref={(swiper) => setSwiper(swiper)}
         onSwipe={(x, _y) => {
           if (x > swipeColorLimit) {
             setRGB(convertRGBgreen(x));

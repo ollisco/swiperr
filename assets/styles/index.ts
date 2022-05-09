@@ -337,6 +337,15 @@ export default StyleSheet.create({
     fontSize: 13,
   },
 
+  playlistsTopRow: {
+    flexDirection: 'row', 
+    width: '90%', 
+    marginLeft: '5%', 
+    marginRight: '5%', 
+    // vertically align items center
+    alignItems: 'center',
+  },
+
   // CONTAINER - GENERAL
   bg: {
     flex: 1,
@@ -367,10 +376,13 @@ export default StyleSheet.create({
     //display: "none",
   },
 
-  containerPlaylists: {
-    flex: 1,
-    backgroundColor: BLACK,
-  },
+  containerPlaylists: { 
+    flex: 1, 
+    backgroundColor: '#FFFFFF', 
+    marginTop: 200, 
+    borderTopLeftRadius: 20, 
+    borderTopRightRadius: 20,
+    },
 
   // CONTAINER - MATCHES
   containerLiked: {

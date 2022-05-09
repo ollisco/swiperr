@@ -1,4 +1,5 @@
 import { createContext, FC, useState } from 'react';
+import CardStack from 'react-native-card-stack-swiper';
 import { SwipedCardContextT } from '../types';
 
 export const SwipeCardContext = createContext<SwipedCardContextT | null>(null);
@@ -9,6 +10,7 @@ const SwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
   const [rgb, setRGB] = useState<string>('rgb(54, 54, 54)');
   const [pressedTrack, setPressedTrack] = useState<string>('');
   const [showPlaylists, setShowPlaylists] = useState<boolean>(false);
+  const [swiper, setSwiper] = useState<CardStack | null>(null);
 
   const updateVolume = (value: number) => {
     setVolume(value);
@@ -24,6 +26,8 @@ const SwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
       setPressedTrack,
       showPlaylists,
       setShowPlaylists,
+      swiper,
+      setSwiper,
     }}
     >
       {children}

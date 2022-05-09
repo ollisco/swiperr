@@ -3,24 +3,38 @@ import React, {
   FlatList, TouchableOpacity, View, ScrollView, Text,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import styles from '../assets/styles';
+import styles, { DARK_GRAY, GRAY } from '../assets/styles';
 import useSpotifyContext from '../hooks/useAuth';
 import CardItemRow from './CardItemRow';
 import { SwipeCardContext } from './SwipeCardProvider';
 // import swipcardcontext from types
 import { SwipedCardContextT } from '../types';
+import Icon from './Icon';
 
 function Playlists() {
   const { playlists, addTrackToPlaylist, token } = useSpotifyContext();
 
-  const { pressedTrack, showPlaylists } = useContext(SwipeCardContext) as SwipedCardContextT;
+  const {
+    pressedTrack,
+    showPlaylists,
+    setShowPlaylists,
+    swiper,
+  } = useContext(SwipeCardContext) as SwipedCardContextT;
   if (playlists && showPlaylists) {
-
     return (
-      <View style={{ flex: 1, backgroundColor: '#000000' }}>
-        <Text style={{ color: '#FFFFFF', position: 'relative', zIndex: 2, flex: 0 }}> 
-        Only select a playlist where you can add songs
-        </Text>
+      <View style={styles.containerPlaylists}>
+        <View style={styles.playlistsTopRow}>
+          <Text style={{ color: '#000000', fontSize: 15 }}>
+            Only select a playlist where you can add songs
+          </Text>
+          <Icon
+            name="close"
+            size={30}
+            color="#000000"
+            style={{ marginLeft: 'auto', color: DARK_GRAY }}
+            onPress={() => setShowPlaylists(false)}
+          />
+        </View>
         <SafeAreaView style={{ flex: 1 }}>
           <ScrollView>
             {showPlaylists ? (
@@ -33,6 +47,8 @@ function Playlists() {
                     key={item.id}
                     onPress={() => {
                       addTrackToPlaylist(token.accessToken, item.id, pressedTrack);
+                      setShowPlaylists(false);
+                      swiper?.swipeRight();
                     }}
                   >
                     <CardItemRow
@@ -46,9 +62,8 @@ function Playlists() {
           </ScrollView>
         </SafeAreaView>
       </View>
-    ) ;
-  } else {
-    return (<></>)
+    );
   }
+  return (<></>);
 }
 export default Playlists;

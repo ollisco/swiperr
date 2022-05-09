@@ -60,9 +60,8 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
     scopes: ['user-read-email', 'user-read-private', 'user-top-read', 'user-library-read',
-      'user-library-modify', 'user-read-playback-state', 'user-modify-playback-state',
-      'app-remote-control', 'playlist-modify-public',
-      'playlist-read-private', 'playlist-modify-private',
+      'user-read-playback-state', 'user-modify-playback-state',
+      'app-remote-control', 'playlist-read-private', 'playlist-modify-private',
     ],
     /*
       In order to follow the 'Authorization Code Flow',
@@ -95,7 +94,9 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     };
     await axios.get(`https://api.spotify.com/v1/me/playlists?limit=${50}`, config)
       .then((res) => {
-        const playlists = res.data.items;
+        // Todo improve this to filter on user id aswell
+        const playlists = res.data.items.filter((playlist: any) => playlist.owner.display_name !== 'Spotify');
+
         // sort playlists alphabetically
         playlists.sort((a: any, b: any) => {
           if (a.name < b.name) {
@@ -171,14 +172,15 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     }
   }
 
-  async function getUserData(accessToken: string) {
+  function getUserData(accessToken: string) {
     const config = {
       headers: { Authorization: `Bearer ${accessToken}` },
     };
-
-    await axios.get(meEndpoint, config)
+    let u = null;
+    axios.get(meEndpoint, config)
       .then((res) => {
         setUser(res.data);
+        u = res.data;
       })
       .catch((res) => console.log('E1: ', res));
   }
@@ -379,10 +381,11 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
 
   React.useEffect(() => {
     if (token) {
+      getUserData(token.accessToken);
       getTopUserItems(token.accessToken);
       getLikedSongs(token.accessToken, 10);
+      
       getPlaylists(token.accessToken);
-      getUserData(token.accessToken);
     }
   }, [token]);
 
