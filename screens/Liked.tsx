@@ -16,7 +16,6 @@ import useSpotifyContext from '../hooks/useAuth';
 function Liked() {
   const { likedSongs, getLikedSongs, token } = useSpotifyContext();
 
-
   React.useEffect(() => {
     likedSongs ? console.log('Yes') : console.log('No');
     if (!likedSongs && token !== null) {
@@ -26,14 +25,13 @@ function Liked() {
     }
   }, [likedSongs, getLikedSongs, token]);
 
-
   return (
     <View>
       <ImageBackground
         source={BG_IMAGE}
         style={styles.bg}
       >
-        <View style={styles.containerMatches}>
+        <View style={styles.containerLiked}>
           <View style={styles.top}>
             <Text style={styles.title}>Liked Songs</Text>
             <TouchableOpacity>
@@ -58,21 +56,21 @@ function Liked() {
             />
           ) : (
             <FlatList
-            numColumns={2}
-            data={DATA}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <TouchableOpacity>
-                <CardItemSmall
-                  image={item.image}
-                  track={item.track}
-                  artist={item.artist}
-                />
-              </TouchableOpacity>
-            )}
-          />
+              numColumns={2}
+              data={DATA}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => (
+                <TouchableOpacity>
+                  <CardItemSmall
+                    image={item.image}
+                    track={item.track}
+                    artist={item.artist}
+                  />
+                </TouchableOpacity>
+              )}
+            />
           )}
-          
+
         </View>
       </ImageBackground>
     </View>

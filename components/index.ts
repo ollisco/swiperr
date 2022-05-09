@@ -5,3 +5,6 @@ export { default as Icon } from './Icon';
 export { default as Message } from './Message';
 export { default as ProfileItem } from './ProfileItem';
 export { default as Login } from './Login';
+export { default as CardItemRow } from './CardItemRow';
+export { default as Playlists } from './Playlists';
+export { default as Cards } from './Cards';
