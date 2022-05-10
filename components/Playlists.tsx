@@ -10,6 +10,7 @@ import { SwipeCardContext } from './SwipeCardProvider';
 // import swipcardcontext from types
 import { SwipedCardContextT } from '../types';
 import Icon from './Icon';
+import { dummyDataPlaylists } from '../assets/data/dummy_data_playlists';
 
 function Playlists() {
   const { playlists, addTrackToPlaylist, token } = useSpotifyContext();
@@ -20,7 +21,9 @@ function Playlists() {
     setShowPlaylists,
     swiper,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
-  if (playlists && showPlaylists) {
+
+
+  if (showPlaylists) {
     return (
       <View style={styles.containerPlaylists}>
         <View style={styles.playlistsTopRow}>
@@ -37,7 +40,7 @@ function Playlists() {
         </View>
         <SafeAreaView style={{ flex: 1 }}>
           <ScrollView>
-            {showPlaylists && playlists ? (
+            {playlists ? (
               <FlatList
                 numColumns={1}
                 data={playlists}
@@ -58,7 +61,24 @@ function Playlists() {
                   </TouchableOpacity>
                 )}
               />
-            ) : <></>}
+              ) : (
+                <FlatList
+                numColumns={1}
+                data={dummyDataPlaylists}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ index, item }) => (
+                  <TouchableOpacity
+                    key={item.id}
+                  >
+                    <CardItemRow
+                      image={item.image}
+                      name={item.name}
+                    />
+                  </TouchableOpacity>
+                )}
+              />
+
+              )}
           </ScrollView>
         </SafeAreaView>
       </View>

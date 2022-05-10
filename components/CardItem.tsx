@@ -131,9 +131,10 @@ function CardItem({
               color={STAR_ACTIONS}
               size={20}
               onPress={() => {
-                setPressedTrack(userRecommendedTracks[index].uri);
+                if (token) {
+                  setPressedTrack(userRecommendedTracks[index].uri);
+                }
                 setShowPlaylists(true);
-                console.log('URT: ', userRecommendedTracks[index]);
               }}
             />
 
