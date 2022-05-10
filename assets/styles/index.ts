@@ -51,7 +51,7 @@ export default StyleSheet.create({
 
   containerCardItemRow: {
     backgroundColor: DARK_GRAY,
-    borderRadius: 8,
+    borderRadius: 2,
     flexDirection: "row",
     alignItems: "center",
     margin: 10,
@@ -65,9 +65,7 @@ export default StyleSheet.create({
   playlistText: {
     fontSize: 30,
     color: WHITE,
-    textAlign: "center",  
-    // align center horizontally
-    alignItems: "center",
+    marginLeft: "5%"
   },
 
   matchesCardItem: {
@@ -161,7 +159,7 @@ export default StyleSheet.create({
       margin: 0,
   },
   playlistImage: {
-    borderRadius: 8,
+    borderRadius: 2,
     height:  120,
     width: 120,
     margin: 0,
@@ -378,10 +376,11 @@ export default StyleSheet.create({
 
   containerPlaylists: { 
     flex: 1, 
-    backgroundColor: '#FFFFFF', 
+    backgroundColor: WHITE, 
     marginTop: 200, 
     borderTopLeftRadius: 20, 
     borderTopRightRadius: 20,
+    borderRadius: 6,
     },
 
   // CONTAINER - MATCHES

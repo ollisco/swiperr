@@ -37,7 +37,7 @@ function Playlists() {
         </View>
         <SafeAreaView style={{ flex: 1 }}>
           <ScrollView>
-            {showPlaylists ? (
+            {showPlaylists && playlists ? (
               <FlatList
                 numColumns={1}
                 data={playlists}
