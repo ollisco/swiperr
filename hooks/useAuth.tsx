@@ -21,6 +21,7 @@ const SpotifyAuthContext: React.Context<{
   info: any,
   playNextCard: any,
   isPlaying: any,
+  setIsPlaying: any,
   switchPlayingState: any,
   setVolume: any,
   likedSongs: any,
@@ -39,6 +40,7 @@ const SpotifyAuthContext: React.Context<{
   info: null,
   playNextCard: null,
   isPlaying: null,
+  setIsPlaying: null,
   switchPlayingState: null,
   setVolume: null,
   likedSongs: null,
@@ -61,8 +63,8 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     clientId: CLIENT_ID,
     scopes: ['user-read-email', 'user-read-private', 'user-top-read', 'user-library-read',
       'user-library-modify', 'playlist-read-private', 'playlist-read-collaborative',
-    'user-read-playback-state', 'user-modify-playback-state',
-      'app-remote-control', 'playlist-modify-private', 'playlist-modify-public'
+      'user-read-playback-state', 'user-modify-playback-state',
+      'app-remote-control', 'playlist-modify-private', 'playlist-modify-public',
     ],
     /*
       In order to follow the 'Authorization Code Flow',
@@ -269,7 +271,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
 
     // WARNING: the length of seed genres + seed artists + seed tracks <= 5 (MAX 5)
     const seedGenres = genres[0];
-    const seedArtists = allArtists[1] ? `${allArtists[0]},${allArtists[1]}`: '';
+    const seedArtists = allArtists[1] ? `${allArtists[0]},${allArtists[1]}` : '';
     const seedTracks = allTracks[1] ? `${allTracks[0]},${allTracks[1]}` : '';
 
     const config2 = {
@@ -380,13 +382,13 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
 
     setIsPlaying(true);
   }
- 
+
   React.useEffect(() => {
     if (token) {
       getUserData(token.accessToken);
       getTopUserItems(token.accessToken);
       getLikedSongs(token.accessToken, 10);
-      
+
       getPlaylists(token.accessToken);
     }
   }, [token]);
@@ -403,6 +405,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         info: playerInfo,
         playNextCard: nextCardSong,
         isPlaying,
+        setIsPlaying,
         switchPlayingState,
         setVolume,
         likedSongs,

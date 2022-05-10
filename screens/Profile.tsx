@@ -21,6 +21,8 @@ function Profile() {
     infoMusic: info2,
     match,
     lastSeen,
+    name,
+    location,
   } = DEMO[7];
 
   function getFlagEmoji(countryCode: string) {
@@ -42,37 +44,39 @@ function Profile() {
   return (
 
     <View>
-      {user ? (
-        <View>
-          <ImageBackground
-            source={BG_IMAGE}
-            style={styles.bg}
-          />
-          <ScrollView style={styles.containerProfile}>
-            {user.images.length > 0 ? (
-              <ImageBackground source={user.images[0].url} style={styles.photo} />
-            ) : (
-              <ImageBackground source={image} style={styles.photo} />)}
-            <View style={styles.top}>
-              <TouchableOpacity>
-                <Icon
-                  name="swap-horizontal-outline"
-                  size={20}
-                  color={WHITE}
-                  style={styles.topIconLeft}
-                />
-              </TouchableOpacity>
+      <View>
+        <ImageBackground
+          source={BG_IMAGE}
+          style={styles.bg}
+        />
+        <ScrollView style={styles.containerProfile}>
+          {user && user.images.length > 0 ? (
+            <ImageBackground source={user.images[0].url} style={styles.photo} />
+          ) : (
+            <ImageBackground source={image} style={styles.photo} />
+          )}
 
-              <TouchableOpacity>
-                <Icon
-                  name="ellipsis-vertical"
-                  size={20}
-                  color={WHITE}
-                  style={styles.topIconRight}
-                />
-              </TouchableOpacity>
-            </View>
+          <View style={styles.top}>
+            <TouchableOpacity>
+              <Icon
+                name="swap-horizontal-outline"
+                size={20}
+                color={WHITE}
+                style={styles.topIconLeft}
+              />
+            </TouchableOpacity>
 
+            <TouchableOpacity>
+              <Icon
+                name="ellipsis-vertical"
+                size={20}
+                color={WHITE}
+                style={styles.topIconRight}
+              />
+            </TouchableOpacity>
+          </View>
+
+          {user ? (
             <ProfileItem
               matches={match}
               followerCount={user.followers.total}
@@ -82,22 +86,30 @@ function Profile() {
               info2={info2}
               info4={lastSeen}
             />
+          ) : (
+            <ProfileItem
+              matches={match}
+              followerCount="20"
+              name={name}
+              location={location}
+              info1={info1}
+              info2={info2}
+              info4={lastSeen}
+            />
+          )}
 
-            <View style={styles.actionsProfile}>
-              <TouchableOpacity style={styles.circledButton}>
-                <Icon name="ellipsis-horizontal" size={20} color={WHITE} />
-              </TouchableOpacity>
+          <View style={styles.actionsProfile}>
+            <TouchableOpacity style={styles.circledButton}>
+              <Icon name="ellipsis-horizontal" size={20} color={WHITE} />
+            </TouchableOpacity>
 
-              <TouchableOpacity style={styles.roundedButton}>
-                <Icon name="chatbubble" size={20} color={WHITE} />
-                <Text style={styles.textButton}>Start chatting</Text>
-              </TouchableOpacity>
-            </View>
-          </ScrollView>
-        </View>
-      ) : (
-        <Text>No profile loaded</Text>
-      )}
+            <TouchableOpacity style={styles.roundedButton}>
+              <Icon name="chatbubble" size={20} color={WHITE} />
+              <Text style={styles.textButton}>Start chatting</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      </View>
     </View>
   );
 }

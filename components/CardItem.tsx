@@ -27,7 +27,12 @@ function CardItem({
     volume, updateVolume, rgb, setPressedTrack, setShowPlaylists,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
   const {
-    isPlaying, switchPlayingState, token, setVolume, userRecommendedTracks,
+    isPlaying, 
+    setIsPlaying,
+    switchPlayingState, 
+    token, 
+    setVolume, 
+    userRecommendedTracks,
   } = useSpotifyContext();
 
   // check if track is longer than 50 chars long
@@ -48,20 +53,6 @@ function CardItem({
         </Text>
       </View>
 
-      {/* Player slider */}
-      {/* {hasActions && (
-
-      <Slider
-        style={{ width: 250, height: 10, marginTop: 10 }}
-        minimumValue={0}
-        maximumValue={20}
-        minimumTrackTintColor="#FFFFFF"
-        maximumTrackTintColor="#000000"
-        disabled
-        thumbTintColor="#00000000"
-        value={10}
-      />
-      )} */}
 
       {/* NAME */}
       <Text style={[styles.trackStyle, trackTextStyle]}>{track}</Text>
@@ -85,7 +76,9 @@ function CardItem({
             // Cant set volume here due to exceeding API rate limit
           }}
           onSlidingComplete={(value: number) => {
-            setVolume(token.accessToken, value);
+            if (token) {
+              setVolume(token.accessToken, value);
+            }
           }}
         />
         <Icon name="md-volume-high" color={WHITE} size={20} />
@@ -101,9 +94,35 @@ function CardItem({
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button}>
-            {isPlaying
-              ? <Icon name="pause" color={DISLIKE_ACTIONS} size={30} onPress={() => switchPlayingState(token.accessToken)} />
-              : <Icon name="play" color={DISLIKE_ACTIONS} size={30} onPress={() => switchPlayingState(token.accessToken)} />}
+            {isPlaying ? 
+              <Icon 
+                name="pause" 
+                color={DISLIKE_ACTIONS} 
+                size={30} 
+                onPress={() => {
+                  if (token) { // user is logged in
+                    switchPlayingState(token.accessToken)
+                  } else { // user is not logged in switch icon for mock page
+                    setIsPlaying(!isPlaying);
+                    console.log()
+                  }
+                }}
+              />
+              : 
+              <Icon 
+                name="play" 
+                color={DISLIKE_ACTIONS} 
+                size={30} 
+                onPress={() => {
+                  if (token) {
+                    switchPlayingState(token.accessToken)
+                  } else { // user is not logged in switch icon for mock page
+                    setIsPlaying(!isPlaying);
+                  }
+
+                }} 
+              />
+            }
 
           </TouchableOpacity>
           <TouchableOpacity style={styles.miniButton}>
@@ -112,9 +131,10 @@ function CardItem({
               color={STAR_ACTIONS}
               size={20}
               onPress={() => {
-                setPressedTrack(userRecommendedTracks[index].uri);
+                if (token) {
+                  setPressedTrack(userRecommendedTracks[index].uri);
+                }
                 setShowPlaylists(true);
-                console.log('URT: ', userRecommendedTracks[index]);
               }}
             />
 

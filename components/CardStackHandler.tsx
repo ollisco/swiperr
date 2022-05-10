@@ -46,17 +46,23 @@ function CardStackHandler(style: any) {
         }}
         onSwiped={(index: number) => {
           setRGB(DARK_GRAY);
-          playNextCard(token.accessToken, index + 1);
+          if (token) {
+            playNextCard(token.accessToken, index + 1);
+          }
         }}
         onSwipeEnd={() => {
           setRGB(DARK_GRAY);
         }}
 
         onSwipedAll={() => {
-          getTopUserItems(token.accessToken);
+          if (token) {
+            getTopUserItems(token.accessToken);
+          }
         }}
         onSwipedRight={(index: number) => {
-          likeSong(token.accessToken, userTopItems[index].id);
+          if (token) {
+            likeSong(token.accessToken, userTopItems[index].id);
+          }
         }}
       >
 
