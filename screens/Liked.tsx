@@ -17,11 +17,8 @@ function Liked() {
   const { likedSongs, getLikedSongs, token } = useSpotifyContext();
 
   React.useEffect(() => {
-    likedSongs ? console.log('Yes') : console.log('No');
     if (!likedSongs && token !== null) {
-      console.log('Getting tokens');
       getLikedSongs(token.accessToken);
-      console.log('L:', likedSongs);
     }
   }, [likedSongs, getLikedSongs, token]);
 

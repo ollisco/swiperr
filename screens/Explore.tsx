@@ -15,12 +15,6 @@ function Explore() {
   const backgroundLink = 'https://ollisco.se/assets/bg2.jpg'; // To avoid bg dissapearing after API call
   const { user, playlists, addTrackToPlaylist } = useSpotifyContext();
 
-  // react use effect
-  React.useEffect(() => {
-    console.log('useEffect');
-    // close the effect
-  }, []);
-
   return (
     <View>
       <ImageBackground
