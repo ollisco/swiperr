@@ -381,6 +381,7 @@ export default StyleSheet.create({
     borderTopLeftRadius: 20, 
     borderTopRightRadius: 20,
     borderRadius: 6,
+    zIndex: 10,
     },
 
   // CONTAINER - MATCHES
