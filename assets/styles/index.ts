@@ -371,6 +371,8 @@ export default StyleSheet.create({
   // CONTAINER - HOME
   containerHome: {
     marginHorizontal: 10,
+    zIndex: 1,
+    elevation: 1,
     //display: "none",
   },
 
@@ -381,7 +383,8 @@ export default StyleSheet.create({
     borderTopLeftRadius: 20, 
     borderTopRightRadius: 20,
     borderRadius: 6,
-    zIndex: 10,
+    zIndex: 3,
+    elevation: 3,
     },
 
   // CONTAINER - MATCHES
