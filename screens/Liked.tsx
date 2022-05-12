@@ -44,7 +44,7 @@ function Liked() {
               renderItem={({ item }) => (
                 <TouchableOpacity>
                   <CardItemSmall
-                    image={item.track.album.images[0].url}
+                    image={{uri: item.track.album.images[0].url}}
                     track={item.track.name}
                     artist={item.track.artists[0].name}
                   />

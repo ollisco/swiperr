@@ -18,12 +18,13 @@ function Explore() {
   return (
     <View>
       <ImageBackground
-        source={backgroundLink} // To avoid bg dissapearing after API call
+        source={{uri: backgroundLink}} // To avoid bg dissapearing after API call
         style={styles.bg}
+        resizeMode="cover"
       >
         <SwipeCardProvider>
           <Cards />
-          <Playlists />
+          {/* <Playlists /> */}
         </SwipeCardProvider>
       </ImageBackground>
     </View>

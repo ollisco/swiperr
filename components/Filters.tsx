@@ -4,11 +4,11 @@ import Icon from './Icon';
 import styles, { DARK_GRAY } from '../assets/styles';
 import useSpotifyContext from '../hooks/useAuth';
 
-function Filters() {
+function Filters() { 
   const { playlists } = useSpotifyContext();
   return (
     <TouchableOpacity style={styles.filters}>
-      <Icon name="options" size={13} color={DARK_GRAY} onPress={() => console.log(playlists)} />
+      <Icon name="options" size={13} color={DARK_GRAY} onPress={() =>  console.log(1337)} />
     </TouchableOpacity>
   );
 }

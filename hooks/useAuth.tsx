@@ -110,7 +110,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
           }
           return 0;
         });
-        console.log('Playlists: ', playlists);
+        //console.log('Playlists: ', playlists);
         setUserPlaylists(playlists);
       })
       .catch((err) => {
@@ -124,7 +124,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         Authorization: `Bearer ${accessToken}`,
       },
     };
-    console.log('OOO', accessToken, playlistId, trackId);
+    //console.log('OOO', accessToken, playlistId, trackId);
     // If this is set to .put instead of .post it will erase the whole playlist
     // Soooo... dont do that
     await axios.post(`https://api.spotify.com/v1/playlists/${playlistId}/tracks?uris=${trackId}&position=${1}`, {}, config)
@@ -146,7 +146,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       };
       await axios.get('https://api.spotify.com/v1/me/player/devices', config)
         .then((res) => {
-          console.log('Device:', res);
+          //console.log('Device:', res);
         }).catch((err) => {
           console.log('Device Error:', err);
         });
@@ -167,7 +167,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         { ids: [trackUri] },
         config,
       ).then((res) => {
-        console.log('Saved track to user library');
+        //console.log('Saved track to user library');
         getLikedSongs(accessToken, 20);
       }).catch((err) => {
         console.log(err);
@@ -287,7 +287,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
 
     await axios.get(recomendationEndpoint, config2)
       .then((res) => {
-        console.log('Recomendations: ', res.data);
+        //console.log('Recomendations: ', res.data);
         const { tracks } = res.data;
         setUserRecommendedTracks(tracks);
         const firstTrackUri = tracks[0].uri;
@@ -325,7 +325,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     };
     await axios.put('https://api.spotify.com/v1/me/player/pause', null, config)
       .then((res) => {
-        console.log('Paused');
+        //console.log('Paused');
         setIsPlaying(false);
       })
       .catch((res) => console.log('Error Pausing: ', res));
@@ -348,7 +348,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     };
     await axios.put('https://api.spotify.com/v1/me/player/play', null, config)
       .then((res) => {
-        console.log('Playing');
+        //console.log('Playing');
         setIsPlaying(true);
       })
       .catch((res) => console.log('Error Playing: ', res));

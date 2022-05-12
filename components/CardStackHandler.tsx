@@ -29,7 +29,7 @@ function CardStackHandler(style: any) {
   }
 
   return (
-    <View>
+    <View onPress={() => console.log(0)}>
       <CardStack
         loop
         verticalSwipe={false}
@@ -70,7 +70,7 @@ function CardStackHandler(style: any) {
           <Card key={item.id}>
             <CardItem
               hasActions
-              image={item.album.images[0].url}
+              image={{uri: item.album.images[0].url}}
               track={item.name}
               description={item.artists[0].name}
               matches={item.popularity}
