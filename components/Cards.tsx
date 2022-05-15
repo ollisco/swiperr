@@ -12,8 +12,8 @@ import { SwipedCardContextT } from '../types';
 type Props = {}
 
 function Cards(props: Props) {
-  const { user } = useSpotifyContext();
-  const { showType, setShowType } = useContext(SwipeCardContext) as SwipedCardContextT;
+  const { user, queueAndSkip, token, userRecommendedTracks, newReleases} = useSpotifyContext();
+  const { showType, setShowType, recommendedIndex, newReleasesIndex} = useContext(SwipeCardContext) as SwipedCardContextT;
 
 
   const recommendedActiveStyle = showType === 'recommended' ? styles.exploreTopCenterTextActive : {};
@@ -26,7 +26,12 @@ function Cards(props: Props) {
         <Settings />
         {user ? (
           <View style={styles.exploreTopCenter}>
-            <TouchableOpacity onPress={() => setShowType('recommended')}>
+            <TouchableOpacity onPress={() => {
+              if (showType !== 'recommended')  {
+                setShowType('recommended')
+                queueAndSkip(token.accessToken, userRecommendedTracks[recommendedIndex].uri)
+              }
+            }}>
               <Text style={[styles.exploreTopCenterText, recommendedActiveStyle]}>
                 Recommended
               </Text>
@@ -34,7 +39,12 @@ function Cards(props: Props) {
             <Text style={styles.exploreTopCenterText}>
               {'|'}
             </Text>
-            <TouchableOpacity onPress={() => setShowType('new')}>
+            <TouchableOpacity onPress={() => {
+              if (showType !== 'new')  {
+                setShowType('new')
+                queueAndSkip(token.accessToken, newReleases[newReleasesIndex].uri)
+              }
+            }}>
               <Text style={[styles.exploreTopCenterText, newActiveStyle]}>
                 New Releases
               </Text>

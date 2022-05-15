@@ -32,6 +32,10 @@ export type SwipedCardContextT = {
   setSwiper: (value: CardStack | null) => void;
   showType: string;
   setShowType: (value: string) => void;
+  recommendedIndex: number;
+  setRecommendedIndex: (value: number) => void;
+  newReleasesIndex: number;
+  setNewReleasesIndex: (value: number) => void;
 }
 
 

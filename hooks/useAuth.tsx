@@ -19,7 +19,7 @@ const SpotifyAuthContext: React.Context<{
   getUserRecommendedTracks: any,
   likeSong: any,
   info: any,
-  playNextCard: any,
+  queueAndSkip: any,
   isPlaying: any,
   setIsPlaying: any,
   switchPlayingState: any,
@@ -40,7 +40,7 @@ const SpotifyAuthContext: React.Context<{
   getUserRecommendedTracks: null,
   likeSong: null,
   info: null,
-  playNextCard: null,
+  queueAndSkip: null,
   isPlaying: null,
   setIsPlaying: null,
   switchPlayingState: null,
@@ -63,6 +63,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const [likedSongs, setLikedSongs] = useState(null);
   const [showRecommended, setShowRecommended] = useState(true);
   const [newReleases, setNewReleases] = useState(null);
+  
 
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
@@ -125,10 +126,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
             console.log(err);
           });
 
-        
-
-        
-        
         setNewReleases(releases);
       })
       .catch((err) => {
@@ -369,7 +366,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     setVolume(accessToken, 50);
   }
 
-  function nextCardSong(accessToken: string, index: number) {
+  function nextCardSong(accessToken: string, ) {
     // make sure userTopItems is not null
     if (userRecommendedTracks !== null) {
       const trackUri = userRecommendedTracks[index].uri;
@@ -475,7 +472,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         getUserRecommendedTracks: getTopUserItems,
         likeSong,
         info: playerInfo,
-        playNextCard: nextCardSong,
+        queueAndSkip: queueSongAndSkip,
         isPlaying,
         setIsPlaying,
         switchPlayingState,

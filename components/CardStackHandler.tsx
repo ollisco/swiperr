@@ -12,10 +12,16 @@ import { SwipeCardContext } from './SwipeCardProvider';
 function CardStackHandler(style: any) {
   const {
     userRecommendedTracks: userTopItems, getUserRecommendedTracks: getTopUserItems, token, likeSong,
-    playNextCard, newReleases
+    queueAndSkip, newReleases
   } = useSpotifyContext();
 
-  const { setRGB, setSwiper, showType } = useContext(SwipeCardContext) as SwipedCardContextT;
+  const { 
+    setRGB, setSwiper, showType, recommendedIndex, setRecommendedIndex, newReleasesIndex, setNewReleasesIndex
+  
+  } = useContext(SwipeCardContext) as SwipedCardContextT;
+
+  const cardIndex = showType === 'recommended' ? recommendedIndex : newReleasesIndex;
+
 
   const swipeColorLimit = 100;
 
@@ -34,7 +40,7 @@ function CardStackHandler(style: any) {
         loop
         verticalSwipe={false}
         renderNoMoreCards={() => null}
-        ref={(swiper) => setSwiper(swiper)}
+        ref={(cardIndex) => setSwiper(cardIndex)}
         onSwipe={(x, _y) => {
           if (x > swipeColorLimit) {
             setRGB(convertRGBgreen(x));
@@ -47,7 +53,15 @@ function CardStackHandler(style: any) {
         onSwiped={(index: number) => {
           setRGB(DARK_GRAY);
           if (token) {
-            playNextCard(token.accessToken, index + 1);
+            if (showType === 'recommended') {
+              queueAndSkip(token.accessToken, userTopItems[recommendedIndex+1].uri);
+              setRecommendedIndex(recommendedIndex + 1);
+              console.log('Qr', userTopItems[recommendedIndex].uri);
+            } else if (showType === 'new') {
+              queueAndSkip(token.accessToken, newReleases[newReleasesIndex+1].uri);
+              setNewReleasesIndex(newReleasesIndex + 1);
+              console.log('Qn', newReleases[newReleasesIndex].uri);
+            }
           }
         }}
         onSwipeEnd={() => {
@@ -112,3 +126,7 @@ function CardStackHandler(style: any) {
 }
 
 export default CardStackHandler;
+function queueAndSkip(accessToken: any, arg1: number) {
+  throw new Error('Function not implemented.');
+}
+
