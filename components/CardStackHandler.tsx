@@ -29,7 +29,7 @@ function CardStackHandler(style: any) {
   }
 
   return (
-    <View onPress={() => console.log(0)}>
+    <View style={{borderColor: '#000000', borderWidth: 3}}>
       <CardStack
         loop
         verticalSwipe={false}

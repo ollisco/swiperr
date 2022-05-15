@@ -24,7 +24,7 @@ function Explore() {
       >
         <SwipeCardProvider>
           <Cards />
-          {/* <Playlists /> */}
+          <Playlists />
         </SwipeCardProvider>
       </ImageBackground>
     </View>

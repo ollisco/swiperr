@@ -62,7 +62,7 @@
   "private": true,
   "name": "swiperr",
   "version": "1.0.0",
-  "description": "A swiping music app",
+  "description": "A swiping music app. Powered By Spotify",
   "repository": "git@github.com:ollisco/app.git",
   "author": "Olle Jernström <ollejer@ug.kth.se>",
   "license": "MIT"

@@ -14,14 +14,13 @@ type Props = {}
 function Cards(props: Props) {
   const { user } = useSpotifyContext();
   return (
-    <View style={styles.containerHome} onPress={() => console.log(1)}>
+    <View style={styles.containerHome}>
       <View style={styles.top}>
         {/* Testing spotify login in settings component */}
         <Settings />
         {user ? <></> : <Login />}
         <Filters />
       </View>
-
       <CardStackHandler />
     </View>
   );
