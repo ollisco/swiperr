@@ -51,8 +51,8 @@ function Profile() {
         />
         <ScrollView style={styles.containerProfile}>
           {user && user.images.length > 0 ? (
-            <ImageBackground source={{uri: user.images[0].url}} style={styles.photo} />
-            
+            <ImageBackground source={{ uri: user.images[0].url }} style={styles.photo} />
+
           ) : (
             <ImageBackground source={image} style={styles.photo} />
           )}

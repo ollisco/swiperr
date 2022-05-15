@@ -12,9 +12,12 @@ import { SwipedCardContextT } from '../types';
 type Props = {}
 
 function Cards(props: Props) {
-  const { user, queueAndSkip, token, userRecommendedTracks, newReleases} = useSpotifyContext();
-  const { showType, setShowType, recommendedIndex, newReleasesIndex} = useContext(SwipeCardContext) as SwipedCardContextT;
-
+  const {
+    user, queueAndSkip, token, userRecommendedTracks, newReleases,
+  } = useSpotifyContext();
+  const {
+    showType, setShowType, recommendedIndex, newReleasesIndex,
+  } = useContext(SwipeCardContext) as SwipedCardContextT;
 
   const recommendedActiveStyle = showType === 'recommended' ? styles.exploreTopCenterTextActive : {};
   const newActiveStyle = showType === 'new' ? styles.exploreTopCenterTextActive : {};
@@ -27,24 +30,26 @@ function Cards(props: Props) {
         {user ? (
           <View style={styles.exploreTopCenter}>
             <TouchableOpacity onPress={() => {
-              if (showType !== 'recommended')  {
-                setShowType('recommended')
-                queueAndSkip(token.accessToken, userRecommendedTracks[recommendedIndex].uri)
+              if (showType !== 'recommended') {
+                setShowType('recommended');
+                queueAndSkip(token.accessToken, userRecommendedTracks[recommendedIndex].uri);
               }
-            }}>
+            }}
+            >
               <Text style={[styles.exploreTopCenterText, recommendedActiveStyle]}>
                 Recommended
               </Text>
-            </TouchableOpacity> 
+            </TouchableOpacity>
             <Text style={styles.exploreTopCenterText}>
-              {'|'}
+              |
             </Text>
             <TouchableOpacity onPress={() => {
-              if (showType !== 'new')  {
-                setShowType('new')
-                queueAndSkip(token.accessToken, newReleases[newReleasesIndex].uri)
+              if (showType !== 'new') {
+                setShowType('new');
+                queueAndSkip(token.accessToken, newReleases[newReleasesIndex].uri);
               }
-            }}>
+            }}
+            >
               <Text style={[styles.exploreTopCenterText, newActiveStyle]}>
                 New Releases
               </Text>

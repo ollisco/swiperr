@@ -34,10 +34,11 @@ const SwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
       showType,
       setShowType,
       recommendedIndex,
-      setRecommendedIndex,  
+      setRecommendedIndex,
       newReleasesIndex,
-      setNewReleasesIndex
-    }}>
+      setNewReleasesIndex,
+    }}
+    >
       {children}
     </SwipeCardContext.Provider>
   );

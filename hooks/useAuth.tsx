@@ -30,7 +30,6 @@ const SpotifyAuthContext: React.Context<{
   playlists: any,
   addTrackToPlaylist: any,
   newReleases: any,
-  
 
 }> = createContext({
   promptAsync: null,
@@ -63,7 +62,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const [likedSongs, setLikedSongs] = useState(null);
   const [showRecommended, setShowRecommended] = useState(true);
   const [newReleases, setNewReleases] = useState(null);
-  
 
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
@@ -91,36 +89,34 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     const config = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-      }
+      },
     };
-
-    
   }
 
   async function getNewReleases(accessToken: string) {
     const config = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-      }
+      },
     };
 
-    await axios.get(`https://api.spotify.com/v1/browse/new-releases`, config)
+    await axios.get('https://api.spotify.com/v1/browse/new-releases', config)
       .then((res) => {
-        let albumUris: string[] = [];
+        const albumUris: string[] = [];
         res.data.albums.items.forEach((item: any) => {
-          albumUris.push(item.id)
-        })
+          albumUris.push(item.id);
+        });
         // get albums
         const albumUriString = albumUris.join();
-        let releases: any[] = [];
+        const releases: any[] = [];
         axios.get(`https://api.spotify.com/v1/albums?ids=${albumUriString}`, config)
           .then((res) => {
-            console.log(res.data)
+            console.log(res.data);
             res.data.albums.forEach((album: any) => {
-              let item = album.tracks.items[0];
+              const item = album.tracks.items[0];
               item.images = album.images;
-              releases.push(item)
-            })
+              releases.push(item);
+            });
           })
           .catch((err) => {
             console.log(err);
@@ -145,12 +141,12 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     const config = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
-      }
+      },
     };
 
-    await axios.get(`https://api.spotify.com/v1/browse/new-releases`, config)
+    await axios.get('https://api.spotify.com/v1/browse/new-releases', config)
       .then((res) => {
-        console.log(res)
+        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -178,7 +174,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
           }
           return 0;
         });
-        //console.log('Playlists: ', playlists);
+        // console.log('Playlists: ', playlists);
         setUserPlaylists(playlists);
       })
       .catch((err) => {
@@ -192,7 +188,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         Authorization: `Bearer ${accessToken}`,
       },
     };
-    //console.log('OOO', accessToken, playlistId, trackId);
+    // console.log('OOO', accessToken, playlistId, trackId);
     // If this is set to .put instead of .post it will erase the whole playlist
     // Soooo... dont do that
     await axios.post(`https://api.spotify.com/v1/playlists/${playlistId}/tracks?uris=${trackId}&position=${1}`, {}, config)
@@ -214,7 +210,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       };
       await axios.get('https://api.spotify.com/v1/me/player/devices', config)
         .then((res) => {
-          //console.log('Device:', res);
+          // console.log('Device:', res);
         }).catch((err) => {
           console.log('Device Error:', err);
         });
@@ -235,7 +231,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         { ids: [trackUri] },
         config,
       ).then((res) => {
-        //console.log('Saved track to user library');
+        // console.log('Saved track to user library');
         getLikedSongs(accessToken, 20);
       }).catch((err) => {
         console.log(err);
@@ -355,7 +351,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
 
     await axios.get(recomendationEndpoint, config2)
       .then((res) => {
-        //console.log('Recomendations: ', res.data);
+        // console.log('Recomendations: ', res.data);
         const { tracks } = res.data;
         setUserRecommendedTracks(tracks);
         const firstTrackUri = tracks[0].uri;
@@ -366,7 +362,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     setVolume(accessToken, 50);
   }
 
-  function nextCardSong(accessToken: string, ) {
+  function nextCardSong(accessToken: string) {
     // make sure userTopItems is not null
     if (userRecommendedTracks !== null) {
       const trackUri = userRecommendedTracks[index].uri;
@@ -393,7 +389,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     };
     await axios.put('https://api.spotify.com/v1/me/player/pause', null, config)
       .then((res) => {
-        //console.log('Paused');
+        // console.log('Paused');
         setIsPlaying(false);
       })
       .catch((res) => console.log('Error Pausing: ', res));
@@ -416,7 +412,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     };
     await axios.put('https://api.spotify.com/v1/me/player/play', null, config)
       .then((res) => {
-        //console.log('Playing');
+        // console.log('Playing');
         setIsPlaying(true);
       })
       .catch((res) => console.log('Error Playing: ', res));

@@ -18,7 +18,7 @@ function Explore() {
   return (
     <View>
       <ImageBackground
-        source={{uri: backgroundLink}} // To avoid bg dissapearing after API call
+        source={{ uri: backgroundLink }} // To avoid bg dissapearing after API call
         style={styles.bg}
         resizeMode="cover"
       >

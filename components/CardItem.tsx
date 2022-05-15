@@ -28,11 +28,11 @@ function CardItem({
     volume, updateVolume, rgb, setPressedTrack, setShowPlaylists,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
   const {
-    isPlaying, 
+    isPlaying,
     setIsPlaying,
-    switchPlayingState, 
-    token, 
-    setVolume, 
+    switchPlayingState,
+    token,
+    setVolume,
     userRecommendedTracks,
   } = useSpotifyContext();
 
@@ -53,7 +53,6 @@ function CardItem({
           % Popularity
         </Text>
       </View>
-
 
       {/* NAME */}
       <Text style={[styles.trackStyle, trackTextStyle]}>{track}</Text>
@@ -94,35 +93,36 @@ function CardItem({
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button}>
-            {isPlaying ? 
-              <Icon 
-                name="pause" 
-                color={DISLIKE_ACTIONS} 
-                size={30} 
-                onPress={() => {
-                  if (token) { // user is logged in
-                    switchPlayingState(token.accessToken)
-                  } else { // user is not logged in switch icon for mock page
-                    setIsPlaying(!isPlaying);
-                    console.log()
-                  }
-                }}
-              />
-              : 
-              <Icon 
-                name="play" 
-                color={DISLIKE_ACTIONS} 
-                size={30} 
-                onPress={() => {
-                  if (token) {
-                    switchPlayingState(token.accessToken)
-                  } else { // user is not logged in switch icon for mock page
-                    setIsPlaying(!isPlaying);
-                  }
-
-                }} 
-              />
-            }
+            {isPlaying
+              ? (
+                <Icon
+                  name="pause"
+                  color={DISLIKE_ACTIONS}
+                  size={30}
+                  onPress={() => {
+                    if (token) { // user is logged in
+                      switchPlayingState(token.accessToken);
+                    } else { // user is not logged in switch icon for mock page
+                      setIsPlaying(!isPlaying);
+                      console.log();
+                    }
+                  }}
+                />
+              )
+              : (
+                <Icon
+                  name="play"
+                  color={DISLIKE_ACTIONS}
+                  size={30}
+                  onPress={() => {
+                    if (token) {
+                      switchPlayingState(token.accessToken);
+                    } else { // user is not logged in switch icon for mock page
+                      setIsPlaying(!isPlaying);
+                    }
+                  }}
+                />
+              )}
 
           </TouchableOpacity>
           <TouchableOpacity style={styles.miniButton}>

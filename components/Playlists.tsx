@@ -22,7 +22,6 @@ function Playlists() {
     swiper,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
 
-
   if (showPlaylists) {
     return (
       <View style={styles.containerPlaylists}>
@@ -55,14 +54,14 @@ function Playlists() {
                     }}
                   >
                     <CardItemRow
-                      image={{uri: item.images[0].url}}
+                      image={{ uri: item.images[0].url }}
                       name={item.name}
                     />
                   </TouchableOpacity>
                 )}
               />
-              ) : (
-                <FlatList
+            ) : (
+              <FlatList
                 numColumns={1}
                 data={dummyDataPlaylists}
                 keyExtractor={(item, index) => index.toString()}
@@ -78,7 +77,7 @@ function Playlists() {
                 )}
               />
 
-              )}
+            )}
           </ScrollView>
         </SafeAreaView>
       </View>
