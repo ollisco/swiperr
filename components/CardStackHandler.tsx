@@ -34,6 +34,9 @@ function CardStackHandler(style: any) {
     const m = d < 125 ? 125 : -d;
     return `rgb(${m}, ${54 - ((54 * -d) / 300) + 20}, ${54 - ((54 * -d) / 300) + 20})`;
   }
+  
+
+  console.log(recommendedIndex);
   return (
     <View style={{ borderColor: '#000000', borderWidth: 3 }}>
 
@@ -59,7 +62,8 @@ function CardStackHandler(style: any) {
             if (token) {
               queueAndSkip(token.accessToken, userTopItems[recommendedIndex + 1].uri);
               setRecommendedIndex(recommendedIndex + 1);
-              console.log('Qr', userTopItems[recommendedIndex].uri);
+              setNewReleasesIndex(newReleasesIndex + 1);
+              console.log('Qr', userTopItems[recommendedIndex].name);
             }
           }}
           onSwipeEnd={() => {
@@ -76,7 +80,6 @@ function CardStackHandler(style: any) {
               likeSong(token.accessToken, userTopItems[index].id);
             }
           }}
-          
           >
             {userTopItems?.map((item: any, index: number) => (
               <Card key={item.id}>
@@ -93,15 +96,13 @@ function CardStackHandler(style: any) {
           }
           </CardStack>
         )
-        : null}
-
-      {newReleases && showType === 'new'
+        : newReleases && showType === 'new'
         ? (
           <CardStack
           loop
           verticalSwipe={false}
           renderNoMoreCards={() => null}
-          ref={(swiper) => setSwiper(swiper)}
+          //ref={(swiper) => setSwiper(swiper)}
           onSwipe={(x, _y) => {
             if (x > swipeColorLimit) {
               setRGB(convertRGBgreen(x));
@@ -118,6 +119,7 @@ function CardStackHandler(style: any) {
           
               queueAndSkip(token.accessToken, newReleases[newReleasesIndex + 1].uri);
               setNewReleasesIndex(newReleasesIndex + 1);
+              setRecommendedIndex(recommendedIndex + 1);
               console.log('Qn', newReleases[newReleasesIndex].uri);
     
             }

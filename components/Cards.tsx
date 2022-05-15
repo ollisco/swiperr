@@ -17,6 +17,7 @@ function Cards(props: Props) {
   } = useSpotifyContext();
   const {
     showType, setShowType, recommendedIndex, newReleasesIndex,
+    setRecommendedIndex, setNewReleasesIndex,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
 
   const recommendedActiveStyle = showType === 'recommended' ? styles.exploreTopCenterTextActive : {};
@@ -32,7 +33,8 @@ function Cards(props: Props) {
             <TouchableOpacity onPress={() => {
               if (showType !== 'recommended') {
                 setShowType('recommended');
-                queueAndSkip(token.accessToken, userRecommendedTracks[recommendedIndex].uri);
+                queueAndSkip(token.accessToken, userRecommendedTracks[recommendedIndex].uri)
+                ;
               }
             }}
             >

@@ -113,7 +113,9 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
           .then((res) => {
             console.log(res.data);
             res.data.albums.forEach((album: any) => {
-              const item = album.tracks.items[0];
+              // get random int from range 0 to length of album.track.items
+              const randomInt = Math.floor(Math.random() * album.tracks.items.length);
+              const item = album.tracks.items[randomInt];
               item.images = album.images;
               releases.push(item);
             });
@@ -121,8 +123,8 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
           .catch((err) => {
             console.log(err);
           });
-
-        setNewReleases(releases);
+        const releasesShuffled = releases.sort(() => Math.random() - 0.5);
+        setNewReleases(releasesShuffled);
       })
       .catch((err) => {
         console.log(err);
