@@ -6,7 +6,7 @@ export type CardItemT = {
   hasVariant?: boolean;
   image: any;
   artist: string;
-  matches?: string;
+  popularity?: string;
   track: string;
   previousVolume?: number;
   setVolume?: (val: number) => void;
@@ -30,6 +30,8 @@ export type SwipedCardContextT = {
   setShowPlaylists: (value: boolean) => void;
   swiper: CardStack | null;
   setSwiper: (value: CardStack | null) => void;
+  showType: string;
+  setShowType: (value: string) => void;
 }
 
 

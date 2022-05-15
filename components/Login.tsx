@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import Icon from './Icon';
 import styles, { DARK_GRAY } from '../assets/styles';
 import useSpotifyContext from '../hooks/useAuth';
+import { SwipeCardContext } from './SwipeCardProvider';
+import { SwipedCardContextT } from '../types';
 
 function Login() {
   const { promptAsync } = useSpotifyContext();
-  // TODO: this should be moved to useAuth hook
+  const { setShowType } = useContext(SwipeCardContext) as SwipedCardContextT;
+
   async function awaitPromptAsync() {
+    setShowType('recommended');
     await promptAsync();
+
   }
 
   return (

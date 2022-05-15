@@ -78,6 +78,24 @@ export default StyleSheet.create({
   matchesTextCardItem: {
     color: WHITE,
   },
+
+  exploreTopCenter: {
+    textAlign: "center",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+   },
+
+  exploreTopCenterText: {
+    color: GRAY,
+    fontSize: 18,
+    marginHorizontal: 10,
+  },
+
+  exploreTopCenterTextActive: {
+    color: WHITE,
+  },
+
   volumeSlider: {
     display: "flex",
     flexDirection: "row",
@@ -199,6 +217,7 @@ export default StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
   },
+
 
 
   // COMPONENT - SETTINGS

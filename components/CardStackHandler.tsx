@@ -8,13 +8,14 @@ import { SwipedCardContextT } from '../types';
 import CardItem from './CardItem';
 import { SwipeCardContext } from './SwipeCardProvider';
 
+
 function CardStackHandler(style: any) {
   const {
     userRecommendedTracks: userTopItems, getUserRecommendedTracks: getTopUserItems, token, likeSong,
-    playNextCard, isPlaying, switchPlayingState,
+    playNextCard, newReleases
   } = useSpotifyContext();
 
-  const { setRGB, setSwiper } = useContext(SwipeCardContext) as SwipedCardContextT;
+  const { setRGB, setSwiper, showType } = useContext(SwipeCardContext) as SwipedCardContextT;
 
   const swipeColorLimit = 100;
 
@@ -26,8 +27,7 @@ function CardStackHandler(style: any) {
   function convertRGBred(d: number) {
     const m = d < 125 ? 125 : -d;
     return `rgb(${m}, ${54 - ((54 * -d) / 300) + 20}, ${54 - ((54 * -d) / 300) + 20})`;
-  }
-
+  } 
   return (
     <View style={{borderColor: '#000000', borderWidth: 3}}>
       <CardStack
@@ -66,31 +66,46 @@ function CardStackHandler(style: any) {
         }}
       >
 
-        {userTopItems ? userTopItems?.map((item: any, index: number) => (
+        {userTopItems && showType === 'recommended' ? userTopItems?.map((item: any, index: number) => (
           <Card key={item.id}>
             <CardItem
               hasActions
               image={{uri: item.album.images[0].url}}
+              popularity={item.popularity}
+              artist={item.artists.map((artist: any) => artist.name).join(', ')}
               track={item.name}
-              description={item.artists[0].name}
-              matches={item.popularity}
-              artist={item.artists[0].name}
               id={index}
             />
           </Card>
-        )) : (DATA.map((item, index) => (
+        )) : newReleases && showType === 'new' ? newReleases?.map((item: any, index: number) => (
+          <Card key={item.id}>
+            <CardItem
+              hasActions
+              image={{uri: item.images[0].url}}
+              popularity={'0'}
+              artist={item.artists.map((artist: any) => artist.name).join(', ')}
+              track={item.name}
+              id={index}
+            />
+          </Card>
+        )) :
+        (DATA.map((item, index) => (
           <Card key={item.id}>
             <CardItem
               hasActions
               image={item.image}
               track={item.track}
               description={item.artist}
-              matches={item.match}
+              popularity={item.match}
               artist={item.artist}
               id={index}
             />
           </Card>
         )))}
+
+        
+
+        
       </CardStack>
     </View>
   );

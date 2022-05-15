@@ -11,6 +11,7 @@ const SwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
   const [pressedTrack, setPressedTrack] = useState<string>('');
   const [showPlaylists, setShowPlaylists] = useState<boolean>(false);
   const [swiper, setSwiper] = useState<CardStack | null>(null);
+  const [showType, setShowType] = useState<string>('mock');
 
   const updateVolume = (value: number) => {
     setVolume(value);
@@ -28,6 +29,8 @@ const SwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
       setShowPlaylists,
       swiper,
       setSwiper,
+      showType,
+      setShowType,
     }}
     >
       {children}

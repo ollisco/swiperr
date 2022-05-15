@@ -19,9 +19,10 @@ function CardItem({
   hasActions,
   image,
   artist,
-  matches,
+  popularity: matches,
   track,
   id: index,
+
 }: CardItemT) {
   const {
     volume, updateVolume, rgb, setPressedTrack, setShowPlaylists,
@@ -56,7 +57,6 @@ function CardItem({
 
       {/* NAME */}
       <Text style={[styles.trackStyle, trackTextStyle]}>{track}</Text>
-
       <Text style={[styles.artist, styles.artistText]}>{artist}</Text>
 
       {Platform.OS === 'web' && (

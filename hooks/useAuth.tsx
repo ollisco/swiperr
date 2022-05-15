@@ -29,6 +29,8 @@ const SpotifyAuthContext: React.Context<{
   getPlaylists: any,
   playlists: any,
   addTrackToPlaylist: any,
+  newReleases: any,
+  
 
 }> = createContext({
   promptAsync: null,
@@ -48,6 +50,7 @@ const SpotifyAuthContext: React.Context<{
   getPlaylists: null,
   playlists: null,
   addTrackToPlaylist: null,
+  newReleases: null,
 });
 
 WebBrowser.maybeCompleteAuthSession();
@@ -58,6 +61,8 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const [userPlaylists, setUserPlaylists] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [likedSongs, setLikedSongs] = useState(null);
+  const [showRecommended, setShowRecommended] = useState(true);
+  const [newReleases, setNewReleases] = useState(null);
 
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
@@ -81,12 +86,78 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     response?.type === 'success' ? response.params.code : undefined,
   );
 
+  async function switchCardtypeState(accessToken: string) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      }
+    };
+
+    
+  }
+
+  async function getNewReleases(accessToken: string) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      }
+    };
+
+    await axios.get(`https://api.spotify.com/v1/browse/new-releases`, config)
+      .then((res) => {
+        let albumUris: string[] = [];
+        res.data.albums.items.forEach((item: any) => {
+          albumUris.push(item.id)
+        })
+        // get albums
+        const albumUriString = albumUris.join();
+        let releases: any[] = [];
+        axios.get(`https://api.spotify.com/v1/albums?ids=${albumUriString}`, config)
+          .then((res) => {
+            console.log(res.data)
+            res.data.albums.forEach((album: any) => {
+              let item = album.tracks.items[0];
+              item.images = album.images;
+              releases.push(item)
+            })
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+        
+
+        
+        
+        setNewReleases(releases);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   function switchPlayingState(accessToken: string) {
     if (isPlaying) {
       pause(accessToken);
     } else {
       play(accessToken);
     }
+  }
+
+  async function getAlbums(accessToken: string, albumId: string) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      }
+    };
+
+    await axios.get(`https://api.spotify.com/v1/browse/new-releases`, config)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   async function getPlaylists(accessToken: string) {
@@ -390,6 +461,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       getLikedSongs(token.accessToken, 10);
 
       getPlaylists(token.accessToken);
+      getNewReleases(token.accessToken);
     }
   }, [token]);
 
@@ -413,6 +485,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         getPlaylists: () => {},
         playlists: userPlaylists,
         addTrackToPlaylist,
+        newReleases,
       }}
     >
       {children}
