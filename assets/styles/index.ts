@@ -24,6 +24,7 @@ export default StyleSheet.create({
   containerCardItem: {
     backgroundColor: DARK_GRAY,
     borderRadius: 8,
+    // border color spotify green
     alignItems: "center",
     margin: 10,
     elevation: 1,

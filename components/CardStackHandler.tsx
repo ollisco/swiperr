@@ -36,7 +36,6 @@ function CardStackHandler(style: any) {
   }
   
 
-  console.log(recommendedIndex);
   return (
     <View style={{ borderColor: '#000000', borderWidth: 3 }}>
 

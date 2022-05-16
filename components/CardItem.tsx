@@ -19,7 +19,7 @@ function CardItem({
   hasActions,
   image,
   artist,
-  popularity: matches,
+  popularity,
   track,
   releaseDate,
   id: index,
@@ -50,7 +50,7 @@ function CardItem({
         <Text style={styles.matchesTextCardItem}>
           <Icon name="heart" color={WHITE} size={13} />
           {' '}
-          {matches}
+          {popularity}
           % Popularity
         </Text>
       </View>
@@ -110,7 +110,6 @@ function CardItem({
                       switchPlayingState(token.accessToken);
                     } else { // user is not logged in switch icon for mock page
                       setIsPlaying(!isPlaying);
-                      console.log();
                     }
                   }}
                 />
