@@ -99,15 +99,20 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         Authorization: `Bearer ${accessToken}`,
       },
     };
+
     const r = Math.floor(Math.random() * 100);
-    await axios.get(`https://api.spotify.com/v1/browse/new-releases?country=SE&offset${r}`, config)
+    await axios.get(`https://api.spotify.com/v1/browse/new-releases?limit=50&country=SE&offset${r}`, config)
       .then((res) => {
         const albumUris: string[] = [];
         res.data.albums.items.forEach((item: any) => {
           albumUris.push(item.id);
         });
-        // get albums
-        const albumUriString = albumUris.join();
+        // shuffle albumUris
+        albumUris.sort(() => 0.5 - Math.random());
+        // get first 20 albums
+        const reducedAlbumUris = albumUris.slice(0, 20);
+      
+        const albumUriString = reducedAlbumUris.join();
         const releases: any[] = [];
         axios.get(`https://api.spotify.com/v1/albums?ids=${albumUriString}`, config)
           .then((res) => {
@@ -118,8 +123,9 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
               item.images = album.images;
               item.releaseDate = album.release_date;
               releases.push(item);
-              releases.sort(() => Math.random() - 0.5); // TEMP SOLUTION NOW SORTS ARRAY RANDOMLY 20 times
             });
+            releases.sort(() => Math.random() - 0.5);
+            setNewReleases(releases);
           })
           .catch((err) => {
             console.log(err);
@@ -128,7 +134,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         // shuffle the releases array
 
         
-        setNewReleases(releases);
       })
       .catch((err) => {
         console.log(err);
