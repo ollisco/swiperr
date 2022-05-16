@@ -12,6 +12,7 @@ export type CardItemT = {
   setVolume?: (val: number) => void;
   color?: string;
   id: number,
+  releaseDate?: string;
 };
 
 export type CardItemRowT = {

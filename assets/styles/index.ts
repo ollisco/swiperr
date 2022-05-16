@@ -117,6 +117,7 @@ export default StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
   },
+
   reminderText: {
     color: GRAY,
     fontSize: 15,
