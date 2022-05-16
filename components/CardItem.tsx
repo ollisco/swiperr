@@ -61,7 +61,7 @@ function CardItem({
       <View style={styles.artist}>
         <Text style={styles.artistText}>{artist}</Text>
         {releaseDate && (
-          <Text style={styles.artistText}> - {releaseDate}</Text>
+          <Text style={styles.releaseDate}>{releaseDate}</Text>
         )}
       </View>
       {Platform.OS === 'web' && (

@@ -107,7 +107,6 @@ export default StyleSheet.create({
   },
   artist: {
     paddingBottom: 10,
-    flexDirection: "row",
     alignItems: "center",
     textAlign: "center",
     marginTop: 10,
@@ -117,6 +116,13 @@ export default StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
   },
+
+  releaseDate: {
+    color: GRAY,
+    fontSize: 18,
+    textAlign: "center",
+  },
+
 
   reminderText: {
     color: GRAY,

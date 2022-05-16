@@ -99,8 +99,8 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         Authorization: `Bearer ${accessToken}`,
       },
     };
-
-    await axios.get('https://api.spotify.com/v1/browse/new-releases', config)
+    const r = Math.floor(Math.random() * 100);
+    await axios.get(`https://api.spotify.com/v1/browse/new-releases?country=SE&offset${r}`, config)
       .then((res) => {
         const albumUris: string[] = [];
         res.data.albums.items.forEach((item: any) => {
