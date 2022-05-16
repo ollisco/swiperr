@@ -21,6 +21,7 @@ function CardItem({
   artist,
   popularity: matches,
   track,
+  releaseDate,
   id: index,
 
 }: CardItemT) {
@@ -56,8 +57,13 @@ function CardItem({
 
       {/* NAME */}
       <Text style={[styles.trackStyle, trackTextStyle]}>{track}</Text>
-      <Text style={[styles.artist, styles.artistText]}>{artist}</Text>
-
+      
+      <View style={styles.artist}>
+        <Text style={ styles.artistText}>{artist}</Text>
+        {releaseDate && (
+          <Text style={styles.artistText}> - {releaseDate}</Text>
+        )}
+      </View>
       {Platform.OS === 'web' && (
       <View style={styles.volumeSlider}>
         <Icon name="md-volume-low" color={WHITE} size={20} />
