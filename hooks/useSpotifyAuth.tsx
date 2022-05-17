@@ -116,15 +116,17 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         const releases: any[] = [];
         axios.get(`https://api.spotify.com/v1/albums?ids=${albumUriString}`, config)
           .then((res) => {
-            console.log(res.data);
+            console.log('A', res.data);
             res.data.albums.forEach((album: any) => {
               const randomInt = Math.floor(Math.random() * album.tracks.items.length);
               const item = album.tracks.items[randomInt];
               item.images = album.images;
               item.releaseDate = album.release_date;
+              item.id = album.tracks.items[randomInt].uri.split(':')[2]; // WATNING SHAKY
               releases.push(item);
             });
             releases.sort(() => Math.random() - 0.5);
+
             setNewReleases(releases);
           })
           .catch((err) => {
@@ -202,7 +204,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     // console.log('OOO', accessToken, playlistId, trackId);
     // If this is set to .put instead of .post it will erase the whole playlist
     // Soooo... dont do that
-    await axios.post(`https://api.spotify.com/v1/playlists/${playlistId}/tracks?uris=${trackId}&position=${1}`, {}, config)
+    await axios.post(`https://api.spotify.com/v1/playlists/${playlistId}/tracks?uris=${trackId}`, {}, config)
       .then((res) => {
         console.log('Added track to playlist: ', res.data);
       })

@@ -27,7 +27,9 @@ function CardItem({
 
 }: CardItemT) {
   const {
-    volume, updateVolume, rgb, setPressedTrack, setShowPlaylists,
+    volume, updateVolume, rgb, setPressedTrack, setShowPlaylists,    showType,
+    pressedTrack
+
   } = useContext(SwipeCardContext) as SwipedCardContextT;
   const {
     user,
@@ -37,7 +39,8 @@ function CardItem({
     token,
     setVolume,
     userRecommendedTracks,
-  } = useSpotifyContext();
+    newReleases,
+   } = useSpotifyContext();
 
   // check if track is longer than 50 chars long
   const trackTextStyle = track.length > 50 ? styles.trackStyleLong : styles.trackStyleShort;
@@ -52,7 +55,7 @@ function CardItem({
         <Text style={styles.matchesTextCardItem}>
           <Icon name="heart" color={WHITE} size={13} />
           {' '}
-          {popularity}
+          {popularity ? popularity : '0'}
           % Popularity
         </Text>
       </View>
@@ -139,8 +142,16 @@ function CardItem({
               size={20}
               onPress={() => {
                 if (token) {
-                  setPressedTrack(userRecommendedTracks[index].uri);
+                  if (showType === 'recommended') {
+                    setPressedTrack(userRecommendedTracks[index].uri);
+                  } else if (showType === 'new') {
+                    setPressedTrack(newReleases[index].uri);
+                  } else {
+                    console.log('invalid showType');
+                  }
+                  console.log(pressedTrack);
                 }
+                
                 setShowPlaylists(true);
               }}
             />

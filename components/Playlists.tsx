@@ -54,7 +54,7 @@ function Playlists() {
                     }}
                   >
                     <CardItemRow
-                      image={{ uri: item.images[0].url }}
+                      image={item.images.length > 0 ? { uri: item.images[0].url } : dummyDataPlaylists[0].image}
                       name={item.name}
                     />
                   </TouchableOpacity>
