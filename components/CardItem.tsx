@@ -3,10 +3,9 @@ import {
   Text, View, Image, TouchableOpacity, Platform,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
+import Clipboard from '@react-native-clipboard/clipboard';
 import Icon from './Icon';
 import { CardItemT, SwipedCardContextT } from '../types';
-import Clipboard from '@react-native-clipboard/clipboard';
-
 
 import styles, {
   DISLIKE_ACTIONS,
@@ -29,8 +28,8 @@ function CardItem({
 
 }: CardItemT) {
   const {
-    volume, updateVolume, rgb, setPressedTrack, setShowPlaylists,    showType,
-    pressedTrack
+    volume, updateVolume, rgb, setPressedTrack, setShowPlaylists, showType,
+    pressedTrack,
 
   } = useContext(SwipeCardContext) as SwipedCardContextT;
   const {
@@ -42,7 +41,7 @@ function CardItem({
     setVolume,
     userRecommendedTracks,
     newReleases,
-   } = useSpotifyContext();
+  } = useSpotifyContext();
 
   // check if track is longer than 50 chars long
   const trackTextStyle = track.length > 50 ? styles.trackStyleLong : styles.trackStyleShort;
@@ -57,14 +56,14 @@ function CardItem({
         <Text style={styles.matchesTextCardItem}>
           <Icon name="heart" color={WHITE} size={13} />
           {' '}
-          {popularity ? popularity : '0'}
+          {popularity || '0'}
           % Popularity
         </Text>
       </View>
 
       {/* NAME */}
       <Text style={[styles.trackStyle, trackTextStyle]}>{track}</Text>
-      
+
       <View style={styles.artist}>
         <Text style={styles.artistText}>{artist}</Text>
         {releaseDate && (
@@ -102,18 +101,20 @@ function CardItem({
         <View style={styles.actionsCardItem}>
 
           <TouchableOpacity style={styles.miniButton}>
-            <Icon 
-              name="copy-outline" 
-              color={FLASH_ACTIONS} 
+            <Icon
+              name="copy-outline"
+              color={FLASH_ACTIONS}
               size={20}
               onPress={() => {
-                if (showType === 'recommended') {
-                  Clipboard.setString(userRecommendedTracks[index].uri);
-                } else if (showType === 'new') {
-                  Clipboard.setString(newReleases[index].uri);
+                if (token) {
+                  if (showType === 'recommended') {
+                    Clipboard.setString(userRecommendedTracks[index].uri);
+                  } else if (showType === 'new') {
+                    Clipboard.setString(newReleases[index].uri);
+                  }
                 }
               }}
-              
+
             />
           </TouchableOpacity>
 
@@ -165,7 +166,7 @@ function CardItem({
                   }
                   console.log(pressedTrack);
                 }
-                
+
                 setShowPlaylists(true);
               }}
             />

@@ -1,13 +1,10 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
 
-const useSoundcloudAuth = () => {
-  return (
-    <View>
-      <Text>useSoundcloudAuth</Text>
-    </View>
-  )
-}
+const useSoundcloudAuth = () => (
+  <View>
+    <Text>useSoundcloudAuth</Text>
+  </View>
+);
 
-export default useSoundcloudAuth
-
+export default useSoundcloudAuth;

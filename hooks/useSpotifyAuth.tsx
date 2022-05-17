@@ -111,7 +111,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         albumUris.sort(() => 0.5 - Math.random());
         // get first 20 albums
         const reducedAlbumUris = albumUris.slice(0, 20);
-      
+
         const albumUriString = reducedAlbumUris.join();
         const releases: any[] = [];
         axios.get(`https://api.spotify.com/v1/albums?ids=${albumUriString}`, config)
@@ -132,10 +132,8 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
           .catch((err) => {
             console.log(err);
           });
-        
-        // shuffle the releases array
 
-        
+        // shuffle the releases array
       })
       .catch((err) => {
         console.log(err);

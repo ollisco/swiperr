@@ -16,7 +16,7 @@ function Login() {
   }
 
   return (
-    <View style={{flexDirection: 'row'}}>
+    <View style={{ flexDirection: 'row' }}>
       <TouchableOpacity style={styles.login} onPress={awaitPromptAsync}>
         <Text style={styles.loginText}>
           <Icon name="spotify" size={13} color={DARK_GRAY} useFontAwesome />

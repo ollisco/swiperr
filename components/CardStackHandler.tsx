@@ -8,24 +8,22 @@ import { SwipedCardContextT } from '../types';
 import CardItem from './CardItem';
 import { SwipeCardContext } from './SwipeCardProvider';
 
-
-
 function CardStackHandler(style: any) {
   const {
-    userRecommendedTracks: userTopItems, 
-    getUserRecommendedTracks: getTopUserItems, 
-    token, 
+    userRecommendedTracks: userTopItems,
+    getUserRecommendedTracks: getTopUserItems,
+    token,
     likeSong,
-    queueAndSkip, 
+    queueAndSkip,
     newReleases,
   } = useSpotifyContext();
   const {
-    setRGB, 
-    setSwiper, 
-    showType, 
-    recommendedIndex, 
-    setRecommendedIndex, 
-    newReleasesIndex, 
+    setRGB,
+    setSwiper,
+    showType,
+    recommendedIndex,
+    setRecommendedIndex,
+    newReleasesIndex,
     setNewReleasesIndex,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
 
@@ -47,43 +45,43 @@ function CardStackHandler(style: any) {
       {userTopItems && showType === 'recommended'
         ? (
           <CardStack
-          loop
-          verticalSwipe={false}
-          renderNoMoreCards={() => null}
-          ref={(swiper) => setSwiper(swiper)}
-          onSwipe={(x, _y) => {
-            if (x > swipeColorLimit) {
-              setRGB(convertRGBgreen(x));
-            } else if (x < -swipeColorLimit) {
-              setRGB(convertRGBred(x));
-            } else {
+            loop
+            verticalSwipe={false}
+            renderNoMoreCards={() => null}
+            ref={(swiper) => setSwiper(swiper)}
+            onSwipe={(x, _y) => {
+              if (x > swipeColorLimit) {
+                setRGB(convertRGBgreen(x));
+              } else if (x < -swipeColorLimit) {
+                setRGB(convertRGBred(x));
+              } else {
+                setRGB(DARK_GRAY);
+              }
+            }}
+            onSwiped={(index: number) => {
+              console.log(index);
               setRGB(DARK_GRAY);
-            }
-          }}
-          onSwiped={(index: number) => {
-            console.log(index);
-            setRGB(DARK_GRAY);
-            if (token) {
-              queueAndSkip(token.accessToken, userTopItems[recommendedIndex + 1].uri);
-              setRecommendedIndex(recommendedIndex + 1);
-                 setNewReleasesIndex(newReleasesIndex + 1);
-              console.log('Qr', userTopItems[recommendedIndex].name);
-            }
-          }}
-          onSwipeEnd={() => {
-            setRGB(DARK_GRAY);
-          }}
-    
-          onSwipedAll={() => {
-            if (token) {
-              getTopUserItems(token.accessToken);
-            }
-          }}
-          onSwipedRight={(index: number) => {
-            if (token) {
-              likeSong(token.accessToken, userTopItems[index].id);
-            }
-          }}
+              if (token) {
+                queueAndSkip(token.accessToken, userTopItems[recommendedIndex + 1].uri);
+                setRecommendedIndex(recommendedIndex + 1);
+                setNewReleasesIndex(newReleasesIndex + 1);
+                console.log('Qr', userTopItems[recommendedIndex].name);
+              }
+            }}
+            onSwipeEnd={() => {
+              setRGB(DARK_GRAY);
+            }}
+
+            onSwipedAll={() => {
+              if (token) {
+                getTopUserItems(token.accessToken);
+              }
+            }}
+            onSwipedRight={(index: number) => {
+              if (token) {
+                likeSong(token.accessToken, userTopItems[index].id);
+              }
+            }}
           >
             {userTopItems?.map((item: any, index: number) => (
               <Card key={item.id}>
@@ -96,52 +94,51 @@ function CardStackHandler(style: any) {
                   id={index}
                 />
               </Card>
-            ))
-          }
+            ))}
           </CardStack>
         )
         : newReleases && showType === 'new'
-        ? (
-          <CardStack
-          loop
-          verticalSwipe={false}
-          renderNoMoreCards={() => null}
-          ref={(swiper) => setSwiper(swiper)}
-          onSwipe={(x, _y) => {
-            if (x > swipeColorLimit) {
-              setRGB(convertRGBgreen(x));
-            } else if (x < -swipeColorLimit) {
-              setRGB(convertRGBred(x));
-            } else {
-              setRGB(DARK_GRAY);
-            }
-          }}
-          onSwiped={(index: number) => {
-            console.log(index);
-            setRGB(DARK_GRAY);
-            if (token) {
-          
-              queueAndSkip(token.accessToken, newReleases[newReleasesIndex + 1].uri);
-              setNewReleasesIndex(newReleasesIndex + 1);
-              setRecommendedIndex(recommendedIndex + 1);
-              console.log('Qn', newReleases[newReleasesIndex].uri);
-    
-            }
-          }}
-          onSwipeEnd={() => {
-            setRGB(DARK_GRAY);
-          }}
-    
-          onSwipedAll={() => {
-            if (token) {
-              getTopUserItems(token.accessToken);
-            }
-          }}
-          onSwipedRight={(index: number) => {
-            if (token) {
-              likeSong(token.accessToken, userTopItems[index].id);
-            }
-          }}>{
+          ? (
+            <CardStack
+              loop
+              verticalSwipe={false}
+              renderNoMoreCards={() => null}
+              ref={(swiper) => setSwiper(swiper)}
+              onSwipe={(x, _y) => {
+                if (x > swipeColorLimit) {
+                  setRGB(convertRGBgreen(x));
+                } else if (x < -swipeColorLimit) {
+                  setRGB(convertRGBred(x));
+                } else {
+                  setRGB(DARK_GRAY);
+                }
+              }}
+              onSwiped={(index: number) => {
+                console.log(index);
+                setRGB(DARK_GRAY);
+                if (token) {
+                  queueAndSkip(token.accessToken, newReleases[newReleasesIndex + 1].uri);
+                  setNewReleasesIndex(newReleasesIndex + 1);
+                  setRecommendedIndex(recommendedIndex + 1);
+                  console.log('Qn', newReleases[newReleasesIndex].uri);
+                }
+              }}
+              onSwipeEnd={() => {
+                setRGB(DARK_GRAY);
+              }}
+
+              onSwipedAll={() => {
+                if (token) {
+                  getTopUserItems(token.accessToken);
+                }
+              }}
+              onSwipedRight={(index: number) => {
+                if (token) {
+                  likeSong(token.accessToken, userTopItems[index].id);
+                }
+              }}
+            >
+              {
             newReleases?.map((item: any, index: number) => (
               <Card key={item.id}>
                 <CardItem
@@ -150,18 +147,18 @@ function CardStackHandler(style: any) {
                   popularity={item.popularity}
                   artist={item.artists.map((artist: any) => artist.name).join(', ')}
                   track={item.name}
-                  id={index}  
+                  id={index}
                   releaseDate={item.releaseDate}
                 />
               </Card>
             ))
           }
-          </CardStack>
-        )
-        : null}
+            </CardStack>
+          )
+          : null}
 
-        {!newReleases && !userTopItems ?(
-          <CardStack
+      {!newReleases && !userTopItems ? (
+        <CardStack
           loop
           verticalSwipe={false}
           ref={(swiper) => setSwiper(swiper)}
@@ -176,28 +173,26 @@ function CardStackHandler(style: any) {
           }}
           onSwipeEnd={() => {
             setRGB(DARK_GRAY);
-          
           }}
           onSwiped={() => {
             setRGB(DARK_GRAY);
           }}
-          >
-            {DATA.map((item, index) => (
-              <Card key={item.id}>
-                <CardItem
-                  hasActions
-                  image={item.image}
-                  track={item.track}
-                  description={item.artist}
-                  matches={item.match}
-                  artist={item.artist}
-                  id={index}
-                />
-              </Card>
-            ))
-          }
-          </CardStack>
-        ) : null}
+        >
+          {DATA.map((item, index) => (
+            <Card key={item.id}>
+              <CardItem
+                hasActions
+                image={item.image}
+                track={item.track}
+                description={item.artist}
+                matches={item.match}
+                artist={item.artist}
+                id={index}
+              />
+            </Card>
+          ))}
+        </CardStack>
+      ) : null}
 
     </View>
   );
