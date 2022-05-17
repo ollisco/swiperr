@@ -4,7 +4,7 @@ import styles from '../assets/styles';
 import Settings from './Settings';
 import Filters from './Filters';
 import Login from './Login';
-import useSpotifyContext from '../hooks/useAuth';
+import useSpotifyContext from '../hooks/useSpotifyAuth';
 import CardStackHandler from './CardStackHandler';
 import { SwipeCardContext } from './SwipeCardProvider';
 import { SwipedCardContextT } from '../types';

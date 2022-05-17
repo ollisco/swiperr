@@ -9,11 +9,12 @@ import { CardItemT, SwipedCardContextT } from '../types';
 import styles, {
   DISLIKE_ACTIONS,
   FLASH_ACTIONS,
+  SPOTIFY_GREEN,
   STAR_ACTIONS,
   WHITE,
 } from '../assets/styles';
 import { SwipeCardContext } from './SwipeCardProvider';
-import useSpotifyContext from '../hooks/useAuth';
+import useSpotifyContext from '../hooks/useSpotifyAuth';
 
 function CardItem({
   hasActions,
@@ -29,6 +30,7 @@ function CardItem({
     volume, updateVolume, rgb, setPressedTrack, setShowPlaylists,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
   const {
+    user,
     isPlaying,
     setIsPlaying,
     switchPlayingState,
@@ -39,10 +41,10 @@ function CardItem({
 
   // check if track is longer than 50 chars long
   const trackTextStyle = track.length > 50 ? styles.trackStyleLong : styles.trackStyleShort;
-
+  const cardOutline = user ? { borderColor: SPOTIFY_GREEN } : {};
   return (
 
-    <View style={[styles.containerCardItem, { backgroundColor: rgb }]}>
+    <View style={[styles.containerCardItem, { backgroundColor: rgb }, cardOutline]}>
       {/* IMAGE */}
       <Image source={image} style={styles.imageStyle} />
 

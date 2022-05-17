@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import DATA from '../assets/data/dummy_data_songs';
 import { DARK_GRAY } from '../assets/styles';
-import useSpotifyContext from '../hooks/useAuth';
+import useSpotifyContext from '../hooks/useSpotifyAuth';
 import { SwipedCardContextT } from '../types';
 import CardItem from './CardItem';
 import { SwipeCardContext } from './SwipeCardProvider';
@@ -12,29 +12,34 @@ import { SwipeCardContext } from './SwipeCardProvider';
 
 function CardStackHandler(style: any) {
   const {
-    userRecommendedTracks: userTopItems, getUserRecommendedTracks: getTopUserItems, token, likeSong,
-    queueAndSkip, newReleases,
+    userRecommendedTracks: userTopItems, 
+    getUserRecommendedTracks: getTopUserItems, 
+    token, 
+    likeSong,
+    queueAndSkip, 
+    newReleases,
   } = useSpotifyContext();
-
   const {
-    setRGB, setSwiper, showType, recommendedIndex, setRecommendedIndex, newReleasesIndex, setNewReleasesIndex,
-
+    setRGB, 
+    setSwiper, 
+    showType, 
+    recommendedIndex, 
+    setRecommendedIndex, 
+    newReleasesIndex, 
+    setNewReleasesIndex,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
 
   const cardIndex = showType === 'recommended' ? recommendedIndex : newReleasesIndex;
 
-  const swipeColorLimit = 100;
-
+  const swipeColorLimit = 50;
   function convertRGBgreen(d: number) {
-    const m = d > 125 ? 125 : d;
+    const m = d > 110 ? 100 : d;
     return `rgb(${54 - ((54 * d) / 300) + 20}, ${m}, ${54 - ((54 * d) / 300) + 20})`;
   }
-
   function convertRGBred(d: number) {
-    const m = d < 125 ? 125 : -d;
+    const m = d < 110 ? 110 : -d;
     return `rgb(${m}, ${54 - ((54 * -d) / 300) + 20}, ${54 - ((54 * -d) / 300) + 20})`;
   }
-  
 
   return (
     <View style={{ borderColor: '#000000', borderWidth: 3 }}>
@@ -158,6 +163,23 @@ function CardStackHandler(style: any) {
         {!newReleases && !userTopItems ?(
           <CardStack
           loop
+          verticalSwipe={false}
+          onSwipe={(x, _y) => {
+            if (x > swipeColorLimit) {
+              setRGB(convertRGBgreen(x));
+            } else if (x < -swipeColorLimit) {
+              setRGB(convertRGBred(x));
+            } else {
+              setRGB(DARK_GRAY);
+            }
+          }}
+          onSwipeEnd={() => {
+            setRGB(DARK_GRAY);
+          
+          }}
+          onSwiped={() => {
+            setRGB(DARK_GRAY);
+          }}
           >
             {DATA.map((item, index) => (
               <Card key={item.id}>

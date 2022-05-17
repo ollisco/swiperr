@@ -11,7 +11,7 @@ import { Icon, ProfileItem } from '../components';
 import DEMO from '../assets/data/dummy_data_profiles';
 import styles, { WHITE } from '../assets/styles';
 import BG_IMAGE from '../assets/images/bg2.jpg';
-import useSpotifyContext from '../hooks/useAuth';
+import useSpotifyContext from '../hooks/useSpotifyAuth';
 
 function Profile() {
   const { user } = useSpotifyContext();

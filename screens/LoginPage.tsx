@@ -13,7 +13,7 @@ import DATA from '../assets/data/dummy_data_songs';
 import styles, { DARK_GRAY } from '../assets/styles';
 import CardItemSmall from '../components/CardItemSmall';
 import BG_IMAGE from '../assets/images/bg2.jpg';
-import useSpotifyContext from '../hooks/useAuth';
+import useSpotifyContext from '../hooks/useSpotifyAuth';
 
 function LoginPage() {
   const { likedSongs, getLikedSongs, token } = useSpotifyContext();

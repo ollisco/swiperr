@@ -46,6 +46,7 @@ export type IconT = {
   color: string;
   style?: any;
   onPress?: (e: any) => void;
+  useFontAwesome?: boolean;
 };
 
 export type MessageT = {
