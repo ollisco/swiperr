@@ -4,7 +4,7 @@ import React, {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles, { DARK_GRAY, GRAY } from '../assets/styles';
-import useSpotifyContext from '../hooks/useAuth';
+import useSpotifyContext from '../hooks/useSpotifyAuth';
 import CardItemRow from './CardItemRow';
 import { SwipeCardContext } from './SwipeCardProvider';
 // import swipcardcontext from types
@@ -21,7 +21,6 @@ function Playlists() {
     setShowPlaylists,
     swiper,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
-
 
   if (showPlaylists) {
     return (
@@ -55,20 +54,25 @@ function Playlists() {
                     }}
                   >
                     <CardItemRow
-                      image={{uri: item.images[0].url}}
+                      image={item.images.length > 0 ? { uri: item.images[0].url } : dummyDataPlaylists[0].image}
                       name={item.name}
                     />
                   </TouchableOpacity>
                 )}
               />
-              ) : (
-                <FlatList
+            ) : (
+              <FlatList
                 numColumns={1}
                 data={dummyDataPlaylists}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ index, item }) => (
                   <TouchableOpacity
                     key={item.id}
+                    onPress={() => {
+                      console.log(swiper);
+                      setShowPlaylists(false);
+                      swiper?.swipeRight();
+                    }}
                   >
                     <CardItemRow
                       image={item.image}
@@ -78,7 +82,7 @@ function Playlists() {
                 )}
               />
 
-              )}
+            )}
           </ScrollView>
         </SafeAreaView>
       </View>

@@ -11,7 +11,7 @@ import DATA from '../assets/data/dummy_data_songs';
 import styles, { DARK_GRAY } from '../assets/styles';
 import CardItemSmall from '../components/CardItemSmall';
 import BG_IMAGE from '../assets/images/bg2.jpg';
-import useSpotifyContext from '../hooks/useAuth';
+import useSpotifyContext from '../hooks/useSpotifyAuth';
 
 function Liked() {
   const { likedSongs, getLikedSongs, token } = useSpotifyContext();
@@ -44,7 +44,7 @@ function Liked() {
               renderItem={({ item }) => (
                 <TouchableOpacity>
                   <CardItemSmall
-                    image={{uri: item.track.album.images[0].url}}
+                    image={{ uri: item.track.album.images[0].url }}
                     track={item.track.name}
                     artist={item.track.artists[0].name}
                   />
