@@ -5,6 +5,8 @@ import {
 import Slider from '@react-native-community/slider';
 import Icon from './Icon';
 import { CardItemT, SwipedCardContextT } from '../types';
+import Clipboard from '@react-native-clipboard/clipboard';
+
 
 import styles, {
   DISLIKE_ACTIONS,
@@ -100,7 +102,19 @@ function CardItem({
         <View style={styles.actionsCardItem}>
 
           <TouchableOpacity style={styles.miniButton}>
-            <Icon name="copy-outline" color={FLASH_ACTIONS} size={20} />
+            <Icon 
+              name="copy-outline" 
+              color={FLASH_ACTIONS} 
+              size={20}
+              onPress={() => {
+                if (showType === 'recommended') {
+                  Clipboard.setString(userRecommendedTracks[index].uri);
+                } else if (showType === 'new') {
+                  Clipboard.setString(newReleases[index].uri);
+                }
+              }}
+              
+            />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button}>
