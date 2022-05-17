@@ -68,6 +68,11 @@ function Playlists() {
                 renderItem={({ index, item }) => (
                   <TouchableOpacity
                     key={item.id}
+                    onPress={() => {
+                      console.log(swiper);
+                      setShowPlaylists(false);
+                      swiper?.swipeRight();
+                    }}
                   >
                     <CardItemRow
                       image={item.image}

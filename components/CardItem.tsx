@@ -97,7 +97,7 @@ function CardItem({
         <View style={styles.actionsCardItem}>
 
           <TouchableOpacity style={styles.miniButton}>
-            <Icon name="arrow-redo" color={FLASH_ACTIONS} size={14} />
+            <Icon name="copy-outline" color={FLASH_ACTIONS} size={20} />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button}>
@@ -135,7 +135,7 @@ function CardItem({
           <TouchableOpacity style={styles.miniButton}>
             <Icon
               name="add"
-              color={STAR_ACTIONS}
+              color={FLASH_ACTIONS}
               size={20}
               onPress={() => {
                 if (token) {

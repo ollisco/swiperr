@@ -106,7 +106,7 @@ function CardStackHandler(style: any) {
           loop
           verticalSwipe={false}
           renderNoMoreCards={() => null}
-          //ref={(swiper) => setSwiper(swiper)}
+          ref={(swiper) => setSwiper(swiper)}
           onSwipe={(x, _y) => {
             if (x > swipeColorLimit) {
               setRGB(convertRGBgreen(x));
@@ -164,6 +164,7 @@ function CardStackHandler(style: any) {
           <CardStack
           loop
           verticalSwipe={false}
+          ref={(swiper) => setSwiper(swiper)}
           onSwipe={(x, _y) => {
             if (x > swipeColorLimit) {
               setRGB(convertRGBgreen(x));
