@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 // import Clipboard from '@react-native-clipboard/clipboard';
+
 import Icon from './Icon';
 import { CardItemT, SwipedCardContextT } from '../types';
 
@@ -164,6 +165,7 @@ function CardItem({
                   } else {
                     console.log('invalid showType');
                   }
+
                 }
 
                 setShowPlaylists(true);

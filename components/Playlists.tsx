@@ -40,7 +40,6 @@ function Playlists() {
         <SafeAreaView style={{ flex: 1 }}>
           <ScrollView>
             {playlists ? (
-
               playlists.map((item: any) => (
                 <TouchableOpacity
                   key={item.id}
@@ -76,6 +75,47 @@ function Playlists() {
                 </TouchableOpacity>
               ))
 
+              <FlatList
+                numColumns={1}
+                data={playlists}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ index, item }) => (
+                  <TouchableOpacity
+                    key={item.id}
+                    onPress={() => {
+                      addTrackToPlaylist(token.accessToken, item.id, pressedTrack);
+                      setShowPlaylists(false);
+                      swiper?.swipeRight();
+                    }}
+                  >
+                    <CardItemRow
+                      image={item.images.length > 0 ? { uri: item.images[0].url } : dummyDataPlaylists[0].image}
+                      name={item.name}
+                    />
+                  </TouchableOpacity>
+                )}
+              />
+            ) : (
+              <FlatList
+                numColumns={1}
+                data={dummyDataPlaylists}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ index, item }) => (
+                  <TouchableOpacity
+                    key={item.id}
+                    onPress={() => {
+                      console.log(swiper);
+                      setShowPlaylists(false);
+                      swiper?.swipeRight();
+                    }}
+                  >
+                    <CardItemRow
+                      image={item.image}
+                      name={item.name}
+                    />
+                  </TouchableOpacity>
+                )}
+              />
             )}
           </ScrollView>
         </SafeAreaView>
