@@ -40,15 +40,12 @@ function Playlists() {
         <SafeAreaView style={{ flex: 1 }}>
           <ScrollView>
             {playlists ? (
-              <FlatList
-                numColumns={1}
-                data={playlists}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({ index, item }) => (
-                  
+              
+                playlists.map((item: any) => (
                   <TouchableOpacity
                     key={item.id}
                     onPress={() => {
+                      console.log(pressedTrack)
                       addTrackToPlaylist(token.accessToken, item.id, pressedTrack.uri);
                       setShowPlaylists(false);
                       swiper?.swipeRight();
@@ -59,8 +56,9 @@ function Playlists() {
                       name={item.name}
                     />
                   </TouchableOpacity>
-                )}
-              />
+                ))
+                
+              
             ) : (
               <FlatList
                 numColumns={1}

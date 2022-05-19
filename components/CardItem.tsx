@@ -3,7 +3,7 @@ import {
   Text, View, Image, TouchableOpacity, Platform,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
-import Clipboard from '@react-native-clipboard/clipboard';
+//import Clipboard from '@react-native-clipboard/clipboard';
 import Icon from './Icon';
 import { CardItemT, SwipedCardContextT } from '../types';
 
@@ -106,13 +106,13 @@ function CardItem({
               color={FLASH_ACTIONS}
               size={20}
               onPress={() => {
-                if (token) {
-                  if (showType === 'recommended') {
-                    Clipboard.setString(userRecommendedTracks[index].uri);
-                  } else if (showType === 'new') {
-                    Clipboard.setString(newReleases[index].uri);
-                  }
-                }
+                // if (token) {
+                //   if (showType === 'recommended') {
+                //     Clipboard.setString(userRecommendedTracks[index].uri);
+                //   } else if (showType === 'new') {
+                //     Clipboard.setString(newReleases[index].uri);
+                //   }
+                // }
               }}
 
             />
@@ -158,13 +158,12 @@ function CardItem({
               onPress={() => {
                 if (token) {
                   if (showType === 'recommended') {
-                    setPressedTrack(userRecommendedTracks[index].uri);
+                    setPressedTrack(userRecommendedTracks[index]);
                   } else if (showType === 'new') {
-                    setPressedTrack(newReleases[index].uri);
+                    setPressedTrack(newReleases[index]);
                   } else {
                     console.log('invalid showType');
                   }
-                  console.log(pressedTrack);
                 }
 
                 setShowPlaylists(true);
