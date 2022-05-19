@@ -42,7 +42,7 @@ function ProfileItem({
 
       <View style={styles.info}>
         <Text style={styles.iconProfile}>
-          <Icon name="reader" size={12} color={WHITE} />
+          <Icon name="albums-outline" size={12} color={WHITE} />
         </Text>
         <Text style={styles.infoContent}>{topGenres}</Text>
       </View>

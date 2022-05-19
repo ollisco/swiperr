@@ -158,6 +158,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     }
   }
 
+
   async function getAlbums(accessToken: string, albumId: string) {
     const config = {
       headers: {
@@ -173,6 +174,17 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         console.log(err);
       });
   }
+  function sortArrayAlpha(array: string[]) {
+    array.sort((a, b) => {
+      if (a < b) {
+        return -1;
+      }
+      if (a > b) {
+        return 1;
+      }
+      return 0;
+    });
+  }
 
   async function getPlaylists(accessToken: string) {
     const config = {
@@ -185,7 +197,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         // Todo improve this to filter on user id aswell
         const playlists = res.data.items.filter((playlist: any) => playlist.owner.display_name !== 'Spotify');
 
-        // sort playlists alphabetically
         playlists.sort((a: any, b: any) => {
           if (a.name < b.name) {
             return -1;
@@ -408,9 +419,9 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     topTracksText.sort(() => 0.5 - Math.random());
     const both = allGenres.concat(otherGenres);
     both.sort(() => 0.5 - Math.random());
-    setTopArtists(topArtistsText.slice(0, n).join(', '));
-    setTopTracks(topTracksText.slice(0, n).join(', '));
-    setTopGenres(both.slice(0, n).join(', '));
+    setTopArtists(topArtistsText.slice(0, n).sort().join(', '));
+    setTopTracks(topTracksText.slice(0, n).sort().join(', '));
+    setTopGenres(both.slice(0, n).sort().join(', '));
     setVolume(accessToken, 50);
   }
 
