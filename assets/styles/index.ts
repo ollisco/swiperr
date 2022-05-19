@@ -92,7 +92,7 @@ export default StyleSheet.create({
 
   exploreTopCenterText: {
     color: GRAY,
-    fontSize: 18,
+    fontSize: 15,
     marginHorizontal: 10,
   },
 

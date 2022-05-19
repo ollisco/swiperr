@@ -25,8 +25,8 @@ export type SwipedCardContextT = {
   updateVolume: (value: number) => void;
   rgb: string;
   setRGB: (value: string) => void;
-  pressedTrack: string;
-  setPressedTrack: (value: string) => void;
+  pressedTrack: any;
+  setPressedTrack: (value: any) => void;
   showPlaylists: boolean;
   setShowPlaylists: (value: boolean) => void;
   swiper: CardStack | null;
