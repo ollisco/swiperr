@@ -12,6 +12,7 @@ export type CardItemT = {
   setVolume?: (val: number) => void;
   color?: string;
   id: number,
+  releaseDate?: string;
 };
 
 export type CardItemRowT = {
@@ -19,19 +20,24 @@ export type CardItemRowT = {
   image: any;
 }
 
+
 export type SwipedCardContextT = {
   volume: number;
   updateVolume: (value: number) => void;
   rgb: string;
   setRGB: (value: string) => void;
-  pressedTrack: string;
-  setPressedTrack: (value: string) => void;
+  pressedTrack: any;
+  setPressedTrack: (value: any) => void;
   showPlaylists: boolean;
   setShowPlaylists: (value: boolean) => void;
   swiper: CardStack | null;
   setSwiper: (value: CardStack | null) => void;
   showType: string;
   setShowType: (value: string) => void;
+  recommendedIndex: number;
+  setRecommendedIndex: (value: number) => void;
+  newReleasesIndex: number;
+  setNewReleasesIndex: (value: number) => void;
 }
 
 
@@ -41,6 +47,7 @@ export type IconT = {
   color: string;
   style?: any;
   onPress?: (e: any) => void;
+  useFontAwesome?: boolean;
 };
 
 export type MessageT = {

@@ -7,6 +7,7 @@ export const GRAY = "#757E90";
 export const DARK_GRAY = "#363636"; // rgb(54, 54, 54)
 export const BLACK = "#000000";
 export const DARKER_GRAY = "#303030";
+export const SPOTIFY_GREEN = "#1DB954";
 
 export const ONLINE_STATUS = "#46A575";
 export const OFFLINE_STATUS = "#D04949";
@@ -16,6 +17,7 @@ export const LIKE_ACTIONS = "#B644B2";
 export const DISLIKE_ACTIONS = "#363636";
 export const FLASH_ACTIONS = "#5028D7";
 
+
 export const DIMENSION_WIDTH = Dimensions.get("window").width;
 export const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
@@ -24,6 +26,8 @@ export default StyleSheet.create({
   containerCardItem: {
     backgroundColor: DARK_GRAY,
     borderRadius: 8,
+    borderWidth: 1,
+    //borderColor: SPOTIFY_GREEN,
     alignItems: "center",
     margin: 10,
     elevation: 1,
@@ -88,7 +92,7 @@ export default StyleSheet.create({
 
   exploreTopCenterText: {
     color: GRAY,
-    fontSize: 18,
+    fontSize: 15,
     marginHorizontal: 10,
   },
 
@@ -107,7 +111,6 @@ export default StyleSheet.create({
   },
   artist: {
     paddingBottom: 10,
-    flexDirection: "row",
     alignItems: "center",
     textAlign: "center",
     marginTop: 10,
@@ -117,6 +120,14 @@ export default StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
   },
+
+  releaseDate: {
+    color: GRAY,
+    fontSize: 18,
+    textAlign: "center",
+  },
+
+
   reminderText: {
     color: GRAY,
     fontSize: 15,

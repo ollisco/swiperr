@@ -8,7 +8,7 @@ import {
 import styles from '../assets/styles';
 import SwipeCardProvider from '../components/SwipeCardProvider';
 import CardStackHandler from '../components/CardStackHandler';
-import useSpotifyContext from '../hooks/useAuth';
+import useSpotifyContext from '../hooks/useSpotifyAuth';
 import CardItemSmall from '../components/CardItemSmall';
 
 function Explore() {
@@ -18,7 +18,7 @@ function Explore() {
   return (
     <View>
       <ImageBackground
-        source={{uri: backgroundLink}} // To avoid bg dissapearing after API call
+        source={{ uri: backgroundLink }} // To avoid bg dissapearing after API call
         style={styles.bg}
         resizeMode="cover"
       >

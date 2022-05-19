@@ -3,45 +3,53 @@ import {
   Text, View, Image, TouchableOpacity, Platform,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
+// import Clipboard from '@react-native-clipboard/clipboard';
+
 import Icon from './Icon';
 import { CardItemT, SwipedCardContextT } from '../types';
 
 import styles, {
   DISLIKE_ACTIONS,
   FLASH_ACTIONS,
+  SPOTIFY_GREEN,
   STAR_ACTIONS,
   WHITE,
 } from '../assets/styles';
 import { SwipeCardContext } from './SwipeCardProvider';
-import useSpotifyContext from '../hooks/useAuth';
+import useSpotifyContext from '../hooks/useSpotifyAuth';
 
 function CardItem({
   hasActions,
   image,
   artist,
-  popularity: matches,
+  popularity,
   track,
+  releaseDate,
   id: index,
 
 }: CardItemT) {
   const {
-    volume, updateVolume, rgb, setPressedTrack, setShowPlaylists,
+    volume, updateVolume, rgb, setPressedTrack, setShowPlaylists, showType,
+    pressedTrack,
+
   } = useContext(SwipeCardContext) as SwipedCardContextT;
   const {
-    isPlaying, 
+    user,
+    isPlaying,
     setIsPlaying,
-    switchPlayingState, 
-    token, 
-    setVolume, 
+    switchPlayingState,
+    token,
+    setVolume,
     userRecommendedTracks,
+    newReleases,
   } = useSpotifyContext();
 
   // check if track is longer than 50 chars long
   const trackTextStyle = track.length > 50 ? styles.trackStyleLong : styles.trackStyleShort;
-
+  const cardOutline = user ? { borderColor: SPOTIFY_GREEN } : {};
   return (
 
-    <View style={[styles.containerCardItem, { backgroundColor: rgb }]}>
+    <View style={[styles.containerCardItem, { backgroundColor: rgb }, cardOutline]}>
       {/* IMAGE */}
       <Image source={image} style={styles.imageStyle} />
 
@@ -49,16 +57,20 @@ function CardItem({
         <Text style={styles.matchesTextCardItem}>
           <Icon name="heart" color={WHITE} size={13} />
           {' '}
-          {matches}
+          {popularity || '0'}
           % Popularity
         </Text>
       </View>
 
-
       {/* NAME */}
       <Text style={[styles.trackStyle, trackTextStyle]}>{track}</Text>
-      <Text style={[styles.artist, styles.artistText]}>{artist}</Text>
 
+      <View style={styles.artist}>
+        <Text style={styles.artistText}>{artist}</Text>
+        {releaseDate && (
+          <Text style={styles.releaseDate}>{releaseDate}</Text>
+        )}
+      </View>
       {Platform.OS === 'web' && (
       <View style={styles.volumeSlider}>
         <Icon name="md-volume-low" color={WHITE} size={20} />
@@ -90,50 +102,72 @@ function CardItem({
         <View style={styles.actionsCardItem}>
 
           <TouchableOpacity style={styles.miniButton}>
-            <Icon name="arrow-redo" color={FLASH_ACTIONS} size={14} />
+            <Icon
+              name="copy-outline"
+              color={FLASH_ACTIONS}
+              size={20}
+              onPress={() => {
+                // if (token) {
+                //   if (showType === 'recommended') {
+                //     Clipboard.setString(userRecommendedTracks[index].uri);
+                //   } else if (showType === 'new') {
+                //     Clipboard.setString(newReleases[index].uri);
+                //   }
+                // }
+              }}
+
+            />
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button}>
-            {isPlaying ? 
-              <Icon 
-                name="pause" 
-                color={DISLIKE_ACTIONS} 
-                size={30} 
-                onPress={() => {
-                  if (token) { // user is logged in
-                    switchPlayingState(token.accessToken)
-                  } else { // user is not logged in switch icon for mock page
-                    setIsPlaying(!isPlaying);
-                    console.log()
-                  }
-                }}
-              />
-              : 
-              <Icon 
-                name="play" 
-                color={DISLIKE_ACTIONS} 
-                size={30} 
-                onPress={() => {
-                  if (token) {
-                    switchPlayingState(token.accessToken)
-                  } else { // user is not logged in switch icon for mock page
-                    setIsPlaying(!isPlaying);
-                  }
-
-                }} 
-              />
-            }
+            {isPlaying
+              ? (
+                <Icon
+                  name="pause"
+                  color={DISLIKE_ACTIONS}
+                  size={30}
+                  onPress={() => {
+                    if (token) { // user is logged in
+                      switchPlayingState(token.accessToken);
+                    } else { // user is not logged in switch icon for mock page
+                      setIsPlaying(!isPlaying);
+                    }
+                  }}
+                />
+              )
+              : (
+                <Icon
+                  name="play"
+                  color={DISLIKE_ACTIONS}
+                  size={30}
+                  onPress={() => {
+                    if (token) {
+                      switchPlayingState(token.accessToken);
+                    } else { // user is not logged in switch icon for mock page
+                      setIsPlaying(!isPlaying);
+                    }
+                  }}
+                />
+              )}
 
           </TouchableOpacity>
           <TouchableOpacity style={styles.miniButton}>
             <Icon
               name="add"
-              color={STAR_ACTIONS}
+              color={FLASH_ACTIONS}
               size={20}
               onPress={() => {
                 if (token) {
-                  setPressedTrack(userRecommendedTracks[index].uri);
+                  if (showType === 'recommended') {
+                    setPressedTrack(userRecommendedTracks[index]);
+                  } else if (showType === 'new') {
+                    setPressedTrack(newReleases[index]);
+                  } else {
+                    console.log('invalid showType');
+                  }
+
                 }
+
                 setShowPlaylists(true);
               }}
             />
