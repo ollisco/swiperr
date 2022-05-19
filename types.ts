@@ -58,12 +58,10 @@ export type MessageT = {
 
 export type ProfileItemT = {
   followerCount?: string;
-  info1?: string;
-  info2?: string;
-  info3?: string;
-  info4?: string;
+  topTracks?: string[];
+  topArtists?: string[];
+  topGenres?: string[];
   location?: string;
-  matches: string;
   name: string;
 };
 

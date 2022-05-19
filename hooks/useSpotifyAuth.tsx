@@ -30,6 +30,9 @@ const SpotifyAuthContext: React.Context<{
   playlists: any,
   addTrackToPlaylist: any,
   newReleases: any,
+  topGenres: string[],
+  topArtists: string[],
+  topTracks: string[],
 
 }> = createContext({
   promptAsync: null,
@@ -50,6 +53,9 @@ const SpotifyAuthContext: React.Context<{
   playlists: null,
   addTrackToPlaylist: null,
   newReleases: null,
+  topGenres: [],
+  topArtists: [],
+  topTracks: [],
 });
 
 WebBrowser.maybeCompleteAuthSession();
@@ -62,6 +68,9 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const [likedSongs, setLikedSongs] = useState(null);
   const [showRecommended, setShowRecommended] = useState(true);
   const [newReleases, setNewReleases] = useState(null);
+  const [topGenres, setTopGenres] = useState<string[]>(['Genre 1', 'Genre 2', 'Genre 3']);
+  const [topArtists, setTopArtists] = useState<string[]>(['Artist 1', 'Artist 2', 'Artist 3']);
+  const [topTracks, setTopTracks] = useState<string[]>(['Track 1', 'Track 2', 'Track 3']);
 
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
@@ -254,14 +263,27 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     const config = {
       headers: { Authorization: `Bearer ${accessToken}` },
     };
-    let u = null;
     axios.get(meEndpoint, config)
       .then((res) => {
+        console.log('User data: ', res.data);
         setUser(res.data);
-        u = res.data;
       })
       .catch((res) => console.log('E1: ', res));
+
+    
   }
+
+
+  function getTopTracks(accessToken: string) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+    
+  }
+
+
 
   async function getTopUserItems(accessToken: string) {
     const allArtists: any = [];
@@ -273,6 +295,10 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     const artist: any = [];
     const tracks: any = [];
 
+    const topTracksText: any = [];
+    const topArtistsText: any = [];
+
+
     const count = 5;
 
     const config = {
@@ -281,6 +307,18 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       },
     };
 
+    await axios.get(`${meEndpoint}/top/tracks`, config)
+      .then((res) => {
+        // setUserTopItems(res.data);
+        for (let i = 0; i < res.data.items.length; i += 1) {
+          allTracks.push(res.data.items[i].id);
+          topTracksText.push(res.data.items[i].name);
+        }
+      })
+      .catch((res) => console.log('E2: ', res));
+
+
+   
     await axios.get(`${recomendationEndpoint}/available-genre-seeds`, config)
       .then((res: any) => {
         // loop over the genres and add them to the available genres
@@ -290,19 +328,11 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       })
       .catch((res) => console.log('E3: ', res));
 
-    await axios.get(`${meEndpoint}/top/tracks`, config)
-      .then((res) => {
-        // setUserTopItems(res.data);
-        for (let i = 0; i < res.data.items.length; i += 1) {
-          allTracks.push(res.data.items[i].id);
-        }
-      })
-      .catch((res) => console.log('E2: ', res));
-
     await axios.get(`${meEndpoint}/top/artists`, config)
       .then((res) => {
         for (let i = 0; i < res.data.items.length; i += 1) {
           allArtists.push(res.data.items[i].id);
+          topArtistsText.push(res.data.items[i].name);
         }
         res.data.items.forEach((item: any) => {
         // loop over the genres and push them to genres
@@ -323,6 +353,8 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       const randomIndex = Math.floor(Math.random() * allGenres.length);
       genres.push(allGenres[randomIndex]);
     }
+
+    
 
     // Get two random items from allTracks and place them in tracks
     for (let i = 0; i < 2; i += 1) {
@@ -370,6 +402,16 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       })
       .catch((res) => console.log('Erec: ', res));
 
+    
+
+    // Shuffle
+    topArtistsText.sort(() => 0.5 - Math.random()); 
+    topTracksText.sort(() => 0.5 - Math.random());
+    const both = allGenres.concat(otherGenres);
+    both.sort(() => 0.5 - Math.random());
+    setTopArtists(topArtistsText.slice(0, 3).join(', '));
+    setTopTracks(topTracksText.slice(0, 3).join(', '));
+    setTopGenres(both.slice(0, 3).join(', '));
     setVolume(accessToken, 50);
   }
 
@@ -463,7 +505,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       getUserData(token.accessToken);
       getTopUserItems(token.accessToken);
       getLikedSongs(token.accessToken, 10);
-
       getPlaylists(token.accessToken);
       getNewReleases(token.accessToken);
     }
@@ -490,6 +531,9 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         playlists: userPlaylists,
         addTrackToPlaylist,
         newReleases,
+        topTracks,
+        topArtists,
+        topGenres,
       }}
     >
       {children}
