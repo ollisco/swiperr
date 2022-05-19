@@ -8,7 +8,7 @@ const SwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
   const [volume, setVolume] = useState<number>(50);
   // const [swipedDistance, setSwipedDistance] = useState<number>(0);
   const [rgb, setRGB] = useState<string>('rgb(54, 54, 54)');
-  const [pressedTrack, setPressedTrack] = useState<string>('');
+  const [pressedTrack, setPressedTrack] = useState<any>(null);
   const [showPlaylists, setShowPlaylists] = useState<boolean>(false);
   const [swiper, setSwiper] = useState<CardStack | null>(null);
   const [showType, setShowType] = useState<string>('mock');

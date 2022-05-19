@@ -45,10 +45,11 @@ function Playlists() {
                 data={playlists}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ index, item }) => (
+                  
                   <TouchableOpacity
                     key={item.id}
                     onPress={() => {
-                      addTrackToPlaylist(token.accessToken, item.id, pressedTrack);
+                      addTrackToPlaylist(token.accessToken, item.id, pressedTrack.uri);
                       setShowPlaylists(false);
                       swiper?.swipeRight();
                     }}
