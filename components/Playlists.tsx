@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import React, {
-  FlatList, TouchableOpacity, View, ScrollView, Text,
+  TouchableOpacity, View, ScrollView, Text,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import styles, { DARK_GRAY, GRAY } from '../assets/styles';
+import styles, { DARK_GRAY } from '../assets/styles';
 import useSpotifyContext from '../hooks/useSpotifyAuth';
 import CardItemRow from './CardItemRow';
 import { SwipeCardContext } from './SwipeCardProvider';

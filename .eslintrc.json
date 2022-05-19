@@ -18,7 +18,8 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "unused-imports"
     ],
     "rules": {
         "import/extensions": [
@@ -40,7 +41,18 @@
                 ".ts", 
                 ".tsx"
             ] 
-        }]
+        }],
+        "no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+        "warn",
+        {
+            "vars": "all",
+            "varsIgnorePattern": "^_",
+            "args": "after-used",
+            "argsIgnorePattern": "^_"
+        }
+        ]
     },
     "settings": {
         "import/resolver": {

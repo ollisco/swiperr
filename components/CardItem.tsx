@@ -12,7 +12,6 @@ import styles, {
   DISLIKE_ACTIONS,
   FLASH_ACTIONS,
   SPOTIFY_GREEN,
-  STAR_ACTIONS,
   WHITE,
 } from '../assets/styles';
 import { SwipeCardContext } from './SwipeCardProvider';
@@ -165,7 +164,6 @@ function CardItem({
                   } else {
                     console.log('invalid showType');
                   }
-
                 }
 
                 setShowPlaylists(true);

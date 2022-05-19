@@ -2,28 +2,18 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import Icon from './Icon';
 import { ProfileItemT } from '../types';
-import styles, { DARK_GRAY, WHITE } from '../assets/styles';
+import styles, { WHITE } from '../assets/styles';
 
 function ProfileItem({
   followerCount,
-  info1,
-  info2,
-  info3,
-  info4,
   location,
-  matches,
   name,
+  topTracks,
+  topArtists,
+  topGenres,
 }: ProfileItemT) {
   return (
     <View style={styles.containerProfileItem}>
-      <View style={styles.matchesProfileItem}>
-        <Text style={styles.matchesTextProfileItem}>
-          <Icon name="heart" size={13} color={WHITE} />
-          {' '}
-          {matches}
-          % Liked Songs
-        </Text>
-      </View>
 
       <Text style={styles.name}>{name}</Text>
 
@@ -39,14 +29,21 @@ function ProfileItem({
         <Text style={styles.iconProfile}>
           <Icon name="person" size={12} color={WHITE} />
         </Text>
-        <Text style={styles.infoContent}>{info1}</Text>
+        <Text style={styles.infoContent}>{topArtists}</Text>
       </View>
 
       <View style={styles.info}>
         <Text style={styles.iconProfile}>
           <Icon name="musical-notes" size={12} color={WHITE} />
         </Text>
-        <Text style={styles.infoContent}>{info2}</Text>
+        <Text style={styles.infoContent}>{topTracks}</Text>
+      </View>
+
+      <View style={styles.info}>
+        <Text style={styles.iconProfile}>
+          <Icon name="albums-outline" size={12} color={WHITE} />
+        </Text>
+        <Text style={styles.infoContent}>{topGenres}</Text>
       </View>
 
       <View style={styles.info}>
@@ -56,12 +53,6 @@ function ProfileItem({
         <Text style={styles.infoContent}>{location}</Text>
       </View>
 
-      <View style={styles.info}>
-        <Text style={styles.iconProfile}>
-          <Icon name="reader" size={12} color={WHITE} />
-        </Text>
-        <Text style={styles.infoContent}>{info4}</Text>
-      </View>
     </View>
   );
 }

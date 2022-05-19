@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SpotifyAuthProvider } from './hooks/useSpotifyAuth';
 import {
-  Explore, Liked, LoginPage, Messages, Profile,
+  Explore, Liked, Profile,
 } from './screens';
 import {
   PRIMARY_COLOR, DARK_GRAY, BLACK,

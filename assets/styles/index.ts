@@ -254,7 +254,7 @@ export default StyleSheet.create({
     backgroundColor: WHITE,
     padding: 10,
     borderRadius: 20,
-    width: 45,
+    width: 40,
     elevation: 1,
     shadowOpacity: 0.05,
     shadowRadius: 10,

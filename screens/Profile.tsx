@@ -2,7 +2,6 @@ import React from 'react';
 import {
   ScrollView,
   View,
-  Text,
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
@@ -14,13 +13,14 @@ import BG_IMAGE from '../assets/images/bg2.jpg';
 import useSpotifyContext from '../hooks/useSpotifyAuth';
 
 function Profile() {
-  const { user } = useSpotifyContext();
+  const {
+    user, topTracks, topArtists, topGenres,
+  } = useSpotifyContext();
   const {
     image,
-    infoPersonal: info1,
-    infoMusic: info2,
-    match,
-    lastSeen,
+    topGenres: mockTopGenres,
+    topArtists: mockTopArtists,
+    topTracks: mockTopTracks,
     name,
     location,
   } = DEMO[7];
@@ -79,36 +79,23 @@ function Profile() {
 
           {user ? (
             <ProfileItem
-              matches={match}
               followerCount={user.followers.total}
               name={user.display_name}
               location={getLocation(user.country)}
-              info1={info1}
-              info2={info2}
-              info4={lastSeen}
+              topTracks={topTracks}
+              topArtists={topArtists}
+              topGenres={topGenres}
             />
           ) : (
             <ProfileItem
-              matches={match}
               followerCount="20"
               name={name}
               location={location}
-              info1={info1}
-              info2={info2}
-              info4={lastSeen}
+              topTracks={mockTopTracks}
+              topArtists={mockTopArtists}
+              topGenres={mockTopGenres}
             />
           )}
-
-          <View style={styles.actionsProfile}>
-            <TouchableOpacity style={styles.circledButton}>
-              <Icon name="ellipsis-horizontal" size={20} color={WHITE} />
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.roundedButton}>
-              <Icon name="chatbubble" size={20} color={WHITE} />
-              <Text style={styles.textButton}>Start chatting</Text>
-            </TouchableOpacity>
-          </View>
         </ScrollView>
       </View>
     </View>
