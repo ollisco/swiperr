@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import Icon from './Icon';
 import { ProfileItemT } from '../types';
-import styles, { DARK_GRAY, WHITE } from '../assets/styles';
+import styles, { WHITE } from '../assets/styles';
 
 function ProfileItem({
   followerCount,

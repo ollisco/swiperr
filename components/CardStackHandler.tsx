@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { View } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import DATA from '../assets/data/dummy_data_songs';

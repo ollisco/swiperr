@@ -18,6 +18,7 @@
     "@react-navigation/stack": "^5.14.3",
     "axios": "^0.26.1",
     "country-data": "^0.0.31",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "expo": "^44.0.0",
     "expo-auth-session": "~3.5.0",
     "expo-random": "~12.1.1",

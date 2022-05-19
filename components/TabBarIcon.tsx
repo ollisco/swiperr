@@ -1,9 +1,7 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import Icon from './Icon';
-import styles, {
-  DARK_GRAY, GRAY, WHITE, PRIMARY_COLOR,
-} from '../assets/styles';
+import styles, { GRAY, WHITE } from '../assets/styles';
 import { TabBarIconT } from '../types';
 
 function TabBarIcon({ focused, iconName, text }: TabBarIconT) {
