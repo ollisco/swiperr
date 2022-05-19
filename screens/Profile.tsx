@@ -17,10 +17,9 @@ function Profile() {
   const { user, topTracks, topArtists, topGenres} = useSpotifyContext();
   const {
     image,
-    infoPersonal: info1,
-    infoMusic: info2,
-    match,
-    lastSeen,
+    topGenres: mockTopGenres,
+    topArtists: mockTopArtists,
+    topTracks: mockTopTracks,
     name,
     location,
   } = DEMO[7];
@@ -91,19 +90,11 @@ function Profile() {
               followerCount="20"
               name={name}
               location={location}
+              topTracks={mockTopTracks}
+              topArtists={mockTopArtists}
+              topGenres={mockTopGenres}
             />
           )}
-
-          <View style={styles.actionsProfile}>
-            <TouchableOpacity style={styles.circledButton}>
-              <Icon name="ellipsis-horizontal" size={20} color={WHITE} />
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.roundedButton}>
-              <Icon name="chatbubble" size={20} color={WHITE} />
-              <Text style={styles.textButton}>Start chatting</Text>
-            </TouchableOpacity>
-          </View>
         </ScrollView>
       </View>
     </View>

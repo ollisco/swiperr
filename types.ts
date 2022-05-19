@@ -58,9 +58,9 @@ export type MessageT = {
 
 export type ProfileItemT = {
   followerCount?: string;
-  topTracks?: string[];
-  topArtists?: string[];
-  topGenres?: string[];
+  topTracks?: string;
+  topArtists?: string;
+  topGenres?: string;
   location?: string;
   name: string;
 };
@@ -95,5 +95,8 @@ export type DataProfile = {
   infoMusic?: string;
   lastSeen?: string;
   location?: string;
+  topTracks?: string;
+  topArtists?: string;
+  topGenres?: string;
 };
 

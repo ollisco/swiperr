@@ -88,6 +88,9 @@ const data: DataProfile[] = [
     infoMusic: "Loves Rock, Pop and Hiphop/Rap",
     lastSeen: "Last seen: 23h ago",
     isOnline: true,
+    topTracks: "Track 1, Track 2, Track 3, Track 4, Track 5",
+    topArtists: "Artist 1, Artist 2, Artist 3, Artist 4, Artist 5",
+    topGenres: "Genre 1, Genre 2, Genre 3, Genre 4, Genre 5",
     message:
       "And as for the television's so-called plan, Batman has no jurisdiction.",
     image: IMAGE_08,

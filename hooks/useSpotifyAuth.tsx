@@ -68,9 +68,10 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const [likedSongs, setLikedSongs] = useState(null);
   const [showRecommended, setShowRecommended] = useState(true);
   const [newReleases, setNewReleases] = useState(null);
-  const [topGenres, setTopGenres] = useState<string[]>(['Genre 1', 'Genre 2', 'Genre 3']);
-  const [topArtists, setTopArtists] = useState<string[]>(['Artist 1', 'Artist 2', 'Artist 3']);
-  const [topTracks, setTopTracks] = useState<string[]>(['Track 1', 'Track 2', 'Track 3']);
+  const [topGenres, setTopGenres] = useState<string>('Genre 1, Genre 2, Genre 3');
+  const [topArtists, setTopArtists] = useState<string>('Artist 1, Artist 2, Artist 3');
+  const [topTracks, setTopTracks] = useState<string>('Track 1, Track 2, Track 3');
+
 
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
@@ -402,16 +403,14 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       })
       .catch((res) => console.log('Erec: ', res));
 
-    
-
-    // Shuffle
+    const n = 10;
     topArtistsText.sort(() => 0.5 - Math.random()); 
     topTracksText.sort(() => 0.5 - Math.random());
     const both = allGenres.concat(otherGenres);
     both.sort(() => 0.5 - Math.random());
-    setTopArtists(topArtistsText.slice(0, 3).join(', '));
-    setTopTracks(topTracksText.slice(0, 3).join(', '));
-    setTopGenres(both.slice(0, 3).join(', '));
+    setTopArtists(topArtistsText.slice(0, n).join(', '));
+    setTopTracks(topTracksText.slice(0, n).join(', '));
+    setTopGenres(both.slice(0, n).join(', '));
     setVolume(accessToken, 50);
   }
 
