@@ -60,11 +60,9 @@ function Playlists() {
                 
               
             ) : (
-              <FlatList
-                numColumns={1}
-                data={dummyDataPlaylists}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({ index, item }) => (
+          
+                
+                dummyDataPlaylists.map((item: any) => (
                   <TouchableOpacity
                     key={item.id}
                     onPress={() => {
@@ -78,8 +76,10 @@ function Playlists() {
                       name={item.name}
                     />
                   </TouchableOpacity>
-                )}
-              />
+                ))
+                
+
+              
 
             )}
           </ScrollView>

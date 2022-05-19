@@ -31,7 +31,7 @@ function Cards(props: Props) {
         {user ? (
           <View style={styles.exploreTopCenter}>
             <TouchableOpacity onPress={() => {
-              if (showType !== 'recommended') {
+              if (showType !== 'recommended' && userRecommendedTracks) {
                 setShowType('recommended');
                 queueAndSkip(token.accessToken, userRecommendedTracks[recommendedIndex].uri);
               }
@@ -45,7 +45,7 @@ function Cards(props: Props) {
               |
             </Text>
             <TouchableOpacity onPress={() => {
-              if (showType !== 'new') {
+              if (showType !== 'new' && newReleases) {
                 setShowType('new');
                 queueAndSkip(token.accessToken, newReleases[newReleasesIndex].uri);
               }
