@@ -8,7 +8,6 @@ import { SwipedCardContextT } from '../types';
 import CardItem from './CardItem';
 import { SwipeCardContext } from './SwipeCardProvider';
 
-
 function CardStackHandler(style: any) {
   const {
     userRecommendedTracks: userTopItems,
@@ -38,7 +37,7 @@ function CardStackHandler(style: any) {
   function convertRGBred(d: number) {
     const m = d < 110 ? 110 : -d;
     return `rgb(${m}, ${54 - ((54 * -d) / 300) + 20}, ${54 - ((54 * -d) / 300) + 20})`;
-  } 
+  }
   return (
     <View style={{ borderColor: '#000000', borderWidth: 3 }}>
 

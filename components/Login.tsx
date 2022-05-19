@@ -13,7 +13,6 @@ function Login() {
   async function awaitPromptAsync() {
     setShowType('recommended');
     await promptAsync();
-
   }
 
   return (

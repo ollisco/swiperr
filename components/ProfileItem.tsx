@@ -14,7 +14,6 @@ function ProfileItem({
 }: ProfileItemT) {
   return (
     <View style={styles.containerProfileItem}>
-      
 
       <Text style={styles.name}>{name}</Text>
 
@@ -54,7 +53,6 @@ function ProfileItem({
         <Text style={styles.infoContent}>{location}</Text>
       </View>
 
-      
     </View>
   );
 }

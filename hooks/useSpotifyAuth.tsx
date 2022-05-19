@@ -72,7 +72,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const [topArtists, setTopArtists] = useState<string>('Artist 1, Artist 2, Artist 3');
   const [topTracks, setTopTracks] = useState<string>('Track 1, Track 2, Track 3');
 
-
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
     scopes: ['user-read-email', 'user-read-private', 'user-top-read', 'user-library-read',
@@ -157,7 +156,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       play(accessToken);
     }
   }
-
 
   async function getAlbums(accessToken: string, albumId: string) {
     const config = {
@@ -281,10 +279,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         setUser(res.data);
       })
       .catch((res) => console.log('E1: ', res));
-
-    
   }
-
 
   function getTopTracks(accessToken: string) {
     const config = {
@@ -292,10 +287,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         Authorization: `Bearer ${accessToken}`,
       },
     };
-    
   }
-
-
 
   async function getTopUserItems(accessToken: string) {
     const allArtists: any = [];
@@ -309,7 +301,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
 
     const topTracksText: any = [];
     const topArtistsText: any = [];
-
 
     const count = 5;
 
@@ -329,8 +320,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       })
       .catch((res) => console.log('E2: ', res));
 
-
-   
     await axios.get(`${recomendationEndpoint}/available-genre-seeds`, config)
       .then((res: any) => {
         // loop over the genres and add them to the available genres
@@ -365,8 +354,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       const randomIndex = Math.floor(Math.random() * allGenres.length);
       genres.push(allGenres[randomIndex]);
     }
-
-    
 
     // Get two random items from allTracks and place them in tracks
     for (let i = 0; i < 2; i += 1) {
@@ -415,7 +402,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       .catch((res) => console.log('Erec: ', res));
 
     const n = 10;
-    topArtistsText.sort(() => 0.5 - Math.random()); 
+    topArtistsText.sort(() => 0.5 - Math.random());
     topTracksText.sort(() => 0.5 - Math.random());
     const both = allGenres.concat(otherGenres);
     both.sort(() => 0.5 - Math.random());

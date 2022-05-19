@@ -165,7 +165,6 @@ function CardItem({
                   } else {
                     console.log('invalid showType');
                   }
-
                 }
 
                 setShowPlaylists(true);

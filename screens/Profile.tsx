@@ -14,7 +14,9 @@ import BG_IMAGE from '../assets/images/bg2.jpg';
 import useSpotifyContext from '../hooks/useSpotifyAuth';
 
 function Profile() {
-  const { user, topTracks, topArtists, topGenres} = useSpotifyContext();
+  const {
+    user, topTracks, topArtists, topGenres,
+  } = useSpotifyContext();
   const {
     image,
     topGenres: mockTopGenres,
@@ -80,7 +82,7 @@ function Profile() {
             <ProfileItem
               followerCount={user.followers.total}
               name={user.display_name}
-              location={getLocation(user.country)}  
+              location={getLocation(user.country)}
               topTracks={topTracks}
               topArtists={topArtists}
               topGenres={topGenres}
