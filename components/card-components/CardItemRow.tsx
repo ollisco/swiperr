@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, View, Image } from 'react-native';
-import { CardItemRowT } from '../types';
+import { CardItemRowT } from '../../types';
 
-import styles from '../assets/styles';
+import styles from '../../assets/styles';
 
 function CardItemRow({
   image,

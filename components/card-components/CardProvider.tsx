@@ -1,7 +1,7 @@
 import { createContext, FC, useState } from 'react';
 import CardStack from 'react-native-card-stack-swiper';
-import useSpotifyContext from '../hooks/useSpotifyAuth';
-import { SwipedCardContextT } from '../types';
+import useSpotifyContext from '../../hooks/useSpotifyAuth';
+import { SwipedCardContextT } from '../../types';
 
 export const SwipeCardContext = createContext<SwipedCardContextT | null>(null);
 

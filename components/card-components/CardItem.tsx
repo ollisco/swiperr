@@ -5,17 +5,17 @@ import {
 import Slider from '@react-native-community/slider';
 // import Clipboard from '@react-native-clipboard/clipboard';
 
-import Icon from './Icon';
-import { CardItemT, SwipedCardContextT } from '../types';
+import Icon from '../Icon';
+import { CardItemT, SwipedCardContextT } from '../../types';
 
 import styles, {
   DISLIKE_ACTIONS,
   FLASH_ACTIONS,
   SPOTIFY_GREEN,
   WHITE,
-} from '../assets/styles';
-import { SwipeCardContext } from './SwipeCardProvider';
-import useSpotifyContext from '../hooks/useSpotifyAuth';
+} from '../../assets/styles';
+import { SwipeCardContext } from './CardProvider';
+import useSpotifyContext from '../../hooks/useSpotifyAuth';
 
 function CardItem({
   hasActions,

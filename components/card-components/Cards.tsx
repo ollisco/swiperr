@@ -1,13 +1,13 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React, { useContext } from 'react';
-import styles from '../assets/styles';
-import Settings from './Settings';
-import Filters from './Filters';
-import Login from './Login';
-import useSpotifyContext from '../hooks/useSpotifyAuth';
+import styles from '../../assets/styles';
+import Settings from '../Settings';
+import Filters from '../Filters';
+import Login from '../Login';
+import useSpotifyContext from '../../hooks/useSpotifyAuth';
 import CardStackHandler from './CardStackHandler';
-import { SwipeCardContext } from './SwipeCardProvider';
-import { SwipedCardContextT } from '../types';
+import { SwipeCardContext } from './CardProvider';
+import { SwipedCardContextT } from '../../types';
 
 type Props = {}
 

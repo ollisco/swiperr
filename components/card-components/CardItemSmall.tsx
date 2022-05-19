@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, View, Image } from 'react-native';
-import { CardItemT } from '../types';
+import { CardItemT } from '../../types';
 
-import styles from '../assets/styles';
+import styles from '../../assets/styles';
 
 function CardItemSmall({
   image,
