@@ -8,7 +8,7 @@ function Filters() {
   const { newReleases } = useSpotifyContext();
   return (
     <TouchableOpacity style={styles.filters}>
-      <Icon name="options" size={13} color={DARK_GRAY} onPress={() => console.log(newReleases)} />
+      <Icon name="options" size={15} color={DARK_GRAY} onPress={() => console.log(newReleases)} />
     </TouchableOpacity>
   );
 }
