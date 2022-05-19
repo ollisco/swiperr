@@ -3,7 +3,7 @@ import {
   Text, View, Image, TouchableOpacity, Platform,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
-//import Clipboard from '@react-native-clipboard/clipboard';
+// import Clipboard from '@react-native-clipboard/clipboard';
 import Icon from './Icon';
 import { CardItemT, SwipedCardContextT } from '../types';
 

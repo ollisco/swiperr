@@ -40,46 +40,41 @@ function Playlists() {
         <SafeAreaView style={{ flex: 1 }}>
           <ScrollView>
             {playlists ? (
-              
-                playlists.map((item: any) => (
-                  <TouchableOpacity
-                    key={item.id}
-                    onPress={() => {
-                      console.log(pressedTrack)
-                      addTrackToPlaylist(token.accessToken, item.id, pressedTrack.uri);
-                      setShowPlaylists(false);
-                      swiper?.swipeRight();
-                    }}
-                  >
-                    <CardItemRow
-                      image={item.images.length > 0 ? { uri: item.images[0].url } : dummyDataPlaylists[0].image}
-                      name={item.name}
-                    />
-                  </TouchableOpacity>
-                ))
-                
-              
-            ) : (
-          
-                
-                dummyDataPlaylists.map((item: any) => (
-                  <TouchableOpacity
-                    key={item.id}
-                    onPress={() => {
-                      console.log(swiper);
-                      setShowPlaylists(false);
-                      swiper?.swipeRight();
-                    }}
-                  >
-                    <CardItemRow
-                      image={item.image}
-                      name={item.name}
-                    />
-                  </TouchableOpacity>
-                ))
-                
 
-              
+              playlists.map((item: any) => (
+                <TouchableOpacity
+                  key={item.id}
+                  onPress={() => {
+                    console.log(pressedTrack);
+                    addTrackToPlaylist(token.accessToken, item.id, pressedTrack.uri);
+                    setShowPlaylists(false);
+                    swiper?.swipeRight();
+                  }}
+                >
+                  <CardItemRow
+                    image={item.images.length > 0 ? { uri: item.images[0].url } : dummyDataPlaylists[0].image}
+                    name={item.name}
+                  />
+                </TouchableOpacity>
+              ))
+
+            ) : (
+
+              dummyDataPlaylists.map((item: any) => (
+                <TouchableOpacity
+                  key={item.id}
+                  onPress={() => {
+                    console.log(swiper);
+                    setShowPlaylists(false);
+                    swiper?.swipeRight();
+                  }}
+                >
+                  <CardItemRow
+                    image={item.image}
+                    name={item.name}
+                  />
+                </TouchableOpacity>
+              ))
 
             )}
           </ScrollView>

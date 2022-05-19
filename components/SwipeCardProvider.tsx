@@ -6,7 +6,6 @@ import { SwipedCardContextT } from '../types';
 export const SwipeCardContext = createContext<SwipedCardContextT | null>(null);
 
 const SwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
-
   const { userRecommendedTracks } = useSpotifyContext();
   const [volume, setVolume] = useState<number>(50);
   // const [swipedDistance, setSwipedDistance] = useState<number>(0);
