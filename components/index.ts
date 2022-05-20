@@ -1,10 +1,11 @@
-export { default as CardItem } from './CardItem';
+export { default as CardItem } from './card-components/CardItem';
 export { default as Settings } from './Settings';
 export { default as Filters } from './Filters';
 export { default as Icon } from './Icon';
 export { default as Message } from './Message';
 export { default as ProfileItem } from './ProfileItem';
 export { default as Login } from './Login';
-export { default as CardItemRow } from './CardItemRow';
+export { default as CardItemRow } from './card-components/CardItemRow';
 export { default as Playlists } from './Playlists';
-export { default as Cards } from './Cards';
+export { default as Cards } from './card-components/Cards';
+export { default as CardItemSmall } from './card-components/CardItemSmall';

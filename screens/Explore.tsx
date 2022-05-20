@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { Playlists, Cards } from '../components';
 import styles from '../assets/styles';
-import SwipeCardProvider from '../components/SwipeCardProvider';
+import SwipeCardProvider from '../components/card-components/CardProvider';
 import useSpotifyContext from '../hooks/useSpotifyAuth';
 
 function Explore() {

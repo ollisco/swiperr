@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import Icon from './Icon';
 import styles, { DARK_GRAY } from '../assets/styles';
 import useSpotifyContext from '../hooks/useSpotifyAuth';
-import { SwipeCardContext } from './SwipeCardProvider';
+import { SwipeCardContext } from './card-components/CardProvider';
 import { SwipedCardContextT } from '../types';
 
 function Login() {

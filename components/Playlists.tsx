@@ -5,8 +5,8 @@ import React, {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styles, { DARK_GRAY } from '../assets/styles';
 import useSpotifyContext from '../hooks/useSpotifyAuth';
-import CardItemRow from './CardItemRow';
-import { SwipeCardContext } from './SwipeCardProvider';
+import CardItemRow from './card-components/CardItemRow';
+import { SwipeCardContext } from './card-components/CardProvider';
 // import swipcardcontext from types
 import { SwipedCardContextT } from '../types';
 import Icon from './Icon';
