@@ -262,7 +262,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         });
       } else {
         console.log(defaultPlaylist, trackId);
-        const trackUri = 'spotify:track:' + trackId;
+        const trackUri = `spotify:track:${trackId}`;
         addTrackToPlaylist(accessToken, defaultPlaylist, trackUri);
       }
     }
