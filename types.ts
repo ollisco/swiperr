@@ -100,9 +100,15 @@ export type DataProfile = {
   topGenres?: string;
 };
 
-export type SettingItemT = {
+export type SettingItemSwitchT = {
   text: string;
   onPress: (value: boolean) => void;
   value: boolean;
   icon?: any;
+};
+
+export type SettingItemDropdownT = {
+  header: string;
+  explanation?: string;
+  options: string[];
 }
