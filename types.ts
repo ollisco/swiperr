@@ -111,4 +111,6 @@ export type SettingItemDropdownT = {
   header: string;
   explanation?: string;
   options: string[];
+  defaultValue?: string;
+  onSelect?: (value: any) => void;
 }

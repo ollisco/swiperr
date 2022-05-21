@@ -30,9 +30,10 @@ const SpotifyAuthContext: React.Context<{
   playlists: any,
   addTrackToPlaylist: any,
   newReleases: any,
-  topGenres: string[],
-  topArtists: string[],
-  topTracks: string[],
+  topGenres: string,
+  topArtists: string,
+  topTracks: string,
+  setDefaultPlaylist: any,
 
 }> = createContext({
   promptAsync: null,
@@ -53,14 +54,19 @@ const SpotifyAuthContext: React.Context<{
   playlists: null,
   addTrackToPlaylist: null,
   newReleases: null,
-  topGenres: [],
-  topArtists: [],
-  topTracks: [],
+  topGenres: '',
+  topArtists: '',
+  topTracks: '',
+  setDefaultPlaylist: null,
 });
 
 WebBrowser.maybeCompleteAuthSession();
 
-export const SpotifyAuthProvider: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode
+}
+
+export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [user, setUser] = useState(null);
   const [userRecommendedTracks, setUserRecommendedTracks] = useState(null);
   const [userPlaylists, setUserPlaylists] = useState(null);
@@ -71,6 +77,8 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const [topGenres, setTopGenres] = useState<string>('Genre 1, Genre 2, Genre 3');
   const [topArtists, setTopArtists] = useState<string>('Artist 1, Artist 2, Artist 3');
   const [topTracks, setTopTracks] = useState<string>('Track 1, Track 2, Track 3');
+  const likeSongString = 'Liked songs';
+  const [defaultPlaylist, setDefaultPlaylist] = useState<string>(likeSongString); // Either equal to liked songs or a playlist uri
 
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
@@ -93,14 +101,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   const { token, tokenExchangeError: exchangeError } = useAutoExchange(
     response?.type === 'success' ? response.params.code : undefined,
   );
-
-  async function switchCardtypeState(accessToken: string) {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-  }
 
   async function getNewReleases(accessToken: string) {
     const config = {
@@ -147,14 +147,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       .catch((err) => {
         console.log(err);
       });
-  }
-
-  function switchPlayingState(accessToken: string) {
-    if (isPlaying) {
-      pause(accessToken);
-    } else {
-      play(accessToken);
-    }
   }
 
   async function getAlbums(accessToken: string, albumId: string) {
@@ -213,6 +205,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
   }
 
   async function addTrackToPlaylist(accessToken: string, playlistId: string, trackId: string) {
+    console.log(playlistId, trackId);
     const config = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -247,7 +240,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     }
   }
 
-  async function likeSong(accessToken: string, trackUri: string) {
+  async function likeSong(accessToken: string, trackId: string) {
     // config
     if (accessToken) {
       const config = {
@@ -255,17 +248,23 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
           Authorization: `Bearer ${accessToken}`,
         },
       };
-      await axios.put(
-        'https://api.spotify.com/v1/me/tracks',
-        // send trackid as "ids" parameter
-        { ids: [trackUri] },
-        config,
-      ).then((res) => {
-        // console.log('Saved track to user library');
-        getLikedSongs(accessToken, 20);
-      }).catch((err) => {
-        console.log(err);
-      });
+      if (defaultPlaylist === likeSongString) {
+        await axios.put(
+          'https://api.spotify.com/v1/me/tracks',
+          // send trackid as "ids" parameter
+          { ids: [trackId] },
+          config,
+        ).then((res) => {
+          // console.log('Saved track to user library');
+          getLikedSongs(accessToken, 20);
+        }).catch((err) => {
+          console.log(err);
+        });
+      } else {
+        console.log(defaultPlaylist, trackId);
+        const trackUri = 'spotify:track:' + trackId;
+        addTrackToPlaylist(accessToken, defaultPlaylist, trackUri);
+      }
     }
   }
 
@@ -497,6 +496,14 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     setIsPlaying(true);
   }
 
+  function switchPlayingState(accessToken: string) {
+    if (isPlaying) {
+      pause(accessToken);
+    } else {
+      play(accessToken);
+    }
+  }
+
   React.useEffect(() => {
     if (token) {
       getUserData(token.accessToken);
@@ -531,6 +538,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         topTracks,
         topArtists,
         topGenres,
+        setDefaultPlaylist,
       }}
     >
       {children}

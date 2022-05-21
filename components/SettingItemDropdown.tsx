@@ -12,6 +12,8 @@ function SettingItemDropdown({
   header,
   explanation,
   options,
+  defaultValue,
+  onSelect,
 }: SettingItemDropdownT) {
   return (
     <View style={styles.container}>
@@ -22,14 +24,16 @@ function SettingItemDropdown({
       <ModalDropdown
         style={styles.dropdownNonpress}
         options={options}
-        defaultValue="Select an option"
+        defaultValue={defaultValue || 'Select an item...'}
         dropdownStyle={styles.dropdown}
         dropdownTextHighlightStyle={styles.dropdownTextHighlight}
         textStyle={styles.header}
         showsVerticalScrollIndicator={false}
         dropdownTextStyle={styles.dropdownText}
-        onSelect={(index: any, value: any) => {
-          console.log(index, value);
+        onSelect={(_index: any, value: any) => {
+          if (onSelect && value) {
+            onSelect(value);
+          }
         }}
       />
     </View>
@@ -44,7 +48,6 @@ const styles = StyleSheet.create({
     padding: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // add border to each flex item
     borderBottomColor: GRAY,
     borderBottomWidth: 1,
     marginTop: -1,

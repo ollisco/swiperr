@@ -64,7 +64,6 @@ function CardStackHandler(style: any) {
                 queueAndSkip(token.accessToken, userTopItems[recommendedIndex + 1].uri);
                 setRecommendedIndex(recommendedIndex + 1);
                 setNewReleasesIndex(newReleasesIndex + 1);
-                console.log('Qr', userTopItems[recommendedIndex].name);
               }
             }}
             onSwipeEnd={() => {
