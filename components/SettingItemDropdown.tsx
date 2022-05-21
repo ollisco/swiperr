@@ -1,10 +1,14 @@
-import { StyleSheet, Switch, Text, View } from 'react-native'
-import React, { useState } from 'react'
-import { SettingItemDropdownT, SettingItemSwitchT } from '../types';
-import { SPOTIFY_GREEN, WHITE, GRAY, BLACK, DARK_GRAY, DARKER_GRAY } from '../assets/styles/index';
+import {
+  StyleSheet, Text, View,
+} from 'react-native';
+import React from 'react';
 import ModalDropdown from 'react-native-modal-dropdown';
+import { SettingItemDropdownT } from '../types';
+import {
+  WHITE, GRAY, BLACK, DARKER_GRAY,
+} from '../assets/styles/index';
 
-function SettingItemDropdown ({
+function SettingItemDropdown({
   header,
   explanation,
   options,
@@ -18,7 +22,7 @@ function SettingItemDropdown ({
       <ModalDropdown
         style={styles.dropdownNonpress}
         options={options}
-        defaultValue={'Select an option'}
+        defaultValue="Select an option"
         dropdownStyle={styles.dropdown}
         dropdownTextHighlightStyle={styles.dropdownTextHighlight}
         textStyle={styles.header}
@@ -29,10 +33,10 @@ function SettingItemDropdown ({
         }}
       />
     </View>
-  )
+  );
 }
 
-export default SettingItemDropdown
+export default SettingItemDropdown;
 
 const styles = StyleSheet.create({
   container: {
@@ -44,25 +48,24 @@ const styles = StyleSheet.create({
     borderBottomColor: GRAY,
     borderBottomWidth: 1,
     marginTop: -1,
-    
 
   },
   header: {
-      fontSize: 18,
-      color: WHITE,
+    fontSize: 18,
+    color: WHITE,
   },
-  dropdown: { 
+  dropdown: {
     width: 150,
-    height: 100, 
+    height: 100,
     borderColor: BLACK,
     borderWidth: 1,
     borderRadius: 3,
   },
   dropdownNonpress: {
-  borderBottomWidth: 1,
-  borderBottomColor: GRAY,
-  padding: 5,
-  width: '40%',
+    borderBottomWidth: 1,
+    borderBottomColor: GRAY,
+    padding: 5,
+    width: '40%',
   },
   dropdownText: {
     fontSize: 18,
