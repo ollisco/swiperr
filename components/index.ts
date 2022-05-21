@@ -9,3 +9,4 @@ export { default as CardItemRow } from './card-components/CardItemRow';
 export { default as Playlists } from './Playlists';
 export { default as Cards } from './card-components/Cards';
 export { default as CardItemSmall } from './card-components/CardItemSmall';
+export { default as SettingItem } from './SettingItem';

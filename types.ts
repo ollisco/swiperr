@@ -100,3 +100,9 @@ export type DataProfile = {
   topGenres?: string;
 };
 
+export type SettingItemT = {
+  text: string;
+  onPress: (value: boolean) => void;
+  value: boolean;
+  icon?: any;
+}

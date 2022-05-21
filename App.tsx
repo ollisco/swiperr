@@ -10,6 +10,7 @@ import {
   PRIMARY_COLOR, DARK_GRAY, BLACK,
 } from './assets/styles';
 import TabBarIcon from './components/TabBarIcon';
+import Settings from './screens/Settings';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -93,6 +94,20 @@ function App() {
                     ),
                   }}
                 /> */}
+
+                <Tab.Screen
+                  name="Settings"
+                  component={Settings}
+                  options={{
+                    tabBarIcon: ({ focused }) => (
+                      <TabBarIcon
+                        focused={focused}
+                        iconName="settings-sharp"
+                        text="Settings"
+                      />
+                    ),
+                  }}
+                />
 
                 <Tab.Screen
                   name="Profile"

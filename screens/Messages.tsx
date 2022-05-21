@@ -25,7 +25,6 @@ function Messages() {
               <Icon name="person-add" color={GRAY} size={20} style={styles.topIconRight} />
             </TouchableOpacity>
           </View>
-
           <FlatList
             data={DEMO}
             keyExtractor={(item, index) => index.toString()}
