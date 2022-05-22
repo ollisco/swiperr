@@ -33,7 +33,7 @@ function Cards(props: Props) {
             <TouchableOpacity onPress={() => {
               if (showType !== 'recommended' && userRecommendedTracks) {
                 setShowType('recommended');
-                queueAndSkip(token.accessToken, userRecommendedTracks[recommendedIndex].uri);
+                queueAndSkip(userRecommendedTracks[recommendedIndex].uri);
               }
             }}
             >
@@ -47,7 +47,7 @@ function Cards(props: Props) {
             <TouchableOpacity onPress={() => {
               if (showType !== 'new' && newReleases) {
                 setShowType('new');
-                queueAndSkip(token.accessToken, newReleases[newReleasesIndex].uri);
+                queueAndSkip(newReleases[newReleasesIndex].uri);
               }
             }}
             >

@@ -44,7 +44,7 @@ function Playlists() {
                 <TouchableOpacity
                   key={item.id}
                   onPress={() => {
-                    addTrackToPlaylist(token.accessToken, item.id, pressedTrack.uri);
+                    addTrackToPlaylist(item.id, pressedTrack.uri);
                     setShowPlaylists(false);
                     swiper?.swipeRight();
                   }}

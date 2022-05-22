@@ -88,7 +88,7 @@ function CardItem({
           }}
           onSlidingComplete={(value: number) => {
             if (token) {
-              setVolume(token.accessToken, value);
+              setVolume(value);
             }
           }}
         />
@@ -127,7 +127,7 @@ function CardItem({
                   size={30}
                   onPress={() => {
                     if (token) { // user is logged in
-                      switchPlayingState(token.accessToken);
+                      switchPlayingState();
                     } else { // user is not logged in switch icon for mock page
                       setIsPlaying(!isPlaying);
                     }
@@ -141,7 +141,7 @@ function CardItem({
                   size={30}
                   onPress={() => {
                     if (token) {
-                      switchPlayingState(token.accessToken);
+                      switchPlayingState();
                     } else { // user is not logged in switch icon for mock page
                       setIsPlaying(!isPlaying);
                     }

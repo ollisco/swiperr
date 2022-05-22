@@ -42,7 +42,7 @@ function SettingItems() {
     setDefaultPlaylist(playlist.id);
   }
 
-  const country: string = user.country;
+  const { country } = user;
 
   return (
     <View>
