@@ -58,10 +58,9 @@ function CardStackHandler(style: any) {
               }
             }}
             onSwiped={(index: number) => {
-              console.log(index);
               setRGB(DARK_GRAY);
               if (token) {
-                queueAndSkip(token.accessToken, userTopItems[recommendedIndex + 1].uri);
+                queueAndSkip(userTopItems[recommendedIndex + 1].uri);
                 setRecommendedIndex(recommendedIndex + 1);
                 setNewReleasesIndex(newReleasesIndex + 1);
               }
@@ -72,12 +71,12 @@ function CardStackHandler(style: any) {
 
             onSwipedAll={() => {
               if (token) {
-                getTopUserItems(token.accessToken);
+                getTopUserItems();
               }
             }}
             onSwipedRight={(index: number) => {
               if (token) {
-                likeSong(token.accessToken, userTopItems[index].id);
+                likeSong(userTopItems[index].id);
               }
             }}
           >
@@ -112,13 +111,11 @@ function CardStackHandler(style: any) {
                 }
               }}
               onSwiped={(index: number) => {
-                console.log(index);
                 setRGB(DARK_GRAY);
                 if (token) {
-                  queueAndSkip(token.accessToken, newReleases[newReleasesIndex + 1].uri);
+                  queueAndSkip(newReleases[newReleasesIndex + 1].uri);
                   setNewReleasesIndex(newReleasesIndex + 1);
                   setRecommendedIndex(recommendedIndex + 1);
-                  console.log('Qn', newReleases[newReleasesIndex].uri);
                 }
               }}
               onSwipeEnd={() => {
@@ -127,12 +124,12 @@ function CardStackHandler(style: any) {
 
               onSwipedAll={() => {
                 if (token) {
-                  getTopUserItems(token.accessToken);
+                  getTopUserItems();
                 }
               }}
               onSwipedRight={(index: number) => {
                 if (token) {
-                  likeSong(token.accessToken, userTopItems[index].id);
+                  likeSong(userTopItems[index].id);
                 }
               }}
             >

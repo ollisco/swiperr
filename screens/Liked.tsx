@@ -17,7 +17,7 @@ function Liked() {
 
   React.useEffect(() => {
     if (!likedSongs && token !== null) {
-      getLikedSongs(token.accessToken);
+      getLikedSongs();
     }
   }, [likedSongs, getLikedSongs, token]);
 

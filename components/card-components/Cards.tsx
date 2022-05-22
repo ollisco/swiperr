@@ -14,6 +14,7 @@ type Props = {}
 function Cards(props: Props) {
   const {
     user, queueAndSkip, token, userRecommendedTracks, newReleases,
+  
   } = useSpotifyContext();
   const {
     showType, setShowType, recommendedIndex, newReleasesIndex,
@@ -22,6 +23,16 @@ function Cards(props: Props) {
 
   const recommendedActiveStyle = showType === 'recommended' ? styles.exploreTopCenterTextActive : {};
   const newActiveStyle = showType === 'new' ? styles.exploreTopCenterTextActive : {};
+
+  React.useEffect(() => {
+    if (newReleases && userRecommendedTracks) {
+      console.log('Studying behavior');
+      if (showType === 'new') {
+        queueAndSkip(newReleases[newReleasesIndex].uri);
+      }
+    }
+  }, [newReleases, userRecommendedTracks]);
+  
 
   return (
     <View style={styles.containerHome}>
@@ -33,7 +44,7 @@ function Cards(props: Props) {
             <TouchableOpacity onPress={() => {
               if (showType !== 'recommended' && userRecommendedTracks) {
                 setShowType('recommended');
-                queueAndSkip(token.accessToken, userRecommendedTracks[recommendedIndex].uri);
+                queueAndSkip(userRecommendedTracks[recommendedIndex].uri);
               }
             }}
             >
@@ -47,7 +58,7 @@ function Cards(props: Props) {
             <TouchableOpacity onPress={() => {
               if (showType !== 'new' && newReleases) {
                 setShowType('new');
-                queueAndSkip(token.accessToken, newReleases[newReleasesIndex].uri);
+                queueAndSkip(newReleases[newReleasesIndex].uri);
               }
             }}
             >

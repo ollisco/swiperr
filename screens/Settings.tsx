@@ -33,7 +33,7 @@ function MockSettingItems() {
 }
 
 function SettingItems() {
-  const { playlists, setDefaultPlaylist } = useSpotifyContext();
+  const { playlists, setDefaultPlaylist, availableMarkets, chosenMarket, setChosenMarket } = useSpotifyContext();
 
   const likedSongs = 'Liked Songs';
 
@@ -44,16 +44,15 @@ function SettingItems() {
 
   return (
     <View>
-      <SettingItemSwitch
-        text="Setting number 1"
-        onPress={() => {}}
-        value
-      />
-      <SettingItemSwitch
-            // lorem ipsum
-        text="Setting number 2 lorem ipsum lipsum"
-        onPress={() => {}}
-        value
+      <SettingItemDropdown
+        header="Country"
+        explanation="Music will be adapted to the given country. New releases will be based on the country you choose."
+        defaultValue={chosenMarket || ''}
+        options={availableMarkets.map((country: {code: string; name: string}) => country.name)}
+        onSelect={(value: string) => {
+          // this is uneffective should probably make getLocation ad getCountrycode public
+          setChosenMarket(availableMarkets.find((country: {name: string}) => country.name === value).code);
+        }}
       />
 
       <SettingItemDropdown
@@ -61,7 +60,7 @@ function SettingItems() {
         explanation="The default playlist where right swiped cards apear. Please only choose playlists that you own or can add music to."
         options={[likedSongs, ...playlists.map((playlist: { name: string; }) => playlist.name)]}
         defaultValue={likedSongs}
-        onSelect={(value: any) => getDefaultPlaylist(value)}
+        onSelect={(value: string) => getDefaultPlaylist(value)}
       />
     </View>
   );
