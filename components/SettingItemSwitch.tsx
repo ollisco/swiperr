@@ -7,7 +7,7 @@ import { SPOTIFY_GREEN, WHITE, GRAY } from '../assets/styles/index';
 
 function SettingItemSwitch({
   text,
-  onPress,
+  onValueChange,
   value,
 }: SettingItemSwitchT) {
   return (
@@ -17,7 +17,7 @@ function SettingItemSwitch({
         trackColor={{ false: '#767577', true: SPOTIFY_GREEN }}
         thumbColor={value ? SPOTIFY_GREEN : '#FFFFFF'}
         ios_backgroundColor="#3e3e3e"
-        onValueChange={onPress}
+        onValueChange={onValueChange}
         value={value}
       />
     </View>

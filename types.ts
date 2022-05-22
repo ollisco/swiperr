@@ -102,7 +102,7 @@ export type DataProfile = {
 
 export type SettingItemSwitchT = {
   text: string;
-  onPress: (value: boolean) => void;
+  onValueChange: (value: boolean) => void;
   value: boolean;
   icon?: any;
 };
