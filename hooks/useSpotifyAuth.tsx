@@ -99,7 +99,6 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [defaultPlaylist, setDefaultPlaylist] = useState<string>(likeSongString); // Either equal to liked songs or a playlist uri
   const [config, setConfig] = useState<any>(null);
 
-  const []
 
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
