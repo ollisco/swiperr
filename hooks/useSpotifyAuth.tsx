@@ -47,7 +47,7 @@ const SpotifyAuthContext: React.Context<{
   setDefaultPlaylist: any,
   availableMarkets: any,
   setChosenMarket: any,
-  chosenMarket: string | null,
+  chosenMarket: any,
 
 }> = createContext({
   promptAsync: null,
@@ -89,7 +89,6 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [userPlaylists, setUserPlaylists] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [likedSongs, setLikedSongs] = useState(null);
-  const [showRecommended, setShowRecommended] = useState(true);
   const [newReleases, setNewReleases] = useState<any[] | null>(null);
   const [topGenres, setTopGenres] = useState<string>('Genre 1, Genre 2, Genre 3');
   const [topArtists, setTopArtists] = useState<string>('Artist 1, Artist 2, Artist 3');
@@ -118,7 +117,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
     clientSecret: CLIENT_SECRET,
   }, discovery);
 
-  const songCount = 50;
+  const songCount = 20; // has to be 20 due to /albums/{ids} can only have 20 ids
 
   // Token will be auto exchanged after auth completes.
   const { token, tokenExchangeError: exchangeError } = useAutoExchange(
@@ -356,6 +355,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       seed_artists: seedArtists,
       seed_genres: seedGenres,
       seed_tracks: seedTracks,
+      limit: songCount,
     };
 
     await axios.get(recomendationEndpoint, configRecommendations)
