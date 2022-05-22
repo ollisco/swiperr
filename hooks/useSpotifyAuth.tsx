@@ -7,8 +7,19 @@ import useAutoExchange from './useAutoExchange';
 import {
   discovery, redirectUri, meEndpoint, recomendationEndpoint,
 } from './utils/auth-utils';
+import { countries } from 'country-data';
 
 WebBrowser.maybeCompleteAuthSession();
+
+function getLocation(countryCode: string) {
+  const country = countries[countryCode].name;
+  return country
+}
+
+function getCounryCode(contryName: string) {
+  const countryCode = countries[contryName].alpha2;
+  return countryCode
+}
 
 // TODO: Remove any
 const SpotifyAuthContext: React.Context<{
@@ -35,6 +46,8 @@ const SpotifyAuthContext: React.Context<{
   topTracks: string,
   setDefaultPlaylist: any,
   availableMarkets: any,
+  setChosenMarket: any,
+  chosenMarket: string | null,
 
 }> = createContext({
   promptAsync: null,
@@ -60,6 +73,8 @@ const SpotifyAuthContext: React.Context<{
   topTracks: '',
   setDefaultPlaylist: null,
   availableMarkets: null,
+  setChosenMarket: null,
+  chosenMarket: null
 });
 
 WebBrowser.maybeCompleteAuthSession();
@@ -84,6 +99,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const likeSongString = 'Liked songs';
   const [defaultPlaylist, setDefaultPlaylist] = useState<string>(likeSongString); // Either equal to liked songs or a playlist uri
   const [config, setConfig] = useState<any>(null);
+
 
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
@@ -125,7 +141,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         const releases: any[] = [];
         axios.get(`https://api.spotify.com/v1/albums?ids=${albumUriString}`, config)
           .then((res) => {
-            console.log('A', res.data);
+            console.log('New releases in', getLocation(market), res.data);
             res.data.albums.forEach((album: any) => {
               const randomInt = Math.floor(Math.random() * album.tracks.items.length);
               const item = album.tracks.items[randomInt];
@@ -188,7 +204,16 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   async function getAvailibleMarkets() {
     await axios.get('https://api.spotify.com/v1/markets', config)
       .then((res) => {
-        setAvailableMarkets(res.data.markets);
+        const countryCodes = res.data.markets;
+        // map each country code to its country name
+        const countries = countryCodes.map((countryCode: string) => {
+          return {
+            code: countryCode,
+            name: getLocation(countryCode),
+          };
+        });
+        console.log(countries);
+        setAvailableMarkets(countries);
       })
       .catch((err) => {
         console.log('Error getting availible markets: ', err);
@@ -478,6 +503,8 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         topGenres,
         setDefaultPlaylist,
         availableMarkets,
+        setChosenMarket,
+        chosenMarket,
       }}
     >
       {children}
