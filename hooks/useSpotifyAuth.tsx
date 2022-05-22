@@ -34,6 +34,7 @@ const SpotifyAuthContext: React.Context<{
   topArtists: string,
   topTracks: string,
   setDefaultPlaylist: any,
+  availableMarkets: any,
 
 }> = createContext({
   promptAsync: null,
@@ -58,6 +59,7 @@ const SpotifyAuthContext: React.Context<{
   topArtists: '',
   topTracks: '',
   setDefaultPlaylist: null,
+  availableMarkets: null,
 });
 
 WebBrowser.maybeCompleteAuthSession();
@@ -77,8 +79,11 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [topGenres, setTopGenres] = useState<string>('Genre 1, Genre 2, Genre 3');
   const [topArtists, setTopArtists] = useState<string>('Artist 1, Artist 2, Artist 3');
   const [topTracks, setTopTracks] = useState<string>('Track 1, Track 2, Track 3');
+  const [availableMarkets, setAvailableMarkets] = useState(null);
+  const [chosenMarket, setChosenMarket] = useState<string>('US');
   const likeSongString = 'Liked songs';
   const [defaultPlaylist, setDefaultPlaylist] = useState<string>(likeSongString); // Either equal to liked songs or a playlist uri
+
 
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
@@ -110,15 +115,13 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
     };
 
     const r = Math.floor(Math.random() * 100);
-    await axios.get(`https://api.spotify.com/v1/browse/new-releases?limit=50&country=SE&offset${r}`, config)
+    await axios.get(`https://api.spotify.com/v1/browse/new-releases?limit=50&country=${chosenMarket}&offset${r}`, config)
       .then((res) => {
         const albumUris: string[] = [];
         res.data.albums.items.forEach((item: any) => {
           albumUris.push(item.id);
         });
-        // shuffle albumUris
         albumUris.sort(() => 0.5 - Math.random());
-        // get first 20 albums
         const reducedAlbumUris = albumUris.slice(0, 20);
 
         const albumUriString = reducedAlbumUris.join();
@@ -147,33 +150,6 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       .catch((err) => {
         console.log(err);
       });
-  }
-
-  async function getAlbums(accessToken: string, albumId: string) {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-
-    await axios.get('https://api.spotify.com/v1/browse/new-releases', config)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  function sortArrayAlpha(array: string[]) {
-    array.sort((a, b) => {
-      if (a < b) {
-        return -1;
-      }
-      if (a > b) {
-        return 1;
-      }
-      return 0;
-    });
   }
 
   async function getPlaylists(accessToken: string) {
@@ -223,6 +199,21 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       });
   }
 
+  async function getAvailibleMarkets(accessToken: string) {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+    await axios.get('https://api.spotify.com/v1/markets', config)
+      .then((res) => {
+        setAvailableMarkets(res.data.markets);
+      })
+      .catch((err) => {
+        console.log('Error getting availible markets: ', err);
+      });
+  }
+
   async function playerInfo() {
     // config
     if (token) {
@@ -268,16 +259,18 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
     }
   }
 
-  function getUserData(accessToken: string) {
+  async function getUserData(accessToken: string) {
     const config = {
       headers: { Authorization: `Bearer ${accessToken}` },
     };
-    axios.get(meEndpoint, config)
+    return axios.get(meEndpoint, config)
       .then((res) => {
         console.log('User data: ', res.data);
         setUser(res.data);
+        setChosenMarket(res.data.country);
       })
       .catch((res) => console.log('E1: ', res));
+      
   }
 
   function getTopTracks(accessToken: string) {
@@ -511,6 +504,22 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       getLikedSongs(token.accessToken, 10);
       getPlaylists(token.accessToken);
       getNewReleases(token.accessToken);
+      getAvailibleMarkets(token.accessToken);
+
+      async function fetchMyAPI(accessToken: string) {
+        
+        getUserData(accessToken)
+        getNewReleases(accessToken);
+        getAvailibleMarkets(accessToken);
+        getTopUserItems(accessToken);
+        getLikedSongs(accessToken, 10);
+        getPlaylists(accessToken);
+         
+
+        
+      }
+  
+      fetchMyAPI(token.accessToken)
     }
   }, [token]);
 

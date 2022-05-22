@@ -33,7 +33,7 @@ function MockSettingItems() {
 }
 
 function SettingItems() {
-  const { playlists, setDefaultPlaylist } = useSpotifyContext();
+  const { playlists, setDefaultPlaylist, user } = useSpotifyContext();
 
   const likedSongs = 'Liked Songs';
 
@@ -42,18 +42,14 @@ function SettingItems() {
     setDefaultPlaylist(playlist.id);
   }
 
+  const country: string = user.country;
+
   return (
     <View>
-      <SettingItemSwitch
-        text="Setting number 1"
-        onPress={() => {}}
-        value
-      />
-      <SettingItemSwitch
-            // lorem ipsum
-        text="Setting number 2 lorem ipsum lipsum"
-        onPress={() => {}}
-        value
+      <SettingItemDropdown
+        header="Country"
+        explanation="Music will be adapted to the given country. New releases will be based on the country you choose."
+        defaultValue={country}
       />
 
       <SettingItemDropdown
