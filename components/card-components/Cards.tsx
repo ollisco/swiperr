@@ -14,7 +14,7 @@ type Props = {}
 function Cards(props: Props) {
   const {
     user, queueAndSkip, token, userRecommendedTracks, newReleases,
-  
+
   } = useSpotifyContext();
   const {
     showType, setShowType, recommendedIndex, newReleasesIndex,
@@ -32,7 +32,6 @@ function Cards(props: Props) {
       }
     }
   }, [newReleases, userRecommendedTracks]);
-  
 
   return (
     <View style={styles.containerHome}>

@@ -3,22 +3,22 @@ import { useAuthRequest } from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
 import { CLIENT_ID, CLIENT_SECRET } from '@env';
 import axios from 'axios';
+import { countries } from 'country-data';
 import useAutoExchange from './useAutoExchange';
 import {
   discovery, redirectUri, meEndpoint, recomendationEndpoint,
 } from './utils/auth-utils';
-import { countries } from 'country-data';
 
 WebBrowser.maybeCompleteAuthSession();
 
 function getLocation(countryCode: string) {
   const country = countries[countryCode].name;
-  return country
+  return country;
 }
 
 function getCounryCode(contryName: string) {
   const countryCode = countries[contryName].alpha2;
-  return countryCode
+  return countryCode;
 }
 
 // TODO: Remove any
@@ -74,7 +74,7 @@ const SpotifyAuthContext: React.Context<{
   setDefaultPlaylist: null,
   availableMarkets: null,
   setChosenMarket: null,
-  chosenMarket: null
+  chosenMarket: null,
 });
 
 WebBrowser.maybeCompleteAuthSession();
@@ -98,7 +98,6 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const likeSongString = 'Liked songs';
   const [defaultPlaylist, setDefaultPlaylist] = useState<string>(likeSongString); // Either equal to liked songs or a playlist uri
   const [config, setConfig] = useState<any>(null);
-
 
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
@@ -205,12 +204,10 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       .then((res) => {
         const countryCodes = res.data.markets;
         // map each country code to its country name
-        const countries = countryCodes.map((countryCode: string) => {
-          return {
-            code: countryCode,
-            name: getLocation(countryCode),
-          };
-        });
+        const countries = countryCodes.map((countryCode: string) => ({
+          code: countryCode,
+          name: getLocation(countryCode),
+        }));
         console.log(countries);
         setAvailableMarkets(countries);
       })

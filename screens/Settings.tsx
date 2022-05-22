@@ -17,7 +17,7 @@ function MockSettingItems() {
         explanation="Music will be adapted to the given country. New releases will be based on the country you choose."
         defaultValue={'SE' || ''}
         options={['SE', 'US', 'GB', 'CA']}
-      /> 
+      />
 
       <SettingItemDropdown
         header="Default Playlist"
@@ -32,13 +32,14 @@ function MockSettingItems() {
 
       />
 
-      
     </View>
   );
 }
 
 function SettingItems() {
-  const { playlists, setDefaultPlaylist, availableMarkets, chosenMarket, setChosenMarket } = useSpotifyContext();
+  const {
+    playlists, setDefaultPlaylist, availableMarkets, chosenMarket, setChosenMarket,
+  } = useSpotifyContext();
 
   const likedSongs = 'Liked Songs';
 
@@ -72,17 +73,16 @@ function SettingItems() {
 }
 
 function Settings() {
-  const {user} = useSpotifyContext();
+  const { user } = useSpotifyContext();
   return (
     <View>
       <ImageBackground
         source={BG_IMAGE}
         style={styles.bg}
       >
-        {user ? 
-        <SettingItems /> 
-          : 
-        <MockSettingItems />}
+        {user
+          ? <SettingItems />
+          : <MockSettingItems />}
       </ImageBackground>
     </View>
   );
