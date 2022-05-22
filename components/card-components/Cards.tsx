@@ -13,7 +13,7 @@ type Props = {}
 
 function Cards(props: Props) {
   const {
-    user, queueAndSkip, token, userRecommendedTracks, newReleases,
+    user, queueAndSkip, token, recommendedTracks: userRecommendedTracks, newReleases,
 
   } = useSpotifyContext();
   const {

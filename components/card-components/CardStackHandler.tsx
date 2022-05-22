@@ -10,7 +10,7 @@ import { SwipeCardContext } from './CardProvider';
 
 function CardStackHandler(style: any) {
   const {
-    userRecommendedTracks: userTopItems,
+    recommendedTracks: userTopItems,
     getUserRecommendedTracks: getTopUserItems,
     token,
     likeSong,

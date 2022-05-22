@@ -39,7 +39,7 @@ function CardItem({
     switchPlayingState,
     token,
     setVolume,
-    userRecommendedTracks,
+    recommendedTracks: userRecommendedTracks,
     newReleases,
   } = useSpotifyContext();
 

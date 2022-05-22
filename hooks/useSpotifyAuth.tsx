@@ -26,7 +26,7 @@ const SpotifyAuthContext: React.Context<{
   promptAsync: any
   token: any,
   user: any,
-  userRecommendedTracks: any,
+  recommendedTracks: any,
   getUserRecommendedTracks: any,
   likeSong: any,
   info: any,
@@ -53,8 +53,8 @@ const SpotifyAuthContext: React.Context<{
   promptAsync: null,
   token: null,
   user: null,
-  userRecommendedTracks: null,
-  getUserRecommendedTracks: null,
+  recommendedTracks: null,
+  getRecommendedTracks: null,
   likeSong: null,
   info: null,
   queueAndSkip: null,
@@ -85,7 +85,7 @@ interface Props {
 
 export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [user, setUser] = useState(null);
-  const [userRecommendedTracks, setUserRecommendedTracks] = useState(null);
+  const [recommendedTracks, setRecommendedTracks] = useState(null);
   const [userPlaylists, setUserPlaylists] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [likedSongs, setLikedSongs] = useState(null);
@@ -98,6 +98,8 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const likeSongString = 'Liked songs';
   const [defaultPlaylist, setDefaultPlaylist] = useState<string>(likeSongString); // Either equal to liked songs or a playlist uri
   const [config, setConfig] = useState<any>(null);
+
+  const []
 
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
@@ -359,7 +361,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       .then((res) => {
         // console.log('Recomendations: ', res.data);
         const { tracks } = res.data;
-        setUserRecommendedTracks(tracks);
+        setRecommendedTracks(tracks);
         const firstTrackUri = tracks[0].uri;
         queueSongAndSkip(firstTrackUri);
       })
@@ -376,13 +378,6 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
     setVolume(50);
   }
 
-  function nextCardSong() {
-    // make sure userTopItems is not null
-    if (userRecommendedTracks !== null) {
-      const trackUri = userRecommendedTracks[index].uri;
-      queueSongAndSkip(trackUri);
-    }
-  }
 
   async function getLikedSongs() {
     await axios.get(`${meEndpoint}/tracks`, config)
@@ -480,7 +475,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         promptAsync,
         token,
         user,
-        userRecommendedTracks,
+        recommendedTracks,
         getUserRecommendedTracks: getTopUserItems,
         likeSong,
         info: playerInfo,
