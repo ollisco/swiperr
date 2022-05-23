@@ -48,6 +48,9 @@ function SettingItems() {
     setDefaultPlaylist(playlist.id);
   }
 
+  console.log('A', availableMarkets);
+  console.log('P', playlists);
+
   return (
     <View>
       <SettingItemDropdown
@@ -73,14 +76,14 @@ function SettingItems() {
 }
 
 function Settings() {
-  const { user } = useSpotifyContext();
+  const { playlists, availableMarkets } = useSpotifyContext();
   return (
     <View>
       <ImageBackground
         source={BG_IMAGE}
         style={styles.bg}
       >
-        {user
+        {playlists && playlists.length > 0 && availableMarkets && availableMarkets.length > 0
           ? <SettingItems />
           : <MockSettingItems />}
       </ImageBackground>

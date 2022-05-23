@@ -43,8 +43,15 @@ function CardItem({
     newReleases,
   } = useSpotifyContext();
 
-  // check if track is longer than 50 chars long
-  const trackTextStyle = track.length > 50 ? styles.trackStyleLong : styles.trackStyleShort;
+  // temp fix
+  if (track.length > 25) {
+    track = track.slice(0, 25) + '...';
+  }
+
+
+
+
+
   const cardOutline = user ? { borderColor: SPOTIFY_GREEN } : {};
   return (
 
@@ -62,7 +69,7 @@ function CardItem({
       </View>
 
       {/* NAME */}
-      <Text style={[styles.trackStyle, trackTextStyle]}>{track}</Text>
+      <Text style={styles.trackStyle}>{track}</Text>
 
       <View style={styles.artist}>
         <Text style={styles.artistText}>{artist}</Text>
