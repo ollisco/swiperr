@@ -231,7 +231,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
 
   async function likeSong(trackId: string) {
     // config
-
+    console.log(defaultPlaylist, likeSongString, defaultPlaylist===likeSongString)
     if (defaultPlaylist === likeSongString) {
       await axios.put(
         'https://api.spotify.com/v1/me/tracks',

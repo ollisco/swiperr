@@ -41,15 +41,15 @@ function SettingItems() {
     playlists, setDefaultPlaylist, availableMarkets, chosenMarket, setChosenMarket,
   } = useSpotifyContext();
 
-  const likedSongs = 'Liked Songs';
-
+  const likedSongs = 'Liked songs';
   function getDefaultPlaylist(playlistName: string) {
+    if (playlistName === likedSongs) {
+      setDefaultPlaylist(likedSongs);
+      return
+    }
     const playlist = playlists.find((playlist: { name: string; }) => playlist.name === playlistName);
     setDefaultPlaylist(playlist.id);
   }
-
-  console.log('A', availableMarkets);
-  console.log('P', playlists);
 
   return (
     <View>
