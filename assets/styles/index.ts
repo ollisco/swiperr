@@ -484,12 +484,14 @@ export default StyleSheet.create({
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: 'red',
+    width: '100%'
   },
   
   testText: {
     color: 'red',
     fontSize: 15,
     textAlign: 'center',
+    width: '100%'
   },
 
 

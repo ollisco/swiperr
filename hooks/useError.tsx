@@ -2,15 +2,20 @@
 import React, { createContext, useContext, useState } from 'react';
 
 const ErrorContext: React.Context<{
-    errorText: string | null;
-    setErrorText: (errorText: string | null) => void;
+    errorTexts: string[];
+    addErrorText: (errorText: string) => void;
+    popErrorText: () => string | undefined;
+    setErrorTexts: any;
     showComponent: boolean | null,
     setShowComponent: any;
 }> = createContext({
-    errorText: '',
-    setErrorText: () => {},
+    errorTexts: [],
+    addErrorText: () => {},
+    popErrorText: () => {},
+    setErrorTexts: () => {},
     showComponent: null,
     setShowComponent: () => {},
+
 });
 
 interface Props {
@@ -18,14 +23,33 @@ interface Props {
   }
 
 export const ErrorProvider: React.ReactNode = ({ children }: Props) => {
-    const [errorText, setErrorText] = useState<string | null>('');
+    const [errorTexts, setErrorTexts] = useState<string[]>([]);
     const [showComponent, setShowComponent] = useState(false);
+
+    function addErrorText(text: string) {
+        const newArray = errorTexts.concat(text);
+        setErrorTexts(newArray);
+    }
+
+    function popErrorText() {
+        // pop item from array
+        if (errorTexts.length > 0) {
+            const item = errorTexts[0]
+            const newArray = errorTexts.slice(1)
+            setErrorTexts(newArray);
+            return item
+        }
+        console.log('Fatal: no items')
+    }
+
     return (
         <ErrorContext.Provider value={{ 
-            errorText, 
-            setErrorText,
+            errorTexts, 
+            addErrorText,
+            popErrorText,
             showComponent, 
             setShowComponent,
+            setErrorTexts,
         }}>
             {children}
         </ErrorContext.Provider>

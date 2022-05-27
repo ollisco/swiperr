@@ -6,41 +6,48 @@ import useError from '../hooks/useError';
 
 
 const Error = () => {
-  const { errorText, showComponent, setShowComponent, setErrorText } = useError();
-  const [count, setCount] = useState(0);
+  const { errorTexts, showComponent, setShowComponent, setErrorTexts, popErrorText } = useError();
+  const [currentError, setCurrentError] = useState<string[] | null>(null);  
+
+  
+  //const [showComponent, setShowComponent] = useState(false);
 
   useEffect(() => {
-    if (errorText) {
+    if (errorTexts.length > 0) {
       const toRef = setTimeout(() => {
         setShowComponent(true);
         clearTimeout(toRef);
         // it is good practice to clear the timeout (but I am not sure why)
-      }, 500);
+      }, 1000);
     }
-    else {
-      console.log('Nope')
-    }
-  }, [errorText]);
+  }, [errorTexts]);
 
   useEffect(() => {
-    console.log(showComponent)
     if (showComponent) {
       const toRef = setTimeout(() => {
         setShowComponent(false);
         clearTimeout(toRef);
-      }, 10000);
+        setErrorTexts([]);
+      }, 4000);
     }
   }, [showComponent]);
 
   const componentTwo = () => {
-    return <Text style={styles.testText}>{errorText}</Text>;
+    
+    return (
+      <TouchableOpacity style={styles.errorContainer} 
+      onPress={() => {console.log(showComponent); setShowComponent(!showComponent)}}>
+        
+        <Text style={styles.testText}>{errorTexts}</Text>
+  
+      
+      </TouchableOpacity>
+    )
   };
 
   return (
-    <TouchableOpacity style={styles.errorContainer} 
-      onPress={() => {console.log(showComponent); setShowComponent(!showComponent)}}>
-      {showComponent ? componentTwo() : null}
-    </TouchableOpacity>
+      
+      showComponent ? componentTwo() : null
   )
 }
 

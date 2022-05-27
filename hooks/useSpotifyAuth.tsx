@@ -101,7 +101,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [config, setConfig] = useState<any>(null);
 
   // Error handling
-  const { setErrorText } = useError();
+  const { addErrorText } = useError();
 
 
   const [request, response, promptAsync] = useAuthRequest({
@@ -389,7 +389,10 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         const tracks = res.data.items;
         setLikedSongs(tracks);
       })
-      .catch((res) => console.log('E4: ', res));
+      .catch((err) => {
+        console.log('Error getting liked songs: ', err);
+        addErrorText(err.response.data.error.message);
+      });
   }
 
   async function pause() {
@@ -398,7 +401,10 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         // console.log('Paused');
         setIsPlaying(false);
       })
-      .catch((res) => console.log('Error Pausing: ', res));
+      .catch((err) => {
+        addErrorText(err.response.data.error.message);
+        console.log('Error Pausing: ', err);
+      });
   }
 
   async function setVolume(volume: number) {
@@ -410,7 +416,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         console.log('Error Setting Volume: ', err);
         const message = err.response.data.error.message;
         const reason = err.response.data.error.reason;
-        setErrorText(`${message}. ${reason}`);
+        addErrorText(`${message}. ${reason}`);
         console.log('P', err.response);
       });
   }
@@ -432,7 +438,10 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       config,
     ).then(() => {
       playNextSong();
-    }).catch((err) => console.log('Error Queue: ', err));
+    }).catch((err) => {
+      console.log('Error Queue: ', err);
+      addErrorText(err.response.data.error.message)
+    });
   }
 
   async function playNextSong() {
