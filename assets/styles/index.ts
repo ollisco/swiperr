@@ -217,17 +217,12 @@ export default StyleSheet.create({
       width: "100%",
       textAlign: "center",
       height: 60,
+      flexWrap: 'wrap',
+      flexShrink: 1,
+      fontSize: 25,
   },
 
-  trackStyleShort: {
-    fontSize: 25,
-    textAlign: "center",
-  },
 
-  trackStyleLong: {
-    fontSize: 20,
-    textAlign: "center",
-  },
 
 
 

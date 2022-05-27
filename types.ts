@@ -100,3 +100,17 @@ export type DataProfile = {
   topGenres?: string;
 };
 
+export type SettingItemSwitchT = {
+  text: string;
+  onValueChange: (value: boolean) => void;
+  value: boolean;
+  icon?: any;
+};
+
+export type SettingItemDropdownT = {
+  header: string;
+  explanation?: string;
+  options: string[];
+  defaultValue?: string;
+  onSelect?: (value: any) => void;
+}

@@ -3,6 +3,7 @@ import { useAuthRequest } from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
 import { CLIENT_ID, CLIENT_SECRET } from '@env';
 import axios from 'axios';
+import { countries } from 'country-data';
 import useAutoExchange from './useAutoExchange';
 import {
   discovery, redirectUri, meEndpoint, recomendationEndpoint,
@@ -10,12 +11,22 @@ import {
 
 WebBrowser.maybeCompleteAuthSession();
 
+function getLocation(countryCode: string) {
+  const country = countries[countryCode].name;
+  return country;
+}
+
+function getCounryCode(contryName: string) {
+  const countryCode = countries[contryName].alpha2;
+  return countryCode;
+}
+
 // TODO: Remove any
 const SpotifyAuthContext: React.Context<{
   promptAsync: any
   token: any,
   user: any,
-  userRecommendedTracks: any,
+  recommendedTracks: any,
   getUserRecommendedTracks: any,
   likeSong: any,
   info: any,
@@ -30,16 +41,20 @@ const SpotifyAuthContext: React.Context<{
   playlists: any,
   addTrackToPlaylist: any,
   newReleases: any,
-  topGenres: string[],
-  topArtists: string[],
-  topTracks: string[],
+  topGenres: string,
+  topArtists: string,
+  topTracks: string,
+  setDefaultPlaylist: any,
+  availableMarkets: any,
+  setChosenMarket: any,
+  chosenMarket: any,
 
 }> = createContext({
   promptAsync: null,
   token: null,
   user: null,
-  userRecommendedTracks: null,
-  getUserRecommendedTracks: null,
+  recommendedTracks: null,
+  getRecommendedTracks: null,
   likeSong: null,
   info: null,
   queueAndSkip: null,
@@ -53,24 +68,37 @@ const SpotifyAuthContext: React.Context<{
   playlists: null,
   addTrackToPlaylist: null,
   newReleases: null,
-  topGenres: [],
-  topArtists: [],
-  topTracks: [],
+  topGenres: '',
+  topArtists: '',
+  topTracks: '',
+  setDefaultPlaylist: null,
+  availableMarkets: null,
+  setChosenMarket: null,
+  chosenMarket: null,
 });
 
 WebBrowser.maybeCompleteAuthSession();
 
-export const SpotifyAuthProvider: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode
+}
+
+export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [user, setUser] = useState(null);
-  const [userRecommendedTracks, setUserRecommendedTracks] = useState(null);
+  const [recommendedTracks, setRecommendedTracks] = useState(null);
   const [userPlaylists, setUserPlaylists] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [likedSongs, setLikedSongs] = useState(null);
-  const [showRecommended, setShowRecommended] = useState(true);
-  const [newReleases, setNewReleases] = useState(null);
+  const [newReleases, setNewReleases] = useState<any[] | null>(null);
   const [topGenres, setTopGenres] = useState<string>('Genre 1, Genre 2, Genre 3');
   const [topArtists, setTopArtists] = useState<string>('Artist 1, Artist 2, Artist 3');
   const [topTracks, setTopTracks] = useState<string>('Track 1, Track 2, Track 3');
+  const [availableMarkets, setAvailableMarkets] = useState(null);
+  const [chosenMarket, setChosenMarket] = useState<string | null>(null);
+  const likeSongString = 'Liked songs';
+  const [defaultPlaylist, setDefaultPlaylist] = useState<string>(likeSongString); // Either equal to liked songs or a playlist uri
+  const [config, setConfig] = useState<any>(null);
+
 
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
@@ -89,43 +117,30 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     clientSecret: CLIENT_SECRET,
   }, discovery);
 
+  const songCount = 20; // has to be 20 due to /albums/{ids} can only have 20 ids
+
   // Token will be auto exchanged after auth completes.
   const { token, tokenExchangeError: exchangeError } = useAutoExchange(
     response?.type === 'success' ? response.params.code : undefined,
   );
 
-  async function switchCardtypeState(accessToken: string) {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-  }
-
-  async function getNewReleases(accessToken: string) {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-
+  async function getNewReleases() {
     const r = Math.floor(Math.random() * 100);
-    await axios.get(`https://api.spotify.com/v1/browse/new-releases?limit=50&country=SE&offset${r}`, config)
+    const market = chosenMarket || 'US';
+    await axios.get(`https://api.spotify.com/v1/browse/new-releases?limit=${songCount}&country=${chosenMarket}&offset${r}`, config)
       .then((res) => {
         const albumUris: string[] = [];
         res.data.albums.items.forEach((item: any) => {
           albumUris.push(item.id);
         });
-        // shuffle albumUris
         albumUris.sort(() => 0.5 - Math.random());
-        // get first 20 albums
         const reducedAlbumUris = albumUris.slice(0, 20);
 
         const albumUriString = reducedAlbumUris.join();
         const releases: any[] = [];
         axios.get(`https://api.spotify.com/v1/albums?ids=${albumUriString}`, config)
           .then((res) => {
-            console.log('A', res.data);
+            console.log('New releases in', getLocation(market), res.data);
             res.data.albums.forEach((album: any) => {
               const randomInt = Math.floor(Math.random() * album.tracks.items.length);
               const item = album.tracks.items[randomInt];
@@ -149,47 +164,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       });
   }
 
-  function switchPlayingState(accessToken: string) {
-    if (isPlaying) {
-      pause(accessToken);
-    } else {
-      play(accessToken);
-    }
-  }
-
-  async function getAlbums(accessToken: string, albumId: string) {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-
-    await axios.get('https://api.spotify.com/v1/browse/new-releases', config)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  function sortArrayAlpha(array: string[]) {
-    array.sort((a, b) => {
-      if (a < b) {
-        return -1;
-      }
-      if (a > b) {
-        return 1;
-      }
-      return 0;
-    });
-  }
-
-  async function getPlaylists(accessToken: string) {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
+  async function getPlaylists() {
     await axios.get(`https://api.spotify.com/v1/me/playlists?limit=${50}`, config)
       .then((res) => {
         // Todo improve this to filter on user id aswell
@@ -212,12 +187,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       });
   }
 
-  async function addTrackToPlaylist(accessToken: string, playlistId: string, trackId: string) {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
+  async function addTrackToPlaylist(playlistId: string, trackId: string) {
     // console.log('OOO', accessToken, playlistId, trackId);
     // If this is set to .put instead of .post it will erase the whole playlist
     // Soooo... dont do that
@@ -230,14 +200,26 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       });
   }
 
+  async function getAvailibleMarkets() {
+    await axios.get('https://api.spotify.com/v1/markets', config)
+      .then((res) => {
+        const countryCodes = res.data.markets;
+        // map each country code to its country name
+        const countries = countryCodes.map((countryCode: string) => ({
+          code: countryCode,
+          name: getLocation(countryCode),
+        }));
+        console.log(countries);
+        setAvailableMarkets(countries);
+      })
+      .catch((err) => {
+        console.log('Error getting availible markets: ', err);
+      });
+  }
+
   async function playerInfo() {
     // config
     if (token) {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token.accessToken}`,
-        },
-      };
       await axios.get('https://api.spotify.com/v1/me/player/devices', config)
         .then((res) => {
           // console.log('Device:', res);
@@ -247,49 +229,39 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     }
   }
 
-  async function likeSong(accessToken: string, trackUri: string) {
+  async function likeSong(trackId: string) {
     // config
-    if (accessToken) {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      };
+    console.log(defaultPlaylist, likeSongString, defaultPlaylist===likeSongString)
+    if (defaultPlaylist === likeSongString) {
       await axios.put(
         'https://api.spotify.com/v1/me/tracks',
         // send trackid as "ids" parameter
-        { ids: [trackUri] },
+        { ids: [trackId] },
         config,
       ).then((res) => {
         // console.log('Saved track to user library');
-        getLikedSongs(accessToken, 20);
+        getLikedSongs();
       }).catch((err) => {
         console.log(err);
       });
+    } else {
+      console.log(defaultPlaylist, trackId);
+      const trackUri = `spotify:track:${trackId}`;
+      addTrackToPlaylist(defaultPlaylist, trackUri);
     }
   }
 
-  function getUserData(accessToken: string) {
-    const config = {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    };
-    axios.get(meEndpoint, config)
+  async function getUserData() {
+    return axios.get(meEndpoint, config)
       .then((res) => {
         console.log('User data: ', res.data);
         setUser(res.data);
+        setChosenMarket(res.data.country);
       })
       .catch((res) => console.log('E1: ', res));
   }
 
-  function getTopTracks(accessToken: string) {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-  }
-
-  async function getTopUserItems(accessToken: string) {
+  async function getTopUserItems() {
     const allArtists: any = [];
     const allTracks: any = [];
     const availableGenres: any = [];
@@ -303,12 +275,6 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     const topArtistsText: any = [];
 
     const count = 5;
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
 
     await axios.get(`${meEndpoint}/top/tracks`, config)
       .then((res) => {
@@ -380,24 +346,23 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     const seedArtists = allArtists[1] ? `${allArtists[0]},${allArtists[1]}` : '';
     const seedTracks = allTracks[1] ? `${allTracks[0]},${allTracks[1]}` : '';
 
-    const config2 = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-      params: {
-        seed_artists: seedArtists,
-        seed_genres: seedGenres,
-        seed_tracks: seedTracks,
-      },
+    // Copy the config add modyfy it.
+    // setting config2 = config and updating config2 also updates config
+    const configRecommendations = { ...config };
+    configRecommendations.params = {
+      seed_artists: seedArtists,
+      seed_genres: seedGenres,
+      seed_tracks: seedTracks,
+      limit: songCount,
     };
 
-    await axios.get(recomendationEndpoint, config2)
+    await axios.get(recomendationEndpoint, configRecommendations)
       .then((res) => {
         // console.log('Recomendations: ', res.data);
         const { tracks } = res.data;
-        setUserRecommendedTracks(tracks);
+        setRecommendedTracks(tracks);
         const firstTrackUri = tracks[0].uri;
-        queueSongAndSkip(accessToken, firstTrackUri);
+        queueSongAndSkip(firstTrackUri);
       })
       .catch((res) => console.log('Erec: ', res));
 
@@ -409,22 +374,11 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     setTopArtists(topArtistsText.slice(0, n).sort().join(', '));
     setTopTracks(topTracksText.slice(0, n).sort().join(', '));
     setTopGenres(both.slice(0, n).sort().join(', '));
-    setVolume(accessToken, 50);
+    setVolume(50);
   }
 
-  function nextCardSong(accessToken: string) {
-    // make sure userTopItems is not null
-    if (userRecommendedTracks !== null) {
-      const trackUri = userRecommendedTracks[index].uri;
-      queueSongAndSkip(accessToken, trackUri);
-    }
-  }
 
-  async function getLikedSongs(accessToken: string, count: number) {
-    const config = {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    };
-
+  async function getLikedSongs() {
     await axios.get(`${meEndpoint}/tracks`, config)
       .then((res) => {
         const tracks = res.data.items;
@@ -433,10 +387,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       .catch((res) => console.log('E4: ', res));
   }
 
-  async function pause(accessToken: string) {
-    const config = {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    };
+  async function pause() {
     await axios.put('https://api.spotify.com/v1/me/player/pause', null, config)
       .then((res) => {
         // console.log('Paused');
@@ -445,10 +396,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       .catch((res) => console.log('Error Pausing: ', res));
   }
 
-  async function setVolume(accessToken: string, volume: number) {
-    const config = {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    };
+  async function setVolume(volume: number) {
     await axios.put(`https://api.spotify.com/v1/me/player/volume?volume_percent=${volume}`, null, config)
       .then((res) => {
         console.log('Volume Set to: ', volume);
@@ -456,10 +404,7 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       .catch((res) => console.log('Error Setting Volume: ', res));
   }
 
-  async function play(accessToken: string) {
-    const config = {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    };
+  async function play() {
     await axios.put('https://api.spotify.com/v1/me/player/play', null, config)
       .then((res) => {
         // console.log('Playing');
@@ -468,26 +413,18 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
       .catch((res) => console.log('Error Playing: ', res));
   }
 
-  async function queueSongAndSkip(accessToken: string, trackUri: string) {
-    const config = {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    };
+  async function queueSongAndSkip(trackUri: string) {
     // TODO: Figure out how to send the query nicely with axios
     axios.post(
       `https://api.spotify.com/v1/me/player/queue?uri=${trackUri}`,
       {},
       config,
     ).then(() => {
-      playNextSong(accessToken);
+      playNextSong();
     }).catch((err) => console.log('Error Queue: ', err));
   }
 
-  async function playNextSong(accessToken: string) {
-    const config = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
+  async function playNextSong() {
     axios.post(
       'https://api.spotify.com/v1/me/player/next',
       {},
@@ -497,23 +434,47 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
     setIsPlaying(true);
   }
 
+  function switchPlayingState() {
+    if (isPlaying) {
+      pause();
+    } else {
+      play();
+    }
+  }
+
   React.useEffect(() => {
     if (token) {
-      getUserData(token.accessToken);
-      getTopUserItems(token.accessToken);
-      getLikedSongs(token.accessToken, 10);
-      getPlaylists(token.accessToken);
-      getNewReleases(token.accessToken);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token.accessToken}`,
+        },
+      };
+      setConfig(config);
     }
   }, [token]);
 
+  React.useEffect(() => {
+    if (config && token) {
+      getUserData();
+      getTopUserItems();
+      getLikedSongs();
+      getPlaylists();
+      getAvailibleMarkets();
+    }
+  }, [config, token]);
+
+  React.useEffect(() => {
+    if (chosenMarket) {
+      getNewReleases();
+    }
+  }, [chosenMarket]);
   return (
     <SpotifyAuthContext.Provider
       value={{
         promptAsync,
         token,
         user,
-        userRecommendedTracks,
+        recommendedTracks,
         getUserRecommendedTracks: getTopUserItems,
         likeSong,
         info: playerInfo,
@@ -531,6 +492,10 @@ export const SpotifyAuthProvider: React.FC = ({ children }) => {
         topTracks,
         topArtists,
         topGenres,
+        setDefaultPlaylist,
+        availableMarkets,
+        setChosenMarket,
+        chosenMarket,
       }}
     >
       {children}
