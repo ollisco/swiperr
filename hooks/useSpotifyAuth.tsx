@@ -8,6 +8,7 @@ import useAutoExchange from './useAutoExchange';
 import {
   discovery, redirectUri, meEndpoint, recomendationEndpoint,
 } from './utils/auth-utils';
+import useError from './useError';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -99,6 +100,8 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [defaultPlaylist, setDefaultPlaylist] = useState<string>(likeSongString); // Either equal to liked songs or a playlist uri
   const [config, setConfig] = useState<any>(null);
 
+  // Error handling
+  const { addErrorText } = useError();
 
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
@@ -155,12 +158,14 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
           })
           .catch((err) => {
             console.log(err);
+            addErrorText(err.response.data.error.message);
           });
 
         // shuffle the releases array
       })
       .catch((err) => {
         console.log(err);
+        addErrorText(err.response.data.error.message);
       });
   }
 
@@ -184,6 +189,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       })
       .catch((err) => {
         console.log('Error Playlist: ', err);
+        addErrorText(err.response.data.error.message);
       });
   }
 
@@ -197,6 +203,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       })
       .catch((err) => {
         console.log('Error adding track to playlist: ', err);
+        addErrorText(err.response.data.error.message);
       });
   }
 
@@ -214,6 +221,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       })
       .catch((err) => {
         console.log('Error getting availible markets: ', err);
+        addErrorText(err.response.data.error.message);
       });
   }
 
@@ -225,13 +233,14 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
           // console.log('Device:', res);
         }).catch((err) => {
           console.log('Device Error:', err);
+          addErrorText(err.response.data.error.message);
         });
     }
   }
 
   async function likeSong(trackId: string) {
     // config
-    console.log(defaultPlaylist, likeSongString, defaultPlaylist===likeSongString)
+    console.log(defaultPlaylist, likeSongString, defaultPlaylist === likeSongString);
     if (defaultPlaylist === likeSongString) {
       await axios.put(
         'https://api.spotify.com/v1/me/tracks',
@@ -243,6 +252,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         getLikedSongs();
       }).catch((err) => {
         console.log(err);
+        addErrorText(err.response.data.error.message);
       });
     } else {
       console.log(defaultPlaylist, trackId);
@@ -258,7 +268,10 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         setUser(res.data);
         setChosenMarket(res.data.country);
       })
-      .catch((res) => console.log('E1: ', res));
+      .catch((err) => {
+        addErrorText(err.response.data.error.message);
+        console.log('E1: ', err);
+      });
   }
 
   async function getTopUserItems() {
@@ -284,7 +297,9 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
           topTracksText.push(res.data.items[i].name);
         }
       })
-      .catch((res) => console.log('E2: ', res));
+      .catch((err) => {
+        console.log('E2: ', err); addErrorText(err.response.data.error.message);
+      });
 
     await axios.get(`${recomendationEndpoint}/available-genre-seeds`, config)
       .then((res: any) => {
@@ -293,7 +308,9 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
           availableGenres.push(genre);
         });
       })
-      .catch((res) => console.log('E3: ', res));
+      .catch((err) => {
+        console.log('E3: ', err); addErrorText(err.response.data.error.message);
+      });
 
     await axios.get(`${meEndpoint}/top/artists`, config)
       .then((res) => {
@@ -313,7 +330,9 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
           }
         });
       })
-      .catch((res) => console.log('E: ', res));
+      .catch((err) => {
+        console.log('E: ', err); addErrorText(err.response.data.error.message);
+      });
 
     // Get 1 random items in allGenres and place them in genres
     for (let i = 0; i < 1; i += 1) {
@@ -377,14 +396,16 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
     setVolume(50);
   }
 
-
   async function getLikedSongs() {
     await axios.get(`${meEndpoint}/tracks`, config)
       .then((res) => {
         const tracks = res.data.items;
         setLikedSongs(tracks);
       })
-      .catch((res) => console.log('E4: ', res));
+      .catch((err) => {
+        console.log('Error getting liked songs: ', err);
+        addErrorText(err.response.data.error.message);
+      });
   }
 
   async function pause() {
@@ -393,7 +414,10 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         // console.log('Paused');
         setIsPlaying(false);
       })
-      .catch((res) => console.log('Error Pausing: ', res));
+      .catch((err) => {
+        addErrorText(err.response.data.error.message);
+        console.log('Error Pausing: ', err);
+      });
   }
 
   async function setVolume(volume: number) {
@@ -401,7 +425,13 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       .then((res) => {
         console.log('Volume Set to: ', volume);
       })
-      .catch((res) => console.log('Error Setting Volume: ', res));
+      .catch((err) => {
+        console.log('Error Setting Volume: ', err);
+        const { message } = err.response.data.error;
+        const { reason } = err.response.data.error;
+        addErrorText(`${message}. ${reason}`);
+        console.log('P', err.response);
+      });
   }
 
   async function play() {
@@ -410,7 +440,9 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         // console.log('Playing');
         setIsPlaying(true);
       })
-      .catch((res) => console.log('Error Playing: ', res));
+      .catch((err) => {
+        console.log('Error Playing: ', err); addErrorText(err.response.data.error.message);
+      });
   }
 
   async function queueSongAndSkip(trackUri: string) {
@@ -421,7 +453,10 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       config,
     ).then(() => {
       playNextSong();
-    }).catch((err) => console.log('Error Queue: ', err));
+    }).catch((err) => {
+      console.log('Error Queue: ', err);
+      addErrorText(err.response.data.error.message);
+    });
   }
 
   async function playNextSong() {
@@ -429,8 +464,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       'https://api.spotify.com/v1/me/player/next',
       {},
       config,
-    ).catch((err) => console.log('Error Next: ', err));
-
+    ).catch((err) => { console.log('Error Next: ', err); addErrorText(err.response.data.error.message); });
     setIsPlaying(true);
   }
 

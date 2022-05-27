@@ -45,7 +45,7 @@ function SettingItems() {
   function getDefaultPlaylist(playlistName: string) {
     if (playlistName === likedSongs) {
       setDefaultPlaylist(likedSongs);
-      return
+      return;
     }
     const playlist = playlists.find((playlist: { name: string; }) => playlist.name === playlistName);
     setDefaultPlaylist(playlist.id);

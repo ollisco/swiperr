@@ -10,3 +10,4 @@ export { default as Playlists } from './Playlists';
 export { default as Cards } from './card-components/Cards';
 export { default as CardItemSmall } from './card-components/CardItemSmall';
 export { default as SettingItemSwitch } from './SettingItemSwitch';
+export { default as Error } from './Error';
