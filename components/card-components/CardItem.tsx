@@ -48,6 +48,9 @@ function CardItem({
     track = `${track.slice(0, 25)}...`;
   }
 
+
+
+
   const cardOutline = user ? { borderColor: SPOTIFY_GREEN } : {};
   return (
 

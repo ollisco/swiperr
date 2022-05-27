@@ -49,6 +49,7 @@ const SpotifyAuthContext: React.Context<{
   availableMarkets: any,
   setChosenMarket: any,
   chosenMarket: any,
+  seek: any,
 
 }> = createContext({
   promptAsync: null,
@@ -76,6 +77,7 @@ const SpotifyAuthContext: React.Context<{
   availableMarkets: null,
   setChosenMarket: null,
   chosenMarket: null,
+  seek: null,
 });
 
 WebBrowser.maybeCompleteAuthSession();
@@ -420,6 +422,17 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       });
   }
 
+  async function seek(ms: number) {
+    await axios.put(`https://api.spotify.com/v1/me/player/seek?position_ms=${ms}`, null, config)
+      .then((res) => {
+        console.log('Seeked');
+      })
+      .catch((err) => {
+        addErrorText(err.response.data.error.message);
+        console.log('Error Seeking: ', err);
+      });
+  }
+
   async function setVolume(volume: number) {
     await axios.put(`https://api.spotify.com/v1/me/player/volume?volume_percent=${volume}`, null, config)
       .then((res) => {
@@ -464,7 +477,10 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       'https://api.spotify.com/v1/me/player/next',
       {},
       config,
-    ).catch((err) => { console.log('Error Next: ', err); addErrorText(err.response.data.error.message); });
+    ).then(() => {
+      seek(25000);
+    })
+    .catch((err) => { console.log('Error Next: ', err); addErrorText(err.response.data.error.message); });
     setIsPlaying(true);
   }
 
@@ -530,6 +546,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         availableMarkets,
         setChosenMarket,
         chosenMarket,
+        seek,
       }}
     >
       {children}
