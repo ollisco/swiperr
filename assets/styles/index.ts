@@ -481,7 +481,6 @@ export default StyleSheet.create({
     height: 100,
     position: "absolute",
     backgroundColor: '#770707',
-    borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: 'red',
     width: '100%'
