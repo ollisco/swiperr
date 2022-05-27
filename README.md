@@ -2,20 +2,22 @@
 # Swiperr
 ## Showcase
 ### Spotify Data
-<img src="assets/images/readme-images/showcase8.png" alt="drawing" width="200"/>
-<img src="assets/images/readme-images/showcase5.png" alt="drawing" width="200"/>
-<img src="assets/images/readme-images/showcase6.png" alt="drawing" width="200"/>
-<img src="assets/images/readme-images/showcase7.png" alt="drawing" width="200"/>
+<p float="left">
+    <img src="assets/images/readme-images/showcase8.png" alt="drawing" width="200"/>
+    <img src="assets/images/readme-images/showcase5.png" alt="drawing" width="200"/>
+    <img src="assets/images/readme-images/showcase6.png" alt="drawing" width="200"/>
+    <img src="assets/images/readme-images/showcase7.png" alt="drawing" width="200"/>
+</p>
 
 ### Mock Data
 The app can also be used without logging in
 
-
-<img src="assets/images/readme-images/showcase1.png" alt="drawing" width="200"/>
-<img src="assets/images/readme-images/showcase2.png" alt="drawing" width="200"/>
-<img src="assets/images/readme-images/showcase3.png" alt="drawing" width="200"/>
-<img src="assets/images/readme-images/showcase4.png" alt="drawing" width="200"/>
-
+<p float="left">
+    <img src="assets/images/readme-images/showcase1.png" alt="drawing" width="200"/>
+    <img src="assets/images/readme-images/showcase2.png" alt="drawing" width="200"/>
+    <img src="assets/images/readme-images/showcase3.png" alt="drawing" width="200"/>
+    <img src="assets/images/readme-images/showcase4.png" alt="drawing" width="200"/>
+</p>
 
 
 ## How to run
