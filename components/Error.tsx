@@ -6,7 +6,8 @@ import useError from '../hooks/useError';
 
 
 const Error = () => {
-  const { errorText, showComponent, setShowComponent } = useError();
+  const { errorText, showComponent, setShowComponent, setErrorText } = useError();
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (errorText) {
@@ -32,12 +33,12 @@ const Error = () => {
   }, [showComponent]);
 
   const componentTwo = () => {
-    return <Text style={styles.testText}>mmm:{errorText}</Text>;
+    return <Text style={styles.testText}>{errorText}</Text>;
   };
 
   return (
     <TouchableOpacity style={styles.errorContainer} 
-      onPress={() => {console.log(showComponent);setShowComponent(!showComponent)}}>
+      onPress={() => {console.log(showComponent); setShowComponent(!showComponent)}}>
       {showComponent ? componentTwo() : null}
     </TouchableOpacity>
   )

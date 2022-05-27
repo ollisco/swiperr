@@ -8,6 +8,7 @@ import useAutoExchange from './useAutoExchange';
 import {
   discovery, redirectUri, meEndpoint, recomendationEndpoint,
 } from './utils/auth-utils';
+import useError from './useError';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -99,6 +100,9 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [defaultPlaylist, setDefaultPlaylist] = useState<string>(likeSongString); // Either equal to liked songs or a playlist uri
   const [config, setConfig] = useState<any>(null);
 
+  // Error handling
+  const { setErrorText } = useError();
+
 
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
@@ -155,6 +159,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
           })
           .catch((err) => {
             console.log(err);
+            
           });
 
         // shuffle the releases array
@@ -401,7 +406,13 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       .then((res) => {
         console.log('Volume Set to: ', volume);
       })
-      .catch((res) => console.log('Error Setting Volume: ', res));
+      .catch((err) => {
+        console.log('Error Setting Volume: ', err);
+        const message = err.response.data.error.message;
+        const reason = err.response.data.error.reason;
+        setErrorText(`${message}. ${reason}`);
+        console.log('P', err.response);
+      });
   }
 
   async function play() {

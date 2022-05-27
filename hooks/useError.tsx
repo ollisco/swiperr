@@ -18,7 +18,7 @@ interface Props {
   }
 
 export const ErrorProvider: React.ReactNode = ({ children }: Props) => {
-    const [errorText, setErrorText] = useState<string | null>('Errir');
+    const [errorText, setErrorText] = useState<string | null>('');
     const [showComponent, setShowComponent] = useState(false);
     return (
         <ErrorContext.Provider value={{ 

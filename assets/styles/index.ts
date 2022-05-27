@@ -476,21 +476,21 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   errorContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 15,
+    flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
+    zIndex: 1,
+    height: 100,
     position: "absolute",
-    width: '100%',
-    height: '5%',
+    backgroundColor: '#770707',
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
     borderColor: 'red',
-    borderWidth: 1,
   },
   
   testText: {
     color: 'red',
-    
-  }
+    fontSize: 15,
+    textAlign: 'center',
+  },
 
 
 });

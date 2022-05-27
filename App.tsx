@@ -19,9 +19,10 @@ const Tab = createBottomTabNavigator();
 
 function App() {
   return (
+    <ErrorProvider>
     <SpotifyAuthProvider>
       <NavigationContainer>
-        <ErrorProvider>
+        
           <Error />
         <Stack.Navigator
           screenOptions={{
@@ -130,9 +131,9 @@ function App() {
             )}
           </Stack.Screen>
         </Stack.Navigator>
-        </ErrorProvider>
       </NavigationContainer>
     </SpotifyAuthProvider>
+    </ErrorProvider>
   );
 }
 
