@@ -3,14 +3,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SpotifyAuthProvider } from './hooks/useSpotifyAuth';
+import { ErrorProvider } from './hooks/useError';
 import {
   Explore, Liked, Profile,
 } from './screens';
-import {
+import styles, {
   PRIMARY_COLOR, DARK_GRAY, BLACK,
 } from './assets/styles';
 import TabBarIcon from './components/TabBarIcon';
 import Settings from './screens/Settings';
+import { Error } from './components';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -19,6 +21,8 @@ function App() {
   return (
     <SpotifyAuthProvider>
       <NavigationContainer>
+        <ErrorProvider>
+          <Error />
         <Stack.Navigator
           screenOptions={{
             headerStyle: { elevation: 0 },
@@ -126,6 +130,7 @@ function App() {
             )}
           </Stack.Screen>
         </Stack.Navigator>
+        </ErrorProvider>
       </NavigationContainer>
     </SpotifyAuthProvider>
   );

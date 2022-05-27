@@ -475,7 +475,22 @@ export default StyleSheet.create({
   iconMenu: {
     alignItems: "center",
   },
+  errorContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 15,
+    position: "absolute",
+    width: '100%',
+    height: '5%',
+    borderColor: 'red',
+    borderWidth: 1,
+  },
+  
+  testText: {
+    color: 'red',
+    
+  }
 
-  // RESULT ICON
 
 });
