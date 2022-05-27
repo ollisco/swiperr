@@ -1,16 +1,15 @@
-import {Text, TouchableOpacity, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { Text, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import styles from '../assets/styles';
 import useError from '../hooks/useError';
 
+function Error() {
+  const {
+    errorTexts, showComponent, setShowComponent, setErrorTexts, popErrorText,
+  } = useError();
+  const [currentError, setCurrentError] = useState<string[] | null>(null);
 
-
-const Error = () => {
-  const { errorTexts, showComponent, setShowComponent, setErrorTexts, popErrorText } = useError();
-  const [currentError, setCurrentError] = useState<string[] | null>(null);  
-
-  
-  //const [showComponent, setShowComponent] = useState(false);
+  // const [showComponent, setShowComponent] = useState(false);
 
   useEffect(() => {
     if (errorTexts.length > 0) {
@@ -32,23 +31,21 @@ const Error = () => {
     }
   }, [showComponent]);
 
-  const componentTwo = () => {
-    
-    return (
-      <TouchableOpacity style={styles.errorContainer} 
-      onPress={() => {console.log(showComponent); setShowComponent(!showComponent)}}>
-        
-        <Text style={styles.testText}>{errorTexts}</Text>
-  
-      
-      </TouchableOpacity>
-    )
-  };
+  const componentTwo = () => (
+    <TouchableOpacity
+      style={styles.errorContainer}
+      onPress={() => { console.log(showComponent); setShowComponent(!showComponent); }}
+    >
+
+      <Text style={styles.testText}>{errorTexts}</Text>
+
+    </TouchableOpacity>
+  );
 
   return (
-      
-      showComponent ? componentTwo() : null
-  )
+
+    showComponent ? componentTwo() : null
+  );
 }
 
-export default Error
+export default Error;

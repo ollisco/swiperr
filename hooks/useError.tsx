@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState } from 'react';
 
 const ErrorContext: React.Context<{
@@ -9,12 +8,12 @@ const ErrorContext: React.Context<{
     showComponent: boolean | null,
     setShowComponent: any;
 }> = createContext({
-    errorTexts: [],
-    addErrorText: () => {},
-    popErrorText: () => {},
-    setErrorTexts: () => {},
-    showComponent: null,
-    setShowComponent: () => {},
+  errorTexts: [],
+  addErrorText: () => {},
+  popErrorText: () => {},
+  setErrorTexts: () => {},
+  showComponent: null,
+  setShowComponent: () => {},
 
 });
 
@@ -23,40 +22,40 @@ interface Props {
   }
 
 export const ErrorProvider: React.ReactNode = ({ children }: Props) => {
-    const [errorTexts, setErrorTexts] = useState<string[]>([]);
-    const [showComponent, setShowComponent] = useState(false);
+  const [errorTexts, setErrorTexts] = useState<string[]>([]);
+  const [showComponent, setShowComponent] = useState(false);
 
-    function addErrorText(text: string) {
-        const newArray = errorTexts.concat(text);
-        setErrorTexts(newArray);
+  function addErrorText(text: string) {
+    const newArray = errorTexts.concat(text);
+    setErrorTexts(newArray);
+  }
+
+  function popErrorText() {
+    // pop item from array
+    if (errorTexts.length > 0) {
+      const item = errorTexts[0];
+      const newArray = errorTexts.slice(1);
+      setErrorTexts(newArray);
+      return item;
     }
+    console.log('Fatal: no items');
+  }
 
-    function popErrorText() {
-        // pop item from array
-        if (errorTexts.length > 0) {
-            const item = errorTexts[0]
-            const newArray = errorTexts.slice(1)
-            setErrorTexts(newArray);
-            return item
-        }
-        console.log('Fatal: no items')
-    }
-
-    return (
-        <ErrorContext.Provider value={{ 
-            errorTexts, 
-            addErrorText,
-            popErrorText,
-            showComponent, 
-            setShowComponent,
-            setErrorTexts,
-        }}>
-            {children}
-        </ErrorContext.Provider>
-    );
-}
-
+  return (
+    <ErrorContext.Provider value={{
+      errorTexts,
+      addErrorText,
+      popErrorText,
+      showComponent,
+      setShowComponent,
+      setErrorTexts,
+    }}
+    >
+      {children}
+    </ErrorContext.Provider>
+  );
+};
 
 export default function useError() {
-    return useContext(ErrorContext);
+  return useContext(ErrorContext);
 }
