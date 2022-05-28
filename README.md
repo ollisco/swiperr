@@ -35,17 +35,24 @@ The app can also be used without logging in
 
 ## How to use
 - When first starting the app it only contains mock data
-- To login and fetch Spotify data one can press the login button
+- To login and fetch Spotify data one can press the login button at the top of the explore screen
 - The profile tab is now filled with you spotify profile information
 - The explore tab now containst cards with recomendations from spotify. Theese are based on two of your top songs (2 out of top 10), two of your top artists (2 out of top 10) and one genre from your top songs.
 - By swiping right on an image you like it and it will appear in your spotify liked songs folder.
-- Swiping left currently does nothing
-- The Liked and Chat page currently only includes mock data
+- With + you can place the song into a specific playlist. 
+- Swiping left moves on to the next song
+- You can change various settings in the settings page.
 
-Note: the [avlailible genres](https://developer.spotify.com/documentation/web-api/reference/#/operations/get-recommendation-genres) does not include all spotify genres. 
+## API and App information
+- All non-mock data comes from the [Spotify web API](https://developer.spotify.com/documentation/web-api/). See the [API reference endpoints](https://developer.spotify.com/documentation/web-api/reference/#/) here.
+- This is a No Database Application and no user data is stored. 
+- This application serves as a extension of the spotify experience with the intent of making it easier and more intuitive to access new music.
+
+*Note: the [avlailible genres](https://developer.spotify.com/documentation/web-api/reference/#/operations/get-recommendation-genres) does not include all spotify genres.*
 
 ## Todo
-See [Todo](Todo.md)
+See [issues](https://github.com/ollisco/swiperr/issues) with enhancement labels.
 
-## Issues?
-Feel free to post an issue
+
+## Problems?
+Feel free to post an [issue](https://github.com/ollisco/swiperr/issues)
