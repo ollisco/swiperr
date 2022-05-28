@@ -17,6 +17,7 @@ function CardStackHandler(style: any) {
     queueAndSkip,
     newReleases,
     seek,
+    isPlaying,
   } = useSpotifyContext();
   const {
     setRGB,
@@ -29,7 +30,6 @@ function CardStackHandler(style: any) {
   } = useContext(SwipeCardContext) as SwipedCardContextT;
 
   const [alwaysOn, setAlwaysOn] = useState(true);
-
 
   const cardIndex = showType === 'recommended' ? recommendedIndex : newReleasesIndex;
 
@@ -44,21 +44,18 @@ function CardStackHandler(style: any) {
   }
   const time = 25000; // ms
   useEffect(() => {
-    if (userTopItems) {
+    if (userTopItems && isPlaying) {
       console.log('seek');
       // set timeout 20 seconds
       const toRef = setTimeout(() => {
-        seek(time);
+        if (isPlaying) {
+          seek(time);
+        }
         setAlwaysOn(!alwaysOn);
         clearTimeout(toRef);
-        seek(time);
       }, time);
     }
-  }, [userTopItems, alwaysOn]);
-
-  // useEffect(() => {
-  //   setAlwaysOn(!alwaysOn)
-  // }, []);
+  });
 
 
   return (
@@ -86,6 +83,7 @@ function CardStackHandler(style: any) {
                 queueAndSkip(userTopItems[recommendedIndex + 1].uri);
                 setRecommendedIndex(recommendedIndex + 1);
                 setNewReleasesIndex(newReleasesIndex + 1);
+                setAlwaysOn(!alwaysOn);
               }
             }}
             onSwipeEnd={() => {
