@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import DATA from '../../assets/data/dummy_data_songs';
@@ -16,6 +16,8 @@ function CardStackHandler(style: any) {
     likeSong,
     queueAndSkip,
     newReleases,
+    seek,
+    isPlaying,
   } = useSpotifyContext();
   const {
     setRGB,
@@ -26,6 +28,8 @@ function CardStackHandler(style: any) {
     newReleasesIndex,
     setNewReleasesIndex,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
+
+  const [alwaysOn, setAlwaysOn] = useState(true);
 
   const cardIndex = showType === 'recommended' ? recommendedIndex : newReleasesIndex;
 
@@ -38,6 +42,22 @@ function CardStackHandler(style: any) {
     const m = d < 110 ? 110 : -d;
     return `rgb(${m}, ${54 - ((54 * -d) / 300) + 20}, ${54 - ((54 * -d) / 300) + 20})`;
   }
+  const time = 25000; // ms
+  useEffect(() => {
+    if (userTopItems && isPlaying) {
+      console.log('seek');
+      // set timeout 20 seconds
+      const toRef = setTimeout(() => {
+        if (isPlaying) {
+          seek(time);
+        }
+        setAlwaysOn(!alwaysOn);
+        clearTimeout(toRef);
+      }, time);
+    }
+  });
+
+
   return (
     <View style={{ borderColor: '#000000', borderWidth: 3 }}>
 
@@ -63,6 +83,7 @@ function CardStackHandler(style: any) {
                 queueAndSkip(userTopItems[recommendedIndex + 1].uri);
                 setRecommendedIndex(recommendedIndex + 1);
                 setNewReleasesIndex(newReleasesIndex + 1);
+                setAlwaysOn(!alwaysOn);
               }
             }}
             onSwipeEnd={() => {
