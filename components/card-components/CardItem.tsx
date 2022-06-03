@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import {
-  Text, View, Image, TouchableOpacity, Platform,
+  Text, View, Image, TouchableOpacity, Platform, Dimensions,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 // import Clipboard from '@react-native-clipboard/clipboard';
@@ -9,6 +9,8 @@ import Icon from '../Icon';
 import { CardItemT, SwipedCardContextT } from '../../types';
 
 import styles, {
+  DIMENSION_HEIGHT,
+  DIMENSION_WIDTH,
   DISLIKE_ACTIONS,
   FLASH_ACTIONS,
   SPOTIFY_GREEN,
@@ -48,13 +50,22 @@ function CardItem({
     track = `${track.slice(0, 25)}...`;
   }
 
+  const isLandscape = () => {
+    return DIMENSION_WIDTH >= DIMENSION_HEIGHT && Platform.OS === 'web';
+  };
+
+  const landScapeWeb = isLandscape() ? styles.containerCardItemWeb : {};
   const cardOutline = user ? { borderColor: SPOTIFY_GREEN } : {};
+
+  const styleContainer = [styles.containerCardItem, { backgroundColor: rgb }, cardOutline, landScapeWeb];
+  const flexDir = isLandscape() ? 'row' : 'column';
   return (
 
-    <View style={[styles.containerCardItem, { backgroundColor: rgb }, cardOutline]}>
+    <View style={styleContainer}>
       {/* IMAGE */}
-      <Image source={image} style={styles.imageStyle} />
-
+      <View style={{flexDirection: flexDir}}>
+        <Image source={image} style={styles.imageStyle} />
+      </View>
       <View style={styles.matchesCardItem}>
         <Text style={styles.matchesTextCardItem}>
           <Icon name="heart" color={WHITE} size={13} />
@@ -65,6 +76,7 @@ function CardItem({
       </View>
 
       {/* NAME */}
+      
       <Text style={styles.trackStyle}>{track}</Text>
 
       <View style={styles.artist}>
@@ -73,6 +85,7 @@ function CardItem({
           <Text style={styles.releaseDate}>{releaseDate}</Text>
         )}
       </View>
+      <View style={{flexDirection: flexDir}}>
       {Platform.OS === 'web' && (
       <View style={styles.volumeSlider}>
         <Icon name="md-volume-low" color={WHITE} size={20} />
@@ -177,11 +190,14 @@ function CardItem({
 
         </View>
       )}
+      </View>
+      <View style={{flexDirection: flexDir}}>
       <View>
         <Text style={[styles.reminderText, { fontSize: 15 }]}>
           You need to have the spotify app active to use this application.
           Try playing and pausing your current song, and make sure your queue is empty.
         </Text>
+      </View>
       </View>
     </View>
   );
