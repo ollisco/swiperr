@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import {
-  Text, View, Image, TouchableOpacity, Platform, Dimensions,
+  Text, View, Image, TouchableOpacity, Platform,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 // import Clipboard from '@react-native-clipboard/clipboard';
@@ -50,9 +50,7 @@ function CardItem({
     track = `${track.slice(0, 25)}...`;
   }
 
-  const isLandscape = () => {
-    return DIMENSION_WIDTH >= DIMENSION_HEIGHT && Platform.OS === 'web';
-  };
+  const isLandscape = () => DIMENSION_WIDTH >= DIMENSION_HEIGHT && Platform.OS === 'web';
 
   const landScapeWeb = isLandscape() ? styles.containerCardItemWeb : {};
   const cardOutline = user ? { borderColor: SPOTIFY_GREEN } : {};
@@ -63,7 +61,7 @@ function CardItem({
 
     <View style={styleContainer}>
       {/* IMAGE */}
-      <View style={{flexDirection: flexDir}}>
+      <View style={{ flexDirection: flexDir }}>
         <Image source={image} style={styles.imageStyle} />
       </View>
       <View style={styles.matchesCardItem}>
@@ -76,7 +74,7 @@ function CardItem({
       </View>
 
       {/* NAME */}
-      
+
       <Text style={styles.trackStyle}>{track}</Text>
 
       <View style={styles.artist}>
@@ -85,35 +83,35 @@ function CardItem({
           <Text style={styles.releaseDate}>{releaseDate}</Text>
         )}
       </View>
-      <View style={{flexDirection: flexDir}}>
-      {Platform.OS === 'web' && (
-      <View style={styles.volumeSlider}>
-        <Icon name="md-volume-low" color={WHITE} size={20} />
-        <Slider
-          style={{ width: 200, height: 20 }}
-          minimumValue={0}
-          maximumValue={100}
-          step={1}
-          minimumTrackTintColor="#FFFFFF"
-          maximumTrackTintColor="#000000"
-          thumbTintColor="#FFFFFF"
-          value={volume}
-          onValueChange={(value: number) => {
-            updateVolume(value);
+      <View style={{ flexDirection: flexDir }}>
+        {Platform.OS === 'web' && (
+        <View style={styles.volumeSlider}>
+          <Icon name="md-volume-low" color={WHITE} size={20} />
+          <Slider
+            style={{ width: 200, height: 20 }}
+            minimumValue={0}
+            maximumValue={100}
+            step={1}
+            minimumTrackTintColor="#FFFFFF"
+            maximumTrackTintColor="#000000"
+            thumbTintColor="#FFFFFF"
+            value={volume}
+            onValueChange={(value: number) => {
+              updateVolume(value);
             // Cant set volume here due to exceeding API rate limit
-          }}
-          onSlidingComplete={(value: number) => {
-            if (token) {
-              setVolume(value);
-            }
-          }}
-        />
-        <Icon name="md-volume-high" color={WHITE} size={20} />
-      </View>
-      )}
+            }}
+            onSlidingComplete={(value: number) => {
+              if (token) {
+                setVolume(value);
+              }
+            }}
+          />
+          <Icon name="md-volume-high" color={WHITE} size={20} />
+        </View>
+        )}
 
-      {/* ACTIONS */}
-      {hasActions && (
+        {/* ACTIONS */}
+        {hasActions && (
         <View style={styles.actionsCardItem}>
 
           <TouchableOpacity style={styles.miniButton}>
@@ -189,15 +187,15 @@ function CardItem({
           </TouchableOpacity>
 
         </View>
-      )}
+        )}
       </View>
-      <View style={{flexDirection: flexDir}}>
-      <View>
-        <Text style={[styles.reminderText, { fontSize: 15 }]}>
-          You need to have the spotify app active to use this application.
-          Try playing and pausing your current song, and make sure your queue is empty.
-        </Text>
-      </View>
+      <View style={{ flexDirection: flexDir }}>
+        <View>
+          <Text style={[styles.reminderText, { fontSize: 15 }]}>
+            You need to have the spotify app active to use this application.
+            Try playing and pausing your current song, and make sure your queue is empty.
+          </Text>
+        </View>
       </View>
     </View>
   );

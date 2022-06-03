@@ -45,8 +45,8 @@ export default StyleSheet.create({
   containerCardItemWeb: {
     width: DIMENSION_WIDTH - 40,
     height: CARD_HEIGHT,
-    margin: 5,
     padding: 0,
+
   },
 
   containerCardItemSmall: {
