@@ -54,6 +54,7 @@ function App() {
                       shadowRadius: 10,
                       shadowColor: BLACK,
                       shadowOffset: { height: 0, width: 0 },
+
                       //
                     },
                   }}
