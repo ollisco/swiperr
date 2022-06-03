@@ -31,7 +31,8 @@ function Liked() {
           <View style={styles.top}>
             <Text style={styles.title}>Liked Songs</Text>
           </View>
-
+          {/* <SafeAreaView>
+            <ScrollView> */}
           {likedSongs ? (
             <FlatList
               numColumns={2}
@@ -52,9 +53,10 @@ function Liked() {
               numColumns={2}
               data={DATA}
               keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item }) => (
+              renderItem={({ index, item }) => (
                 <TouchableOpacity>
                   <CardItemSmall
+                    id={index}
                     image={item.image}
                     track={item.track}
                     artist={item.artist}
@@ -63,7 +65,12 @@ function Liked() {
               )}
             />
           )}
-
+          {/* Ugly padding hack */}
+          <TouchableOpacity>
+            <Text>Padding</Text>
+            <Text>Padding</Text>
+            <Text>Padding</Text>
+          </TouchableOpacity>
         </View>
       </ImageBackground>
     </View>

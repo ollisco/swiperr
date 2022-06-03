@@ -22,7 +22,7 @@ export const DIMENSION_WIDTH = Dimensions.get("window").width;
 export const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 
-const CARD_HEIGHT = DIMENSION_HEIGHT * 0.8;
+const CARD_HEIGHT = DIMENSION_HEIGHT * 0.75;
 
 export default StyleSheet.create({
   // COMPONENT - CARD ITEM
@@ -40,6 +40,7 @@ export default StyleSheet.create({
     shadowOffset: { height: 0, width: 0 },
     // center children
     justifyContent: "center",
+
   },
 
   containerCardItemWeb: {

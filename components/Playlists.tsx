@@ -3,7 +3,7 @@ import React, {
   TouchableOpacity, View, ScrollView, Text,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import styles, { DARK_GRAY } from '../assets/styles';
+import styles, { DARK_GRAY, WHITE } from '../assets/styles';
 import useSpotifyContext from '../hooks/useSpotifyAuth';
 import CardItemRow from './card-components/CardItemRow';
 import { SwipeCardContext } from './card-components/CardProvider';
@@ -73,6 +73,13 @@ function Playlists() {
                 </TouchableOpacity>
               ))
             )}
+            {/* Ugly padding hack */}
+            <TouchableOpacity>
+              <Text style={{ color: WHITE }}>Hello World!</Text>
+              <Text style={{ color: WHITE }}>Hello World!</Text>
+              <Text style={{ color: WHITE }}>Hello World!</Text>
+              <Text style={{ color: WHITE }}>Hello World!</Text>
+            </TouchableOpacity>
           </ScrollView>
         </SafeAreaView>
       </View>
