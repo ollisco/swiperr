@@ -14,7 +14,7 @@ import IMAGE_BANGER from "../images/banger.jpg";
 const data: DataSong[] = [
   {
     id: 1,
-    track: "The Return loremp ipsum dolor sit amet d loremp ipsum dolor sit amet d",
+    track: "The Return",
     match: "78",
     artist: "Logic",
     album: "The Return",
