@@ -1,10 +1,10 @@
 import {
-  View, ImageBackground,
+  View, ImageBackground, Text, TouchableOpacity
 } from 'react-native';
 import React, { useState } from 'react';
-import styles from '../assets/styles';
+import styles, { DARK_GRAY } from '../assets/styles';
 import BG_IMAGE from '../assets/images/bg2.jpg';
-import { SettingItemSwitch } from '../components';
+import { Icon, SettingItemSwitch } from '../components';
 import SettingItemDropdown from '../components/SettingItemDropdown';
 import useSpotifyContext from '../hooks/useSpotifyAuth';
 
@@ -79,10 +79,14 @@ function Settings() {
   const { playlists, availableMarkets } = useSpotifyContext();
   return (
     <View>
+        
       <ImageBackground
         source={BG_IMAGE}
         style={styles.bg}
       >
+        <View style={styles.top}>
+          <Text style={styles.title}>Settings</Text>
+        </View>
         {playlists && playlists.length > 0 && availableMarkets && availableMarkets.length > 0
           ? <SettingItems />
           : <MockSettingItems />}

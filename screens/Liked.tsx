@@ -30,9 +30,6 @@ function Liked() {
         <View style={styles.containerLiked}>
           <View style={styles.top}>
             <Text style={styles.title}>Liked Songs</Text>
-            <TouchableOpacity>
-              <Icon name="ellipsis-vertical" color={DARK_GRAY} size={20} />
-            </TouchableOpacity>
           </View>
           {/* <SafeAreaView>
             <ScrollView> */}
