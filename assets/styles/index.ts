@@ -21,6 +21,9 @@ export const FLASH_ACTIONS = "#5028D7";
 export const DIMENSION_WIDTH = Dimensions.get("window").width;
 export const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
+
+const CARD_HEIGHT = DIMENSION_HEIGHT * 0.8;
+
 export default StyleSheet.create({
   // COMPONENT - CARD ITEM
   containerCardItem: {
@@ -29,7 +32,7 @@ export default StyleSheet.create({
     borderWidth: 1,
     //borderColor: SPOTIFY_GREEN,
     alignItems: "center",
-    margin: 10,
+    margin: 5,
     elevation: 1,
     shadowOpacity: 0.05,
     shadowRadius: 10,
@@ -38,6 +41,14 @@ export default StyleSheet.create({
     // center children
     justifyContent: "center",
   },
+
+  containerCardItemWeb: {
+    width: DIMENSION_WIDTH - 40,
+    height: CARD_HEIGHT,
+    padding: 0,
+
+  },
+
   containerCardItemSmall: {
     backgroundColor: DARK_GRAY,
     borderRadius: 8,
@@ -113,7 +124,6 @@ export default StyleSheet.create({
     paddingBottom: 10,
     alignItems: "center",
     textAlign: "center",
-    marginTop: 10,
   },
   artistText: {
     color: GRAY,
@@ -186,6 +196,7 @@ export default StyleSheet.create({
       width: DIMENSION_WIDTH / 2 - 40 ,
       height: 170 ,
       margin: 0,
+      flexDirection: "column",
   },
   playlistImage: {
     borderRadius: 2,
@@ -205,24 +216,22 @@ export default StyleSheet.create({
   imageStyle: {
       borderRadius: 8,
       width:  DIMENSION_WIDTH - 80,
-      height: DIMENSION_WIDTH - 80,
+      height: (DIMENSION_HEIGHT - 80)/2,
       margin: 20,
     },
   
 
   trackStyle: {
-      paddingTop: 15,
+      paddingTop: 10,
       paddingBottom: 7,
       color: WHITE,
       width: "100%",
       textAlign: "center",
-      height: 60,
+      height: 45,
       flexWrap: 'wrap',
       flexShrink: 1,
       fontSize: 25,
   },
-
-
 
 
 
