@@ -212,10 +212,18 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       .then((res) => {
         const countryCodes = res.data.markets;
         // map each country code to its country name
-        const countries = countryCodes.map((countryCode: string) => ({
+        let countries = countryCodes.map((countryCode: string) => ({
           code: countryCode,
           name: getLocation(countryCode),
         }));
+        console.log(countries);
+        // sort countries alphabetically
+        countries = countries.sort((a: {code: string, name: string}, b: {code: string, name: string}) => {
+          if (a.name < b.name) {
+            return -1;
+          }
+          return 1;
+        });
         console.log(countries);
         setAvailableMarkets(countries);
       })

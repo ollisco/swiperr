@@ -6,9 +6,9 @@ import {
   ImageBackground,
   FlatList,
 } from 'react-native';
-import { Icon, CardItemSmall } from '../components';
+import { CardItemSmall } from '../components';
 import DATA from '../assets/data/dummy_data_songs';
-import styles, { DARK_GRAY } from '../assets/styles';
+import styles from '../assets/styles';
 import BG_IMAGE from '../assets/images/bg2.jpg';
 import useSpotifyContext from '../hooks/useSpotifyAuth';
 
