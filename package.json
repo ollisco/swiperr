@@ -8,9 +8,6 @@
   "repository": "git@github.com:ollisco/swiperr.git",
   "author": "Olle Jernström <ollejer@ug.kth.se>",
   "license": "MIT",
-  "icon": "assets/images/icon-small.png",
-  "favicon": "assets/images/icon-big.png",
-  "privacy": "public",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
