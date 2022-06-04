@@ -18,8 +18,8 @@ export const DISLIKE_ACTIONS = "#363636";
 export const FLASH_ACTIONS = "#5028D7";
 
 
-export const DIMENSION_WIDTH = Dimensions.get("screen").width;
-export const DIMENSION_HEIGHT = Dimensions.get("screen").height;
+export const DIMENSION_WIDTH = Dimensions.get("window").width;
+export const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 
 const CARD_HEIGHT = DIMENSION_HEIGHT * 0.75;
