@@ -217,6 +217,18 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
           name: getLocation(countryCode),
         }));
         console.log(countries);
+        // sort countries alphabetically
+        countries.sort((a: string, b: string) => {
+          if (a < b) {
+            return -1;
+          }
+          if (a > b){
+            return 1;
+          }
+          return 0;
+        }
+        );
+      
         setAvailableMarkets(countries);
       })
       .catch((err) => {
