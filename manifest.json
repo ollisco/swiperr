@@ -3,8 +3,8 @@
   "description": "A swiping music app. Powered By Spotify",
   "display": "standalone",
   "lang": "en",
-  "name": "swiperr",
-  "short_name": "swiperr",
+  "name": "tinder-expo",
+  "short_name": "tinder-expo",
   "start_url": "/?utm_source=web_app_manifest",
   "orientation": "portrait",
   "related_applications": [
