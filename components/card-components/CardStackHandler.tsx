@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import DATA from '../../assets/data/dummy_data_songs';
-import { DARK_GRAY, WHITE } from '../../assets/styles';
+import { DARK_GRAY } from '../../assets/styles';
 import useSpotifyContext from '../../hooks/useSpotifyAuth';
 import { SwipedCardContextT } from '../../types';
 import CardItem from './CardItem';
