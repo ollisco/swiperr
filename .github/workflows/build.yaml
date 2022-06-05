@@ -24,10 +24,15 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn install
 
+      - name: Pre-Deploy
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
       - name: 🚀 Deploy app
         run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           yarn deploy
 
       - name: 🚀 Publish app
