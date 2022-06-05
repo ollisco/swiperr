@@ -24,6 +24,11 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn install
 
+      - name: 🚀 Pre Deploy app
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+
       - name: 🚀 Deploy app
         run: |
           git config user.name "GitHub Actions Bot"
