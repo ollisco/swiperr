@@ -39,7 +39,7 @@ function CardStackHandler(style: any) {
     return `rgb(${m}, ${54 - ((54 * -d) / 300) + 20}, ${54 - ((54 * -d) / 300) + 20})`;
   }
   return (
-    <View style={{ borderColor: '#000000', borderWidth: 3 }}>
+    <View>
 
       {userTopItems && showType === 'recommended'
         ? (
