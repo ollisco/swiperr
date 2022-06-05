@@ -28,6 +28,7 @@ jobs:
         run: |
           git config user.name "ollisco"
           git config user.email "<>"
+          git config --list
           yarn deploy
 
       - name: 🚀 Publish app
