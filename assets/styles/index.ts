@@ -30,15 +30,12 @@ export default StyleSheet.create({
     backgroundColor: DARK_GRAY,
     borderRadius: 8,
     borderWidth: 1,
-    //borderColor: SPOTIFY_GREEN,
     alignItems: "center",
     margin: 5,
     elevation: 1,
     shadowOpacity: 0.05,
     shadowRadius: 10,
     shadowColor: BLACK,
-    shadowOffset: { height: 0, width: 0 },
-    // center children
     justifyContent: "center",
     height: CARD_HEIGHT,
 
@@ -217,9 +214,11 @@ export default StyleSheet.create({
   // LARGE CARD (CARDITEM)
   imageStyle: {
       borderRadius: 8,
+      height: (CARD_HEIGHT)*0.5,
       width:  DIMENSION_WIDTH - 80,
-      height: (DIMENSION_HEIGHT - 80)/2,
-      margin: 20,
+      marginTop: 20,
+      display: "flex",
+      
     },
   
 
@@ -409,9 +408,7 @@ export default StyleSheet.create({
     marginHorizontal: 10,
     zIndex: 1,
     elevation: 1,
-    borderColor: WHITE,
-    borderWidth: 1,
-    //display: "none",
+    height: DIMENSION_HEIGHT,
   },
 
   containerPlaylists: { 
