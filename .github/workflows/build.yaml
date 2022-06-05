@@ -25,7 +25,10 @@ jobs:
         run: yarn install
 
       - name: 🚀 Deploy app
-        run: yarn deploy
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
+          yarn deploy
 
       - name: 🚀 Publish app
         run: expo publish --non-interactive
