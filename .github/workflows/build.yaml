@@ -29,6 +29,7 @@ jobs:
           git config user.name "ollisco"
           git config user.email "<>"
           git config --list
+          git remote add github "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/$GITHUB_REPOSITORY.git"
           yarn deploy
 
       - name: 🚀 Publish app
