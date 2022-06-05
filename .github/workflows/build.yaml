@@ -24,8 +24,8 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn install
 
+      - name: 🚀 Deploy app
+        run: yarn deploy
+
       - name: 🚀 Publish app
         run: expo publish --non-interactive
-
-      - name: 🚀 Deploy app
-        run: yarn deploy --non-interactive
