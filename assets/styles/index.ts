@@ -40,6 +40,7 @@ export default StyleSheet.create({
     shadowOffset: { height: 0, width: 0 },
     // center children
     justifyContent: "center",
+    height: CARD_HEIGHT,
 
   },
 
@@ -408,6 +409,8 @@ export default StyleSheet.create({
     marginHorizontal: 10,
     zIndex: 1,
     elevation: 1,
+    borderColor: WHITE,
+    borderWidth: 1,
     //display: "none",
   },
 
