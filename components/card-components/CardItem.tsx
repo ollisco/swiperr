@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 // import Clipboard from '@react-native-clipboard/clipboard';
-
+import Clipboard from '@react-native-clipboard/clipboard';
 import Icon from '../Icon';
 import { CardItemT, SwipedCardContextT } from '../../types';
 
@@ -120,13 +120,13 @@ function CardItem({
               color={FLASH_ACTIONS}
               size={20}
               onPress={() => {
-                // if (token) {
-                //   if (showType === 'recommended') {
-                //     Clipboard.setString(userRecommendedTracks[index].uri);
-                //   } else if (showType === 'new') {
-                //     Clipboard.setString(newReleases[index].uri);
-                //   }
-                // }
+                if (token) {
+                  if (showType === 'recommended') {
+                    Clipboard.setString(userRecommendedTracks[index].uri);
+                  } else if (showType === 'new') {
+                    Clipboard.setString(newReleases[index].uri);
+                  }
+                }
               }}
 
             />
