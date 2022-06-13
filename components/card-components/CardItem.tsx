@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import {
   Text, View, Image, TouchableOpacity, Platform,
 } from 'react-native';
@@ -49,7 +49,7 @@ function CardItem({
   if (track.length > 25) {
     track = `${track.slice(0, 25)}...`;
   }
-  
+
   const isLandscape = () => DIMENSION_WIDTH >= DIMENSION_HEIGHT && Platform.OS === 'web';
 
   const landScapeWeb = isLandscape() ? styles.containerCardItemWeb : {};
