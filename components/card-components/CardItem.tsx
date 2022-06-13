@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Text, View, Image, TouchableOpacity, Platform,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 // import Clipboard from '@react-native-clipboard/clipboard';
-
+import Clipboard from '@react-native-clipboard/clipboard';
 import Icon from '../Icon';
 import { CardItemT, SwipedCardContextT } from '../../types';
 
@@ -49,7 +49,7 @@ function CardItem({
   if (track.length > 25) {
     track = `${track.slice(0, 25)}...`;
   }
-
+  
   const isLandscape = () => DIMENSION_WIDTH >= DIMENSION_HEIGHT && Platform.OS === 'web';
 
   const landScapeWeb = isLandscape() ? styles.containerCardItemWeb : {};
@@ -120,13 +120,13 @@ function CardItem({
               color={FLASH_ACTIONS}
               size={20}
               onPress={() => {
-                // if (token) {
-                //   if (showType === 'recommended') {
-                //     Clipboard.setString(userRecommendedTracks[index].uri);
-                //   } else if (showType === 'new') {
-                //     Clipboard.setString(newReleases[index].uri);
-                //   }
-                // }
+                if (token) {
+                  if (showType === 'recommended') {
+                    Clipboard.setString(userRecommendedTracks[index].uri);
+                  } else if (showType === 'new') {
+                    Clipboard.setString(newReleases[index].uri);
+                  }
+                }
               }}
 
             />
