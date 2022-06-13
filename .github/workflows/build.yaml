@@ -26,6 +26,7 @@ jobs:
 
       - name: Deploy
         run: |
+          set -x
           git config --global user.name "ollisco"
           git config --global user.email "<>"
           yarn deploy
