@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import DATA from '../../assets/data/dummy_data_songs';
-import { DARK_GRAY } from '../../assets/styles';
+import { CARD_HEIGHT, DARK_GRAY, DIMENSION_HEIGHT } from '../../assets/styles';
 import useSpotifyContext from '../../hooks/useSpotifyAuth';
 import { SwipedCardContextT } from '../../types';
 import CardItem from './CardItem';
@@ -39,7 +39,14 @@ function CardStackHandler(style: any) {
     return `rgb(${m}, ${54 - ((54 * -d) / 300) + 20}, ${54 - ((54 * -d) / 300) + 20})`;
   }
   return (
-    <View style={{ borderColor: '#000000', borderWidth: 3 }}>
+    <View 
+      style={{ 
+        height: DIMENSION_HEIGHT,
+      }}
+      onPress={() => {
+        console.log('Hello Card')
+      }}
+    >
 
       {userTopItems && showType === 'recommended'
         ? (
