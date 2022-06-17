@@ -38,6 +38,7 @@ function CardStackHandler(style: any) {
     const m = d < 110 ? 110 : -d;
     return `rgb(${m}, ${54 - ((54 * -d) / 300) + 20}, ${54 - ((54 * -d) / 300) + 20})`;
   }
+  
   return (
     <View 
       style={{ 
