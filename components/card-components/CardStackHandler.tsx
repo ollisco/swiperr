@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View, StyleSheet, Button, Text } from 'react-native';
+import { View, StyleSheet, Button, Text, Platform } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
 import Swiper from 'react-native-deck-swiper';
 import DATA from '../../assets/data/dummy_data_songs';
@@ -8,6 +8,7 @@ import useSpotifyContext from '../../hooks/useSpotifyAuth';
 import { SwipedCardContextT } from '../../types';
 import CardItem from './CardItem';
 import { SwipeCardContext } from './CardProvider';
+import { GestureHandlerRootView, Swipeable } from "react-native-gesture-handler";
 
 function CardStackHandler(style: any) {
   const {
@@ -158,19 +159,31 @@ function CardStackHandler(style: any) {
           cards={DATA}
           renderCard={(card) => {
               return (
+                <GestureHandlerRootView>
+                  <Swipeable>
                     <CardItem
-                        hasActions
-                        image={card.image}
-                        track={card.track}
-                        description={card.artist}
-                        matches={card.match}
-                        artist={card.artist}
-                      />
-          
+                      hasActions
+                      image={card.image}
+                      track={card.track}
+                      description={card.artist}
+                      matches={card.match}
+                      artist={card.artist}
+                    />
+                  </Swipeable>
+                </GestureHandlerRootView>
               )
+            } 
+          }
+          useViewOverflow={Platform.OS === 'ios'}
+          onSwiped={(cardIndex) => {
+            setRGB(DARK_GRAY);
           }}
-          onSwiped={(cardIndex) => {console.log(cardIndex)}}
-          onSwipedAll={() => {console.log('onSwipedAll')}}
+          onSwipedAborted={() => {
+            setRGB(DARK_GRAY);
+          }}
+          onSwipedAll={() => {
+            console.log('onSwipedAll')
+          }}
           onSwiping={(x, _y) => {
             if (x > swipeColorLimit) {
               setRGB(convertRGBgreen(x));
@@ -180,6 +193,7 @@ function CardStackHandler(style: any) {
               setRGB(DARK_GRAY);
             }
           }}
+          ref={swiper => setSwiper(swiper)}
           cardIndex={0}
           verticalSwipe={false}
           backgroundColor={'#4FD0E9'}
