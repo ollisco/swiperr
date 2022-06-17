@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet, Button, Text } from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
+import Swiper from 'react-native-deck-swiper';
 import DATA from '../../assets/data/dummy_data_songs';
 import { DARK_GRAY } from '../../assets/styles';
 import useSpotifyContext from '../../hooks/useSpotifyAuth';
@@ -153,11 +154,24 @@ function CardStackHandler(style: any) {
           : null}
 
       {!newReleases && !userTopItems ? (
-        <CardStack
-          loop
-          verticalSwipe={false}
-          ref={(swiper) => setSwiper(swiper)}
-          onSwipe={(x, _y) => {
+        <Swiper
+          cards={DATA}
+          renderCard={(card) => {
+              return (
+                    <CardItem
+                        hasActions
+                        image={card.image}
+                        track={card.track}
+                        description={card.artist}
+                        matches={card.match}
+                        artist={card.artist}
+                      />
+          
+              )
+          }}
+          onSwiped={(cardIndex) => {console.log(cardIndex)}}
+          onSwipedAll={() => {console.log('onSwipedAll')}}
+          onSwiping={(x, _y) => {
             if (x > swipeColorLimit) {
               setRGB(convertRGBgreen(x));
             } else if (x < -swipeColorLimit) {
@@ -166,27 +180,14 @@ function CardStackHandler(style: any) {
               setRGB(DARK_GRAY);
             }
           }}
-          onSwipeEnd={() => {
-            setRGB(DARK_GRAY);
-          }}
-          onSwiped={() => {
-            setRGB(DARK_GRAY);
-          }}
+          cardIndex={0}
+          verticalSwipe={false}
+          backgroundColor={'#4FD0E9'}
+          stackSize= {3}
+          infinite
         >
-          {DATA.map((item, index) => (
-            <Card key={item.id}>
-              <CardItem
-                hasActions
-                image={item.image}
-                track={item.track}
-                description={item.artist}
-                matches={item.match}
-                artist={item.artist}
-                id={index}
-              />
-            </Card>
-          ))}
-        </CardStack>
+          
+      </Swiper>
       ) : null}
 
     </View>
@@ -197,3 +198,25 @@ export default CardStackHandler;
 function queueAndSkip(accessToken: any, arg1: number) {
   throw new Error('Function not implemented.');
 }
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#F5FCFF",
+    marginHorizontal: 40  ,
+  },
+  card: {
+    flex: 1,
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: "#E8E8E8",
+    justifyContent: "center",
+    backgroundColor: "white"
+  },
+  text: {
+    textAlign: "center",
+    fontSize: 50,
+    backgroundColor: "transparent"
+  }
+});
