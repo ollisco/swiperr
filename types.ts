@@ -1,4 +1,5 @@
 import CardStack from "react-native-card-stack-swiper";
+import Swiper from "react-native-deck-swiper";
 
 export type CardItemT = {
   description?: string;
@@ -30,8 +31,9 @@ export type SwipedCardContextT = {
   setPressedTrack: (value: any) => void;
   showPlaylists: boolean;
   setShowPlaylists: (value: boolean) => void;
-  swiper: CardStack | null;
-  setSwiper: (value: CardStack | null) => void;
+  swiper: Swiper<DataSong> | null;
+  setSwiper: (value: Swiper<DataSong> | null) => void;
+  
   showType: string;
   setShowType: (value: string) => void;
   recommendedIndex: number;

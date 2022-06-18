@@ -1,6 +1,10 @@
 import React, { useContext } from 'react';
-import { View } from 'react-native';
+import {
+  View, StyleSheet, Platform,
+} from 'react-native';
 import CardStack, { Card } from 'react-native-card-stack-swiper';
+import Swiper from 'react-native-deck-swiper';
+import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
 import DATA from '../../assets/data/dummy_data_songs';
 import { CARD_HEIGHT, DARK_GRAY, DIMENSION_HEIGHT } from '../../assets/styles';
 import useSpotifyContext from '../../hooks/useSpotifyAuth';
@@ -8,7 +12,7 @@ import { SwipedCardContextT } from '../../types';
 import CardItem from './CardItem';
 import { SwipeCardContext } from './CardProvider';
 
-function CardStackHandler(style: any) {
+function CardStackHandler(_style: any) {
   const {
     recommendedTracks: userTopItems,
     getUserRecommendedTracks: getTopUserItems,
@@ -51,121 +55,50 @@ function CardStackHandler(style: any) {
 
       {userTopItems && showType === 'recommended'
         ? (
-          <CardStack
-            loop
-            verticalSwipe={false}
-            renderNoMoreCards={() => null}
-            ref={(swiper) => setSwiper(swiper)}
-            onSwipe={(x, _y) => {
-              if (x > swipeColorLimit) {
-                setRGB(convertRGBgreen(x));
-              } else if (x < -swipeColorLimit) {
-                setRGB(convertRGBred(x));
-              } else {
-                setRGB(DARK_GRAY);
-              }
-            }}
-            onSwiped={(index: number) => {
-              setRGB(DARK_GRAY);
-              if (token) {
-                queueAndSkip(userTopItems[recommendedIndex + 1].uri);
-                setRecommendedIndex(recommendedIndex + 1);
-                setNewReleasesIndex(newReleasesIndex + 1);
-              }
-            }}
-            onSwipeEnd={() => {
-              setRGB(DARK_GRAY);
-            }}
-
-            onSwipedAll={() => {
-              if (token) {
-                getTopUserItems();
-              }
-            }}
-            onSwipedRight={(index: number) => {
-              if (token) {
-                likeSong(userTopItems[index].id);
-              }
-            }}
-          >
-            {userTopItems?.map((item: any, index: number) => (
-              <Card key={item.id}>
+          <Swiper
+          cards={userTopItems}
+          renderCard={(
+            card: 
+              {album: any, popularity: number, artists: string[], releaseDate: string, name: string},
+            index: number,
+              ) => (
+            <GestureHandlerRootView>
+              <Swipeable>
                 <CardItem
                   hasActions
-                  image={{ uri: item.album.images[0].url }}
-                  popularity={item.popularity}
-                  artist={item.artists.map((artist: any) => artist.name).join(', ')}
-                  track={item.name}
+                  image={{ uri: card.album.images[0].url }}
+                  track={card.name}
+                  releaseDate={card.releaseDate}
+                  popularity={card.popularity}
+                  artist={card.artists.map((artist: any) => artist.name).join(', ')}
                   id={index}
                 />
-              </Card>
-            ))}
-          </CardStack>
-        )
-        : newReleases && showType === 'new'
-          ? (
-            <CardStack
-              loop
-              verticalSwipe={false}
-              renderNoMoreCards={() => null}
-              ref={(swiper) => setSwiper(swiper)}
-              onSwipe={(x, _y) => {
-                if (x > swipeColorLimit) {
-                  setRGB(convertRGBgreen(x));
-                } else if (x < -swipeColorLimit) {
-                  setRGB(convertRGBred(x));
-                } else {
-                  setRGB(DARK_GRAY);
-                }
-              }}
-              onSwiped={(index: number) => {
-                setRGB(DARK_GRAY);
-                if (token) {
-                  queueAndSkip(newReleases[newReleasesIndex + 1].uri);
-                  setNewReleasesIndex(newReleasesIndex + 1);
-                  setRecommendedIndex(recommendedIndex + 1);
-                }
-              }}
-              onSwipeEnd={() => {
-                setRGB(DARK_GRAY);
-              }}
-
-              onSwipedAll={() => {
-                if (token) {
-                  getTopUserItems();
-                }
-              }}
-              onSwipedRight={(index: number) => {
-                if (token) {
-                  likeSong(userTopItems[index].id);
-                }
-              }}
-            >
-              {
-            newReleases?.map((item: any, index: number) => (
-              <Card key={item.id}>
-                <CardItem
-                  hasActions
-                  image={{ uri: item.images[0].url }}
-                  popularity={item.popularity}
-                  artist={item.artists.map((artist: any) => artist.name).join(', ')}
-                  track={item.name}
-                  id={index}
-                  releaseDate={item.releaseDate}
-                />
-              </Card>
-            ))
-          }
-            </CardStack>
-          )
-          : null}
-
-      {!newReleases && !userTopItems ? (
-        <CardStack
-          loop
-          verticalSwipe={false}
-          ref={(swiper) => setSwiper(swiper)}
-          onSwipe={(x, _y) => {
+              </Swipeable>
+            </GestureHandlerRootView>
+          )}
+          useViewOverflow={Platform.OS === 'ios'}
+          onSwiped={(cardIndex) => {
+            console.log(cardIndex)
+            setRGB(DARK_GRAY);
+            if (token) {
+              queueAndSkip(userTopItems[recommendedIndex + 1].uri);
+              setRecommendedIndex(recommendedIndex + 1);
+              setNewReleasesIndex(newReleasesIndex + 1);
+            }
+          }}
+          onSwipedAborted={() => {
+            setRGB(DARK_GRAY);
+          }}
+          onSwipedAll={() => {
+            console.log('onSwipedAll');
+          }}
+          onSwipedRight={(index) => {
+            console.log(index)
+            if (token) {
+              likeSong(userTopItems[index].id);
+            }
+          }}
+          onSwiping={(x, _y) => {
             if (x > swipeColorLimit) {
               setRGB(convertRGBgreen(x));
             } else if (x < -swipeColorLimit) {
@@ -174,27 +107,121 @@ function CardStackHandler(style: any) {
               setRGB(DARK_GRAY);
             }
           }}
-          onSwipeEnd={() => {
+          ref={(swiper) => setSwiper(swiper)}
+          cardIndex={0}
+          verticalSwipe={false}
+          backgroundColor="#4FD0E9"
+          stackSize={3}
+          infinite
+        />
+        )
+        : newReleases && showType === 'new'
+          ? (
+            <Swiper
+              cards={newReleases}
+              renderCard={(
+                card: {images: {url: string}[], name: string, artists: any, popularity: string, releaseDate: string}, 
+                index: number
+                ) => (
+                <GestureHandlerRootView>
+                  <Swipeable>
+                    <CardItem
+                      hasActions
+                      image={{ uri: card.images[0].url }}
+                      track={card.name}
+                      releaseDate={card.releaseDate}
+                      popularity={card.popularity}
+                      artist={card.artists.map((artist: any) => artist.name).join(', ')}
+                      id={index}
+                    />
+                  </Swipeable>
+                </GestureHandlerRootView>
+              )}
+              useViewOverflow={Platform.OS === 'ios'}
+              onSwiped={(_cardIndex) => {
+                setRGB(DARK_GRAY);
+                if (token) {
+                  queueAndSkip(newReleases[newReleasesIndex + 1].uri);
+                  setRecommendedIndex(recommendedIndex + 1);
+                  setNewReleasesIndex(newReleasesIndex + 1);
+                }
+              }}
+              onSwipedAborted={() => {
+                setRGB(DARK_GRAY);
+              }}
+              onSwipedAll={() => {
+                console.log('onSwipedAll');
+              }}
+              onSwipedRight={(index) => {
+                
+                if (token) {
+                  likeSong(newReleases[index].id);
+                }
+              }}
+              onSwiping={(x, _y) => {
+                if (x > swipeColorLimit) {
+                  setRGB(convertRGBgreen(x));
+                } else if (x < -swipeColorLimit) {
+                  setRGB(convertRGBred(x));
+                } else {
+                  setRGB(DARK_GRAY);
+                }
+              }}
+              ref={(swiper) => setSwiper(swiper)}
+              cardIndex={0}
+              verticalSwipe={false}
+              backgroundColor="#4FD0E9"
+              stackSize={3}
+              infinite
+            />
+
+          )
+
+          : null}
+
+      {!newReleases && !userTopItems ? (
+        <Swiper
+          cards={DATA}
+          renderCard={(card) => (
+            <GestureHandlerRootView>
+              <Swipeable>
+                <CardItem
+                  hasActions
+                  image={card.image}
+                  track={card.track}
+                  description={card.artist}
+                  matches={card.match}
+                  artist={card.artist}
+                />
+              </Swipeable>
+            </GestureHandlerRootView>
+          )}
+          useViewOverflow={Platform.OS === 'ios'}
+          onSwiped={(_cardIndex) => {
             setRGB(DARK_GRAY);
           }}
-          onSwiped={() => {
+          onSwipedAborted={() => {
             setRGB(DARK_GRAY);
           }}
-        >
-          {DATA.map((item, index) => (
-            <Card key={item.id}>
-              <CardItem
-                hasActions
-                image={item.image}
-                track={item.track}
-                description={item.artist}
-                matches={item.match}
-                artist={item.artist}
-                id={index}
-              />
-            </Card>
-          ))}
-        </CardStack>
+          onSwipedAll={() => {
+            console.log('onSwipedAll');
+          }}
+          onSwiping={(x, _y) => {
+            if (x > swipeColorLimit) {
+              setRGB(convertRGBgreen(x));
+            } else if (x < -swipeColorLimit) {
+              setRGB(convertRGBred(x));
+            } else {
+              setRGB(DARK_GRAY);
+            }
+          }}
+          ref={(swiper) => setSwiper(swiper)}
+          cardIndex={0}
+          verticalSwipe={false}
+          backgroundColor="#4FD0E9"
+          stackSize={3}
+          infinite
+        />
       ) : null}
 
     </View>
@@ -202,6 +229,27 @@ function CardStackHandler(style: any) {
 }
 
 export default CardStackHandler;
-function queueAndSkip(accessToken: any, arg1: number) {
+function queueAndSkip(_accessToken: any, _arg1: number) {
   throw new Error('Function not implemented.');
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#F5FCFF',
+    marginHorizontal: 40,
+  },
+  card: {
+    flex: 1,
+    borderRadius: 4,
+    borderWidth: 2,
+    borderColor: '#E8E8E8',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+  },
+  text: {
+    textAlign: 'center',
+    fontSize: 50,
+    backgroundColor: 'transparent',
+  },
+});
