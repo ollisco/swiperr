@@ -1,5 +1,6 @@
-
 # Swiperr
+## About
+Swiperr is a platform for discovering new music with a mix of your favorite types of songs mixed with music you did not know you wanted, and needed. The app is connected to spotify so all you have to do is fire up spotify and start using Swiperr. With the familiar card-swiping functionality you can add the songs to your spotify library or the playlist where you feel it fits best.
 ## Showcase
 ### Spotify Data
 <p float="left">
