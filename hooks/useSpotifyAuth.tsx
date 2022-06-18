@@ -22,7 +22,6 @@ function getCounryCode(contryName: string) {
   return countryCode;
 }
 
-// TODO: Remove any
 const SpotifyAuthContext: React.Context<{
   promptAsync: any
   token: any,
@@ -161,8 +160,6 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
             console.log(err);
             addErrorText(err.response.data.error.message);
           });
-
-        // shuffle the releases array
       })
       .catch((err) => {
         console.log(err);
@@ -388,7 +385,6 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       .then((res) => {
         // console.log('Recomendations: ', res.data);
         const { tracks } = res.data;
-        // const allTracks = recommendedTracks.concat(tracks);
         setRecommendedTracks(tracks);
         const firstTrackUri = tracks[0].uri;
         queueSongAndSkip(firstTrackUri);
