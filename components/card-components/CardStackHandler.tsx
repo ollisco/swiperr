@@ -20,9 +20,11 @@ function CardStackHandler(_style: any) {
     likeSong,
     queueAndSkip,
     newReleases,
+    getNewReleases,
   } = useSpotifyContext();
   const {
     setRGB,
+    swiper,
     setSwiper,
     showType,
     recommendedIndex,
@@ -79,6 +81,11 @@ function CardStackHandler(_style: any) {
               setRecommendedIndex(recommendedIndex + 1);
               setNewReleasesIndex(newReleasesIndex + 1);
             }
+            if (cardIndex == 15) {
+              getTopUserItems();
+              getNewReleases();
+              swiper?.jumpToCardIndex(0);
+            }
           }}
           onSwipedAborted={() => {
             setRGB(DARK_GRAY);
@@ -106,7 +113,6 @@ function CardStackHandler(_style: any) {
           verticalSwipe={false}
           backgroundColor="#4FD0E9"
           stackSize={3}
-          infinite
         />
         )
         : newReleases && showType === 'new'
@@ -132,13 +138,22 @@ function CardStackHandler(_style: any) {
                 </GestureHandlerRootView>
               )}
               useViewOverflow={Platform.OS === 'ios'}
-              onSwiped={(_cardIndex) => {
+              onSwiped={(cardIndex) => {
+                console.log(cardIndex)
                 setRGB(DARK_GRAY);
                 if (token) {
-                  queueAndSkip(newReleases[newReleasesIndex + 1].uri);
-                  setRecommendedIndex(recommendedIndex + 1);
-                  setNewReleasesIndex(newReleasesIndex + 1);
+                  if (cardIndex == 15) {
+                    getTopUserItems();
+                    getNewReleases();
+                    swiper?.jumpToCardIndex(0);
+                    
+                  } else {
+                    queueAndSkip(newReleases[newReleasesIndex + 1].uri);
+                    setRecommendedIndex(recommendedIndex + 1);
+                    setNewReleasesIndex(newReleasesIndex + 1);
+                  }
                 }
+                
               }}
               onSwipedAborted={() => {
                 setRGB(DARK_GRAY);
