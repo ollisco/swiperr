@@ -50,9 +50,10 @@ function CardStackHandler(_style: any) {
       console.log('Hello', userTopItems.length, userTopItems[0].name,  showType);
       setWhat(!what);
       swiper?.jumpToCardIndex(0);
-      
     }
-  }, [userTopItems]);
+  }, [userTopItems, newReleases]);
+
+
 
   return (
     <View style={{ borderColor: '#000000', borderWidth: 3 }}>
@@ -98,7 +99,7 @@ function CardStackHandler(_style: any) {
           onSwipedAll={() => {
             console.log('swiped all');
             getTopUserItems();
-            swiper?.jumpToCardIndex(0);
+            getNewReleases();
           }}
           onSwipedRight={(index) => {
             console.log(index)
@@ -148,7 +149,7 @@ function CardStackHandler(_style: any) {
               onSwiped={(cardIndex) => {
                 console.log(cardIndex)
                 setRGB(DARK_GRAY);
-                if (token && newReleases[newReleasesIndex + 1].uri) {
+                if (token && newReleases[newReleasesIndex + 1] !== undefined) {
                     queueAndSkip(newReleases[newReleasesIndex + 1].uri);
                     setRecommendedIndex(recommendedIndex + 1);
                     setNewReleasesIndex(newReleasesIndex + 1);
@@ -160,6 +161,8 @@ function CardStackHandler(_style: any) {
               }}
               onSwipedAll={() => {
                 console.log('onSwipedAll');
+                getTopUserItems();
+                getNewReleases();
               }}
               onSwipedRight={(index) => {
                 
