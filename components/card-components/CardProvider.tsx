@@ -13,9 +13,7 @@ const SwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
   const [rgb, setRGB] = useState<string>('rgb(54, 54, 54)');
   const [pressedTrack, setPressedTrack] = useState<any>(userRecommendedTracks ? userRecommendedTracks[0] : null);
   const [showPlaylists, setShowPlaylists] = useState<boolean>(false);
-  const [swiperMock, setSwiperMock] = useState<Swiper<DataSong> | null>(null);
-  const [swiperRec, setSwiperRec] = useState<Swiper<DataSong> | null>(null);
-  const [swiperNew, setSwiperNew] = useState<Swiper<DataSong> | null>(null);
+  const [swiper, setSwiper] = useState<Swiper<DataSong> | null>(null);
 
 
   const [showType, setShowType] = useState<string>('mock');
@@ -36,12 +34,8 @@ const SwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
       setPressedTrack,
       showPlaylists,
       setShowPlaylists,
-      swiperMock,
-      setSwiperMock,
-      swiperRec,
-      setSwiperRec,
-      swiperNew,
-      setSwiperNew,
+      swiper,
+      setSwiper,
       showType,
       setShowType,
       recommendedIndex,

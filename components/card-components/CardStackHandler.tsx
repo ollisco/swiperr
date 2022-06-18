@@ -23,9 +23,7 @@ function CardStackHandler(style: any) {
   } = useSpotifyContext();
   const {
     setRGB,
-    setSwiperMock,
-    setSwiperRec,
-    setSwiperNew,
+    setSwiper,
     showType,
     recommendedIndex,
     setRecommendedIndex,
@@ -96,7 +94,7 @@ function CardStackHandler(style: any) {
               setRGB(DARK_GRAY);
             }
           }}
-          ref={(swiper) => setSwiperRec(swiper)}
+          ref={(swiper) => setSwiper(swiper)}
           cardIndex={0}
           verticalSwipe={false}
           backgroundColor="#4FD0E9"
@@ -126,7 +124,7 @@ function CardStackHandler(style: any) {
               onSwiped={(cardIndex) => {
                 setRGB(DARK_GRAY);
                 if (token) {
-                  queueAndSkip(userTopItems[newReleasesIndex + 1].uri);
+                  queueAndSkip(newReleases[newReleasesIndex + 1].uri);
                   setRecommendedIndex(recommendedIndex + 1);
                   setNewReleasesIndex(newReleasesIndex + 1);
                 }
@@ -152,7 +150,7 @@ function CardStackHandler(style: any) {
                   setRGB(DARK_GRAY);
                 }
               }}
-              ref={(swiper) => setSwiperNew(swiper)}
+              ref={(swiper) => setSwiper(swiper)}
               cardIndex={0}
               verticalSwipe={false}
               backgroundColor="#4FD0E9"
@@ -200,7 +198,7 @@ function CardStackHandler(style: any) {
               setRGB(DARK_GRAY);
             }
           }}
-          ref={(swiper) => setSwiperMock(swiper)}
+          ref={(swiper) => setSwiper(swiper)}
           cardIndex={0}
           verticalSwipe={false}
           backgroundColor="#4FD0E9"
