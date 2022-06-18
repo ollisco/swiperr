@@ -44,14 +44,8 @@ function CardStackHandler(_style: any) {
   }
   
   return (
-    <View 
-      style={{ 
-        height: DIMENSION_HEIGHT,
-      }}
-      onPress={() => {
-        console.log('Hello Card')
-      }}
-    >
+    <View style={{ borderColor: '#000000', borderWidth: 3 }}>
+
 
       {userTopItems && showType === 'recommended'
         ? (
