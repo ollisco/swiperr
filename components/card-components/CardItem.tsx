@@ -10,6 +10,7 @@ import styles, {
   DIMENSION_HEIGHT,
   DIMENSION_WIDTH,
   DISLIKE_ACTIONS,
+  ERROR,
   FLASH_ACTIONS,
   SPOTIFY_GREEN,
   WHITE,
@@ -113,7 +114,7 @@ function CardItem({
           <TouchableOpacity style={styles.miniButton}>
             <Icon
               name="close"
-              color={FLASH_ACTIONS}
+              color={ERROR}
               size={20}
               onPress={() => {
                 swiper?.swipeLeft();
@@ -195,7 +196,7 @@ function CardItem({
           <TouchableOpacity style={styles.miniButton}>
             <Icon
               name="checkmark"
-              color={FLASH_ACTIONS}
+              color={SPOTIFY_GREEN}
               size={20}
               onPress={() => {
                 swiper?.swipeRight();

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View,  Platform } from 'react-native';
+import { View, Platform } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import DATA from '../../assets/data/dummy_data_songs';
 import { DARK_GRAY } from '../../assets/styles';
@@ -218,5 +218,3 @@ function CardStackHandler(_style: any) {
 }
 
 export default CardStackHandler;
-
-
