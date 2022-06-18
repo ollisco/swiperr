@@ -1,9 +1,6 @@
-import React, { useContext, useState } from 'react';
-import {
-  View, StyleSheet, Platform,
-} from 'react-native';
+import React, { useContext } from 'react';
+import { View,  Platform } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
-import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
 import DATA from '../../assets/data/dummy_data_songs';
 import { DARK_GRAY } from '../../assets/styles';
 import useSpotifyContext from '../../hooks/useSpotifyAuth';
@@ -31,8 +28,6 @@ function CardStackHandler(_style: any) {
     newReleasesIndex,
     setNewReleasesIndex,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
-  const [what, setWhat] = useState(true);
-  const cardIndex = showType === 'recommended' ? recommendedIndex : newReleasesIndex;
 
   const swipeColorLimit = 50;
   function convertRGBgreen(d: number) {
@@ -45,9 +40,7 @@ function CardStackHandler(_style: any) {
   }
 
   React.useEffect(() => {
-    if (userTopItems.length > 0) {
-      console.log('Hello', userTopItems.length, userTopItems[0].name, showType);
-      setWhat(!what);
+    if (userTopItems.length > 0 && newReleases.length > 0) {
       swiper?.jumpToCardIndex(0);
     }
   }, [userTopItems, newReleases]);
@@ -56,7 +49,6 @@ function CardStackHandler(_style: any) {
     <View style={{ borderColor: '#000000', borderWidth: 3 }}>
       {userTopItems.length > 0 && showType === 'recommended'
         ? (
-
           <Swiper
             cards={userTopItems}
             renderCard={(
@@ -64,19 +56,15 @@ function CardStackHandler(_style: any) {
               {album: any, popularity: number, artists: string[], releaseDate: string, name: string},
               index: number,
             ) => (
-              <GestureHandlerRootView>
-                <Swipeable>
-                  <CardItem
-                    hasActions
-                    image={{ uri: card.album.images[0].url }}
-                    track={card.name}
-                    releaseDate={card.releaseDate}
-                    popularity={card.popularity}
-                    artist={card.artists.map((artist: any) => artist.name).join(', ')}
-                    id={index}
-                  />
-                </Swipeable>
-              </GestureHandlerRootView>
+              <CardItem
+                hasActions
+                image={{ uri: card.album.images[0].url }}
+                track={card.name}
+                releaseDate={card.releaseDate}
+                popularity={card.popularity}
+                artist={card.artists.map((artist: any) => artist.name).join(', ')}
+                id={index}
+              />
             )}
             useViewOverflow={Platform.OS === 'ios'}
             onSwiped={(cardIndex) => {
@@ -127,19 +115,15 @@ function CardStackHandler(_style: any) {
                 card: {images: {url: string}[], name: string, artists: any, popularity: string, releaseDate: string},
                 index: number,
               ) => (
-                <GestureHandlerRootView>
-                  <Swipeable>
-                    <CardItem
-                      hasActions
-                      image={{ uri: card.images[0].url }}
-                      track={card.name}
-                      releaseDate={card.releaseDate}
-                      popularity={card.popularity}
-                      artist={card.artists.map((artist: any) => artist.name).join(', ')}
-                      id={index}
-                    />
-                  </Swipeable>
-                </GestureHandlerRootView>
+                <CardItem
+                  hasActions
+                  image={{ uri: card.images[0].url }}
+                  track={card.name}
+                  releaseDate={card.releaseDate}
+                  popularity={card.popularity}
+                  artist={card.artists.map((artist: any) => artist.name).join(', ')}
+                  id={index}
+                />
               )}
               useViewOverflow={Platform.OS === 'ios'}
               onSwiped={(cardIndex) => {
@@ -189,18 +173,14 @@ function CardStackHandler(_style: any) {
         <Swiper
           cards={DATA}
           renderCard={(card) => (
-            <GestureHandlerRootView>
-              <Swipeable>
-                <CardItem
-                  hasActions
-                  image={card.image}
-                  track={card.track}
-                  description={card.artist}
-                  matches={card.match}
-                  artist={card.artist}
-                />
-              </Swipeable>
-            </GestureHandlerRootView>
+            <CardItem
+              hasActions
+              image={card.image}
+              track={card.track}
+              description={card.artist}
+              matches={card.match}
+              artist={card.artist}
+            />
           )}
           useViewOverflow={Platform.OS === 'ios'}
           onSwiped={(_cardIndex) => {
@@ -235,27 +215,5 @@ function CardStackHandler(_style: any) {
 }
 
 export default CardStackHandler;
-function queueAndSkip(_accessToken: any, _arg1: number) {
-  throw new Error('Function not implemented.');
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5FCFF',
-    marginHorizontal: 40,
-  },
-  card: {
-    flex: 1,
-    borderRadius: 4,
-    borderWidth: 2,
-    borderColor: '#E8E8E8',
-    justifyContent: 'center',
-    backgroundColor: 'white',
-  },
-  text: {
-    textAlign: 'center',
-    fontSize: 50,
-    backgroundColor: 'transparent',
-  },
-});
+
