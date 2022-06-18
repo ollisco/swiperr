@@ -32,13 +32,14 @@ export default StyleSheet.create({
     borderWidth: 1,
     //borderColor: SPOTIFY_GREEN,
     alignItems: "center",
-    margin: 5,
+    // margin: 5,
     elevation: 1,
+    height: DIMENSION_HEIGHT *0.8,
+    marginTop: 10,
     shadowOpacity: 0.05,
     shadowRadius: 10,
     shadowColor: BLACK,
     shadowOffset: { height: 0, width: 0 },
-    // center children
     justifyContent: "center",
 
   },
