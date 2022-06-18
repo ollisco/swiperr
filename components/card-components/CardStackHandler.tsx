@@ -84,6 +84,8 @@ function CardStackHandler(_style: any) {
               console.log('swiped all');
               getTopUserItems();
               getNewReleases();
+              setNewReleasesIndex(0);
+              setRecommendedIndex(0);
             }}
             onSwipedRight={(index) => {
               console.log(index);
@@ -139,9 +141,10 @@ function CardStackHandler(_style: any) {
                 setRGB(DARK_GRAY);
               }}
               onSwipedAll={() => {
-                console.log('onSwipedAll');
                 getTopUserItems();
                 getNewReleases();
+                setNewReleasesIndex(0);
+                setRecommendedIndex(0);
               }}
               onSwipedRight={(index) => {
                 if (token) {
