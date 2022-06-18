@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   View, StyleSheet, Platform,
 } from 'react-native';
@@ -32,7 +32,7 @@ function CardStackHandler(_style: any) {
     newReleasesIndex,
     setNewReleasesIndex,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
-
+  const [what, setWhat] = useState(true);
   const cardIndex = showType === 'recommended' ? recommendedIndex : newReleasesIndex;
 
   const swipeColorLimit = 50;
@@ -44,13 +44,21 @@ function CardStackHandler(_style: any) {
     const m = d < 110 ? 110 : -d;
     return `rgb(${m}, ${54 - ((54 * -d) / 300) + 20}, ${54 - ((54 * -d) / 300) + 20})`;
   }
-  
+
+  React.useEffect(() => {
+    if (userTopItems.length > 0) {
+      console.log('Hello', userTopItems.length, userTopItems[0].name,  showType);
+      setWhat(!what);
+      swiper?.jumpToCardIndex(0);
+      
+    }
+  }, [userTopItems]);
+
   return (
     <View style={{ borderColor: '#000000', borderWidth: 3 }}>
-
-
-      {userTopItems && showType === 'recommended'
+      {userTopItems.length > 0 && showType === 'recommended'
         ? (
+          
           <Swiper
           cards={userTopItems}
           renderCard={(
@@ -76,22 +84,21 @@ function CardStackHandler(_style: any) {
           onSwiped={(cardIndex) => {
             console.log(cardIndex)
             setRGB(DARK_GRAY);
-            if (token) {
+            //console.log(token && userTopItems[recommendedIndex + 1].uri);
+            if (token && userTopItems[recommendedIndex + 1] !== undefined) {
               queueAndSkip(userTopItems[recommendedIndex + 1].uri);
               setRecommendedIndex(recommendedIndex + 1);
               setNewReleasesIndex(newReleasesIndex + 1);
             }
-            if (cardIndex == 15) {
-              getTopUserItems();
-              getNewReleases();
-              swiper?.jumpToCardIndex(0);
-            }
+            
           }}
           onSwipedAborted={() => {
             setRGB(DARK_GRAY);
           }}
           onSwipedAll={() => {
-            console.log('onSwipedAll');
+            console.log('swiped all');
+            getTopUserItems();
+            swiper?.jumpToCardIndex(0);
           }}
           onSwipedRight={(index) => {
             console.log(index)
@@ -141,20 +148,13 @@ function CardStackHandler(_style: any) {
               onSwiped={(cardIndex) => {
                 console.log(cardIndex)
                 setRGB(DARK_GRAY);
-                if (token) {
-                  if (cardIndex == 15) {
-                    getTopUserItems();
-                    getNewReleases();
-                    swiper?.jumpToCardIndex(0);
-                    
-                  } else {
+                if (token && newReleases[newReleasesIndex + 1].uri) {
                     queueAndSkip(newReleases[newReleasesIndex + 1].uri);
                     setRecommendedIndex(recommendedIndex + 1);
                     setNewReleasesIndex(newReleasesIndex + 1);
                   }
                 }
-                
-              }}
+              }
               onSwipedAborted={() => {
                 setRGB(DARK_GRAY);
               }}
@@ -188,7 +188,7 @@ function CardStackHandler(_style: any) {
 
           : null}
 
-      {!newReleases && !userTopItems ? (
+      {!newReleases && userTopItems.length === 0 ? (
         <Swiper
           cards={DATA}
           renderCard={(card) => (

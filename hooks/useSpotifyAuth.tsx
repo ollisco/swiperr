@@ -88,7 +88,7 @@ interface Props {
 
 export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [user, setUser] = useState(null);
-  const [recommendedTracks, setRecommendedTracks] = useState(null);
+  const [recommendedTracks, setRecommendedTracks] = useState([]);
   const [userPlaylists, setUserPlaylists] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [likedSongs, setLikedSongs] = useState(null);
@@ -388,21 +388,25 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       .then((res) => {
         // console.log('Recomendations: ', res.data);
         const { tracks } = res.data;
+        //const allTracks = recommendedTracks.concat(tracks);
         setRecommendedTracks(tracks);
         const firstTrackUri = tracks[0].uri;
         queueSongAndSkip(firstTrackUri);
+        console.log(tracks[0].name);
       })
       .catch((res) => console.log('Erec: ', res));
 
-    const n = 10;
-    topArtistsText.sort(() => 0.5 - Math.random());
-    topTracksText.sort(() => 0.5 - Math.random());
-    const both = allGenres.concat(otherGenres);
-    both.sort(() => 0.5 - Math.random());
-    setTopArtists(topArtistsText.slice(0, n).sort().join(', '));
-    setTopTracks(topTracksText.slice(0, n).sort().join(', '));
-    setTopGenres(both.slice(0, n).sort().join(', '));
-    setVolume(50);
+    if (recommendedTracks.length === 0) {
+      const n = 10;
+      topArtistsText.sort(() => 0.5 - Math.random());
+      topTracksText.sort(() => 0.5 - Math.random());
+      const both = allGenres.concat(otherGenres);
+      both.sort(() => 0.5 - Math.random());
+      setTopArtists(topArtistsText.slice(0, n).sort().join(', '));
+      setTopTracks(topTracksText.slice(0, n).sort().join(', '));
+      setTopGenres(both.slice(0, n).sort().join(', '));
+      setVolume(50);
+    }
   }
 
   async function getLikedSongs() {

@@ -31,7 +31,7 @@ function CardItem({
 }: CardItemT) {
   const {
     volume, updateVolume, rgb, setPressedTrack, setShowPlaylists, showType,
-    pressedTrack,
+    pressedTrack, swiper
 
   } = useContext(SwipeCardContext) as SwipedCardContextT;
   const {
@@ -116,6 +116,17 @@ function CardItem({
 
           <TouchableOpacity style={styles.miniButton}>
             <Icon
+              name="close"
+              color={FLASH_ACTIONS}
+              size={20}
+              onPress={() => {
+                swiper?.swipeLeft();
+              }}
+
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.miniButton}>
+            <Icon
               name="copy-outline"
               color={FLASH_ACTIONS}
               size={20}
@@ -184,6 +195,17 @@ function CardItem({
               }}
             />
 
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.miniButton}>
+            <Icon
+              name="checkmark"
+              color={FLASH_ACTIONS}
+              size={20}
+              onPress={() => {
+                swiper?.swipeRight();
+              }}
+
+            />
           </TouchableOpacity>
 
         </View>

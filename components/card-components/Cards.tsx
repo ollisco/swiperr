@@ -24,14 +24,7 @@ function Cards(props: Props) {
   const recommendedActiveStyle = showType === 'recommended' ? styles.exploreTopCenterTextActive : {};
   const newActiveStyle = showType === 'new' ? styles.exploreTopCenterTextActive : {};
 
-  React.useEffect(() => {
-    if (newReleases && userRecommendedTracks) {
-      console.log('Studying behavior');
-      if (showType === 'new') {
-        queueAndSkip(newReleases[newReleasesIndex].uri);
-      }
-    }
-  }, [newReleases, userRecommendedTracks]);
+  
 
   return (
     <View style={styles.containerHome}>
