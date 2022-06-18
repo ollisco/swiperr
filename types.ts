@@ -31,8 +31,12 @@ export type SwipedCardContextT = {
   setPressedTrack: (value: any) => void;
   showPlaylists: boolean;
   setShowPlaylists: (value: boolean) => void;
-  swiper: CardStack | null;
-  setSwiper: (value: Swiper<DataSong> | null) => void;
+  swiperMock: Swiper<DataSong> | null;
+  setSwiperMock: (value: Swiper<DataSong> | null) => void;
+  swiperRec: Swiper<DataSong> | null;
+  setSwiperRec: (value: Swiper<DataSong> | null) => void;
+  swiperNew: Swiper<DataSong> | null;
+  setSwiperNew: (value: Swiper<DataSong> | null) => void;
   showType: string;
   setShowType: (value: string) => void;
   recommendedIndex: number;
