@@ -17,12 +17,11 @@ export const LIKE_ACTIONS = "#B644B2";
 export const DISLIKE_ACTIONS = "#363636";
 export const FLASH_ACTIONS = "#5028D7";
 
-
 export const DIMENSION_WIDTH = Dimensions.get("window").width;
 export const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 
-const CARD_HEIGHT = DIMENSION_HEIGHT * 0.75;
+export const CARD_HEIGHT = DIMENSION_HEIGHT * 0.75;
 
 export default StyleSheet.create({
   // COMPONENT - CARD ITEM
