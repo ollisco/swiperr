@@ -50,9 +50,8 @@ function CardItem({
   const isLandscape = () => DIMENSION_WIDTH >= DIMENSION_HEIGHT && Platform.OS === 'web';
 
   const landScapeWeb = isLandscape() ? styles.containerCardItemWeb : {};
-  const cardOutline = user ? { borderColor: SPOTIFY_GREEN } : {};
 
-  const styleContainer = [styles.containerCardItem, { backgroundColor: rgb }, cardOutline, landScapeWeb];
+  const styleContainer = [styles.containerCardItem, { backgroundColor: rgb }, landScapeWeb];
   const flexDir = isLandscape() ? 'row' : 'column';
   return (
 
