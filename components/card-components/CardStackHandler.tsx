@@ -12,7 +12,7 @@ import { SwipedCardContextT } from '../../types';
 import CardItem from './CardItem';
 import { SwipeCardContext } from './CardProvider';
 
-function CardStackHandler(style: any) {
+function CardStackHandler(_style: any) {
   const {
     recommendedTracks: userTopItems,
     getUserRecommendedTracks: getTopUserItems,
@@ -49,7 +49,11 @@ function CardStackHandler(style: any) {
         ? (
           <Swiper
           cards={userTopItems}
-          renderCard={(card: {album: any, popularity: number, artists: string[], releaseDate: string, name: string}) => (
+          renderCard={(
+            card: 
+              {album: any, popularity: number, artists: string[], releaseDate: string, name: string},
+            index: number,
+              ) => (
             <GestureHandlerRootView>
               <Swipeable>
                 <CardItem
@@ -59,6 +63,7 @@ function CardStackHandler(style: any) {
                   releaseDate={card.releaseDate}
                   popularity={card.popularity}
                   artist={card.artists.map((artist: any) => artist.name).join(', ')}
+                  id={index}
                 />
               </Swipeable>
             </GestureHandlerRootView>
@@ -106,7 +111,10 @@ function CardStackHandler(style: any) {
           ? (
             <Swiper
               cards={newReleases}
-              renderCard={(card: {images: {url: string}[], name: string, artists: any, popularity: string, releaseDate: string}) => (
+              renderCard={(
+                card: {images: {url: string}[], name: string, artists: any, popularity: string, releaseDate: string}, 
+                index: number
+                ) => (
                 <GestureHandlerRootView>
                   <Swipeable>
                     <CardItem
@@ -116,12 +124,13 @@ function CardStackHandler(style: any) {
                       releaseDate={card.releaseDate}
                       popularity={card.popularity}
                       artist={card.artists.map((artist: any) => artist.name).join(', ')}
+                      id={index}
                     />
                   </Swipeable>
                 </GestureHandlerRootView>
               )}
               useViewOverflow={Platform.OS === 'ios'}
-              onSwiped={(cardIndex) => {
+              onSwiped={(_cardIndex) => {
                 setRGB(DARK_GRAY);
                 if (token) {
                   queueAndSkip(newReleases[newReleasesIndex + 1].uri);
@@ -180,7 +189,7 @@ function CardStackHandler(style: any) {
             </GestureHandlerRootView>
           )}
           useViewOverflow={Platform.OS === 'ios'}
-          onSwiped={(cardIndex) => {
+          onSwiped={(_cardIndex) => {
             setRGB(DARK_GRAY);
           }}
           onSwipedAborted={() => {
@@ -212,7 +221,7 @@ function CardStackHandler(style: any) {
 }
 
 export default CardStackHandler;
-function queueAndSkip(accessToken: any, arg1: number) {
+function queueAndSkip(_accessToken: any, _arg1: number) {
   throw new Error('Function not implemented.');
 }
 
