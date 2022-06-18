@@ -40,6 +40,7 @@ function CardStackHandler(style: any) {
   }
   
   return (
+<<<<<<< HEAD
     <View 
       style={{ 
         height: DIMENSION_HEIGHT,
@@ -48,6 +49,9 @@ function CardStackHandler(style: any) {
         console.log('Hello Card')
       }}
     >
+=======
+    <View style={{ borderColor: '#000000', borderWidth: 3 }}>
+>>>>>>> 1a70648 (Revert "Responsive card size (#50)")
 
       {userTopItems && showType === 'recommended'
         ? (
