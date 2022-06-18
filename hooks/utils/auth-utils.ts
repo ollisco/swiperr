@@ -5,6 +5,7 @@ import { REDIRECT_URI, REDIRECT_URI_WEB } from '@env';
 const redirectUri = Platform.OS === 'web' ? REDIRECT_URI_WEB : REDIRECT_URI;
 console.log(REDIRECT_URI, REDIRECT_URI_WEB);
 
+// TODO: add all endpoints to here instead of useSpotifyAuth
 const authorizationEndpoint = 'https://accounts.spotify.com/authorize';
 const tokenEndpoint = 'https://accounts.spotify.com/api/token';
 const meEndpoint = 'https://api.spotify.com/v1/me';

@@ -10,7 +10,7 @@ type State = {
 };
 
 // A hook to automatically exchange the auth token for an access token.
-// this should be performed in a server and not in the application.
+// I think this should be performed on server and not in the application.
 function useAutoExchange(code?: string): State {
   const [currentState, setCurrentState] = React.useReducer(
     (state: State, action: Partial<State>) => ({ ...state, ...action }),
