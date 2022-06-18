@@ -102,7 +102,6 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
 
   // Error handling
   const { addErrorText } = useError();
-
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
     scopes: ['user-read-email', 'user-read-private', 'user-top-read', 'user-library-read',
