@@ -13,12 +13,11 @@ type Props = {}
 
 function Cards(props: Props) {
   const {
-    user, queueAndSkip, token, recommendedTracks: userRecommendedTracks, newReleases,
+    user, queueAndSkip, recommendedTracks: userRecommendedTracks, newReleases,
 
   } = useSpotifyContext();
   const {
     showType, setShowType, recommendedIndex, newReleasesIndex,
-    setRecommendedIndex, setNewReleasesIndex,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
 
   const recommendedActiveStyle = showType === 'recommended' ? styles.exploreTopCenterTextActive : {};

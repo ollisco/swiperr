@@ -3,8 +3,6 @@ import {
   Text, View, Image, TouchableOpacity, Platform,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
-// import Clipboard from '@react-native-clipboard/clipboard';
-
 import Icon from '../Icon';
 import { CardItemT, SwipedCardContextT } from '../../types';
 
@@ -31,7 +29,7 @@ function CardItem({
 }: CardItemT) {
   const {
     volume, updateVolume, rgb, setPressedTrack, setShowPlaylists, showType,
-    pressedTrack, swiper,
+    swiper,
 
   } = useContext(SwipeCardContext) as SwipedCardContextT;
   const {
@@ -45,7 +43,6 @@ function CardItem({
     newReleases,
   } = useSpotifyContext();
 
-  // temp fix
   if (track.length > 25) {
     track = `${track.slice(0, 25)}...`;
   }
