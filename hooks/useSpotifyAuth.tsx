@@ -388,7 +388,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       .then((res) => {
         // console.log('Recomendations: ', res.data);
         const { tracks } = res.data;
-        //const allTracks = recommendedTracks.concat(tracks);
+        // const allTracks = recommendedTracks.concat(tracks);
         setRecommendedTracks(tracks);
         const firstTrackUri = tracks[0].uri;
         queueSongAndSkip(firstTrackUri);
@@ -536,7 +536,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         playlists: userPlaylists,
         addTrackToPlaylist,
         newReleases,
-        getNewReleases, 
+        getNewReleases,
         topTracks,
         topArtists,
         topGenres,

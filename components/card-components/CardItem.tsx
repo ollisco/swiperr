@@ -31,7 +31,7 @@ function CardItem({
 }: CardItemT) {
   const {
     volume, updateVolume, rgb, setPressedTrack, setShowPlaylists, showType,
-    pressedTrack, swiper
+    pressedTrack, swiper,
 
   } = useContext(SwipeCardContext) as SwipedCardContextT;
   const {

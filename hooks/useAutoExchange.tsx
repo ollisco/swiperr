@@ -23,7 +23,7 @@ function useAutoExchange(code?: string): State {
       setCurrentState({ token: null, tokenExchangeError: null });
       return;
     }
-    
+
     exchangeCodeAsync(
       {
         clientId: CLIENT_ID,

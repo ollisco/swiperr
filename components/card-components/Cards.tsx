@@ -24,8 +24,6 @@ function Cards(props: Props) {
   const recommendedActiveStyle = showType === 'recommended' ? styles.exploreTopCenterTextActive : {};
   const newActiveStyle = showType === 'new' ? styles.exploreTopCenterTextActive : {};
 
-  
-
   return (
     <View style={styles.containerHome}>
       <View style={styles.top}>

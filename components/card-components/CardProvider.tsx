@@ -1,5 +1,4 @@
 import { createContext, FC, useState } from 'react';
-import CardStack from 'react-native-card-stack-swiper';
 import Swiper from 'react-native-deck-swiper';
 import useSpotifyContext from '../../hooks/useSpotifyAuth';
 import { DataSong, SwipedCardContextT } from '../../types';
@@ -14,7 +13,6 @@ const SwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
   const [pressedTrack, setPressedTrack] = useState<any>(userRecommendedTracks ? userRecommendedTracks[0] : null);
   const [showPlaylists, setShowPlaylists] = useState<boolean>(false);
   const [swiper, setSwiper] = useState<Swiper<DataSong> | null>(null);
-
 
   const [showType, setShowType] = useState<string>('mock');
   const [recommendedIndex, setRecommendedIndex] = useState(0);
