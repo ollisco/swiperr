@@ -5,7 +5,7 @@ import {
 import Swiper from 'react-native-deck-swiper';
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
 import DATA from '../../assets/data/dummy_data_songs';
-import { DARK_GRAY } from '../../assets/styles';
+import { CARD_HEIGHT, DARK_GRAY, DIMENSION_HEIGHT } from '../../assets/styles';
 import useSpotifyContext from '../../hooks/useSpotifyAuth';
 import { SwipedCardContextT } from '../../types';
 import CardItem from './CardItem';
@@ -41,8 +41,13 @@ function CardStackHandler(_style: any) {
     const m = d < 110 ? 110 : -d;
     return `rgb(${m}, ${54 - ((54 * -d) / 300) + 20}, ${54 - ((54 * -d) / 300) + 20})`;
   }
+  
   return (
-    <View style={{ borderColor: '#fff', borderWidth: 3 }}>
+    <View 
+      style={{height: DIMENSION_HEIGHT}}
+      onPress={() => {console.log('Hello Card')}}
+    >
+
 
       {userTopItems && showType === 'recommended'
         ? (
@@ -101,7 +106,7 @@ function CardStackHandler(_style: any) {
             ref={(swiper) => setSwiper(swiper)}
             cardIndex={0}
             verticalSwipe={false}
-            backgroundColor="#4FD0E9"
+            backgroundColor="#000000"
             stackSize={3}
             infinite
           />
@@ -160,7 +165,7 @@ function CardStackHandler(_style: any) {
               ref={(swiper) => setSwiper(swiper)}
               cardIndex={0}
               verticalSwipe={false}
-              backgroundColor="#4FD0E9"
+              backgroundColor="#000000"
               stackSize={3}
               infinite
             />
@@ -173,18 +178,14 @@ function CardStackHandler(_style: any) {
         <Swiper
           cards={DATA}
           renderCard={(card) => (
-            <GestureHandlerRootView>
-              <Swipeable>
-                <CardItem
-                  hasActions
-                  image={card.image}
-                  track={card.track}
-                  description={card.artist}
-                  matches={card.match}
-                  artist={card.artist}
-                />
-              </Swipeable>
-            </GestureHandlerRootView>
+            <CardItem
+              hasActions
+              image={card.image}
+              track={card.track}
+              description={card.artist}
+              matches={card.match}
+              artist={card.artist}
+            />
           )}
           useViewOverflow={Platform.OS === 'ios'}
           onSwiped={(_cardIndex) => {
@@ -208,9 +209,10 @@ function CardStackHandler(_style: any) {
           ref={(swiper) => setSwiper(swiper)}
           cardIndex={0}
           verticalSwipe={false}
-          backgroundColor="#4FD0E9"
+          backgroundColor="#000000"
           stackSize={3}
           infinite
+          stackScale={10}
         />
       ) : null}
 

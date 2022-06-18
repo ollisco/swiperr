@@ -17,12 +17,11 @@ export const LIKE_ACTIONS = "#B644B2";
 export const DISLIKE_ACTIONS = "#363636";
 export const FLASH_ACTIONS = "#5028D7";
 
-
 export const DIMENSION_WIDTH = Dimensions.get("window").width;
 export const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 
-const CARD_HEIGHT = DIMENSION_HEIGHT * 0.75;
+export const CARD_HEIGHT =  (DIMENSION_HEIGHT - 100) * 0.8;
 
 export default StyleSheet.create({
   // COMPONENT - CARD ITEM
@@ -30,18 +29,23 @@ export default StyleSheet.create({
     backgroundColor: DARK_GRAY,
     borderRadius: 8,
     borderWidth: 1,
-    //borderColor: SPOTIFY_GREEN,
     alignItems: "center",
-    // margin: 5,
     elevation: 1,
-    height: DIMENSION_HEIGHT *0.8,
-    marginTop: 10,
+    height: CARD_HEIGHT,
+    marginTop: 0,
     shadowOpacity: 0.05,
     shadowRadius: 10,
     shadowColor: BLACK,
     shadowOffset: { height: 0, width: 0 },
     justifyContent: "center",
+  },
 
+  // LARGE CARD (CARDITEM)
+  imageStyle: {
+    borderRadius: 8,
+    width:  DIMENSION_WIDTH - 80,
+    height: CARD_HEIGHT / 2,
+    margin: 20,
   },
 
   containerCardItemWeb: {
@@ -82,7 +86,7 @@ export default StyleSheet.create({
   playlistText: {
     fontSize: 30,
     color: WHITE,
-    marginLeft: "5%"
+    //marginLeft: "5%"
   },
 
   matchesCardItem: {
@@ -214,13 +218,7 @@ export default StyleSheet.create({
       fontSize: 15,
       textAlign: "center",
     },
-  // LARGE CARD (CARDITEM)
-  imageStyle: {
-      borderRadius: 8,
-      width:  DIMENSION_WIDTH - 80,
-      height: (DIMENSION_HEIGHT - 80)/2,
-      margin: 20,
-    },
+  
   
 
   trackStyle: {

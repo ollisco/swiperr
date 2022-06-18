@@ -27,7 +27,6 @@ function CardItem({
   track,
   releaseDate,
   id: index,
-
 }: CardItemT) {
   const {
     volume, updateVolume, rgb, setPressedTrack, setShowPlaylists, showType,
@@ -179,7 +178,6 @@ function CardItem({
                     console.log('invalid showType');
                   }
                 }
-
                 setShowPlaylists(true);
               }}
             />
@@ -189,7 +187,7 @@ function CardItem({
         </View>
         )}
       </View>
-      <View style={{ flexDirection: flexDir }}>
+      <View style={{ flexDirection: flexDir, border: '1px solid white' }}>
         <View>
           <Text style={[styles.reminderText, { fontSize: 15 }]}>
             You need to have the spotify app active to use this application.

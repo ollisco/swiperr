@@ -55,9 +55,7 @@ function Playlists() {
                   />
                 </TouchableOpacity>
               ))
-
             ) : (
-
               dummyDataPlaylists.map((item: any) => (
                 <TouchableOpacity
                   key={item.id}
