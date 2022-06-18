@@ -22,7 +22,11 @@ export const DIMENSION_WIDTH = Dimensions.get("window").width;
 export const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 
-const CARD_HEIGHT = DIMENSION_HEIGHT * 0.75;
+
+
+
+
+export const CARD_HEIGHT = DIMENSION_HEIGHT * 0.75;
 
 export default StyleSheet.create({
   // COMPONENT - CARD ITEM
