@@ -17,8 +17,10 @@ web-build/
 GoogleService-Info.plist
 google-services.json
 
-# Vs Code
+# Editors
+.idea
 .vscode
+*.iml
 
-# Env
+# Environment
 .env
