@@ -22,11 +22,7 @@ export const DIMENSION_WIDTH = Dimensions.get("window").width;
 export const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 
-
-
-
-
-export const CARD_HEIGHT = DIMENSION_HEIGHT * 0.75;
+export const CARD_HEIGHT = (DIMENSION_HEIGHT - 50) * 0.8;
 
 export default StyleSheet.create({
   // COMPONENT - CARD ITEM
@@ -35,6 +31,7 @@ export default StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     //borderColor: SPOTIFY_GREEN,
+    height: CARD_HEIGHT,
     alignItems: "center",
     margin: 5,
     elevation: 1,
@@ -44,7 +41,16 @@ export default StyleSheet.create({
     shadowOffset: { height: 0, width: 0 },
     // center children
     justifyContent: "center",
+    marginTop: -30,
+    marginLeft: -20,
 
+  },
+
+  imageStyle: {
+    borderRadius: 8,
+    width:  DIMENSION_WIDTH - 80,
+    height: CARD_HEIGHT / 2,
+    margin: 20,
   },
 
   containerCardItemWeb: {
@@ -218,12 +224,7 @@ export default StyleSheet.create({
       textAlign: "center",
     },
   // LARGE CARD (CARDITEM)
-  imageStyle: {
-      borderRadius: 8,
-      width:  DIMENSION_WIDTH - 80,
-      height: (DIMENSION_HEIGHT - 80)/2,
-      margin: 20,
-    },
+  
   
 
   trackStyle: {
