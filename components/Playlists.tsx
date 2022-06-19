@@ -13,13 +13,22 @@ import Icon from './Icon';
 import { dummyDataPlaylists } from '../assets/data/dummy_data_playlists';
 
 function Playlists() {
-  const { playlists, addTrackToPlaylist, token } = useSpotifyContext();
+  const { playlists, addTrackToPlaylist, token, 
+    queueAndSkip,
+    recommendedTracks,
+    newReleases,
+  } = useSpotifyContext();
 
   const {
     pressedTrack,
     showPlaylists,
     setShowPlaylists,
     swiper,
+    newReleasesIndex,
+    setNewReleasesIndex,
+    recommendedIndex,
+    setRecommendedIndex,
+    showType,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
 
   if (showPlaylists) {
@@ -46,7 +55,17 @@ function Playlists() {
                   onPress={() => {
                     addTrackToPlaylist(item.id, pressedTrack.uri);
                     setShowPlaylists(false);
-                    swiper?.swipeRight();
+                    swiper?.swipeTop();
+                    if (showType === 'new' && newReleases[newReleasesIndex + 1] !== undefined) {
+                      queueAndSkip(newReleases[newReleasesIndex + 1].uri);
+                      setRecommendedIndex(recommendedIndex + 1);
+                      setNewReleasesIndex(newReleasesIndex + 1);
+                      
+                    } else if (showType === 'recommended') {
+                      queueAndSkip(recommendedTracks[recommendedIndex + 1].uri);
+                      setRecommendedIndex(recommendedIndex + 1);
+                      setNewReleasesIndex(newReleasesIndex + 1);
+                    }
                   }}
                 >
                   <CardItemRow
@@ -88,3 +107,7 @@ function Playlists() {
   return (<></>);
 }
 export default Playlists;
+function newReleasesIndex(newReleasesIndex: any) {
+  throw new Error('Function not implemented.');
+}
+
