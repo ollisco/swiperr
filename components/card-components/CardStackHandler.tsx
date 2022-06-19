@@ -17,6 +17,7 @@ function CardStackHandler(_style: any) {
     queueAndSkip,
     newReleases,
     getNewReleases,
+    chosenMarket
   } = useSpotifyContext();
   const {
     setRGB,
@@ -27,6 +28,7 @@ function CardStackHandler(_style: any) {
     setRecommendedIndex,
     newReleasesIndex,
     setNewReleasesIndex,
+
   } = useContext(SwipeCardContext) as SwipedCardContextT;
 
   const swipeColorLimit = 50;
@@ -44,6 +46,15 @@ function CardStackHandler(_style: any) {
       swiper?.jumpToCardIndex(0);
     }
   }, [userTopItems, newReleases]);
+
+  React.useEffect(() => {
+    if (showType === 'new') {
+      queueAndSkip(newReleases[0].uri);
+      setNewReleasesIndex(0);
+      setRecommendedIndex(0);
+      
+    }
+  }, [newReleases]);
 
   return (
     <View style={{ borderColor: '#000000', borderWidth: 3 }}>
@@ -81,7 +92,6 @@ function CardStackHandler(_style: any) {
               setRGB(DARK_GRAY);
             }}
             onSwipedAll={() => {
-              console.log('swiped all');
               getTopUserItems();
               getNewReleases();
               setNewReleasesIndex(0);
@@ -105,7 +115,7 @@ function CardStackHandler(_style: any) {
             ref={(swiper) => setSwiper(swiper)}
             cardIndex={0}
             verticalSwipe={false}
-            backgroundColor="#4FD0E9"
+            backgroundColor="#000000"
             stackSize={3}
           />
         )
@@ -163,7 +173,7 @@ function CardStackHandler(_style: any) {
               ref={(swiper) => setSwiper(swiper)}
               cardIndex={0}
               verticalSwipe={false}
-              backgroundColor="#4FD0E9"
+              backgroundColor="#000000"
               stackSize={3}
               infinite
             />

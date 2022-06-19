@@ -39,7 +39,12 @@ function MockSettingItems() {
 
 function SettingItems() {
   const {
-    playlists, setDefaultPlaylist, availableMarkets, chosenMarket, setChosenMarket,
+    playlists, 
+    setDefaultPlaylist, 
+    availableMarkets, 
+    chosenMarket, 
+    setChosenMarket, 
+    queueAndSkip
   } = useSpotifyContext();
 
   const likedSongs = 'Liked songs';
