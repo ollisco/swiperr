@@ -207,7 +207,6 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
           name: getCountryName(countryCode),
           nameWithFlag: getLocation(countryCode),
         }));
-        console.log(countries);
         // sort countries alphabetically
         countries = countries.sort((a: {code: string, name: string}, b: {code: string, name: string}) => {
           if (a.name < b.name) {
@@ -215,7 +214,6 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
           }
           return 1;
         });
-        console.log(countries);
         setAvailableMarkets(countries);
       })
       .catch((err) => {
@@ -432,7 +430,6 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         const { message } = err.response.data.error;
         const { reason } = err.response.data.error;
         addErrorText(`${message}. ${reason}`);
-        console.log('P', err.response);
       });
   }
 
