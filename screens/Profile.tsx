@@ -11,6 +11,7 @@ import DEMO from '../assets/data/dummy_data_profiles';
 import styles, { WHITE } from '../assets/styles';
 import BG_IMAGE from '../assets/images/bg2.jpg';
 import useSpotifyContext from '../hooks/useSpotifyAuth';
+import { getLocation } from '../components/utils/country-utils';
 
 function Profile() {
   const {
@@ -25,21 +26,7 @@ function Profile() {
     location,
   } = DEMO[7];
 
-  function getFlagEmoji(countryCode: string) {
-    const codePoints = countryCode
-      .toUpperCase()
-      .split('')
-      .map((char) => 127397 + char.charCodeAt(0));
-    return String.fromCodePoint(...codePoints);
-  }
-
-  function getLocation(countryCode: string) {
-    // get flag emoji
-    const flagEmoji = getFlagEmoji(countryCode);
-    // get country name
-    const country = countries[countryCode].name;
-    return `${country} ${flagEmoji}`;
-  }
+  
 
   return (
 

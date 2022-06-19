@@ -3,24 +3,16 @@ import { useAuthRequest } from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
 import { CLIENT_ID, CLIENT_SECRET } from '@env';
 import axios from 'axios';
-import { countries } from 'country-data';
 import useAutoExchange from './useAutoExchange';
 import {
   discovery, redirectUri, meEndpoint, recomendationEndpoint,
 } from './utils/auth-utils';
 import useError from './useError';
+import { getCountryName, getLocation } from '../components/utils/country-utils';
 
 WebBrowser.maybeCompleteAuthSession();
 
-function getLocation(countryCode: string) {
-  const country = countries[countryCode].name;
-  return country;
-}
 
-function getCounryCode(contryName: string) {
-  const countryCode = countries[contryName].alpha2;
-  return countryCode;
-}
 
 const SpotifyAuthContext: React.Context<{
   promptAsync: any
@@ -212,7 +204,8 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         // map each country code to its country name
         let countries = countryCodes.map((countryCode: string) => ({
           code: countryCode,
-          name: getLocation(countryCode),
+          name: getCountryName(countryCode),
+          nameWithFlag: getLocation(countryCode),
         }));
         console.log(countries);
         // sort countries alphabetically
