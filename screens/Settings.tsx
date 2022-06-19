@@ -7,6 +7,7 @@ import BG_IMAGE from '../assets/images/bg2.jpg';
 import { SettingItemSwitch } from '../components';
 import SettingItemDropdown from '../components/SettingItemDropdown';
 import useSpotifyContext from '../hooks/useSpotifyAuth';
+import { getLocation } from '../components/utils/country-utils';
 
 function MockSettingItems() {
   const [exampleBool, setExampleBool] = useState(false);
@@ -56,11 +57,17 @@ function SettingItems() {
       <SettingItemDropdown
         header="Country"
         explanation="Music will be adapted to the given country. New releases will be based on the country you choose."
-        defaultValue={chosenMarket || ''}
-        options={availableMarkets.map((country: {code: string; name: string}) => country.name)}
+        defaultValue={getLocation(chosenMarket) || ''}
+        options={availableMarkets.map((
+          country: {
+            code: string,
+            name: string, 
+            nameWithFlag: string
+          }     
+        ) => country.nameWithFlag
+        )}
         onSelect={(value: string) => {
-          // this is uneffective should probably make getLocation ad getCountrycode public
-          setChosenMarket(availableMarkets.find((country: {name: string}) => country.name === value).code);
+          setChosenMarket(availableMarkets.find((country: {nameWithFlag: string}) => country.nameWithFlag === value).code);
         }}
       />
 
