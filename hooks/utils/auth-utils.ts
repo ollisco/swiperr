@@ -6,9 +6,10 @@ import { makeRedirectUri } from 'expo-auth-session';
 
 //const redirectUri = Platform.OS === 'web' ? REDIRECT_URI_WEB : REDIRECT_URI;
 
-const redirectUri = makeRedirectUri({
-});
+const redirectUri = makeRedirectUri({});
 console.log(redirectUri);
+
+
 // TODO: add all endpoints to here instead of useSpotifyAuth
 const authorizationEndpoint = 'https://accounts.spotify.com/authorize';
 const tokenEndpoint = 'https://accounts.spotify.com/api/token';
