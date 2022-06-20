@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { View, Platform } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import DATA from '../../assets/data/dummy_data_songs';
-import { DARK_GRAY } from '../../assets/styles';
+import { CARD_HEIGHT, DARK_GRAY } from '../../assets/styles';
 import useSpotifyContext from '../../hooks/useSpotifyAuth';
 import { SwipedCardContextT } from '../../types';
 import CardItem from './CardItem';
@@ -57,7 +57,7 @@ function CardStackHandler(_style: any) {
   }, [newReleases]);
 
   return (
-    <View style={{ borderColor: '#000000', borderWidth: 3 }}>
+    <View style={{ borderColor: '#0000000', borderWidth: 3, height: CARD_HEIGHT }}>
       {userTopItems.length > 0 && showType === 'recommended'
         ? (
           <Swiper
@@ -217,7 +217,7 @@ function CardStackHandler(_style: any) {
           ref={(swiper) => setSwiper(swiper)}
           cardIndex={0}
           verticalSwipe={false}
-          backgroundColor="#4FD0E9"
+          backgroundColor="#000000"
           stackSize={3}
           infinite
         />

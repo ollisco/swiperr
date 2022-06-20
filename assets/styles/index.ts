@@ -133,7 +133,6 @@ export default StyleSheet.create({
     textAlign: "center",
   },
   artist: {
-    paddingBottom: 10,
     alignItems: "center",
     textAlign: "center",
   },
@@ -218,8 +217,6 @@ export default StyleSheet.create({
   },
 
   smallNameStyle: {
-      paddingTop: 10,
-      paddingBottom: 5 ,
       color: WHITE,
       fontSize: 15,
       textAlign: "center",
@@ -229,8 +226,6 @@ export default StyleSheet.create({
   
 
   trackStyle: {
-      paddingTop: 10,
-      paddingBottom: 7,
       color: WHITE,
       width: "100%",
       textAlign: "center",
