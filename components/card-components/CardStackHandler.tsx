@@ -57,7 +57,7 @@ function CardStackHandler(_style: any) {
   }, [newReleases]);
 
   return (
-    <View style={{ borderColor: '#0000000', borderWidth: 3, height: CARD_HEIGHT }}>
+    <View style={{ borderColor: '#000', borderWidth: 3, height: CARD_HEIGHT }}>
       {userTopItems.length > 0 && showType === 'recommended'
         ? (
           <Swiper

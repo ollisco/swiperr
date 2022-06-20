@@ -415,7 +415,7 @@ export default StyleSheet.create({
   containerPlaylists: { 
     flex: 1, 
     backgroundColor: WHITE, 
-    marginTop: 200, 
+    marginTop: 200 - CARD_HEIGHT, 
     borderTopLeftRadius: 20, 
     borderTopRightRadius: 20,
     borderRadius: 6,
