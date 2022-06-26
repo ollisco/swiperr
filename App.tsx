@@ -18,7 +18,7 @@ import { CLIENT_ID } from '@env';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-//console.log(process.env.CLIENT_ID, CLIENT_ID);
+console.log(process.env.CLIENT_ID, CLIENT_ID);
 
 function App() {
   return (
