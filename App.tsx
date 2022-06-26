@@ -13,9 +13,12 @@ import {
 import TabBarIcon from './components/TabBarIcon';
 import Settings from './screens/Settings';
 import { Error } from './components';
+import { CLIENT_ID } from '@env';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
+
+//console.log(process.env.CLIENT_ID, CLIENT_ID);
 
 function App() {
   return (
