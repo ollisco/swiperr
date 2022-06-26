@@ -1,5 +1,6 @@
 import { createContext, FC, useState } from 'react';
 import Swiper from 'react-native-deck-swiper';
+import useSpotifyAuth from '../../hooks/useSpotifyAuth';
 import useSpotifyContext from '../../hooks/useSpotifyAuth';
 import { DataSong, SwipedCardContextT } from '../../types';
 
@@ -21,6 +22,8 @@ const SwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
     setVolume(value);
   };
 
+  const { allowVolumeControll } = useSpotifyAuth();
+
   return (
     <SwipeCardContext.Provider value={{
       volume,
@@ -39,6 +42,7 @@ const SwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
       setRecommendedIndex,
       newReleasesIndex,
       setNewReleasesIndex,
+      allowVolumeControll,
     }}
     >
       {children}

@@ -33,13 +33,13 @@ export type SwipedCardContextT = {
   setShowPlaylists: (value: boolean) => void;
   swiper: Swiper<DataSong> | null;
   setSwiper: (value: Swiper<DataSong> | null) => void;
-  
   showType: string;
   setShowType: (value: string) => void;
   recommendedIndex: number;
   setRecommendedIndex: (value: number) => void;
   newReleasesIndex: number;
   setNewReleasesIndex: (value: number) => void;
+  allowVolumeControll: boolean;
 }
 
 
@@ -115,4 +115,10 @@ export type SettingItemDropdownT = {
   options: string[];
   defaultValue?: string;
   onSelect?: (value: any) => void;
+}
+
+export enum DeviceType {
+  COMPUTER = "Computer",
+  SMARTPHONE = "Smartphone",
+  SPEAKER = "speaker",
 }

@@ -24,3 +24,6 @@ google-services.json
 
 # Environment
 .env
+
+# Versions android
+versions/
