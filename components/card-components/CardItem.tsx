@@ -30,7 +30,7 @@ function CardItem({
 }: CardItemT) {
   const {
     volume, updateVolume, rgb, setPressedTrack, setShowPlaylists, showType,
-    swiper,
+    swiper, allowVolumeControll
 
   } = useContext(SwipeCardContext) as SwipedCardContextT;
   const {
@@ -81,7 +81,7 @@ function CardItem({
         )}
       </View>
       <View style={{ flexDirection: flexDir }}>
-        {Platform.OS === 'web' && (
+        {allowVolumeControll && (
         <View style={styles.volumeSlider}>
           <Icon name="md-volume-low" color={WHITE} size={20} />
           <Slider

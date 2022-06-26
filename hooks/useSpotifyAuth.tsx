@@ -7,6 +7,7 @@ import useAutoExchange from './useAutoExchange';
 import { discovery, redirectUri, meEndpoint, recomendationEndpoint } from './utils/auth-utils';
 import useError from './useError';
 import { getCountryName, getLocation } from '../components/utils/country-utils';
+import { DeviceType } from '../types';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -37,6 +38,7 @@ const SpotifyAuthContext: React.Context<{
   availableMarkets: any,
   setChosenMarket: any,
   chosenMarket: any,
+  allowVolumeControll: any,
 
 }> = createContext({
   promptAsync: null,
@@ -65,6 +67,7 @@ const SpotifyAuthContext: React.Context<{
   availableMarkets: null,
   setChosenMarket: null,
   chosenMarket: null,
+  allowVolumeControll: true,
 });
 
 WebBrowser.maybeCompleteAuthSession();
@@ -88,6 +91,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const likeSongString = 'Liked songs';
   const [defaultPlaylist, setDefaultPlaylist] = useState<string>(likeSongString); // Either equal to liked songs or a playlist uri
   const [config, setConfig] = useState<any>(null);
+  const [allowVolumeControll, setAllowVolumeControll] = useState<boolean>(true);
 
   // Error handling
   const { addErrorText } = useError();
@@ -388,7 +392,6 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       setTopArtists(topArtistsText.slice(0, n).sort().join(', '));
       setTopTracks(topTracksText.slice(0, n).sort().join(', '));
       setTopGenres(both.slice(0, n).sort().join(', '));
-      setVolume(50);
     }
   }
 
@@ -471,6 +474,27 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
     }
   }
 
+  async function getPlaybackState() {
+    await axios.get('https://api.spotify.com/v1/me/player', config)
+      .then((res) => {
+         if (res.data !== "") {
+          if (res.data.device.type === DeviceType.COMPUTER) {
+            setAllowVolumeControll(true);
+            setVolume(50);
+          } else if (res.data.device.type === DeviceType.SMARTPHONE) {
+            setAllowVolumeControll(false);
+          } else {
+            console.warn(`Could not match device type: ${res.data.device.type}`);
+            setAllowVolumeControll(false);
+          }
+        }
+      })
+      .catch((err) => {
+        console.log('Error getting playback state: ', err);
+        addErrorText(err.response.data.error.message);
+      });
+  }
+
   React.useEffect(() => {
     if (token) {
       const config = {
@@ -484,13 +508,19 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
 
   React.useEffect(() => {
     if (config && token) {
+      getPlaybackState();
       getUserData();
+    }
+  }, [config, token]);
+
+  React.useEffect(() => {
+    if (user) {
       getTopUserItems();
       getLikedSongs();
       getPlaylists();
-      getAvailibleMarkets();
+      getAvailibleMarkets();    
     }
-  }, [config, token]);
+  }, [user]);
 
   React.useEffect(() => {
     if (chosenMarket) {
@@ -526,6 +556,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         availableMarkets,
         setChosenMarket,
         chosenMarket,
+        allowVolumeControll,
       }}
     >
       {children}
