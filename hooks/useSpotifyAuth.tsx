@@ -4,15 +4,11 @@ import * as WebBrowser from 'expo-web-browser';
 import { CLIENT_ID, CLIENT_SECRET } from '@env';
 import axios from 'axios';
 import useAutoExchange from './useAutoExchange';
-import {
-  discovery, redirectUri, meEndpoint, recomendationEndpoint,
-} from './utils/auth-utils';
+import { discovery, redirectUri, meEndpoint, recomendationEndpoint } from './utils/auth-utils';
 import useError from './useError';
 import { getCountryName, getLocation } from '../components/utils/country-utils';
 
 WebBrowser.maybeCompleteAuthSession();
-
-
 
 const SpotifyAuthContext: React.Context<{
   promptAsync: any
