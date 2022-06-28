@@ -2,7 +2,7 @@
   "expo": {
     "name": "swiperr",
     "slug": "swiperr",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "scheme": "swiperr",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,11 +22,11 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "package": "ollisco.swiper",
-      "versionCode": 3
+      "versionCode": 4
     },
     "web": {
       "favicon": "./assets/favicon.png"
