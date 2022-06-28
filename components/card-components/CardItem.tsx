@@ -124,17 +124,11 @@ function CardItem({
           </TouchableOpacity>
           <TouchableOpacity style={styles.miniButton}>
             <Icon
-              name="copy-outline"
+              name="reload"            
               color={FLASH_ACTIONS}
               size={20}
               onPress={() => {
-                // if (token) {
-                //   if (showType === 'recommended') {
-                //     Clipboard.setString(userRecommendedTracks[index].uri);
-                //   } else if (showType === 'new') {
-                //     Clipboard.setString(newReleases[index].uri);
-                //   }
-                // }
+                swiper?.swipeBack();
               }}
 
             />
