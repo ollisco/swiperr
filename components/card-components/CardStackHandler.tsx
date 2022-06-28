@@ -117,6 +117,7 @@ function CardStackHandler(_style: any) {
             verticalSwipe={false}
             backgroundColor="#000000"
             stackSize={3}
+            swipeBackCard
           />
         )
         : newReleases && showType === 'new'
@@ -176,6 +177,7 @@ function CardStackHandler(_style: any) {
               backgroundColor="#000000"
               stackSize={3}
               infinite
+              swipeBackCard
             />
 
           )
@@ -220,6 +222,7 @@ function CardStackHandler(_style: any) {
           backgroundColor="#000000"
           stackSize={3}
           infinite
+          swipeBackCard
         />
       ) : null}
 
