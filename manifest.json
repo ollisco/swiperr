@@ -10,8 +10,8 @@
   "related_applications": [
     {
       "platform": "play",
-      "url": "http://play.google.com/store/apps/details?id=com.ollisco.reactnativeapp",
-      "id": "com.ollisco.reactnativeapp"
+      "url": "http://play.google.com/store/apps/details?id=ollisco.swiper",
+      "id": "ollisco.swiper"
     }
   ],
   "prefer_related_applications": true,
