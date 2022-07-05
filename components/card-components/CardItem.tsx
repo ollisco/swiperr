@@ -85,7 +85,7 @@ function CardItem({
         <View style={styles.volumeSlider}>
           <Icon name="md-volume-low" color={WHITE} size={20} />
           <Slider
-            style={{ width: 200, height: 20 }}
+            style={{ width: 200, height: 10 }}
             minimumValue={0}
             maximumValue={100}
             step={1}
