@@ -224,7 +224,6 @@ export default StyleSheet.create({
     },
   // LARGE CARD (CARDITEM)
   
-  
 
   trackStyle: {
       color: WHITE,
@@ -235,8 +234,6 @@ export default StyleSheet.create({
       fontSize: 25,
       fontWeight: "bold",
   },
-
-
 
   // COMPONENT - SETTINGS
   settings: {
