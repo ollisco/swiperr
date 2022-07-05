@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/swiperr/static/js/app.ac5a0cc7.chunk.js",
-    "app.js.map": "/swiperr/static/js/app.ac5a0cc7.chunk.js.map",
+    "app.js": "/swiperr/static/js/app.d0a62767.chunk.js",
+    "app.js.map": "/swiperr/static/js/app.d0a62767.chunk.js.map",
     "runtime~app.js": "/swiperr/static/js/runtime~app.74bcbb84.js",
     "runtime~app.js.map": "/swiperr/static/js/runtime~app.74bcbb84.js.map",
-    "static/js/2.abb2898f.chunk.js": "/swiperr/static/js/2.abb2898f.chunk.js",
-    "static/js/2.abb2898f.chunk.js.map": "/swiperr/static/js/2.abb2898f.chunk.js.map",
+    "static/js/2.62f624a9.chunk.js": "/swiperr/static/js/2.62f624a9.chunk.js",
+    "static/js/2.62f624a9.chunk.js.map": "/swiperr/static/js/2.62f624a9.chunk.js.map",
     "fonts/AntDesign.ttf": "/swiperr/./fonts/AntDesign.ttf",
     "fonts/Entypo.ttf": "/swiperr/./fonts/Entypo.ttf",
     "fonts/Feather.ttf": "/swiperr/./fonts/Feather.ttf",
@@ -24,7 +24,7 @@
     "index.html": "/swiperr/index.html",
     "manifest.json": "/swiperr/manifest.json",
     "serve.json": "/swiperr/serve.json",
-    "static/js/2.abb2898f.chunk.js.LICENSE.txt": "/swiperr/static/js/2.abb2898f.chunk.js.LICENSE.txt",
+    "static/js/2.62f624a9.chunk.js.LICENSE.txt": "/swiperr/static/js/2.62f624a9.chunk.js.LICENSE.txt",
     "static/media/banger.jpg": "/swiperr/static/media/banger.bb266617.jpg",
     "static/media/bg2.jpg": "/swiperr/static/media/bg2.a5ed1007.jpg",
     "static/media/dio.jpg": "/swiperr/static/media/dio.6a2fb57d.jpg",
@@ -39,7 +39,7 @@
   },
   "entrypoints": [
     "static/js/runtime~app.74bcbb84.js",
-    "static/js/2.abb2898f.chunk.js",
-    "static/js/app.ac5a0cc7.chunk.js"
+    "static/js/2.62f624a9.chunk.js",
+    "static/js/app.d0a62767.chunk.js"
   ]
 }
