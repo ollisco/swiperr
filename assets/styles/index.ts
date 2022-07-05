@@ -19,7 +19,7 @@ export const FLASH_ACTIONS = "#5028D7";
 
 export const ERROR = "#770707";
 
-export const DIMENSION_WIDTH = Dimensions.get("window").width;
+export const DIMENSION_WIDTH = Dimensions.get("window").width; // window not screen
 export const DIMENSION_HEIGHT = Dimensions.get("window").height;
 
 
@@ -127,6 +127,7 @@ export default StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
   },
   descriptionCardItem: {
     color: GRAY,
@@ -140,14 +141,14 @@ export default StyleSheet.create({
     color: GRAY,
     fontSize: 20,
     textAlign: "center",
+    fontWeight: "bold",
   },
 
   releaseDate: {
     color: GRAY,
-    fontSize: 18,
+    fontSize: 15,
     textAlign: "center",
   },
-
 
   reminderText: {
     color: GRAY,
@@ -171,7 +172,7 @@ export default StyleSheet.create({
   actionsCardItem: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 30,
+    paddingVertical: 5,
   },
   button: {
     width: 60,
@@ -223,19 +224,16 @@ export default StyleSheet.create({
     },
   // LARGE CARD (CARDITEM)
   
-  
 
   trackStyle: {
       color: WHITE,
       width: "100%",
       textAlign: "center",
-      height: 45,
       flexWrap: 'wrap',
       flexShrink: 1,
       fontSize: 25,
+      fontWeight: "bold",
   },
-
-
 
   // COMPONENT - SETTINGS
   settings: {

@@ -8,6 +8,7 @@ import { SettingItemSwitch } from '../components';
 import SettingItemDropdown from '../components/SettingItemDropdown';
 import useSpotifyContext from '../hooks/useSpotifyAuth';
 import { getLocation } from '../components/utils/country-utils';
+import { mobileRedirectUri, redirectUri, webRedirectUri } from '../hooks/utils/auth-utils';
 
 function MockSettingItems() {
   const [exampleBool, setExampleBool] = useState(false);
@@ -30,7 +31,12 @@ function MockSettingItems() {
         text="An example Switch"
         value={exampleBool}
         onValueChange={() => setExampleBool(!exampleBool)}
+      />
 
+      <SettingItemDropdown
+        header="Debug info"
+        explanation="This is debug info for development resons. If you are testing you can ignore this dropdown."
+        options={[redirectUri, webRedirectUri, mobileRedirectUri]}
       />
 
     </View>
