@@ -29,7 +29,7 @@ export default StyleSheet.create({
   // COMPONENT - CARD ITEM
   containerCardItem: {
     backgroundColor: DARK_GRAY,
-    borderRadius: 8,
+    borderRadius: 20,
     borderWidth: 1,
     //borderColor: SPOTIFY_GREEN,
     height: CARD_HEIGHT,
