@@ -19,6 +19,7 @@ function CardStackHandler(_style: any) {
     getNewReleases,
     chosenMarket
   } = useSpotifyContext();
+
   const {
     setRGB,
     swiper,
@@ -28,7 +29,6 @@ function CardStackHandler(_style: any) {
     setRecommendedIndex,
     newReleasesIndex,
     setNewReleasesIndex,
-
   } = useContext(SwipeCardContext) as SwipedCardContextT;
 
   const swipeColorLimit = 50;

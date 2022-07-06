@@ -30,8 +30,11 @@ function CardItem({
 }: CardItemT) {
   const {
     volume, updateVolume, rgb, setPressedTrack, setShowPlaylists, showType,
-    swiper, allowVolumeControll
-
+    swiper, allowVolumeControll,
+    recommendedIndex,
+    setRecommendedIndex,
+    newReleasesIndex,
+    setNewReleasesIndex,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
   const {
     user,
@@ -42,6 +45,7 @@ function CardItem({
     setVolume,
     recommendedTracks: userRecommendedTracks,
     newReleases,
+    
   } = useSpotifyContext();
 
   if (track.length > 25) {
@@ -55,7 +59,6 @@ function CardItem({
   const styleContainer = [styles.containerCardItem, { backgroundColor: rgb }, landScapeWeb];
   const flexDir = isLandscape() ? 'row' : 'column';
   return (
-
     <View style={styleContainer}>
       {/* IMAGE */}
       <View style={{ flexDirection: flexDir }}>
@@ -129,6 +132,8 @@ function CardItem({
               size={20}
               onPress={() => {
                 swiper?.swipeBack();
+                setRecommendedIndex(recommendedIndex - 2);
+                setNewReleasesIndex(newReleasesIndex - 2);
               }}
 
             />
@@ -203,12 +208,10 @@ function CardItem({
         )}
       </View>
       <View style={{ flexDirection: flexDir }}>
-        <View>
           <Text style={[styles.reminderText, { fontSize: 15 }]}>
             You need to have the spotify app active to use this application.
             Try playing and pausing your current song, and make sure your queue is empty.
           </Text>
-        </View>
       </View>
     </View>
   );
