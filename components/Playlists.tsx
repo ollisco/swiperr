@@ -56,16 +56,16 @@ function Playlists() {
                     addTrackToPlaylist(item.id, pressedTrack.uri);
                     setShowPlaylists(false);
                     swiper?.swipeTop();
-                    if (showType === 'new' && newReleases[newReleasesIndex + 1] !== undefined) {
-                      queueAndSkip(newReleases[newReleasesIndex + 1].uri);
-                      setRecommendedIndex(recommendedIndex + 1);
-                      setNewReleasesIndex(newReleasesIndex + 1);
+                    // if (showType === 'new' && newReleases[newReleasesIndex + 1] !== undefined) {
+                    //   queueAndSkip(newReleases[newReleasesIndex + 1].uri);
+                    //   setRecommendedIndex(recommendedIndex + 1);
+                    //   setNewReleasesIndex(newReleasesIndex + 1);
                       
-                    } else if (showType === 'recommended') {
-                      queueAndSkip(recommendedTracks[recommendedIndex + 1].uri);
-                      setRecommendedIndex(recommendedIndex + 1);
-                      setNewReleasesIndex(newReleasesIndex + 1);
-                    }
+                    // } else if (showType === 'recommended') {
+                    //   queueAndSkip(recommendedTracks[recommendedIndex + 1].uri);
+                    //   setRecommendedIndex(recommendedIndex + 1);
+                    //   setNewReleasesIndex(newReleasesIndex + 1);
+                    // }
                   }}
                 >
                   <CardItemRow
