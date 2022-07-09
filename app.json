@@ -2,14 +2,14 @@
   "expo": {
     "name": "swiperr",
     "slug": "swiperr",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "scheme": "swiperr",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/swiperr-logo-square.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/swiperr-splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -22,14 +22,14 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/swiperr-text.png",
+        "backgroundImage": "./assets/swiperr-background.png"
       },
       "package": "com.ollisco.reactnativeapp",
-      "versionCode": 7
+      "versionCode": 8
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/swiperr-logo-circle.png"
     }
   }
 }
