@@ -3,7 +3,7 @@ import {
 } from 'react-native';
 import React from 'react';
 import ModalDropdown from 'react-native-modal-dropdown';
-import { SettingItemDropdownT } from '../types';
+import { dropdownSize, SettingItemDropdownT } from '../types';
 import {
   WHITE, GRAY, BLACK, DARKER_GRAY,
 } from '../assets/styles/index';
@@ -14,7 +14,14 @@ function SettingItemDropdown({
   options,
   defaultValue,
   onSelect,
+  dropdownSize: size,
 }: SettingItemDropdownT) {
+
+  const ddSize = size === dropdownSize.MEDIUM ? 300 
+    : size === dropdownSize.LARGE ? 400
+    : 200;
+
+
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
@@ -25,7 +32,7 @@ function SettingItemDropdown({
         style={styles.dropdownNonpress}
         options={options}
         defaultValue={defaultValue || 'Select an item...'}
-        dropdownStyle={styles.dropdown}
+        dropdownStyle={[styles.dropdown, { height: ddSize }]}
         dropdownTextHighlightStyle={styles.dropdownTextHighlight}
         textStyle={styles.header}
         showsVerticalScrollIndicator={false}
