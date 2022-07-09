@@ -22,7 +22,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/swiperr-text.png",
+        "foregroundImage": "./assets/swiperr-foreground.png",
         "backgroundImage": "./assets/swiperr-background.png"
       },
       "package": "com.ollisco.reactnativeapp",
