@@ -9,6 +9,7 @@ import SettingItemDropdown from '../components/SettingItemDropdown';
 import useSpotifyContext from '../hooks/useSpotifyAuth';
 import { getLocation } from '../components/utils/country-utils';
 import { mobileRedirectUri, redirectUri, webRedirectUri } from '../hooks/utils/auth-utils';
+import { dropdownSize } from '../types';
 
 function MockSettingItems() {
   const [exampleBool, setExampleBool] = useState(false);
@@ -37,6 +38,7 @@ function MockSettingItems() {
         header="Debug info"
         explanation="This is debug info for development resons. If you are testing you can ignore this dropdown."
         options={[redirectUri, webRedirectUri, mobileRedirectUri]}
+        dropdownSize={dropdownSize.MEDIUM}
       />
 
     </View>
@@ -69,6 +71,7 @@ function SettingItems() {
         header="Country"
         explanation="Music will be adapted to the given country. New releases will be based on the country you choose."
         defaultValue={getLocation(chosenMarket) || ''}
+        dropdownSize={dropdownSize.LARGE}
         options={availableMarkets.map((
           country: {
             code: string,
@@ -87,6 +90,7 @@ function SettingItems() {
         explanation="The default playlist where right swiped cards apear. Please only choose playlists that you own or can add music to."
         options={[likedSongs, ...playlists.map((playlist: { name: string; }) => playlist.name)]}
         defaultValue={likedSongs}
+        dropdownSize={dropdownSize.MEDIUM}
         onSelect={(value: string) => getDefaultPlaylist(value)}
       />
     </View>

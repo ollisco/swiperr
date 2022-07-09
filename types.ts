@@ -115,6 +115,13 @@ export type SettingItemDropdownT = {
   options: string[];
   defaultValue?: string;
   onSelect?: (value: any) => void;
+  dropdownSize?: dropdownSize;
+}
+
+export enum dropdownSize {
+  SMALL = "small",
+  MEDIUM = "medium",
+  LARGE = "large",
 }
 
 export enum DeviceType {
