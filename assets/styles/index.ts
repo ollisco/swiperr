@@ -487,6 +487,7 @@ export default StyleSheet.create({
   errorContainer: {
     flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
     zIndex: 1,
+    elevation: 1,
     height: 100,
     position: "absolute",
     backgroundColor: ERROR,
