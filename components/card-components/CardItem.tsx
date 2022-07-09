@@ -194,13 +194,13 @@ function CardItem({
           </TouchableOpacity>
           <TouchableOpacity style={styles.miniButton}>
             <Icon
-              name="checkmark"
+              name="heart-o"
               color={SPOTIFY_GREEN}
               size={20}
               onPress={() => {
                 swiper?.swipeRight();
               }}
-
+              useFontAwesome
             />
           </TouchableOpacity>
 
