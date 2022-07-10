@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - cicd
 jobs:
   publish:
     runs-on: ubuntu-latest

@@ -18,7 +18,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ollisco.reactnativeapp"
     },
     "android": {
       "adaptiveIcon": {
