@@ -27,21 +27,21 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn install
 
-      - name: Deploy 🚀
+      - name: 🚀 Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: "." # The folder the action should deploy.
 
-      # - name: Deploy
-      #   run: |
-      #     set -x
-      #     echo ${{ secrets.GITHUB_TOKEN }}
-      #     echo ${{ secrets.EXPO_TOKENNNNNN }}
-      #     git config --global user.name "gh actions"
-      #     git config --global user.email "<>"
-      #     git config --list
-      #     git log
-      #     yarn deploy --user "gh actions <gh-actions@swiper.com>"
+      - name: Deploy
+        run: |
+          set -x
+          echo ${{ secrets.GITHUB_TOKEN }}
+          echo ${{ secrets.EXPO_TOKENNNNNN }}
+          git config --global user.name "gh actions"
+          git config --global user.email "<>"
+          git config --list
+          git log
+          yarn deploy --user "gh actions <gh-actions@swiper.com>"
 
       - name: 🚀 Publish app
         run: expo publish --non-interactive
