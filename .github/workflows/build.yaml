@@ -10,7 +10,7 @@ jobs:
       - name: 🏗 Setup repo
         uses: actions/checkout@v3
         with:
-          token: ${{ github.GITHUB_TOKEN }}
+          token: ${{ github.TOKEN }}
 
       - name: 🏗 Setup Node
         uses: actions/setup-node@v2
@@ -37,6 +37,8 @@ jobs:
           git config --list
           git log 
           yarn deploy --user "gh actions <gh-actions@swiper.com>"
+        with:
+          token: ${{ github.TOKEN }}
 
       - name: 🚀 Publish app
         run: expo publish --non-interactive
