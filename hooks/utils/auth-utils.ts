@@ -5,7 +5,7 @@ import { makeRedirectUri } from 'expo-auth-session';
 // TODO: can maybe be replaced with: getRedirectUrl from expo auth session
 
 
-
+console.log(CLIENT_ID, CLIENT_SECRET);
 //const redirectUri = Platform.OS === 'web' ? REDIRECT_URI_WEB : REDIRECT_URI;
 const webRedirectUri = makeRedirectUri({scheme: 'swiperr', path: 'swiperr'}) ;
 const mobileRedirectUri = makeRedirectUri({scheme: 'swiperr'}) ;
