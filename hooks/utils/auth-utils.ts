@@ -1,8 +1,10 @@
 import { Platform } from 'react-native';
-import { CLIENT_ID } from '@env';
+import { CLIENT_ID, CLIENT_SECRET } from '@env';
 import { makeRedirectUri } from 'expo-auth-session';
 
 // TODO: can maybe be replaced with: getRedirectUrl from expo auth session
+
+const c = CLIENT_ID.concat(':', CLIENT_SECRET);
 
 //const redirectUri = Platform.OS === 'web' ? REDIRECT_URI_WEB : REDIRECT_URI;
 const webRedirectUri = makeRedirectUri({scheme: 'swiperr', path: 'swiperr'}) ;
