@@ -30,7 +30,6 @@ jobs:
           git config --global user.name "ollisco"
           git config --global user.email "<>"
           git config --list
-          git 
           yarn deploy
 
       - name: 🚀 Publish app
