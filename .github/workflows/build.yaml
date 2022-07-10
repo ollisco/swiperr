@@ -33,7 +33,7 @@ jobs:
           git config --global user.name "gh actions"
           git config --global user.email "<>"
           git config --list
-          git log
+          git log 
           yarn deploy --user gh actions <gh-actions@swiper.com>
 
       - name: 🚀 Publish app
