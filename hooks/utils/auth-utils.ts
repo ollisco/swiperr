@@ -10,8 +10,9 @@ const mobileRedirectUri = makeRedirectUri({scheme: 'swiperr'}) ;
 
 const redirectUri = Platform.OS === "web" 
   ? webRedirectUri
-  : mobileRedirectUri;
-console.log(redirectUri, CLIENT_ID);
+  : mobileRedirectUri;  
+
+console.log(redirectUri);
 // TODO: add all endpoints to here instead of useSpotifyAuth
 const authorizationEndpoint = 'https://accounts.spotify.com/authorize';
 const tokenEndpoint = 'https://accounts.spotify.com/api/token';
