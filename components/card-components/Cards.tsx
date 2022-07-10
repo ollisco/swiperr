@@ -38,7 +38,7 @@ function Cards(props: Props) {
             }}
             >
               <Text style={[styles.exploreTopCenterText, recommendedActiveStyle]}>
-                Recommended
+                Recommended-2
               </Text>
             </TouchableOpacity>
             <Text style={styles.exploreTopCenterText}>
