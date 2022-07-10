@@ -1,5 +1,5 @@
 import { Platform } from 'react-native';
-import { REDIRECT_URI, REDIRECT_URI_WEB } from '@env';
+import { CLIENT_ID } from '@env';
 import { makeRedirectUri } from 'expo-auth-session';
 
 // TODO: can maybe be replaced with: getRedirectUrl from expo auth session
@@ -11,7 +11,7 @@ const mobileRedirectUri = makeRedirectUri({scheme: 'swiperr'}) ;
 const redirectUri = Platform.OS === "web" 
   ? webRedirectUri
   : mobileRedirectUri;
-console.log(redirectUri);
+console.log(redirectUri, CLIENT_ID);
 // TODO: add all endpoints to here instead of useSpotifyAuth
 const authorizationEndpoint = 'https://accounts.spotify.com/authorize';
 const tokenEndpoint = 'https://accounts.spotify.com/api/token';
