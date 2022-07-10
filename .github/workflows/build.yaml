@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: 🏗 Setup repo
         uses: actions/checkout@v3
+        with:
+          token: ${{ github.TOKEN }}
 
       - name: 🏗 Setup Node
         uses: actions/setup-node@v2
@@ -28,7 +30,7 @@ jobs:
       - name: Deploy
         run: |
           set -x
-          echo ${{ secrets.PAT }}
+          echo ${{ secrets.TOKEN }}
           echo ${{ secrets.EXPO_TOKEN }}
           git config --global user.name "gh actions"
           git config --global user.email "<>"
