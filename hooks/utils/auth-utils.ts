@@ -4,7 +4,7 @@ import { makeRedirectUri } from 'expo-auth-session';
 
 // TODO: can maybe be replaced with: getRedirectUrl from expo auth session
 
-const c = CLIENT_ID.concat(':', CLIENT_SECRET);
+
 
 //const redirectUri = Platform.OS === 'web' ? REDIRECT_URI_WEB : REDIRECT_URI;
 const webRedirectUri = makeRedirectUri({scheme: 'swiperr', path: 'swiperr'}) ;
@@ -14,7 +14,7 @@ const redirectUri = Platform.OS === "web"
   ? webRedirectUri
   : mobileRedirectUri;  
 
-console.log(redirectUri);
+console.log(redirectUri, CLIENT_ID !== undefined, CLIENT_SECRET !== undefined);
 // TODO: add all endpoints to here instead of useSpotifyAuth
 const authorizationEndpoint = 'https://accounts.spotify.com/authorize';
 const tokenEndpoint = 'https://accounts.spotify.com/api/token';
