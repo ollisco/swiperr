@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "swiperr",
+    "slug": "swiperr",
+    "version": "1.0.7",
+    "scheme": "swiperr",
+    "orientation": "portrait",
+    "icon": "./assets/swiperr-logo-square.png",
+    "splash": {
+      "image": "./assets/swiperr-splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ollisco.reactnativeapp"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/swiperr-foreground.png",
+        "backgroundImage": "./assets/swiperr-background.png"
+      },
+      "package": "com.ollisco.reactnativeapp",
+      "versionCode": 8
+    },
+    "web": {
+      "favicon": "./assets/swiperr-logo-circle.png"
+    }
+  }
+}
