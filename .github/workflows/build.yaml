@@ -4,7 +4,7 @@ on:
       - cicd
 jobs:
   publish:
-    environment: gh-pages
+    environment: github-pages
     runs-on: ubuntu-latest
     steps:
       - name: 🏗 Setup repo
