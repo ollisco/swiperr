@@ -30,11 +30,11 @@ jobs:
           set -x
           echo ${{ secrets.PAT }}
           echo ${{ secrets.EXPO_TOKEN }}
-          git config --global user.name "ollisco"
+          git config --global user.name "gh actions"
           git config --global user.email "<>"
           git config --list
           git log
-          yarn deploy --non-interactive
+          yarn deploy --user gh actions <gh-actions@swiper.com>
 
       - name: 🚀 Publish app
         run: expo publish --non-interactive
