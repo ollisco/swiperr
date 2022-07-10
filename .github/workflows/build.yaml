@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: 🏗 Setup repo
         uses: actions/checkout@v2
+        with:
+          token: ${{secrets.PAT}}
 
       - name: 🏗 Setup Node
         uses: actions/setup-node@v2
