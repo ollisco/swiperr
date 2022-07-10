@@ -34,7 +34,7 @@ jobs:
           git config --global user.email "<>"
           git config --list
           git log 
-          yarn deploy --user gh actions <gh-actions@swiper.com>
+          yarn deploy --user "gh actions <gh-actions@swiper.com>"
 
       - name: 🚀 Publish app
         run: expo publish --non-interactive
