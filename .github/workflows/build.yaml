@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: 🏗 Setup repo
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT }}
 
       - name: 🏗 Setup Node
         uses: actions/setup-node@v2
@@ -27,9 +29,11 @@ jobs:
       - name: Deploy
         run: |
           set -x
+          echo ${{ secrets.PAT }}
           git config --global user.name "ollisco"
           git config --global user.email "<>"
           git config --list
+          git log
           yarn deploy
 
       - name: 🚀 Publish app
