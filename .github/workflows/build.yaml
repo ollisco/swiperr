@@ -27,6 +27,9 @@ jobs:
       - name: 📦 Install dependencies
         run: yarn install
 
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+
       - name: Deploy
         run: |
           set -x
@@ -37,8 +40,6 @@ jobs:
           git config --list
           git log 
           yarn deploy --user "gh actions <gh-actions@swiper.com>"
-        with:
-          token: ${{ github.TOKEN }}
 
       - name: 🚀 Publish app
         run: expo publish --non-interactive
