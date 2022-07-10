@@ -31,6 +31,9 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: "." # The folder the action should deploy.
+        env:
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
 
       - name: Deploy
         run: |
