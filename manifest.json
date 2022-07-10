@@ -9,6 +9,10 @@
   "orientation": "portrait",
   "related_applications": [
     {
+      "platform": "itunes",
+      "id": "com.ollisco.reactnativeapp"
+    },
+    {
       "platform": "play",
       "url": "http://play.google.com/store/apps/details?id=com.ollisco.reactnativeapp",
       "id": "com.ollisco.reactnativeapp"
