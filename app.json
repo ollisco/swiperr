@@ -8,7 +8,7 @@
     "icon": "./assets/swiperr-logo-square.png",
     "splash": {
       "image": "./assets/swiperr-splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#000000"
     },
     "updates": {
