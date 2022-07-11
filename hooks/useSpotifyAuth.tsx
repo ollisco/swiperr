@@ -8,8 +8,33 @@ import { discovery, redirectUri, meEndpoint, recomendationEndpoint } from './uti
 import useError from './useError';
 import { getCountryName, getLocation } from '../components/utils/country-utils';
 import { DeviceType } from '../types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 WebBrowser.maybeCompleteAuthSession();
+
+const storeData = async (key: string, value: string) => {
+  const { addErrorText } = useError();
+  try {
+    await AsyncStorage.setItem(key, value);
+  } catch (e: any) {
+    addErrorText(`Error saving ${key} to storage.`);
+  }
+}
+
+const getData = (key: string) => {
+  const { addErrorText } = useError();
+  try {
+    const value = AsyncStorage.getItem(key);
+    if(value !== null) {
+      return value;
+    }
+  } catch(e: any) {
+    addErrorText(`Error getting ${key} from storage.`);
+  }
+}
+
+
 
 const SpotifyAuthContext: React.Context<{
   promptAsync: any
@@ -77,6 +102,17 @@ interface Props {
 }
 
 export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
+  const loadDefaultPlaylist = () => {
+    return getData('@defaultPlaylist')
+  }
+  
+  const saveDefaultPlaylist = (playlistId: string) =>  {
+    setDefaultPlaylist(playlistId);
+    storeData('@defaultPlaylist', playlistId);
+  }
+
+
+
   const [user, setUser] = useState(null);
   const [recommendedTracks, setRecommendedTracks] = useState([]);
   const [userPlaylists, setUserPlaylists] = useState(null);
@@ -89,7 +125,9 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [availableMarkets, setAvailableMarkets] = useState(null);
   const [chosenMarket, setChosenMarket] = useState<string | null>(null);
   const likeSongString = 'Liked songs';
-  const [defaultPlaylist, setDefaultPlaylist] = useState<string>(likeSongString); // Either equal to liked songs or a playlist uri
+  const savedDefaultPlaylist = loadDefaultPlaylist();
+  const playlist: string = savedDefaultPlaylist === null ? likeSongString : savedDefaultPlaylist;
+  const [defaultPlaylist, setDefaultPlaylist] = useState<string>(); // Either equal to liked songs or a playlist uri
   const [config, setConfig] = useState<any>(null);
   const [allowVolumeControll, setAllowVolumeControll] = useState<boolean>(true);
 
@@ -118,6 +156,9 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const { token, tokenExchangeError: exchangeError } = useAutoExchange(
     response?.type === 'success' ? response.params.code : undefined,
   );
+
+  
+  
 
   async function getNewReleases() {
     const r = Math.floor(Math.random() * 100);
