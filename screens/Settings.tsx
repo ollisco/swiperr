@@ -55,7 +55,7 @@ function MockSettingItems() {
 function SettingItems() {
   const {
     playlists, 
-    setDefaultPlaylist, 
+    saveDefaultPlaylist, 
     availableMarkets, 
     chosenMarket, 
     setChosenMarket, 
@@ -67,11 +67,11 @@ function SettingItems() {
   const likedSongs = 'Liked songs';
   function getDefaultPlaylist(playlistName: string) {
     if (playlistName === likedSongs) {
-      setDefaultPlaylist(likedSongs);
+      saveDefaultPlaylist(likedSongs);
       return;
     }
     const playlist = playlists.find((playlist: { name: string; }) => playlist.name === playlistName);
-    setDefaultPlaylist(playlist.id);
+    saveDefaultPlaylist(playlist.id);
   }
 
   

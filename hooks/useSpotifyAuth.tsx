@@ -13,10 +13,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 WebBrowser.maybeCompleteAuthSession();
 
-const storeData = async (key: string, value: string) => {
+const storeData = (key: string, value: string) => {
   const { addErrorText } = useError();
   try {
-    await AsyncStorage.setItem(key, value);
+    AsyncStorage.setItem(key, value);
   } catch (e: any) {
     addErrorText(`Error saving ${key} to storage.`);
   }
@@ -59,7 +59,7 @@ const SpotifyAuthContext: React.Context<{
   topGenres: string,
   topArtists: string,
   topTracks: string,
-  setDefaultPlaylist: any,
+  saveDefaultPlaylist: any,
   availableMarkets: any,
   setChosenMarket: any,
   chosenMarket: any,
@@ -88,7 +88,7 @@ const SpotifyAuthContext: React.Context<{
   topGenres: '',
   topArtists: '',
   topTracks: '',
-  setDefaultPlaylist: null,
+  saveDefaultPlaylist: null,
   availableMarkets: null,
   setChosenMarket: null,
   chosenMarket: null,
@@ -103,7 +103,8 @@ interface Props {
 
 export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const loadDefaultPlaylist = () => {
-    return getData('@defaultPlaylist')
+    const playlist =  getData('@defaultPlaylist');
+    return playlist;
   }
   
   const saveDefaultPlaylist = (playlistId: string) =>  {
@@ -126,8 +127,9 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [chosenMarket, setChosenMarket] = useState<string | null>(null);
   const likeSongString = 'Liked songs';
   const savedDefaultPlaylist = loadDefaultPlaylist();
-  const playlist: string = savedDefaultPlaylist === null ? likeSongString : savedDefaultPlaylist;
-  const [defaultPlaylist, setDefaultPlaylist] = useState<string>(); // Either equal to liked songs or a playlist uri
+  // playlist is equal to liked songs if default playlist is not stored using async
+  const [defaultPlaylist, setDefaultPlaylist] = useState(savedDefaultPlaylist || likeSongString);
+
   const [config, setConfig] = useState<any>(null);
   const [allowVolumeControll, setAllowVolumeControll] = useState<boolean>(true);
 
@@ -593,7 +595,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         topTracks,
         topArtists,
         topGenres,
-        setDefaultPlaylist,
+        saveDefaultPlaylist,
         availableMarkets,
         setChosenMarket,
         chosenMarket,
