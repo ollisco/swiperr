@@ -38,7 +38,12 @@ const SpotifyAuthContext: React.Context<{
   availableMarkets: any,
   setChosenMarket: any,
   chosenMarket: any,
+<<<<<<< Updated upstream
   allowVolumeControll: any,
+=======
+  showVolumeBar: boolean,
+  setShowVolumeBar: any,
+>>>>>>> Stashed changes
 
 }> = createContext({
   promptAsync: null,
@@ -67,7 +72,13 @@ const SpotifyAuthContext: React.Context<{
   availableMarkets: null,
   setChosenMarket: null,
   chosenMarket: null,
+<<<<<<< Updated upstream
   allowVolumeControll: true,
+=======
+  showVolumeBar: true,
+  setShowVolumeBar: null,
+  
+>>>>>>> Stashed changes
 });
 
 WebBrowser.maybeCompleteAuthSession();
@@ -91,7 +102,11 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const likeSongString = 'Liked songs';
   const [defaultPlaylist, setDefaultPlaylist] = useState<string>(likeSongString); // Either equal to liked songs or a playlist uri
   const [config, setConfig] = useState<any>(null);
+<<<<<<< Updated upstream
   const [allowVolumeControll, setAllowVolumeControll] = useState<boolean>(true);
+=======
+  const [showVolumeBar, setShowVolumeBar] = useState(true);
+>>>>>>> Stashed changes
 
   // Error handling
   const { addErrorText } = useError();
