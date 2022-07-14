@@ -8,6 +8,7 @@ import { discovery, redirectUri, meEndpoint, recomendationEndpoint } from './uti
 import useError from './useError';
 import { getCountryName, getLocation } from '../components/utils/country-utils';
 import { DeviceType } from '../types';
+import useSnippet from './useSnippet.native';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -38,12 +39,7 @@ const SpotifyAuthContext: React.Context<{
   availableMarkets: any,
   setChosenMarket: any,
   chosenMarket: any,
-<<<<<<< Updated upstream
   allowVolumeControll: any,
-=======
-  showVolumeBar: boolean,
-  setShowVolumeBar: any,
->>>>>>> Stashed changes
 
 }> = createContext({
   promptAsync: null,
@@ -72,13 +68,7 @@ const SpotifyAuthContext: React.Context<{
   availableMarkets: null,
   setChosenMarket: null,
   chosenMarket: null,
-<<<<<<< Updated upstream
   allowVolumeControll: true,
-=======
-  showVolumeBar: true,
-  setShowVolumeBar: null,
-  
->>>>>>> Stashed changes
 });
 
 WebBrowser.maybeCompleteAuthSession();
@@ -102,11 +92,11 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const likeSongString = 'Liked songs';
   const [defaultPlaylist, setDefaultPlaylist] = useState<string>(likeSongString); // Either equal to liked songs or a playlist uri
   const [config, setConfig] = useState<any>(null);
-<<<<<<< Updated upstream
   const [allowVolumeControll, setAllowVolumeControll] = useState<boolean>(true);
-=======
-  const [showVolumeBar, setShowVolumeBar] = useState(true);
->>>>>>> Stashed changes
+
+  
+  const { addTrackAndPlay }  = useSnippet();
+
 
   // Error handling
   const { addErrorText } = useError();
@@ -389,7 +379,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
 
     await axios.get(recomendationEndpoint, configRecommendations)
       .then((res) => {
-        // console.log('Recomendations: ', res.data);
+        console.log('Recomendations: ', res.data);
         const { tracks } = res.data;
         setRecommendedTracks(tracks);
         const firstTrackUri = tracks[0].uri;
@@ -458,18 +448,23 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       });
   }
 
-  async function queueSongAndSkip(trackUri: string) {
-    // TODO: Figure out how to send the query nicely with axios
-    axios.post(
-      `https://api.spotify.com/v1/me/player/queue?uri=${trackUri}`,
-      {},
-      config,
-    ).then(() => {
-      playNextSong();
-    }).catch((err) => {
-      console.log('Error Queue: ', err);
-      addErrorText(err.response.data.error.message);
-    });
+  async function queueSongAndSkip(track: any) {
+
+    if (track.preview_url !== undefined) {
+      addTrackAndPlay(track.preview_url);
+    } else {
+      // TODO: Figure out how to send the query nicely with axios
+      axios.post(
+        `https://api.spotify.com/v1/me/player/queue?uri=${track.id}`,
+        {},
+        config,
+      ).then(() => {
+        playNextSong();
+      }).catch((err) => {
+        console.log('Error Queue: ', err);
+        addErrorText(err.response.data.error.message);
+      });
+    }
   }
 
   async function playNextSong() {

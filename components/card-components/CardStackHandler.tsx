@@ -49,7 +49,7 @@ function CardStackHandler(_style: any) {
 
   React.useEffect(() => {
     if (showType === 'new') {
-      queueAndSkip(newReleases[0].uri);
+      queueAndSkip(newReleases[0]);
       setNewReleasesIndex(0);
       setRecommendedIndex(0);
       
@@ -83,7 +83,7 @@ function CardStackHandler(_style: any) {
               setRGB(DARK_GRAY);
               // console.log(token && userTopItems[recommendedIndex + 1].uri);
               if (token && userTopItems[recommendedIndex + 1] !== undefined) {
-                queueAndSkip(userTopItems[recommendedIndex + 1].uri);
+                queueAndSkip(userTopItems[recommendedIndex + 1]);
                 setRecommendedIndex(recommendedIndex + 1);
                 setNewReleasesIndex(newReleasesIndex + 1);
               }
@@ -130,7 +130,7 @@ function CardStackHandler(_style: any) {
               ) => (
                 <CardItem
                   hasActions
-                  image={{ uri: card.images[0].url }}
+                  image={{ uri: card.images[0] }}
                   track={card.name}
                   releaseDate={card.releaseDate}
                   popularity={card.popularity}
@@ -143,7 +143,7 @@ function CardStackHandler(_style: any) {
                 console.log(cardIndex);
                 setRGB(DARK_GRAY);
                 if (token && newReleases[newReleasesIndex + 1] !== undefined) {
-                  queueAndSkip(newReleases[newReleasesIndex + 1].uri);
+                  queueAndSkip(newReleases[newReleasesIndex + 1]);
                   setRecommendedIndex(recommendedIndex + 1);
                   setNewReleasesIndex(newReleasesIndex + 1);
                 }
