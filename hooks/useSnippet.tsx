@@ -14,8 +14,6 @@ interface Props {
 
 
 export const SnippetHandler: React.ReactNode = ({ children }: Props) => {
-   
-    
     const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
     const [playing, setPlaying] = useState<boolean>(false);
   
@@ -53,5 +51,6 @@ export const SnippetHandler: React.ReactNode = ({ children }: Props) => {
 }
 
 export default function useSnippetContext() {
+  console.log("Using Web snippets");
   return useContext(snippetContext);
 }

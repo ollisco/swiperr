@@ -8,7 +8,7 @@ import { discovery, redirectUri, meEndpoint, recomendationEndpoint } from './uti
 import useError from './useError';
 import { getCountryName, getLocation } from '../components/utils/country-utils';
 import { DeviceType } from '../types';
-import useSnippet from './useSnippet.native';
+import useSnippetContext from './useSnippet';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -95,7 +95,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [allowVolumeControll, setAllowVolumeControll] = useState<boolean>(true);
 
   
-  const { addTrackAndPlay }  = useSnippet();
+  const { addTrackAndPlay }  = useSnippetContext();
 
 
   // Error handling

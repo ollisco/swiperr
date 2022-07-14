@@ -78,5 +78,6 @@ export const SnippetHandler: React.ReactNode = ({ children }: Props) => {
 }
 
 export default function useSnippetContext() {
+  console.log("Using Native snippets");
   return useContext(snippetContext);
 }
