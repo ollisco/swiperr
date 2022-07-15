@@ -69,10 +69,10 @@ function CardStackHandler(_style: any) {
               <CardItem
                 hasActions
                 image={{ uri: card.album.images[0].url }}
-                track={card.name || "*No Track Name Found*"}
+                track={card.name || '*No Track Name Found*'}
                 releaseDate={card.releaseDate || undefined}
-                popularity={card.popularity || "*No Popularity Found*"}
-                artist={card.artists.map((artist: any) => artist.name).join(', ') || "*No Artist Found*"}
+                popularity={card.popularity || '*No Popularity Found*'}
+                artist={card.artists.map((artist: any) => artist.name).join(', ') || '*No Artist Found*'}
                 id={index}
               />
             )}
@@ -130,7 +130,7 @@ function CardStackHandler(_style: any) {
                 <CardItem
                   hasActions
                   image={{ uri: card.images[0].url }}
-                  track={card.name || "*No Track Name Found*"}
+                  track={card.name || '*No Track Name Found*'}
                   releaseDate={card.releaseDate || '*No Release Date Found*'}
                   popularity={card.popularity || '*No Popularity Found*'}
                   artist={card.artists.map((artist: any) => artist.name).join(', ') || '*No Artist Found*'}

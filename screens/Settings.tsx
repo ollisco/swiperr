@@ -2,6 +2,7 @@ import {
   View, ImageBackground, Text,
 } from 'react-native';
 import React, { useState } from 'react';
+import { CLIENT_ID, CLIENT_SECRET } from '@env';
 import styles from '../assets/styles';
 import BG_IMAGE from '../assets/images/bg2.jpg';
 import { SettingItemSwitch } from '../components';
@@ -12,7 +13,6 @@ import { mobileRedirectUri, redirectUri, webRedirectUri } from '../hooks/utils/a
 import { dropdownSize } from '../types';
 import useSnippetContext from '../hooks/useSnippet';
 import useError from '../hooks/useError';
-import { CLIENT_ID, CLIENT_SECRET } from '@env';
 
 function MockSettingItems() {
   const [exampleBool, setExampleBool] = useState(false);
@@ -41,11 +41,11 @@ function MockSettingItems() {
         header="Debug info"
         explanation="This is debug info for development resons. If you are testing you can ignore this dropdown."
         options={[
-          redirectUri, 
-          webRedirectUri, 
-          mobileRedirectUri, 
-          CLIENT_ID !== undefined ? "client id exists" : "client id does not exist",
-          CLIENT_SECRET !== undefined ? "client secret exists" : "client secret does not exist",]}
+          redirectUri,
+          webRedirectUri,
+          mobileRedirectUri,
+          CLIENT_ID !== undefined ? 'client id exists' : 'client id does not exist',
+          CLIENT_SECRET !== undefined ? 'client secret exists' : 'client secret does not exist']}
         dropdownSize={dropdownSize.MEDIUM}
       />
 
@@ -63,11 +63,11 @@ function SettingItems() {
     queueAndSkip,
     playSnippets,
     setPlaySnippets,
-    pause: pauseSpotify
+    pause: pauseSpotify,
   } = useSpotifyContext();
 
   const { pause: pauseSnippet } = useSnippetContext();
-  const {addErrorText} = useError();
+  const { addErrorText } = useError();
 
   const likedSongs = 'Liked songs';
   function getDefaultPlaylist(playlistName: string) {
@@ -78,9 +78,6 @@ function SettingItems() {
     const playlist = playlists.find((playlist: { name: string; }) => playlist.name === playlistName);
     setDefaultPlaylist(playlist.id);
   }
-
-  
-  
 
   return (
     <View>
@@ -108,7 +105,7 @@ function SettingItems() {
         defaultValue={likedSongs}
         dropdownSize={dropdownSize.MEDIUM}
         onSelect={(value: string) => {
-          getDefaultPlaylist(value)
+          getDefaultPlaylist(value);
         }}
       />
 
@@ -118,8 +115,8 @@ function SettingItems() {
         value={playSnippets}
         onValueChange={(value: boolean) => {
           value ? pauseSpotify() : pauseSnippet();
-          setPlaySnippets(value)}
-        }
+          setPlaySnippets(value);
+        }}
       />
     </View>
   );

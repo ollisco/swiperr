@@ -24,21 +24,20 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
 
   const snippetLength = 30000;
 
-
   const play = () => {
     if (audio) {
-      return new Promise(res=>{
-        audio.play()
-        audio.onended = res
-      })
+      return new Promise((res) => {
+        audio.play();
+        audio.onended = res;
+      });
     }
-  }
+  };
   const pause = () => {
     if (audio) {
       audio.pause();
     }
-  }
-  
+  };
+
   const fadeInTick = () => {
     if (audio) {
       if (audio.volume + volumeIncrement > 1) {
@@ -47,8 +46,8 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
         audio.volume += volumeIncrement;
       }
     }
-  }
-      
+  };
+
   const fadeOutTick = () => {
     if (audio) {
       if (audio.volume - volumeIncrement < 0) {
@@ -57,29 +56,29 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
         audio.volume -= volumeIncrement;
       }
     }
-  }
+  };
 
   const attachFadeIn = () => {
-    audio!.volume = 0
-    const fadeInInterval = setInterval(fadeInTick, fadeDuration/ticks);
+    audio!.volume = 0;
+    const fadeInInterval = setInterval(fadeInTick, fadeDuration / ticks);
     setTimeout(() => {
       clearInterval(fadeInInterval);
     }, fadeDuration);
-  }
+  };
 
   const attachFadeOut = () => {
-    const fadeOutInterval = setInterval(fadeOutTick, fadeDuration/ticks);
+    const fadeOutInterval = setInterval(fadeOutTick, fadeDuration / ticks);
     setTimeout(() => {
       clearInterval(fadeOutInterval);
     }, fadeDuration);
-  }
+  };
 
   useEffect(() => {
     if (audio) {
       attachFadeIn();
       setTimeout(() => {
         attachFadeOut();
-      }, snippetLength-fadeDuration); 
+      }, snippetLength - fadeDuration);
       audio.play();
     }
   }, [audio]);
@@ -104,7 +103,7 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
   return (
     <snippetContext.Provider value={{
       addTrackAndPlay,
-      pause
+      pause,
     }}
     >
       {children}

@@ -66,10 +66,10 @@ function App() {
                       options={{
                         tabBarIcon: ({ focused }) => (
                           <TabBarIcon
-                          focused={focused}
-                          iconName="musical-notes"
-                          text="Explore"
-                        />
+                            focused={focused}
+                            iconName="musical-notes"
+                            text="Explore"
+                          />
                         ),
                       }}
                     />
@@ -80,10 +80,10 @@ function App() {
                       options={{
                         tabBarIcon: ({ focused }) => (
                           <TabBarIcon
-                          focused={focused}
-                          iconName="heart"
-                          text="Liked"
-                        />
+                            focused={focused}
+                            iconName="heart"
+                            text="Liked"
+                          />
                         ),
                       }}
                     />
@@ -108,10 +108,10 @@ function App() {
                       options={{
                         tabBarIcon: ({ focused }) => (
                           <TabBarIcon
-                          focused={focused}
-                          iconName="settings-sharp"
-                          text="Settings"
-                        />
+                            focused={focused}
+                            iconName="settings-sharp"
+                            text="Settings"
+                          />
                         ),
                       }}
                     />
@@ -122,10 +122,10 @@ function App() {
                       options={{
                         tabBarIcon: ({ focused }) => (
                           <TabBarIcon
-                          focused={focused}
-                          iconName="person"
-                          text="Profile"
-                        />
+                            focused={focused}
+                            iconName="person"
+                            text="Profile"
+                          />
                         ),
                       }}
                     />
