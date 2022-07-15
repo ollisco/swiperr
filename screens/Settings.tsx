@@ -53,6 +53,8 @@ function SettingItems() {
     chosenMarket,
     setChosenMarket,
     queueAndSkip,
+    playSnippets,
+    setPlaySnippets,
   } = useSpotifyContext();
 
   const likedSongs = 'Liked songs';
@@ -91,6 +93,12 @@ function SettingItems() {
         defaultValue={likedSongs}
         dropdownSize={dropdownSize.MEDIUM}
         onSelect={(value: string) => getDefaultPlaylist(value)}
+      />
+
+      <SettingItemSwitch
+        text="Play Snippets"
+        value={playSnippets}
+        onValueChange={(value: boolean) => setPlaySnippets(value)}
       />
     </View>
   );

@@ -26,12 +26,18 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
 
   const play = () => {
     if (audio) {
-      audio.play();
+      return new Promise(res=>{
+        audio.play()
+        audio.onended = res
+      })
     }
   }
   const pause = () => {
     if (audio) {
-      audio.pause();
+      return new Promise(res=>{
+        audio.play()
+        audio.onended = res
+      })
     }
   }
   
@@ -94,7 +100,6 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
     if (audio) {
       audio.pause();
     }
-    
     setAudio(new Audio(url));
   };
 

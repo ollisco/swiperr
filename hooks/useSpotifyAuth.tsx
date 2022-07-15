@@ -42,7 +42,8 @@ const SpotifyAuthContext: React.Context<{
   setChosenMarket: any,
   chosenMarket: any,
   allowVolumeControll: any,
-
+  playSnippets: any,
+  setPlaySnippets: any,
 }> = createContext({
   promptAsync: null,
   token: null,
@@ -71,6 +72,8 @@ const SpotifyAuthContext: React.Context<{
   setChosenMarket: null,
   chosenMarket: null,
   allowVolumeControll: true,
+  playSnippets: true,
+  setPlaySnippets: null,
 });
 
 WebBrowser.maybeCompleteAuthSession();
@@ -95,6 +98,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [defaultPlaylist, setDefaultPlaylist] = useState<string>(likeSongString); // Either equal to liked songs or a playlist uri
   const [config, setConfig] = useState<any>(null);
   const [allowVolumeControll, setAllowVolumeControll] = useState<boolean>(true);
+  const [playSnippets, setPlaySnippets] = useState<boolean>(true);
 
   const { addTrackAndPlay } = useSnippetContext();
 
@@ -137,7 +141,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         const reducedAlbumUris = albumUris.slice(0, 20);
 
         const albumUriString = reducedAlbumUris.join();
-        const releases: any[] = [];
+        let releases: any[] = [];
         axios.get(`https://api.spotify.com/v1/albums?ids=${albumUriString}`, config)
           .then((res) => {
             console.log('New releases in', getLocation(market), res.data);
@@ -150,7 +154,12 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
               releases.push(item);
             });
             releases.sort(() => Math.random() - 0.5);
-
+            if (playSnippets) {
+              releases = releases.filter((
+                track: { preview_url: string | null ; }) => 
+                  track.preview_url !== null
+              );
+            }
             setNewReleases(releases);
           })
           .catch((err) => {
@@ -380,7 +389,13 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
     await axios.get(recomendationEndpoint, configRecommendations)
       .then((res) => {
         console.log('Recomendations: ', res.data);
-        const { tracks } = res.data;
+        let { tracks } = res.data;
+        if (playSnippets) {
+          tracks = tracks.filter((
+            track: { preview_url: string | null ; }) => 
+              track.preview_url !== null
+          );
+        }
         setRecommendedTracks(tracks);
         const firstTrackUri = tracks[0];
         queueSongAndSkip(firstTrackUri);
@@ -449,14 +464,13 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   }
 
   async function queueSongAndSkip(track: any) {
-    if (track.preview_url) {
+    if (playSnippets) {
       console.log("Snippet:", track.name);
       addTrackAndPlay(track.preview_url);
     } else {
       console.log("Full track:", track.name);
       // TODO: Figure out how to send the query nicely with axios
-      
-
+    
       axios.post(
         `https://api.spotify.com/v1/me/player/queue?uri=${track.uri}`,
         {},
@@ -540,6 +554,16 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       getNewReleases();
     }
   }, [chosenMarket]);
+
+  React.useEffect(() => {
+    if (config && token) {
+
+
+    getTopUserItems();
+    getNewReleases();
+  }
+  }, [playSnippets]);
+
   return (
     <SpotifyAuthContext.Provider
       value={{
@@ -570,6 +594,8 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         setChosenMarket,
         chosenMarket,
         allowVolumeControll,
+        playSnippets,
+        setPlaySnippets,
       }}
     >
       {children}

@@ -129,7 +129,7 @@ function CardStackHandler(_style: any) {
               ) => (
                 <CardItem
                   hasActions
-                  image={{ uri: card.images[0] }}
+                  image={{ uri: card.images[0].url }}
                   track={card.name}
                   releaseDate={card.releaseDate}
                   popularity={card.popularity}
@@ -175,7 +175,6 @@ function CardStackHandler(_style: any) {
               verticalSwipe={false}
               backgroundColor="#000000"
               stackSize={3}
-              infinite
               swipeBackCard
             />
 
