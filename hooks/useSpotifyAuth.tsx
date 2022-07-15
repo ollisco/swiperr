@@ -44,6 +44,7 @@ const SpotifyAuthContext: React.Context<{
   allowVolumeControll: any,
   playSnippets: any,
   setPlaySnippets: any,
+  pause: any,
 }> = createContext({
   promptAsync: null,
   token: null,
@@ -74,6 +75,7 @@ const SpotifyAuthContext: React.Context<{
   allowVolumeControll: true,
   playSnippets: true,
   setPlaySnippets: null,
+  pause: null,
 });
 
 WebBrowser.maybeCompleteAuthSession();
@@ -596,6 +598,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         allowVolumeControll,
         playSnippets,
         setPlaySnippets,
+        pause,
       }}
     >
       {children}

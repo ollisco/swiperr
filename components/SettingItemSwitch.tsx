@@ -9,10 +9,14 @@ function SettingItemSwitch({
   text,
   onValueChange,
   value,
+  explanation,
 }: SettingItemSwitchT) {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>{text}</Text>
+      <View style={styles.textContainer}>
+        <Text style={styles.text}>{text}</Text>
+        <Text style={styles.explanation}>{explanation}</Text>
+      </View>
       <Switch
         trackColor={{ false: '#767577', true: SPOTIFY_GREEN }}
         thumbColor={value ? SPOTIFY_GREEN : '#FFFFFF'}
@@ -38,10 +42,19 @@ const styles = StyleSheet.create({
     marginTop: -1,
 
   },
+  textContainer: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    width: '70%',
+  },
   text: {
     fontSize: 18,
     color: WHITE,
     borderRadius: 3,
     borderColor: GRAY,
+  },
+  explanation: {
+    fontSize: 14,
+    color: GRAY,
   },
 });

@@ -107,6 +107,7 @@ export type SettingItemSwitchT = {
   onValueChange: (value: boolean) => void;
   value: boolean;
   icon?: any;
+  explanation?: string;
 };
 
 export type SettingItemDropdownT = {

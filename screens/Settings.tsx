@@ -10,6 +10,7 @@ import useSpotifyContext from '../hooks/useSpotifyAuth';
 import { getLocation } from '../components/utils/country-utils';
 import { mobileRedirectUri, redirectUri, webRedirectUri } from '../hooks/utils/auth-utils';
 import { dropdownSize } from '../types';
+import useSnippetContext from '../hooks/useSnippet';
 
 function MockSettingItems() {
   const [exampleBool, setExampleBool] = useState(false);
@@ -55,7 +56,10 @@ function SettingItems() {
     queueAndSkip,
     playSnippets,
     setPlaySnippets,
+    pause: pauseSpotify
   } = useSpotifyContext();
+
+  const { pause: pauseSnippet } = useSnippetContext();
 
   const likedSongs = 'Liked songs';
   function getDefaultPlaylist(playlistName: string) {
@@ -97,8 +101,12 @@ function SettingItems() {
 
       <SettingItemSwitch
         text="Play Snippets"
+        explanation="If you want to play snippets, turn this on. If you want to play full songs through spotify, turn this off."
         value={playSnippets}
-        onValueChange={(value: boolean) => setPlaySnippets(value)}
+        onValueChange={(value: boolean) => {
+          value ? pauseSpotify() : pauseSnippet();
+          setPlaySnippets(value)}
+        }
       />
     </View>
   );
