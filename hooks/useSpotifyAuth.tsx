@@ -4,7 +4,9 @@ import * as WebBrowser from 'expo-web-browser';
 import { CLIENT_ID, CLIENT_SECRET } from '@env';
 import axios from 'axios';
 import useAutoExchange from './useAutoExchange';
-import { discovery, redirectUri, meEndpoint, recomendationEndpoint } from './utils/auth-utils';
+import {
+  discovery, redirectUri, meEndpoint, recomendationEndpoint,
+} from './utils/auth-utils';
 import useError from './useError';
 import { getCountryName, getLocation } from '../components/utils/country-utils';
 import { DeviceType } from '../types';
@@ -94,9 +96,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [config, setConfig] = useState<any>(null);
   const [allowVolumeControll, setAllowVolumeControll] = useState<boolean>(true);
 
-  
-  const { addTrackAndPlay }  = useSnippetContext();
-
+  const { addTrackAndPlay } = useSnippetContext();
 
   // Error handling
   const { addErrorText } = useError();
@@ -382,7 +382,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         console.log('Recomendations: ', res.data);
         const { tracks } = res.data;
         setRecommendedTracks(tracks);
-        const firstTrackUri = tracks[0].uri;
+        const firstTrackUri = tracks[0];
         queueSongAndSkip(firstTrackUri);
         console.log(tracks[0].name);
       })
@@ -449,13 +449,16 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   }
 
   async function queueSongAndSkip(track: any) {
-
-    if (track.preview_url !== undefined) {
+    if (track.preview_url) {
+      console.log("Snippet:", track.name);
       addTrackAndPlay(track.preview_url);
     } else {
+      console.log("Full track:", track.name);
       // TODO: Figure out how to send the query nicely with axios
+      
+
       axios.post(
-        `https://api.spotify.com/v1/me/player/queue?uri=${track.id}`,
+        `https://api.spotify.com/v1/me/player/queue?uri=${track.uri}`,
         {},
         config,
       ).then(() => {
@@ -487,7 +490,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   async function getPlaybackState() {
     await axios.get('https://api.spotify.com/v1/me/player', config)
       .then((res) => {
-         if (res.data !== "") {
+        if (res.data !== '') {
           if (res.data.device.type === DeviceType.COMPUTER) {
             setAllowVolumeControll(true);
             setVolume(50);
@@ -528,7 +531,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
       getTopUserItems();
       getLikedSongs();
       getPlaylists();
-      getAvailibleMarkets();    
+      getAvailibleMarkets();
     }
   }, [user]);
 

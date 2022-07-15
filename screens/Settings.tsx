@@ -47,12 +47,12 @@ function MockSettingItems() {
 
 function SettingItems() {
   const {
-    playlists, 
-    setDefaultPlaylist, 
-    availableMarkets, 
-    chosenMarket, 
-    setChosenMarket, 
-    queueAndSkip
+    playlists,
+    setDefaultPlaylist,
+    availableMarkets,
+    chosenMarket,
+    setChosenMarket,
+    queueAndSkip,
   } = useSpotifyContext();
 
   const likedSongs = 'Liked songs';
@@ -75,11 +75,10 @@ function SettingItems() {
         options={availableMarkets.map((
           country: {
             code: string,
-            name: string, 
+            name: string,
             nameWithFlag: string
-          }     
-        ) => country.nameWithFlag
-        )}
+          },
+        ) => country.nameWithFlag)}
         onSelect={(value: string) => {
           setChosenMarket(availableMarkets.find((country: {nameWithFlag: string}) => country.nameWithFlag === value).code);
         }}

@@ -34,7 +34,7 @@ function Error() {
   const componentTwo = () => (
     <TouchableOpacity
       style={styles.errorContainer}
-      onPress={() => {setShowComponent(!showComponent); }}
+      onPress={() => { setShowComponent(!showComponent); }}
     >
 
       <Text style={styles.testText}>{errorTexts}</Text>

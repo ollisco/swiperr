@@ -45,7 +45,7 @@ function CardItem({
     setVolume,
     recommendedTracks: userRecommendedTracks,
     newReleases,
-    
+
   } = useSpotifyContext();
 
   if (track.length > 25) {
@@ -127,7 +127,7 @@ function CardItem({
           </TouchableOpacity>
           <TouchableOpacity style={styles.miniButton}>
             <Icon
-              name="reload"            
+              name="reload"
               color={FLASH_ACTIONS}
               size={20}
               onPress={() => {
@@ -208,10 +208,10 @@ function CardItem({
         )}
       </View>
       <View style={{ flexDirection: flexDir }}>
-          <Text style={[styles.reminderText, { fontSize: 15 }]}>
-            You need to have the spotify app active to use this application.
-            Try playing and pausing your current song, and make sure your queue is empty.
-          </Text>
+        <Text style={[styles.reminderText, { fontSize: 15 }]}>
+          You need to have the spotify app active to use this application.
+          Try playing and pausing your current song, and make sure your queue is empty.
+        </Text>
       </View>
     </View>
   );

@@ -16,11 +16,9 @@ function SettingItemDropdown({
   onSelect,
   dropdownSize: size,
 }: SettingItemDropdownT) {
-
-  const ddSize = size === dropdownSize.MEDIUM ? 300 
+  const ddSize = size === dropdownSize.MEDIUM ? 300
     : size === dropdownSize.LARGE ? 400
-    : 200;
-
+      : 200;
 
   return (
     <View style={styles.container}>

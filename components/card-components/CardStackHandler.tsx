@@ -17,7 +17,7 @@ function CardStackHandler(_style: any) {
     queueAndSkip,
     newReleases,
     getNewReleases,
-    chosenMarket
+    chosenMarket,
   } = useSpotifyContext();
 
   const {
@@ -52,7 +52,6 @@ function CardStackHandler(_style: any) {
       queueAndSkip(newReleases[0]);
       setNewReleasesIndex(0);
       setRecommendedIndex(0);
-      
     }
   }, [newReleases]);
 
