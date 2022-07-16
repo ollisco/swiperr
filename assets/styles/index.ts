@@ -1,27 +1,26 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions } from 'react-native';
 
-export const PRIMARY_COLOR = "#7444C0";
-export const SECONDARY_COLOR = "#5636B8";
-export const WHITE = "#FFFFFF";
-export const GRAY = "#757E90";
-export const DARK_GRAY = "#363636"; // rgb(54, 54, 54)
-export const BLACK = "#000000";
-export const DARKER_GRAY = "#303030";
-export const SPOTIFY_GREEN = "#1DB954";
+export const PRIMARY_COLOR = '#7444C0';
+export const SECONDARY_COLOR = '#5636B8';
+export const WHITE = '#FFFFFF';
+export const GRAY = '#757E90';
+export const DARK_GRAY = '#363636'; // rgb(54, 54, 54)
+export const BLACK = '#000000';
+export const DARKER_GRAY = '#303030';
+export const SPOTIFY_GREEN = '#1DB954';
 
-export const ONLINE_STATUS = "#46A575";
-export const OFFLINE_STATUS = "#D04949";
+export const ONLINE_STATUS = '#46A575';
+export const OFFLINE_STATUS = '#D04949';
 
-export const STAR_ACTIONS = "#FFA200";
-export const LIKE_ACTIONS = "#B644B2";
-export const DISLIKE_ACTIONS = "#363636";
-export const FLASH_ACTIONS = "#5028D7";
+export const STAR_ACTIONS = '#FFA200';
+export const LIKE_ACTIONS = '#B644B2';
+export const DISLIKE_ACTIONS = '#363636';
+export const FLASH_ACTIONS = '#5028D7';
 
-export const ERROR = "#770707";
+export const ERROR = '#770707';
 
-export const DIMENSION_WIDTH = Dimensions.get("window").width; // window not screen
-export const DIMENSION_HEIGHT = Dimensions.get("window").height;
-
+export const DIMENSION_WIDTH = Dimensions.get('window').width; // window not screen
+export const DIMENSION_HEIGHT = Dimensions.get('window').height;
 
 export const CARD_HEIGHT = (DIMENSION_HEIGHT - 50) * 0.8;
 
@@ -31,9 +30,9 @@ export default StyleSheet.create({
     backgroundColor: DARK_GRAY,
     borderRadius: 20,
     borderWidth: 1,
-    //borderColor: SPOTIFY_GREEN,
+    // borderColor: SPOTIFY_GREEN,
     height: CARD_HEIGHT,
-    alignItems: "center",
+    alignItems: 'center',
     margin: 5,
     elevation: 1,
     shadowOpacity: 0.05,
@@ -41,7 +40,7 @@ export default StyleSheet.create({
     shadowColor: BLACK,
     shadowOffset: { height: 0, width: 0 },
     // center children
-    justifyContent: "center",
+    justifyContent: 'center',
     marginTop: -30,
     marginLeft: -20,
 
@@ -49,7 +48,7 @@ export default StyleSheet.create({
 
   imageStyle: {
     borderRadius: 8,
-    width:  DIMENSION_WIDTH - 80,
+    width: DIMENSION_WIDTH - 80,
     height: CARD_HEIGHT / 2,
     margin: 20,
   },
@@ -64,7 +63,7 @@ export default StyleSheet.create({
   containerCardItemSmall: {
     backgroundColor: DARK_GRAY,
     borderRadius: 8,
-    alignItems: "center",
+    alignItems: 'center',
     margin: 10,
     elevation: 1,
     shadowOpacity: 0.05,
@@ -73,14 +72,14 @@ export default StyleSheet.create({
     shadowOffset: { height: 0, width: 0 },
     width: (DIMENSION_WIDTH / 2) - 30,
     // center children
-    justifyContent: "center",
+    justifyContent: 'center',
   },
 
   containerCardItemRow: {
     backgroundColor: DARK_GRAY,
     borderRadius: 2,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     margin: 10,
     elevation: 1,
     shadowOpacity: 0.05,
@@ -92,7 +91,7 @@ export default StyleSheet.create({
   playlistText: {
     fontSize: 30,
     color: WHITE,
-    marginLeft: "5%"
+    marginLeft: '5%',
   },
 
   matchesCardItem: {
@@ -107,11 +106,11 @@ export default StyleSheet.create({
   },
 
   exploreTopCenter: {
-    textAlign: "center",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-   },
+    textAlign: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
   exploreTopCenterText: {
     color: GRAY,
@@ -124,36 +123,36 @@ export default StyleSheet.create({
   },
 
   volumeSlider: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   descriptionCardItem: {
     color: GRAY,
-    textAlign: "center",
+    textAlign: 'center',
   },
   artist: {
-    alignItems: "center",
-    textAlign: "center",
+    alignItems: 'center',
+    textAlign: 'center',
   },
   artistText: {
     color: GRAY,
     fontSize: 20,
-    textAlign: "center",
-    fontWeight: "bold",
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
 
   releaseDate: {
     color: GRAY,
     fontSize: 15,
-    textAlign: "center",
+    textAlign: 'center',
   },
 
   reminderText: {
     color: GRAY,
     fontSize: 15,
-    textAlign: "center",
+    textAlign: 'center',
   },
   online: {
     width: 6,
@@ -170,8 +169,8 @@ export default StyleSheet.create({
     marginRight: 4,
   },
   actionsCardItem: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingVertical: 5,
   },
   button: {
@@ -180,8 +179,8 @@ export default StyleSheet.create({
     borderRadius: 30,
     backgroundColor: WHITE,
     marginHorizontal: 7,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     elevation: 1,
     shadowOpacity: 0.15,
     shadowRadius: 20,
@@ -194,8 +193,8 @@ export default StyleSheet.create({
     borderRadius: 30,
     backgroundColor: WHITE,
     marginHorizontal: 7,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     elevation: 1,
     shadowOpacity: 0.15,
     shadowRadius: 20,
@@ -204,37 +203,36 @@ export default StyleSheet.create({
   },
   // SMALL CARD (CARDITEMSMALL)
   smallImageStyle: {
-      borderRadius: 8,
-      //width: DIMENSION_WIDTH / 2 - 40 ,
-      width: "100%",
-      height: 170 ,
-      margin: 0,
-      flexDirection: "column",
+    borderRadius: 8,
+    // width: DIMENSION_WIDTH / 2 - 40 ,
+    width: '100%',
+    height: 170,
+    margin: 0,
+    flexDirection: 'column',
   },
   playlistImage: {
     borderRadius: 2,
-    height:  120,
+    height: 120,
     width: 120,
     margin: 0,
   },
 
   smallNameStyle: {
-      color: WHITE,
-      fontSize: 15,
-      textAlign: "center",
-      fontWeight: "bold",
-    },
+    color: WHITE,
+    fontSize: 15,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
   // LARGE CARD (CARDITEM)
-  
 
   trackStyle: {
-      color: WHITE,
-      width: "100%",
-      textAlign: "center",
-      flexWrap: 'wrap',
-      flexShrink: 1,
-      fontSize: 25,
-      fontWeight: "bold",
+    color: WHITE,
+    width: '100%',
+    textAlign: 'center',
+    flexWrap: 'wrap',
+    flexShrink: 1,
+    fontSize: 25,
+    fontWeight: 'bold',
   },
 
   // COMPONENT - SETTINGS
@@ -252,7 +250,7 @@ export default StyleSheet.create({
   settingsText: {
     color: DARK_GRAY,
     fontSize: 13,
-    textAlign: "center",
+    textAlign: 'center',
   },
 
   // COMPONENT - FILTERS
@@ -266,7 +264,7 @@ export default StyleSheet.create({
     shadowRadius: 10,
     shadowColor: BLACK,
     shadowOffset: { height: 0, width: 0 },
-    alignItems: "center",
+    alignItems: 'center',
   },
 
   login: {
@@ -284,15 +282,15 @@ export default StyleSheet.create({
   loginText: {
     color: DARK_GRAY,
     fontSize: 13,
-    textAlign: "center",
+    textAlign: 'center',
   },
 
   // COMPONENT - MESSAGE
   containerMessage: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "flex-start",
-    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
     paddingHorizontal: 10,
     width: DIMENSION_WIDTH - 100,
   },
@@ -311,7 +309,7 @@ export default StyleSheet.create({
 
   // COMPONENT - PROFILE ITEM
   containerProfileItem: {
-    backgroundColor: "#232323",
+    backgroundColor: '#232323',
     paddingHorizontal: 10,
     paddingBottom: 25,
     margin: 20,
@@ -330,36 +328,36 @@ export default StyleSheet.create({
     paddingVertical: 7,
     paddingHorizontal: 20,
     borderRadius: 20,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   matchesTextProfileItem: {
     color: WHITE,
-    textAlign: "center",
+    textAlign: 'center',
   },
   name: {
     paddingTop: 25,
     paddingBottom: 5,
     color: WHITE,
     fontSize: 15,
-    textAlign: "center",
+    textAlign: 'center',
   },
   messageName: {
     paddingTop: 25,
     paddingBottom: 5,
     color: WHITE,
     fontSize: 15,
-    textAlign: "left",
+    textAlign: 'left',
   },
   descriptionProfileItem: {
     color: GRAY,
-    textAlign: "center",
+    textAlign: 'center',
     paddingBottom: 20,
     fontSize: 13,
   },
   info: {
     paddingVertical: 8,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   iconProfile: {
     fontSize: 12,
@@ -372,10 +370,10 @@ export default StyleSheet.create({
   },
 
   playlistsTopRow: {
-    flexDirection: 'row', 
-    width: '90%', 
-    marginLeft: '5%', 
-    marginRight: '5%', 
+    flexDirection: 'row',
+    width: '90%',
+    marginLeft: '5%',
+    marginRight: '5%',
     // vertically align items center
     alignItems: 'center',
   },
@@ -383,25 +381,25 @@ export default StyleSheet.create({
   // CONTAINER - GENERAL
   bg: {
     flex: 1,
-    resizeMode: "cover",
+    resizeMode: 'cover',
     width: DIMENSION_WIDTH,
     height: DIMENSION_HEIGHT,
-    position: "absolute",
+    position: 'absolute',
   },
   top: {
     paddingTop: 50,
     marginHorizontal: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  title: { 
-    paddingBottom: 10, 
-    fontSize: 22, 
+  title: {
+    paddingBottom: 10,
+    fontSize: 22,
     color: WHITE,
-    fontWeight: "bold",
-    textAlign: "center",
-    width: "100%",
+    fontWeight: 'bold',
+    textAlign: 'center',
+    width: '100%',
   },
 
   // CONTAINER - HOME
@@ -409,30 +407,30 @@ export default StyleSheet.create({
     marginHorizontal: 10,
     zIndex: 1,
     elevation: 1,
-    //display: "none",
+    // display: "none",
   },
 
-  containerPlaylists: { 
-    flex: 1, 
-    backgroundColor: WHITE, 
-    marginTop: 200 - CARD_HEIGHT, 
-    borderTopLeftRadius: 20, 
+  containerPlaylists: {
+    flex: 1,
+    backgroundColor: WHITE,
+    marginTop: 200 - CARD_HEIGHT,
+    borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     borderRadius: 6,
     zIndex: 3,
     elevation: 3,
-    },
+  },
 
   // CONTAINER - MATCHES
   containerLiked: {
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     flex: 1,
     paddingHorizontal: 10,
   },
 
   // CONTAINER - MESSAGES
   containerMessages: {
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     flex: 1,
     paddingHorizontal: 10,
   },
@@ -450,9 +448,9 @@ export default StyleSheet.create({
     paddingRight: 20,
   },
   actionsProfile: {
-    justifyContent: "center",
-    flexDirection: "row",
-    alignItems: "center",
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   textButton: {
     fontSize: 15,
@@ -464,14 +462,14 @@ export default StyleSheet.create({
     height: 50,
     borderRadius: 25,
     backgroundColor: PRIMARY_COLOR,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginRight: 10,
   },
   roundedButton: {
-    justifyContent: "center",
-    flexDirection: "row",
-    alignItems: "center",
+    justifyContent: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
     marginLeft: 10,
     height: 50,
     borderRadius: 25,
@@ -481,29 +479,31 @@ export default StyleSheet.create({
 
   // MENU
   tabButtonText: {
-    textTransform: "uppercase",
+    textTransform: 'uppercase',
   },
   iconMenu: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   errorContainer: {
-    flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     zIndex: 1,
     elevation: 1,
     height: 100,
-    position: "absolute",
+    position: 'absolute',
     backgroundColor: ERROR,
     borderBottomWidth: 1,
     borderColor: 'red',
-    width: '100%'
+    width: '100%',
   },
-  
+
   testText: {
     color: 'red',
     fontSize: 15,
     textAlign: 'center',
-    width: '100%'
+    width: '100%',
   },
-
 
 });

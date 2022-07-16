@@ -434,10 +434,9 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         setIsPlaying(false);
       })
       .catch((err) => {
-          addErrorText(err.response.data.error.message);
-          console.log('Error Pausing: ', err);
-        }
-      );
+        addErrorText(err.response.data.error.message);
+        console.log('Error Pausing: ', err);
+      });
   }
 
   async function setVolume(volume: number) {
@@ -497,11 +496,11 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
 
   function switchPlayingState() {
     if (playSnippets) {
-      console.log('snippet')
+      console.log('snippet');
       isPlaying ? pauseSnippet() : playSnippet();
       setIsPlaying(!isPlaying);
     } else {
-      console.log('spotify')
+      console.log('spotify');
       isPlaying ? pause() : play();
     }
   }
@@ -510,6 +509,10 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
     await axios.get('https://api.spotify.com/v1/me/player', config)
       .then((res) => {
         if (res.data !== '') {
+          if (res.data.is_playing) {
+            pause();
+          }
+
           if (res.data.device.type === DeviceType.COMPUTER) {
             setAllowVolumeControll(true);
             setVolume(50);
@@ -541,13 +544,12 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   React.useEffect(() => {
     if (config && token) {
       getPlaybackState();
-      getUserData();
+      getUserData()
     }
   }, [config, token]);
 
   React.useEffect(() => {
     if (user) {
-      pause();
       getTopUserItems();
       getLikedSongs();
       getPlaylists();

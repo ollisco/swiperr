@@ -58,7 +58,6 @@ function CardStackHandler(_style: any) {
     }
   }, [newReleases]);
 
-
   return (
     <View style={{ borderColor: '#000', borderWidth: 3, height: CARD_HEIGHT }}>
       {userTopItems.length > 0 && showType === 'recommended'
@@ -72,8 +71,8 @@ function CardStackHandler(_style: any) {
             ) => (
               <CardItem
                 hasActions
-                track={card.name }
-                image={ { uri: card.album.images[0].url } }
+                track={card.name}
+                image={{ uri: card.album.images[0].url }}
                 releaseDate={card.releaseDate || undefined}
                 popularity={card.popularity || '*No Popularity Found*'}
                 artist={card.artists.map((artist: any) => artist.name).join(', ') || '*No Artist Found*'}

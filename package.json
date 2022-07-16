@@ -14,8 +14,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "lint": "eslint --ext .tsx --ext .ts App.tsx screens/ hooks/ components/",
-    "lint:fix": "eslint --fix --ext .tsx --ext .ts App.tsx screens/ hooks/ components/",
+    "lint": "eslint --ext .tsx --ext .ts App.tsx screens/ hooks/ components/ assets/styles/",
+    "lint:fix": "eslint --fix --ext .tsx --ext .ts App.tsx screens/ hooks/ components/ assets/styles/",
     "deploy": "gh-pages -d web-build",
     "predeploy": "expo build:web"
   },
