@@ -102,7 +102,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [allowVolumeControll, setAllowVolumeControll] = useState<boolean>(true);
   const [playSnippets, setPlaySnippets] = useState<boolean>(true);
 
-  const { addTrackAndPlay } = useSnippetContext();
+  const { addTrackAndPlay, pause: pauseSnippet, play: playSnippet } = useSnippetContext();
 
   // Error handling
   const { addErrorText } = useError();
@@ -434,9 +434,10 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         setIsPlaying(false);
       })
       .catch((err) => {
-        addErrorText(err.response.data.error.message);
-        console.log('Error Pausing: ', err);
-      });
+          addErrorText(err.response.data.error.message);
+          console.log('Error Pausing: ', err);
+        }
+      );
   }
 
   async function setVolume(volume: number) {
@@ -467,6 +468,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
     if (playSnippets) {
       console.log('Snippet:', track.name);
       addTrackAndPlay(track.preview_url);
+      setIsPlaying(true);
     } else {
       console.log('Full track:', track.name);
       // TODO: Figure out how to send the query nicely with axios
@@ -494,10 +496,13 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   }
 
   function switchPlayingState() {
-    if (isPlaying) {
-      pause();
+    if (playSnippets) {
+      console.log('snippet')
+      isPlaying ? pauseSnippet() : playSnippet();
+      setIsPlaying(!isPlaying);
     } else {
-      play();
+      console.log('spotify')
+      isPlaying ? pause() : play();
     }
   }
 
@@ -542,6 +547,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
 
   React.useEffect(() => {
     if (user) {
+      pause();
       getTopUserItems();
       getLikedSongs();
       getPlaylists();

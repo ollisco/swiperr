@@ -44,16 +44,20 @@ function CardStackHandler(_style: any) {
   React.useEffect(() => {
     if (userTopItems.length > 0 && newReleases.length > 0) {
       swiper?.jumpToCardIndex(0);
+      console.log(userTopItems[0]);
     }
   }, [userTopItems, newReleases]);
 
   React.useEffect(() => {
     if (showType === 'new') {
-      queueAndSkip(newReleases[0]);
-      setNewReleasesIndex(0);
-      setRecommendedIndex(0);
+      if (userTopItems.length > 0 && newReleases.length > 0) {
+        queueAndSkip(newReleases[0]);
+        setNewReleasesIndex(0);
+        setRecommendedIndex(0);
+      }
     }
   }, [newReleases]);
+
 
   return (
     <View style={{ borderColor: '#000', borderWidth: 3, height: CARD_HEIGHT }}>
@@ -68,8 +72,8 @@ function CardStackHandler(_style: any) {
             ) => (
               <CardItem
                 hasActions
-                image={{ uri: card.album.images[0].url }}
-                track={card.name || '*No Track Name Found*'}
+                track={card.name }
+                image={ { uri: card.album.images[0].url } }
                 releaseDate={card.releaseDate || undefined}
                 popularity={card.popularity || '*No Popularity Found*'}
                 artist={card.artists.map((artist: any) => artist.name).join(', ') || '*No Artist Found*'}

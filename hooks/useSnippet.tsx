@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 const snippetContext: React.Context<{
   addTrackAndPlay: any,
   pause: any,
+  play: any
 }> = React.createContext({
 
 });
@@ -26,10 +27,7 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
 
   const play = () => {
     if (audio) {
-      return new Promise((res) => {
-        audio.play();
-        audio.onended = res;
-      });
+      audio.play();
     }
   };
   const pause = () => {
@@ -104,6 +102,7 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
     <snippetContext.Provider value={{
       addTrackAndPlay,
       pause,
+      play,
     }}
     >
       {children}
