@@ -205,7 +205,8 @@ export default StyleSheet.create({
   // SMALL CARD (CARDITEMSMALL)
   smallImageStyle: {
       borderRadius: 8,
-      width: DIMENSION_WIDTH / 2 - 40 ,
+      //width: DIMENSION_WIDTH / 2 - 40 ,
+      width: "100%",
       height: 170 ,
       margin: 0,
       flexDirection: "column",
@@ -221,6 +222,7 @@ export default StyleSheet.create({
       color: WHITE,
       fontSize: 15,
       textAlign: "center",
+      fontWeight: "bold",
     },
   // LARGE CARD (CARDITEM)
   

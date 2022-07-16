@@ -2,8 +2,7 @@ import React from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
-  ImageBackground,
+   ImageBackground,
   FlatList,
 } from 'react-native';
 import { CardItemSmall } from '../components';
@@ -39,13 +38,13 @@ function Liked() {
               data={likedSongs}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
-                <TouchableOpacity>
+                <View>
                   <CardItemSmall
                     image={{ uri: item.track.album.images[0].url }}
                     track={item.track.name}
                     artist={item.track.artists[0].name}
                   />
-                </TouchableOpacity>
+                </View>
               )}
             />
           ) : (
@@ -54,23 +53,23 @@ function Liked() {
               data={DATA}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ index, item }) => (
-                <TouchableOpacity>
+                <View>
                   <CardItemSmall
                     id={index}
                     image={item.image}
                     track={item.track}
                     artist={item.artist}
                   />
-                </TouchableOpacity>
+                </View>
               )}
             />
           )}
           {/* Ugly padding hack */}
-          <TouchableOpacity>
+          <View>
             <Text>Padding</Text>
             <Text>Padding</Text>
             <Text>Padding</Text>
-          </TouchableOpacity>
+          </View>
         </View>
       </ImageBackground>
     </View>
