@@ -41,7 +41,7 @@ export default StyleSheet.create({
     // center children
     justifyContent: 'center',
     marginTop: -50,
-    marginLeft: -20,
+    marginLeft: -25,
 
   },
 
