@@ -1,14 +1,13 @@
 import { Platform } from 'react-native';
-import { REDIRECT_URI, REDIRECT_URI_WEB } from '@env';
 import { makeRedirectUri } from 'expo-auth-session';
 
 // TODO: can maybe be replaced with: getRedirectUrl from expo auth session
 
-//const redirectUri = Platform.OS === 'web' ? REDIRECT_URI_WEB : REDIRECT_URI;
-const webRedirectUri = makeRedirectUri({scheme: 'swiperr', path: 'swiperr'}) ;
-const mobileRedirectUri = makeRedirectUri({scheme: 'swiperr'}) ;
+// const redirectUri = Platform.OS === 'web' ? REDIRECT_URI_WEB : REDIRECT_URI;
+const webRedirectUri = makeRedirectUri({ scheme: 'swiperr', path: 'swiperr' });
+const mobileRedirectUri = makeRedirectUri({ scheme: 'swiperr' });
 
-const redirectUri = Platform.OS === "web" 
+const redirectUri = Platform.OS === 'web'
   ? webRedirectUri
   : mobileRedirectUri;
 console.log(redirectUri);

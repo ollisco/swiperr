@@ -13,7 +13,8 @@ import Icon from './Icon';
 import { dummyDataPlaylists } from '../assets/data/dummy_data_playlists';
 
 function Playlists() {
-  const { playlists, addTrackToPlaylist, token, 
+  const {
+    playlists, addTrackToPlaylist, token,
     queueAndSkip,
     recommendedTracks,
     newReleases,
@@ -60,7 +61,7 @@ function Playlists() {
                     //   queueAndSkip(newReleases[newReleasesIndex + 1].uri);
                     //   setRecommendedIndex(recommendedIndex + 1);
                     //   setNewReleasesIndex(newReleasesIndex + 1);
-                      
+
                     // } else if (showType === 'recommended') {
                     //   queueAndSkip(recommendedTracks[recommendedIndex + 1].uri);
                     //   setRecommendedIndex(recommendedIndex + 1);
@@ -110,4 +111,3 @@ export default Playlists;
 function newReleasesIndex(newReleasesIndex: any) {
   throw new Error('Function not implemented.');
 }
-

@@ -5,7 +5,6 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import { countries } from 'country-data';
 import { Icon, ProfileItem } from '../components';
 import DEMO from '../assets/data/dummy_data_profiles';
 import styles, { WHITE } from '../assets/styles';
@@ -25,8 +24,6 @@ function Profile() {
     name,
     location,
   } = DEMO[7];
-
-  
 
   return (
 

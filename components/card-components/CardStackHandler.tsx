@@ -17,7 +17,6 @@ function CardStackHandler(_style: any) {
     queueAndSkip,
     newReleases,
     getNewReleases,
-    chosenMarket
   } = useSpotifyContext();
 
   const {
@@ -40,21 +39,24 @@ function CardStackHandler(_style: any) {
     const m = d < 110 ? 110 : -d;
     return `rgb(${m}, ${54 - ((54 * -d) / 300) + 20}, ${54 - ((54 * -d) / 300) + 20})`;
   }
+  
 
   React.useEffect(() => {
     if (userTopItems.length > 0 && newReleases.length > 0) {
       swiper?.jumpToCardIndex(0);
+      console.log(userTopItems[0]);
+
+    }
+    if (showType === 'new') {
+      if (userTopItems.length > 0 && newReleases.length > 0) {
+        queueAndSkip(newReleases[0]);
+        setNewReleasesIndex(0);
+        setRecommendedIndex(0);
+      }
     }
   }, [userTopItems, newReleases]);
 
-  React.useEffect(() => {
-    if (showType === 'new') {
-      queueAndSkip(newReleases[0].uri);
-      setNewReleasesIndex(0);
-      setRecommendedIndex(0);
-      
-    }
-  }, [newReleases]);
+
 
   return (
     <View style={{ borderColor: '#000', borderWidth: 3, height: CARD_HEIGHT }}>
@@ -64,16 +66,16 @@ function CardStackHandler(_style: any) {
             cards={userTopItems}
             renderCard={(
               card:
-              {album: any, popularity: number, artists: string[], releaseDate: string, name: string},
+              {album: any, popularity: string | undefined, artists: string[], releaseDate: string, name: string},
               index: number,
             ) => (
               <CardItem
                 hasActions
-                image={{ uri: card.album.images[0].url }}
                 track={card.name}
-                releaseDate={card.releaseDate}
-                popularity={card.popularity}
-                artist={card.artists.map((artist: any) => artist.name).join(', ')}
+                image={ { uri: card.album.images[0].url }}
+                releaseDate={ card.releaseDate || undefined}
+                popularity={ card.popularity }
+                artist={ card.artists.map((artist: any) => artist.name).join(', ') }
                 id={index}
               />
             )}
@@ -83,7 +85,7 @@ function CardStackHandler(_style: any) {
               setRGB(DARK_GRAY);
               // console.log(token && userTopItems[recommendedIndex + 1].uri);
               if (token && userTopItems[recommendedIndex + 1] !== undefined) {
-                queueAndSkip(userTopItems[recommendedIndex + 1].uri);
+                queueAndSkip(userTopItems[recommendedIndex + 1]);
                 setRecommendedIndex(recommendedIndex + 1);
                 setNewReleasesIndex(newReleasesIndex + 1);
               }
@@ -118,6 +120,7 @@ function CardStackHandler(_style: any) {
             backgroundColor="#000000"
             stackSize={3}
             swipeBackCard
+            key={"top-items"}
           />
         )
         : newReleases && showType === 'new'
@@ -131,10 +134,10 @@ function CardStackHandler(_style: any) {
                 <CardItem
                   hasActions
                   image={{ uri: card.images[0].url }}
-                  track={card.name}
-                  releaseDate={card.releaseDate}
-                  popularity={card.popularity}
-                  artist={card.artists.map((artist: any) => artist.name).join(', ')}
+                  track={card.name || '*No Track Name Found*'}
+                  releaseDate={card.releaseDate || '*No Release Date Found*'}
+                  popularity={card.popularity || '*No Popularity Found*'}
+                  artist={card.artists.map((artist: any) => artist.name).join(', ') || '*No Artist Found*'}
                   id={index}
                 />
               )}
@@ -143,7 +146,7 @@ function CardStackHandler(_style: any) {
                 console.log(cardIndex);
                 setRGB(DARK_GRAY);
                 if (token && newReleases[newReleasesIndex + 1] !== undefined) {
-                  queueAndSkip(newReleases[newReleasesIndex + 1].uri);
+                  queueAndSkip(newReleases[newReleasesIndex + 1]);
                   setRecommendedIndex(recommendedIndex + 1);
                   setNewReleasesIndex(newReleasesIndex + 1);
                 }
@@ -176,7 +179,6 @@ function CardStackHandler(_style: any) {
               verticalSwipe={false}
               backgroundColor="#000000"
               stackSize={3}
-              infinite
               swipeBackCard
             />
 
