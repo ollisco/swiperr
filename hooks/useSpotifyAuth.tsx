@@ -509,9 +509,10 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
     await axios.get('https://api.spotify.com/v1/me/player', config)
       .then((res) => {
         if (res.data !== '') {
-          if (res.data.is_playing) {
-            pause();
-          }
+          /* Enable this code when playing spotify content is back */
+          // if (res.data.is_playing) {
+          //   pause();
+          // }
 
           if (res.data.device.type === DeviceType.COMPUTER) {
             setAllowVolumeControll(true);
