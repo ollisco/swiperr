@@ -1,9 +1,11 @@
 import {
   StyleSheet, Switch, Text, View,
 } from 'react-native';
-import React from 'react';
+import React, {useState, useCallback} from 'react';
 import { SettingItemSwitchT } from '../types';
 import { SPOTIFY_GREEN, WHITE, GRAY } from '../assets/styles/index';
+import { debounce } from "lodash";
+
 
 function SettingItemSwitch({
   text,
@@ -11,6 +13,9 @@ function SettingItemSwitch({
   value,
   explanation,
 }: SettingItemSwitchT) {
+  const [disabled, setDisabled] = useState(false);
+
+
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>

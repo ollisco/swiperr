@@ -1,102 +1,58 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Audio } from 'expo-av';
+
 
 const snippetContext: React.Context<{
-  addTrackAndPlay: any,
-  pause: any,
-  play: any
+  addTrackAndPlay: (url: string) => Promise<void>,
+  pause: () => Promise<void>,
+  play: () => Promise<void>
 }> = React.createContext({
-
-});
+  addTrackAndPlay: (url: string) => new Promise<void>(() => {}),
+  pause: () => new Promise<void>(() => {}),
+  play: () => new Promise<void>(() => {})
+}); 
 
 interface Props {
   children: React.ReactNode
 }
 
 export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
-  const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
-  const [playing, setPlaying] = useState<boolean>(false);
-  const [volume, setVolume] = useState<number>(0);
+  const [audio, setAudio] = useState<Audio.Sound | null>(null);
 
-  const toggle = () => setPlaying(!playing);
-
-  const fadeDuration = 4000;
-  const ticks = 20;
-  const volumeIncrement = ticks / fadeDuration;
-
-  const snippetLength = 30000;
-
-  const play = () => {
+  const addTrackAndPlay = async (url: string) =>  {
+    console.log('Loading Sound');
+    
     if (audio) {
-      audio.play();
+      await pause();
     }
-  };
-  const pause = () => {
+
+    const { sound } = await Audio.Sound.createAsync(
+      {uri: url}
+    );
+    setAudio(sound);
+    console.log('Playing Sound');
+    await sound.playAsync(); 
+  }
+  const play = async () => {
     if (audio) {
-      audio.pause();
+      await audio.playAsync();
     }
-  };
+  }
 
-  const fadeInTick = () => {
+  const pause = async () => {
     if (audio) {
-      if (audio.volume + volumeIncrement > 1) {
-        audio.volume = 1;
-      } else {
-        audio.volume += volumeIncrement;
-      }
+      await audio.pauseAsync();
     }
-  };
-
-  const fadeOutTick = () => {
-    if (audio) {
-      if (audio.volume - volumeIncrement < 0) {
-        audio.volume = 0;
-      } else {
-        audio.volume -= volumeIncrement;
-      }
-    }
-  };
-
-  const attachFadeIn = () => {
-    audio!.volume = 0;
-    const fadeInInterval = setInterval(fadeInTick, fadeDuration / ticks);
-    setTimeout(() => {
-      clearInterval(fadeInInterval);
-    }, fadeDuration);
-  };
-
-  const attachFadeOut = () => {
-    const fadeOutInterval = setInterval(fadeOutTick, fadeDuration / ticks);
-    setTimeout(() => {
-      clearInterval(fadeOutInterval);
-    }, fadeDuration);
-  };
+  }
 
   useEffect(() => {
-    if (audio) {
-      attachFadeIn();
-      setTimeout(() => {
-        attachFadeOut();
-      }, snippetLength - fadeDuration);
-      audio.play();
-    }
+    return audio
+      ? () => {
+          console.log('Unloading audio');
+          audio.unloadAsync(); }
+      : undefined;
   }, [audio]);
 
-  useEffect(() => {
-    if (audio) {
-      audio.addEventListener('ended', () => setPlaying(false));
-      return () => {
-        audio.removeEventListener('ended', () => setPlaying(false));
-      };
-    }
-  }, []);
-
-  const addTrackAndPlay = async (url: string) => {
-    // async
-    if (audio) {
-      audio.pause();
-    }
-    setAudio(new Audio(url));
-  };
 
   return (
     <snippetContext.Provider value={{
@@ -111,6 +67,6 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
 };
 
 export default function useSnippetContext() {
-  // console.log('Using Web snippets');
+  // console.log('Using Native snippets');
   return useContext(snippetContext);
 }

@@ -64,6 +64,8 @@ function SettingItems() {
     playSnippets,
     setPlaySnippets,
     pause: pauseSpotify,
+    getUserRecommendedTracks,
+    getNewReleases,
   } = useSpotifyContext();
 
   const { pause: pauseSnippet } = useSnippetContext();
@@ -108,8 +110,8 @@ function SettingItems() {
           getDefaultPlaylist(value);
         }}
       />
-
-      <SettingItemSwitch
+      {/* Kinda works but cause WIERD crashes */}
+      {/* <SettingItemSwitch
         text="Play Snippets"
         explanation="If you want to play snippets, turn this on. If you want to play full songs through spotify, turn this off."
         value={playSnippets}
@@ -117,7 +119,8 @@ function SettingItems() {
           value ? pauseSpotify() : pauseSnippet();
           setPlaySnippets(value);
         }}
-      />
+
+      /> */}
     </View>
   );
 }

@@ -17,7 +17,6 @@ function CardStackHandler(_style: any) {
     queueAndSkip,
     newReleases,
     getNewReleases,
-    chosenMarket,
   } = useSpotifyContext();
 
   const {
@@ -40,15 +39,14 @@ function CardStackHandler(_style: any) {
     const m = d < 110 ? 110 : -d;
     return `rgb(${m}, ${54 - ((54 * -d) / 300) + 20}, ${54 - ((54 * -d) / 300) + 20})`;
   }
+  
 
   React.useEffect(() => {
     if (userTopItems.length > 0 && newReleases.length > 0) {
       swiper?.jumpToCardIndex(0);
       console.log(userTopItems[0]);
-    }
-  }, [userTopItems, newReleases]);
 
-  React.useEffect(() => {
+    }
     if (showType === 'new') {
       if (userTopItems.length > 0 && newReleases.length > 0) {
         queueAndSkip(newReleases[0]);
@@ -56,7 +54,9 @@ function CardStackHandler(_style: any) {
         setRecommendedIndex(0);
       }
     }
-  }, [newReleases]);
+  }, [userTopItems, newReleases]);
+
+
 
   return (
     <View style={{ borderColor: '#000', borderWidth: 3, height: CARD_HEIGHT }}>
@@ -72,10 +72,10 @@ function CardStackHandler(_style: any) {
               <CardItem
                 hasActions
                 track={card.name}
-                image={{ uri: card.album.images[0].url }}
-                releaseDate={card.releaseDate || undefined}
-                popularity={card.popularity || '*No Popularity Found*'}
-                artist={card.artists.map((artist: any) => artist.name).join(', ') || '*No Artist Found*'}
+                image={ { uri: card.album.images[0].url }}
+                releaseDate={ card.releaseDate || undefined}
+                popularity={ card.popularity }
+                artist={ card.artists.map((artist: any) => artist.name).join(', ') }
                 id={index}
               />
             )}
@@ -120,6 +120,7 @@ function CardStackHandler(_style: any) {
             backgroundColor="#000000"
             stackSize={3}
             swipeBackCard
+            key={"top-items"}
           />
         )
         : newReleases && showType === 'new'

@@ -33,7 +33,6 @@ export default StyleSheet.create({
     // borderColor: SPOTIFY_GREEN,
     height: CARD_HEIGHT,
     alignItems: 'center',
-    margin: 5,
     elevation: 1,
     shadowOpacity: 0.05,
     shadowRadius: 10,
@@ -41,7 +40,7 @@ export default StyleSheet.create({
     shadowOffset: { height: 0, width: 0 },
     // center children
     justifyContent: 'center',
-    marginTop: -30,
+    marginTop: -50,
     marginLeft: -20,
 
   },
