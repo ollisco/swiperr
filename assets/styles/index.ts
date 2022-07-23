@@ -52,6 +52,11 @@ export default StyleSheet.create({
     margin: 20,
   },
 
+  loginImageStyle: {
+    width: '90%',
+    height: 400,
+  },
+
   containerCardItemWeb: {
     width: DIMENSION_WIDTH - 40,
     height: CARD_HEIGHT,
@@ -270,18 +275,24 @@ export default StyleSheet.create({
     backgroundColor: WHITE,
     padding: 10,
     borderRadius: 20,
-    width: 80,
+    width: 160,
+    height: 50,
     elevation: 1,
     shadowOpacity: 0.05,
     shadowRadius: 10,
     shadowColor: BLACK,
     shadowOffset: { height: 0, width: 0 },
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   loginText: {
+    // center the text
     color: DARK_GRAY,
-    fontSize: 13,
+    fontSize: 30,
     textAlign: 'center',
+    // bold
+    fontWeight: 'bold',
   },
 
   // COMPONENT - MESSAGE

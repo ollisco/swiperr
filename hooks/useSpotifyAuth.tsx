@@ -545,7 +545,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   React.useEffect(() => {
     if (config && token) {
       getPlaybackState();
-      getUserData()
+      getUserData();
     }
   }, [config, token]);
 

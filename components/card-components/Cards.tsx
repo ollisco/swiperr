@@ -3,7 +3,6 @@ import React, { useContext } from 'react';
 import styles from '../../assets/styles';
 import Settings from '../Settings';
 import Filters from '../Filters';
-import Login from '../Login';
 import useSpotifyContext from '../../hooks/useSpotifyAuth';
 import CardStackHandler from './CardStackHandler';
 import { SwipeCardContext } from './CardProvider';
@@ -57,7 +56,26 @@ function Cards(props: Props) {
             </TouchableOpacity>
           </View>
         ) : (
-          <Login />
+          <View style={styles.exploreTopCenter}>
+            <TouchableOpacity onPress={() => {
+              setShowType('recommended');
+            }}
+            >
+              <Text style={[styles.exploreTopCenterText, recommendedActiveStyle]}>
+                Recommended
+              </Text>
+            </TouchableOpacity>
+            <Text style={styles.exploreTopCenterText}>
+              |
+            </Text>
+            <TouchableOpacity
+              onPress={() => { setShowType('new'); }}
+            >
+              <Text style={[styles.exploreTopCenterText, newActiveStyle]}>
+                New Releases
+              </Text>
+            </TouchableOpacity>
+          </View>
         )}
         <Filters />
       </View>

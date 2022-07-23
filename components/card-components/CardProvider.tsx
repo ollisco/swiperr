@@ -6,7 +6,7 @@ import { DataSong, SwipedCardContextT } from '../../types';
 
 export const SwipeCardContext = createContext<SwipedCardContextT | null>(null);
 
-const SwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
+const useSwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
   const { recommendedTracks: userRecommendedTracks } = useSpotifyContext();
   const [volume, setVolume] = useState<number>(50);
   const [rgb, setRGB] = useState<string>('rgb(54, 54, 54)');
@@ -50,4 +50,4 @@ const SwipeCardProvider: FC<React.ReactNode> = ({ children }) => {
   );
 };
 
-export default SwipeCardProvider;
+export default useSwipeCardProvider;

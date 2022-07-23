@@ -39,13 +39,11 @@ function CardStackHandler(_style: any) {
     const m = d < 110 ? 110 : -d;
     return `rgb(${m}, ${54 - ((54 * -d) / 300) + 20}, ${54 - ((54 * -d) / 300) + 20})`;
   }
-  
 
   React.useEffect(() => {
     if (userTopItems.length > 0 && newReleases.length > 0) {
       swiper?.jumpToCardIndex(0);
       console.log(userTopItems[0]);
-
     }
     if (showType === 'new') {
       if (userTopItems.length > 0 && newReleases.length > 0) {
@@ -55,8 +53,6 @@ function CardStackHandler(_style: any) {
       }
     }
   }, [userTopItems, newReleases]);
-
-
 
   return (
     <View style={{ borderColor: '#000', borderWidth: 3, height: CARD_HEIGHT }}>
@@ -72,10 +68,10 @@ function CardStackHandler(_style: any) {
               <CardItem
                 hasActions
                 track={card.name}
-                image={ { uri: card.album.images[0].url }}
-                releaseDate={ card.releaseDate || undefined}
-                popularity={ card.popularity }
-                artist={ card.artists.map((artist: any) => artist.name).join(', ') }
+                image={{ uri: card.album.images[0].url }}
+                releaseDate={card.releaseDate || undefined}
+                popularity={card.popularity}
+                artist={card.artists.map((artist: any) => artist.name).join(', ')}
                 id={index}
               />
             )}
@@ -120,7 +116,7 @@ function CardStackHandler(_style: any) {
             backgroundColor="#000000"
             stackSize={3}
             swipeBackCard
-            key={"top-items"}
+            key="top-items"
           />
         )
         : newReleases && showType === 'new'

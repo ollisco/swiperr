@@ -6,32 +6,43 @@ import useSpotifyContext from '../hooks/useSpotifyAuth';
 import { SwipeCardContext } from './card-components/CardProvider';
 import { SwipedCardContextT } from '../types';
 
-function Login() {
+export function LoginMock({ navigation }: any) {
   const { promptAsync } = useSpotifyContext();
-  const { setShowType } = useContext(SwipeCardContext) as SwipedCardContextT;
+  const { setShowType } = useContext<SwipedCardContextT>(SwipeCardContext);
 
-  async function awaitPromptAsync() {
-    setShowType('recommended');
-    await promptAsync();
-  }
+  const login = async () => {
+    await setShowType('recommended');
+    await navigation.navigate('Tab');
+  };
 
   return (
-    <View style={{ flexDirection: 'row' }}>
-      <TouchableOpacity style={styles.login} onPress={awaitPromptAsync}>
+    <View style={{ flexDirection: 'row', marginTop: 20 }}>
+      <TouchableOpacity style={styles.login} onPress={login}>
         <Text style={styles.loginText}>
-          <Icon name="spotify" size={13} color={DARK_GRAY} useFontAwesome />
-          {' Login'}
+          Try it out
         </Text>
       </TouchableOpacity>
-
-      {/* <TouchableOpacity style={styles.login} onPress={awaitPromptAsync}>
-        <Text style={styles.loginText}>
-          <Icon name="soundcloud" size={13} color={DARK_GRAY} useFontAwesome />
-          {' Login'}
-        </Text>
-      </TouchableOpacity> */}
     </View>
   );
 }
+export default function Login({ navigation }: any) {
+  const { promptAsync } = useSpotifyContext();
+  const { setShowType } = useContext<SwipedCardContextT>(SwipeCardContext);
 
-export default Login;
+  const login = async () => {
+    await setShowType('recommended');
+    await promptAsync();
+    await navigation.navigate('Tab');
+  };
+
+  return (
+    <View style={{ flexDirection: 'row' }}>
+      <TouchableOpacity style={styles.login} onPress={login}>
+        <Text style={styles.loginText}>
+          <Icon name="spotify" size={30} color={DARK_GRAY} useFontAwesome />
+          {' Login'}
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+}

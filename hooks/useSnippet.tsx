@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Audio } from 'expo-av';
 
-
 const snippetContext: React.Context<{
   addTrackAndPlay: (url: string) => Promise<void>,
   pause: () => Promise<void>,
@@ -9,8 +8,8 @@ const snippetContext: React.Context<{
 }> = React.createContext({
   addTrackAndPlay: (url: string) => new Promise<void>(() => {}),
   pause: () => new Promise<void>(() => {}),
-  play: () => new Promise<void>(() => {})
-}); 
+  play: () => new Promise<void>(() => {}),
+});
 
 interface Props {
   children: React.ReactNode
@@ -19,40 +18,38 @@ interface Props {
 export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
   const [audio, setAudio] = useState<Audio.Sound | null>(null);
 
-  const addTrackAndPlay = async (url: string) =>  {
+  const addTrackAndPlay = async (url: string) => {
     console.log('Loading Sound');
-    
+
     if (audio) {
       await pause();
     }
 
     const { sound } = await Audio.Sound.createAsync(
-      {uri: url}
+      { uri: url },
     );
     setAudio(sound);
     console.log('Playing Sound');
-    await sound.playAsync(); 
-  }
+    await sound.playAsync();
+  };
   const play = async () => {
     if (audio) {
       await audio.playAsync();
     }
-  }
+  };
 
   const pause = async () => {
     if (audio) {
       await audio.pauseAsync();
     }
-  }
+  };
 
-  useEffect(() => {
-    return audio
-      ? () => {
-          console.log('Unloading audio');
-          audio.unloadAsync(); }
-      : undefined;
-  }, [audio]);
-
+  useEffect(() => (audio
+    ? () => {
+      console.log('Unloading audio');
+      audio.unloadAsync();
+    }
+    : undefined), [audio]);
 
   return (
     <snippetContext.Provider value={{
