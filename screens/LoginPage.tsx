@@ -3,20 +3,30 @@
 import React from 'react';
 import {
   View,
-  Text,
+  ImageBackground,
 } from 'react-native';
-import useSpotifyContext from '../hooks/useSpotifyAuth';
+import BACKGROUND_IMAGE from '../assets/swiperr-splash.png';
+import { DIMENSION_HEIGHT } from '../assets/styles';
+import { Login } from '../components';
+import { LoginMock } from '../components/Login';
 
-function LoginPage() {
-  const { likedSongs, getLikedSongs, token } = useSpotifyContext();
-
+function LoginPage({ navigation }: any) {
   return (
-    <View>
-      <Text>
-        Login
-      </Text>
-      ;
-    </View>
+    <ImageBackground style={{ height: '100%' }} source={BACKGROUND_IMAGE}>
+      <View style={{ height: DIMENSION_HEIGHT }}>
+        <View style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          marginTop: "130%", 
+          // space between rows
+          
+        
+          }}>
+          <Login navigation={navigation} />
+          <LoginMock navigation={navigation} />
+        </View>
+      </View>
+    </ImageBackground>
   );
 }
 

@@ -4,7 +4,6 @@ import {
 } from 'react-native';
 import { Playlists, Cards } from '../components';
 import styles from '../assets/styles';
-import SwipeCardProvider from '../components/card-components/CardProvider';
 import useSpotifyContext from '../hooks/useSpotifyAuth';
 
 function Explore() {
@@ -18,10 +17,8 @@ function Explore() {
         style={styles.bg}
         resizeMode="cover"
       >
-        <SwipeCardProvider>
-          <Cards />
-          <Playlists />
-        </SwipeCardProvider>
+        <Cards />
+        <Playlists />
       </ImageBackground>
     </View>
   );
