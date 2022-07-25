@@ -3,7 +3,7 @@ import { useAuthRequest } from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
 import { CLIENT_ID, CLIENT_SECRET } from '@env';
 import axios from 'axios';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import useAutoExchange from './useAutoExchange';
 import {
   discovery, redirectUri, meEndpoint, recomendationEndpoint,

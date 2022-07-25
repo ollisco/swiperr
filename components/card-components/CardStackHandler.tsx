@@ -45,14 +45,26 @@ function CardStackHandler(_style: any) {
       swiper?.jumpToCardIndex(0);
       console.log(userTopItems[0]);
     }
-    if (showType === 'new') {
-      if (userTopItems.length > 0 && newReleases.length > 0) {
-        queueAndSkip(newReleases[0]);
-        setNewReleasesIndex(0);
-        setRecommendedIndex(0);
-      }
-    }
   }, [userTopItems, newReleases]);
+
+  React.useEffect(() => {
+    if (showType === "recommended") {
+      swiper?.jumpToCardIndex(recommendedIndex);
+    }
+    else if (showType === "new") {
+      swiper?.jumpToCardIndex(newReleasesIndex);
+    } else {
+      console.warn("Unexpected show type:", showType);
+    }
+  }), [showType];
+
+  React.useEffect(() => {
+    try{
+      console.log("S", userTopItems[recommendedIndex]);
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
 
   return (
     <View style={{ borderColor: '#000', borderWidth: 3, height: CARD_HEIGHT }}>
@@ -83,18 +95,19 @@ function CardStackHandler(_style: any) {
               if (token && userTopItems[recommendedIndex + 1] !== undefined) {
                 queueAndSkip(userTopItems[recommendedIndex + 1]);
                 setRecommendedIndex(recommendedIndex + 1);
-                setNewReleasesIndex(newReleasesIndex + 1);
+                // setNewReleasesIndex(newReleasesIndex + 1);
               }
             }}
             onSwipedAborted={() => {
               setRGB(DARK_GRAY);
             }}
             onSwipedAll={() => {
-              getTopUserItems();
-              getNewReleases();
-              setNewReleasesIndex(0);
               setRecommendedIndex(0);
+              getTopUserItems();
+              // getNewReleases();
+              // setNewReleasesIndex(0);
             }}
+            
             onSwipedRight={(index) => {
               console.log(index);
               if (token) {
@@ -143,7 +156,7 @@ function CardStackHandler(_style: any) {
                 setRGB(DARK_GRAY);
                 if (token && newReleases[newReleasesIndex + 1] !== undefined) {
                   queueAndSkip(newReleases[newReleasesIndex + 1]);
-                  setRecommendedIndex(recommendedIndex + 1);
+                  // setRecommendedIndex(recommendedIndex + 1);
                   setNewReleasesIndex(newReleasesIndex + 1);
                 }
               }}
@@ -151,10 +164,8 @@ function CardStackHandler(_style: any) {
                 setRGB(DARK_GRAY);
               }}
               onSwipedAll={() => {
-                getTopUserItems();
                 getNewReleases();
                 setNewReleasesIndex(0);
-                setRecommendedIndex(0);
               }}
               onSwipedRight={(index) => {
                 if (token) {
