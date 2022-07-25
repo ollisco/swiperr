@@ -132,7 +132,7 @@ function CardStackHandler(_style: any) {
                   image={{ uri: card.images[0].url }}
                   track={card.name || '*No Track Name Found*'}
                   releaseDate={card.releaseDate || '*No Release Date Found*'}
-                  popularity={card.popularity || '*No Popularity Found*'}
+                  popularity={card.popularity || '0'}
                   artist={card.artists.map((artist: any) => artist.name).join(', ') || '*No Artist Found*'}
                   id={index}
                 />
