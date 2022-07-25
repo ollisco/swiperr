@@ -24,7 +24,6 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
   // useErrorContext
   const { addErrorText } = useError();
 
-
   const addTrackAndPlay = async (url: string) => {
     // console.log('Loading Sound');
 
@@ -38,36 +37,34 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
         volume: 1,
       },
     );
-    setAudio(sound);  
+    setAudio(sound);
   };
   const play = async () => {
-    try{
+    try {
       if (audio) {
         await audio.playAsync();
       }
-    }
-    catch(e){
+    } catch (e) {
       addErrorText(e.message);
     }
   };
 
   const pause = async () => {
-    try{
+    try {
       if (audio) {
         await audio.pauseAsync();
       }
-    }
-    catch(e){
+    } catch (e) {
       addErrorText(e.message);
-    } 
+    }
   };
 
   const replay = async () => {
     if (audio) {
       await audio.stopAsync();
       await audio.playAsync();
-    } 
-  }
+    }
+  };
 
   useEffect(() => (audio
     ? () => {

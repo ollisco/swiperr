@@ -132,9 +132,9 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [availableMarkets, setAvailableMarkets] = useState(null);
   const [chosenMarket, setChosenMarket] = useState<string | null>(null);
 
-  const loadedDefaultPlaylist = getDefaultPlaylist().then((val: any) => {return val}) || likeSongString;
+  const loadedDefaultPlaylist = getDefaultPlaylist().then((val: any) => val) || likeSongString;
   const [defaultPlaylist, setDefaultPlaylist] = useState<any>(loadedDefaultPlaylist); // Either equal to liked songs or a playlist uri
-  
+
   const [config, setConfig] = useState<any>(null);
   const [allowVolumeControll, setAllowVolumeControll] = useState<boolean>(true);
   const [playSnippets, setPlaySnippets] = useState<boolean>(true);
@@ -532,11 +532,9 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
 
   function switchPlayingState() {
     if (playSnippets) {
-      console.log('snippet');
       isPlaying ? pauseSnippet() : playSnippet();
       setIsPlaying(!isPlaying);
     } else {
-      console.log('spotify');
       isPlaying ? pause() : play();
     }
   }
