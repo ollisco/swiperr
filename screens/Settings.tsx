@@ -73,7 +73,11 @@ function SettingItems() {
     storeDefaultPlaylist(playlist);
   }
 
-  console.log('DEFAULT:', defaultPlaylist);
+  React.useEffect(() => {
+    Promise.resolve(defaultPlaylist).then((val: any) => {
+      setPlaylistShowValue(val.name || likedSongString);
+    });
+  }), [defaultPlaylist];
 
   React.useEffect(() => {
     Promise.resolve(defaultPlaylist).then((val: any) => {
