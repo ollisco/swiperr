@@ -131,9 +131,10 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [topTracks, setTopTracks] = useState<string>('Track 1, Track 2, Track 3');
   const [availableMarkets, setAvailableMarkets] = useState(null);
   const [chosenMarket, setChosenMarket] = useState<string | null>(null);
-  const loadedDefaultPlaylist = getDefaultPlaylist() || likeSongString;
 
+  const loadedDefaultPlaylist = getDefaultPlaylist().then((val: any) => {return val}) || likeSongString;
   const [defaultPlaylist, setDefaultPlaylist] = useState<any>(loadedDefaultPlaylist); // Either equal to liked songs or a playlist uri
+  
   const [config, setConfig] = useState<any>(null);
   const [allowVolumeControll, setAllowVolumeControll] = useState<boolean>(true);
   const [playSnippets, setPlaySnippets] = useState<boolean>(true);
@@ -302,9 +303,9 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         addErrorText(err.response.data.error.message);
       });
     } else {
-      console.log(defaultPlaylist, trackId);
+      const playlist = await defaultPlaylist;
       const trackUri = `spotify:track:${trackId}`;
-      addTrackToPlaylist(defaultPlaylist.id, trackUri);
+      addTrackToPlaylist(playlist.id, trackUri);
     }
   }
 
