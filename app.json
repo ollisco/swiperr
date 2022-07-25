@@ -2,7 +2,7 @@
   "expo": {
     "name": "swiperr",
     "slug": "swiperr",
-    "version": "1.0.12",
+    "version": "1.0.15",
     "scheme": "swiperr",
     "orientation": "portrait",
     "icon": "./assets/swiperr-logo-square.png",
@@ -27,7 +27,7 @@
       },
       "icon": "./assets/swiperr-logo-square.png",
       "package": "com.ollisco.reactnativeapp",
-      "versionCode": 13
+      "versionCode": 16
     },
     "web": {
       "favicon": "./assets/swiperr-logo-circle.png"

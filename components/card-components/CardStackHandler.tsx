@@ -43,24 +43,21 @@ function CardStackHandler(_style: any) {
   }
 
   React.useEffect(() => {
-    if (userTopItems.length > 0 && newReleases.length > 0) {
-      swiper?.jumpToCardIndex(0);
-      console.log(userTopItems[0]);
-    }
-  }, [userTopItems, newReleases]);
-
-  React.useEffect(() => {
     if (showType !== cardType) {
       setCardType(showType);
-      if (showType === 'recommended') {
-        swiper?.jumpToCardIndex(recommendedIndex);
-      } else if (showType === 'new') {
-        swiper?.jumpToCardIndex(newReleasesIndex);
-      } else {
-        console.warn('Unexpected show type:', showType);
-      }
     }
   }), [showType];
+
+  React.useEffect(() => {
+    if (showType === 'recommended') {
+      swiper?.jumpToCardIndex(recommendedIndex);
+    } else if (showType === 'new') {
+      swiper?.jumpToCardIndex(newReleasesIndex);
+    } else {
+      console.warn('Unexpected show type:', showType);
+    }
+    
+  }), [cardType];
 
   return (
     <View style={{ borderColor: '#000', borderWidth: 3, height: CARD_HEIGHT }}>
