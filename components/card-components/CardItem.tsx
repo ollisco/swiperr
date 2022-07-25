@@ -18,6 +18,7 @@ import styles, {
 import { SwipeCardContext } from './CardProvider';
 import useSpotifyContext from '../../hooks/useSpotifyAuth';
 import { TopRow } from './Cards';
+import useSnippetContext from '../../hooks/useSnippet';
 
 function CardItem({
   hasActions,
@@ -50,6 +51,8 @@ function CardItem({
 
   } = useSpotifyContext();
 
+  const { replay } = useSnippetContext();
+
   if (track.length > 25) {
     track = `${track.slice(0, 25)}...`;
   }
@@ -64,9 +67,9 @@ function CardItem({
     <View style={styleContainer}>
       {/* IMAGE */}
       <TopRow />
-      <View style={{ flexDirection: flexDir }}>
+      <TouchableOpacity style={{ flexDirection: flexDir }} onPress={replay}>
         <Image source={image} style={styles.imageStyle} />
-      </View>
+      </TouchableOpacity>
       <View style={styles.matchesCardItem}>
         <Text style={styles.matchesTextCardItem}>
           <Icon name="heart" color={WHITE} size={13} />

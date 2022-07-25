@@ -4,11 +4,13 @@ import { Audio } from 'expo-av';
 const snippetContext: React.Context<{
   addTrackAndPlay: (url: string) => Promise<void>,
   pause: () => Promise<void>,
-  play: () => Promise<void>
+  play: () => Promise<void>,
+  replay: () => Promise<void>
 }> = React.createContext({
   addTrackAndPlay: (url: string) => new Promise<void>(() => {}),
   pause: () => new Promise<void>(() => {}),
   play: () => new Promise<void>(() => {}),
+  replay: () => new Promise<void>(() => {}),
 });
 
 interface Props {
@@ -44,6 +46,13 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
     }
   };
 
+  const replay = async () => {
+    if (audio) {
+      await audio.stopAsync();
+      await audio.playAsync();
+    } 
+  }
+
   useEffect(() => (audio
     ? () => {
       // console.log('Unloading audio');
@@ -56,6 +65,7 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
       addTrackAndPlay,
       pause,
       play,
+      replay,
     }}
     >
       {children}
