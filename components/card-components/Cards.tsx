@@ -1,13 +1,9 @@
-import { View, Text, TouchableOpacity } from 'react-native';
-import React, { useContext } from 'react';
+import { View } from 'react-native';
+import React from 'react';
 import styles from '../../assets/styles';
-import useSpotifyContext from '../../hooks/useSpotifyAuth';
 import CardStackHandler from './CardStackHandler';
-import { SwipeCardContext } from './CardProvider';
-import { SwipedCardContextT } from '../../types';
 
 type Props = {}
-
 
 function Cards(props: Props) {
   return (

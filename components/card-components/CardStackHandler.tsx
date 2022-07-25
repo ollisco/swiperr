@@ -52,14 +52,12 @@ function CardStackHandler(_style: any) {
   React.useEffect(() => {
     if (showType !== cardType) {
       setCardType(showType);
-      if (showType === "recommended") {
+      if (showType === 'recommended') {
         swiper?.jumpToCardIndex(recommendedIndex);
-      }
-      else if (showType === "new") {
-        
+      } else if (showType === 'new') {
         swiper?.jumpToCardIndex(newReleasesIndex);
       } else {
-        console.warn("Unexpected show type:", showType);
+        console.warn('Unexpected show type:', showType);
       }
     }
   }), [showType];
@@ -105,7 +103,7 @@ function CardStackHandler(_style: any) {
               // getNewReleases();
               // setNewReleasesIndex(0);
             }}
-            
+
             onSwipedRight={(index) => {
               console.log(index);
               if (token) {

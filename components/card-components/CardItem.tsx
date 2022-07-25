@@ -87,7 +87,6 @@ export function TopRow() {
   );
 }
 
-
 function CardItem({
   hasActions,
   image,
