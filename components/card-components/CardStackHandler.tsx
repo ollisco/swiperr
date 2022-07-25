@@ -42,13 +42,6 @@ function CardStackHandler(_style: any) {
     return `rgb(${m}, ${54 - ((54 * -d) / 300) + 20}, ${54 - ((54 * -d) / 300) + 20})`;
   }
 
-  // React.useEffect(() => {
-  //   if (userTopItems.length > 0 && newReleases.length > 0) {
-  //     swiper?.jumpToCardIndex(0);
-  //     console.log(userTopItems[0]);
-  //   }
-  // }, [userTopItems, newReleases]);
-
   React.useEffect(() => {
     if (showType !== cardType) {
       setCardType(showType);
