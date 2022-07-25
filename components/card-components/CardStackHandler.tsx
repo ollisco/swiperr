@@ -58,6 +58,14 @@ function CardStackHandler(_style: any) {
     }
   }), [showType];
 
+  React.useEffect(() => {
+    try{
+      console.log("S", userTopItems[recommendedIndex]);
+    } catch (e) {
+      console.log(e);
+    }
+  }, []);
+
   return (
     <View style={{ borderColor: '#000', borderWidth: 3, height: CARD_HEIGHT }}>
       {userTopItems.length > 0 && showType === 'recommended'
@@ -94,8 +102,8 @@ function CardStackHandler(_style: any) {
               setRGB(DARK_GRAY);
             }}
             onSwipedAll={() => {
-              getTopUserItems();
               setRecommendedIndex(0);
+              getTopUserItems();
               // getNewReleases();
               // setNewReleasesIndex(0);
             }}

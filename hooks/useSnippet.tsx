@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Audio } from 'expo-av';
+import useError from './useError';
 
 const snippetContext: React.Context<{
   addTrackAndPlay: (url: string) => Promise<void>,
@@ -20,6 +21,10 @@ interface Props {
 export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
   const [audio, setAudio] = useState<Audio.Sound | null>(null);
 
+  // useErrorContext
+  const { addErrorText } = useError();
+
+
   const addTrackAndPlay = async (url: string) => {
     // console.log('Loading Sound');
 
@@ -36,15 +41,25 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
     setAudio(sound);  
   };
   const play = async () => {
-    if (audio) {
-      await audio.playAsync();
+    try{
+      if (audio) {
+        await audio.playAsync();
+      }
+    }
+    catch(e){
+      addErrorText(e.message);
     }
   };
 
   const pause = async () => {
-    if (audio) {
-      await audio.pauseAsync();
+    try{
+      if (audio) {
+        await audio.pauseAsync();
+      }
     }
+    catch(e){
+      addErrorText(e.message);
+    } 
   };
 
   const replay = async () => {
