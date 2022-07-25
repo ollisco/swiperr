@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/swiperr/static/js/app.18b7f58e.chunk.js",
-    "app.js.map": "/swiperr/static/js/app.18b7f58e.chunk.js.map",
+    "app.js": "/swiperr/static/js/app.7ca2b56b.chunk.js",
+    "app.js.map": "/swiperr/static/js/app.7ca2b56b.chunk.js.map",
     "runtime~app.js": "/swiperr/static/js/runtime~app.c760241a.js",
     "runtime~app.js.map": "/swiperr/static/js/runtime~app.c760241a.js.map",
-    "static/js/2.7e21ae65.chunk.js": "/swiperr/static/js/2.7e21ae65.chunk.js",
-    "static/js/2.7e21ae65.chunk.js.map": "/swiperr/static/js/2.7e21ae65.chunk.js.map",
+    "static/js/2.3783c619.chunk.js": "/swiperr/static/js/2.3783c619.chunk.js",
+    "static/js/2.3783c619.chunk.js.map": "/swiperr/static/js/2.3783c619.chunk.js.map",
     "fonts/AntDesign.ttf": "/swiperr/./fonts/AntDesign.ttf",
     "fonts/Entypo.ttf": "/swiperr/./fonts/Entypo.ttf",
     "fonts/Feather.ttf": "/swiperr/./fonts/Feather.ttf",
@@ -24,7 +24,7 @@
     "index.html": "/swiperr/index.html",
     "manifest.json": "/swiperr/manifest.json",
     "serve.json": "/swiperr/serve.json",
-    "static/js/2.7e21ae65.chunk.js.LICENSE.txt": "/swiperr/static/js/2.7e21ae65.chunk.js.LICENSE.txt",
+    "static/js/2.3783c619.chunk.js.LICENSE.txt": "/swiperr/static/js/2.3783c619.chunk.js.LICENSE.txt",
     "static/media/banger.jpg": "/swiperr/static/media/banger.bb266617.jpg",
     "static/media/bg2.jpg": "/swiperr/static/media/bg2.a5ed1007.jpg",
     "static/media/dio.jpg": "/swiperr/static/media/dio.6a2fb57d.jpg",
@@ -34,12 +34,13 @@
     "static/media/odz.jpg": "/swiperr/static/media/odz.a48909a6.jpg",
     "static/media/post.jpg": "/swiperr/static/media/post.61b3850d.jpg",
     "static/media/skepta.jpg": "/swiperr/static/media/skepta.f0f62bb2.jpg",
+    "static/media/swiperr-splash.png": "/swiperr/static/media/swiperr-splash.26a8d603.png",
     "static/media/travis.jpg": "/swiperr/static/media/travis.a6dcc371.jpg",
     "static/media/xxx.jpg": "/swiperr/static/media/xxx.a0b6a7dc.jpg"
   },
   "entrypoints": [
     "static/js/runtime~app.c760241a.js",
-    "static/js/2.7e21ae65.chunk.js",
-    "static/js/app.18b7f58e.chunk.js"
+    "static/js/2.3783c619.chunk.js",
+    "static/js/app.7ca2b56b.chunk.js"
   ]
 }
