@@ -17,6 +17,7 @@ import styles, {
 } from '../../assets/styles';
 import { SwipeCardContext } from './CardProvider';
 import useSpotifyContext from '../../hooks/useSpotifyAuth';
+import { TopRow } from './Cards';
 
 function CardItem({
   hasActions,
@@ -62,6 +63,7 @@ function CardItem({
   return (
     <View style={styleContainer}>
       {/* IMAGE */}
+      <TopRow />
       <View style={{ flexDirection: flexDir }}>
         <Image source={image} style={styles.imageStyle} />
       </View>

@@ -22,7 +22,7 @@ export const ERROR = '#770707';
 export const DIMENSION_WIDTH = Dimensions.get('window').width; // window not screen
 export const DIMENSION_HEIGHT = Dimensions.get('window').height;
 
-export const CARD_HEIGHT = (DIMENSION_HEIGHT - 50) * 0.8;
+export const CARD_HEIGHT = (DIMENSION_HEIGHT - 50) * 0.9;
 
 export default StyleSheet.create({
   // COMPONENT - CARD ITEM
@@ -40,7 +40,7 @@ export default StyleSheet.create({
     shadowOffset: { height: 0, width: 0 },
     // center children
     justifyContent: 'center',
-    marginTop: -50,
+    marginTop: -30,
     marginLeft: -25,
 
   },
@@ -118,8 +118,13 @@ export default StyleSheet.create({
 
   exploreTopCenterText: {
     color: GRAY,
-    fontSize: 15,
+    fontSize: 20,
     marginHorizontal: 10,
+    fontWeight: 'bold',
+  },
+
+  lighterBar: {
+    fontWeight: 'normal',
   },
 
   exploreTopCenterTextActive: {
@@ -402,6 +407,9 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    textAlign: 'center',
+    // text size 20
+
   },
   title: {
     paddingBottom: 10,

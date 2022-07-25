@@ -14,15 +14,14 @@ function LoginPage({ navigation }: any) {
   return (
     <ImageBackground style={{ height: '100%' }} source={BACKGROUND_IMAGE}>
       <View style={{ height: DIMENSION_HEIGHT }}>
-        <View style={{
-          display: 'flex',
-          alignItems: 'center',
-          marginTop: '130%',
+        <View style={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          marginTop: "130%", 
           // space between rows
-          marginBottom: '10%',
-
-        }}
-        >
+          
+        
+          }}>
           <Login navigation={navigation} />
           <LoginMock navigation={navigation} />
         </View>
