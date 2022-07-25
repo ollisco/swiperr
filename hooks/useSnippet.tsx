@@ -55,6 +55,7 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
 
   useEffect(() => (audio
     ? () => {
+      // console.log('Unloading audio');
       audio.unloadAsync();
     }
     : undefined), [audio]);
