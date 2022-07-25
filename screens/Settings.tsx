@@ -11,8 +11,8 @@ import useSpotifyContext from '../hooks/useSpotifyAuth';
 import { getLocation } from '../components/utils/country-utils';
 import { mobileRedirectUri, redirectUri, webRedirectUri } from '../hooks/utils/auth-utils';
 import { dropdownSize } from '../types';
-import useSnippetContext from '../hooks/useSnippet';
-import useError from '../hooks/useError';
+
+const likedSongString = 'Liked songs';
 
 function MockSettingItems() {
   const [exampleBool, setExampleBool] = useState(false);
@@ -56,30 +56,34 @@ function MockSettingItems() {
 function SettingItems() {
   const {
     playlists,
-    setDefaultPlaylist,
+    defaultPlaylist,
+    storeDefaultPlaylist,
     availableMarkets,
     chosenMarket,
     setChosenMarket,
-    queueAndSkip,
-    playSnippets,
-    setPlaySnippets,
-    pause: pauseSpotify,
-    getUserRecommendedTracks,
-    getNewReleases,
   } = useSpotifyContext();
+  const [playlistShowValue, setPlaylistShowValue] = useState(defaultPlaylist.name || likedSongString);
 
-  const { pause: pauseSnippet } = useSnippetContext();
-  const { addErrorText } = useError();
-
-  const likedSongs = 'Liked songs';
-  function getDefaultPlaylist(playlistName: string) {
-    if (playlistName === likedSongs) {
-      setDefaultPlaylist(likedSongs);
+  function setDefaultPlaylist(playlistName: string) {
+    if (playlistName === likedSongString) {
+      storeDefaultPlaylist(likedSongString);
       return;
     }
     const playlist = playlists.find((playlist: { name: string; }) => playlist.name === playlistName);
-    setDefaultPlaylist(playlist.id);
+    storeDefaultPlaylist(playlist);
   }
+
+  React.useEffect(() => {
+    Promise.resolve(defaultPlaylist).then((val: any) => {
+      setPlaylistShowValue(val.name || likedSongString);
+    });
+  }), [defaultPlaylist];
+
+  React.useEffect(() => {
+    Promise.resolve(defaultPlaylist).then((val: any) => {
+      setPlaylistShowValue(val.name || likedSongString);
+    });
+  }), [defaultPlaylist];
 
   return (
     <View>
@@ -103,11 +107,11 @@ function SettingItems() {
       <SettingItemDropdown
         header="Default Playlist"
         explanation="The default playlist where right swiped cards apear. Please only choose playlists that you own or can add music to."
-        options={[likedSongs, ...playlists.map((playlist: { name: string; }) => playlist.name)]}
-        defaultValue={likedSongs}
+        options={[likedSongString, ...playlists.map((playlist: { name: string; }) => playlist.name)]}
+        defaultValue={playlistShowValue}
         dropdownSize={dropdownSize.MEDIUM}
         onSelect={(value: string) => {
-          getDefaultPlaylist(value);
+          setDefaultPlaylist(value);
         }}
       />
       {/* Kinda works but cause WIERD crashes */}

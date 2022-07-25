@@ -6,3 +6,4 @@ declare module 'country-data';
 declare module 'react-native-slider';
 declare module 'react-native-modal-dropdown';
 declare module 'loadash';
+declare module '@react-native-community/async-storage';
