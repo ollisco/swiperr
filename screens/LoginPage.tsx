@@ -6,7 +6,7 @@ import {
   ImageBackground,
 } from 'react-native';
 import BACKGROUND_IMAGE from '../assets/swiperr-splash.png';
-import { DIMENSION_HEIGHT } from '../assets/styles';
+import { CARD_HEIGHT, DIMENSION_HEIGHT } from '../assets/styles';
 import { Login } from '../components';
 import { LoginMock } from '../components/Login';
 
@@ -17,7 +17,7 @@ function LoginPage({ navigation }: any) {
         <View style={{
           display: 'flex',
           alignItems: 'center',
-          marginTop: '130%',
+          marginTop: CARD_HEIGHT * 0.65,
           // space between rows
 
         }}
