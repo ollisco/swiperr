@@ -23,16 +23,17 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
   const addTrackAndPlay = async (url: string) => {
     // console.log('Loading Sound');
 
-    if (audio) {
-      await pause();
-    }
-
+    // wait for pause then play
     const { sound } = await Audio.Sound.createAsync(
       { uri: url },
+      {
+        shouldPlay: true,
+        isLooping: false,
+        isMuted: false,
+        volume: 1,
+      },
     );
-    setAudio(sound);
-    // console.log('Playing Sound');
-    await sound.playAsync();
+    setAudio(sound);  
   };
   const play = async () => {
     if (audio) {
