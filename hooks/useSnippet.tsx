@@ -19,7 +19,7 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
   const [audio, setAudio] = useState<Audio.Sound | null>(null);
 
   const addTrackAndPlay = async (url: string) => {
-    console.log('Loading Sound');
+    // console.log('Loading Sound');
 
     if (audio) {
       await pause();
@@ -29,7 +29,7 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
       { uri: url },
     );
     setAudio(sound);
-    console.log('Playing Sound');
+    // console.log('Playing Sound');
     await sound.playAsync();
   };
   const play = async () => {
@@ -46,7 +46,7 @@ export const SnippetProvider: React.ReactNode = ({ children }: Props) => {
 
   useEffect(() => (audio
     ? () => {
-      console.log('Unloading audio');
+      // console.log('Unloading audio');
       audio.unloadAsync();
     }
     : undefined), [audio]);

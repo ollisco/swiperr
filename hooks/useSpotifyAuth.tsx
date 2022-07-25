@@ -3,6 +3,7 @@ import { useAuthRequest } from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
 import { CLIENT_ID, CLIENT_SECRET } from '@env';
 import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 import useAutoExchange from './useAutoExchange';
 import {
   discovery, redirectUri, meEndpoint, recomendationEndpoint,
@@ -37,7 +38,8 @@ const SpotifyAuthContext: React.Context<{
   topGenres: string,
   topArtists: string,
   topTracks: string,
-  setDefaultPlaylist: any,
+  defaultPlaylist: any,
+  storeDefaultPlaylist: any,
   availableMarkets: any,
   setChosenMarket: any,
   chosenMarket: any,
@@ -68,7 +70,8 @@ const SpotifyAuthContext: React.Context<{
   topGenres: '',
   topArtists: '',
   topTracks: '',
-  setDefaultPlaylist: null,
+  defaultPlaylist: null,
+  storeDefaultPlaylist: null,
   availableMarkets: null,
   setChosenMarket: null,
   chosenMarket: null,
@@ -80,11 +83,43 @@ const SpotifyAuthContext: React.Context<{
 
 WebBrowser.maybeCompleteAuthSession();
 
+const likeSongString = 'Liked songs';
+
 interface Props {
   children: React.ReactNode
 }
 
+const storeData = async (key: string, value: string) => {
+  try {
+    const jsonValue = JSON.stringify(value);
+    await AsyncStorage.setItem(key, jsonValue);
+  } catch (e) {
+    console.log('failed to store data:', e);
+  }
+};
+
+const getData = async (key: string) => {
+  try {
+    const jsonValue = await AsyncStorage.getItem(key);
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    // error reading value
+    console.log('failed to get data:', e);
+  }
+};
+
 export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
+  const storeDefaultPlaylist = async (value: string) => {
+    const key = '@defaultPlaylist';
+    storeData(key, value).then();
+    setDefaultPlaylist(value);
+  };
+  const getDefaultPlaylist = async () => {
+    const key = '@defaultPlaylist';
+    const val = getData(key);
+    return val;
+  };
+
   const [user, setUser] = useState(null);
   const [recommendedTracks, setRecommendedTracks] = useState([]);
   const [userPlaylists, setUserPlaylists] = useState(null);
@@ -96,16 +131,16 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
   const [topTracks, setTopTracks] = useState<string>('Track 1, Track 2, Track 3');
   const [availableMarkets, setAvailableMarkets] = useState(null);
   const [chosenMarket, setChosenMarket] = useState<string | null>(null);
-  const likeSongString = 'Liked songs';
-  const [defaultPlaylist, setDefaultPlaylist] = useState<string>(likeSongString); // Either equal to liked songs or a playlist uri
+  const loadedDefaultPlaylist = getDefaultPlaylist() || likeSongString;
+
+  const [defaultPlaylist, setDefaultPlaylist] = useState<any>(loadedDefaultPlaylist); // Either equal to liked songs or a playlist uri
   const [config, setConfig] = useState<any>(null);
   const [allowVolumeControll, setAllowVolumeControll] = useState<boolean>(true);
   const [playSnippets, setPlaySnippets] = useState<boolean>(true);
 
   const { addTrackAndPlay, pause: pauseSnippet, play: playSnippet } = useSnippetContext();
-
-  // Error handling
   const { addErrorText } = useError();
+
   const [request, response, promptAsync] = useAuthRequest({
     clientId: CLIENT_ID,
     scopes: ['user-read-email', 'user-read-private', 'user-top-read', 'user-library-read',
@@ -269,7 +304,7 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
     } else {
       console.log(defaultPlaylist, trackId);
       const trackUri = `spotify:track:${trackId}`;
-      addTrackToPlaylist(defaultPlaylist, trackUri);
+      addTrackToPlaylist(defaultPlaylist.id, trackUri);
     }
   }
 
@@ -596,7 +631,8 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
         topTracks,
         topArtists,
         topGenres,
-        setDefaultPlaylist,
+        defaultPlaylist,
+        storeDefaultPlaylist,
         availableMarkets,
         setChosenMarket,
         chosenMarket,
