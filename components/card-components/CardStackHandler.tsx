@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { View, Platform } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import DATA from '../../assets/data/dummy_data_songs';
@@ -30,6 +30,8 @@ function CardStackHandler(_style: any) {
     setNewReleasesIndex,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
 
+  const [cardType, setCardType] = useState('recommended');
+
   const swipeColorLimit = 50;
   function convertRGBgreen(d: number) {
     const m = d > 110 ? 100 : d;
@@ -48,27 +50,23 @@ function CardStackHandler(_style: any) {
   }, [userTopItems, newReleases]);
 
   React.useEffect(() => {
-    if (showType === "recommended") {
-      swiper?.jumpToCardIndex(recommendedIndex);
-    }
-    else if (showType === "new") {
-      swiper?.jumpToCardIndex(newReleasesIndex);
-    } else {
-      console.warn("Unexpected show type:", showType);
+    if (showType !== cardType) {
+      setCardType(showType);
+      if (showType === "recommended") {
+        swiper?.jumpToCardIndex(recommendedIndex);
+      }
+      else if (showType === "new") {
+        
+        swiper?.jumpToCardIndex(newReleasesIndex);
+      } else {
+        console.warn("Unexpected show type:", showType);
+      }
     }
   }), [showType];
 
-  React.useEffect(() => {
-    try{
-      console.log("S", userTopItems[recommendedIndex]);
-    } catch (e) {
-      console.log(e);
-    }
-  }, []);
-
   return (
     <View style={{ borderColor: '#000', borderWidth: 3, height: CARD_HEIGHT }}>
-      {userTopItems.length > 0 && showType === 'recommended'
+      {userTopItems.length > 0 && cardType === 'recommended'
         ? (
           <Swiper
             cards={userTopItems}
@@ -132,7 +130,7 @@ function CardStackHandler(_style: any) {
             key="top-items"
           />
         )
-        : newReleases && showType === 'new'
+        : newReleases && cardType === 'new'
           ? (
             <Swiper
               cards={newReleases}

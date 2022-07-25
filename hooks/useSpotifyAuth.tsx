@@ -532,11 +532,9 @@ export const SpotifyAuthProvider: React.ReactNode = ({ children }: Props) => {
 
   function switchPlayingState() {
     if (playSnippets) {
-      console.log('snippet');
       isPlaying ? pauseSnippet() : playSnippet();
       setIsPlaying(!isPlaying);
     } else {
-      console.log('spotify');
       isPlaying ? pause() : play();
     }
   }
