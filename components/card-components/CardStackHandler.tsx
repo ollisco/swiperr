@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { View, Platform } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import DATA from '../../assets/data/dummy_data_songs';
@@ -43,17 +43,18 @@ function CardStackHandler(_style: any) {
   }
 
   // when showType updates jump to swiper index
-  React.useEffect(() => {
-    if (swiper) {
-      if (showType === 'recommended') {
-        swiper.jumpToCardIndex(recommendedIndex);
-      } else if (showType === 'new') {
-        swiper.jumpToCardIndex(newReleasesIndex);
+  React.useEffect(
+    () => {
+      if (swiper) {
+        if (showType === 'recommended') {
+          swiper.jumpToCardIndex(recommendedIndex);
+        } else if (showType === 'new') {
+          swiper.jumpToCardIndex(newReleasesIndex);
+        }
       }
-    }
-  }
-  , [showType, swiper, recommendedIndex, newReleasesIndex]);
-
+    },
+    [showType, swiper, recommendedIndex, newReleasesIndex],
+  );
 
   return (
     <View style={{ borderColor: '#000', borderWidth: 3, height: CARD_HEIGHT }}>
