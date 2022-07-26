@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { View, Platform } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 import DATA from '../../assets/data/dummy_data_songs';
@@ -30,7 +30,7 @@ function CardStackHandler(_style: any) {
     setNewReleasesIndex,
   } = useContext(SwipeCardContext) as SwipedCardContextT;
 
-  const [cardType, setCardType] = useState('recommended');
+  // const [cardType, setCardType] = useState('recommended');
 
   const swipeColorLimit = 50;
   function convertRGBgreen(d: number) {
@@ -42,26 +42,23 @@ function CardStackHandler(_style: any) {
     return `rgb(${m}, ${54 - ((54 * -d) / 300) + 20}, ${54 - ((54 * -d) / 300) + 20})`;
   }
 
-  React.useEffect(() => {
-    if (showType !== cardType) {
-      setCardType(showType);
-    }
-  }), [showType];
-
-  React.useEffect(() => {
-    if (showType === 'recommended') {
-      swiper?.jumpToCardIndex(recommendedIndex);
-    } else if (showType === 'new') {
-      swiper?.jumpToCardIndex(newReleasesIndex);
-    } else {
-      console.warn('Unexpected show type:', showType);
-    }
-    
-  }), [cardType];
+  // when showType updates jump to swiper index
+  React.useEffect(
+    () => {
+      if (swiper) {
+        if (showType === 'recommended') {
+          swiper.jumpToCardIndex(recommendedIndex);
+        } else if (showType === 'new') {
+          swiper.jumpToCardIndex(newReleasesIndex);
+        }
+      }
+    },
+    [showType, swiper, recommendedIndex, newReleasesIndex],
+  );
 
   return (
     <View style={{ borderColor: '#000', borderWidth: 3, height: CARD_HEIGHT }}>
-      {userTopItems.length > 0 && cardType === 'recommended'
+      {userTopItems.length > 0 && showType === 'recommended'
         ? (
           <Swiper
             cards={userTopItems}
@@ -125,7 +122,7 @@ function CardStackHandler(_style: any) {
             key="top-items"
           />
         )
-        : newReleases && cardType === 'new'
+        : newReleases && showType === 'new'
           ? (
             <Swiper
               cards={newReleases}
