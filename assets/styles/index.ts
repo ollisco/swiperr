@@ -280,8 +280,8 @@ export default StyleSheet.create({
     backgroundColor: WHITE,
     padding: 10,
     borderRadius: 20,
-    width: 160,
-    height: 50,
+    width: 180,
+    height: 70,
     elevation: 1,
     shadowOpacity: 0.05,
     shadowRadius: 10,
@@ -289,15 +289,21 @@ export default StyleSheet.create({
     shadowOffset: { height: 0, width: 0 },
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 10,
+
   },
 
   loginText: {
-    // center the text
     color: DARK_GRAY,
     fontSize: 30,
     textAlign: 'center',
-    // bold
     fontWeight: 'bold',
+    // box shadow
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+    shadowColor: BLACK,
+    shadowOffset: { height: 0, width: 0 },
+
   },
 
   // COMPONENT - MESSAGE
