@@ -289,15 +289,21 @@ export default StyleSheet.create({
     shadowOffset: { height: 0, width: 0 },
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 10,
+
   },
 
   loginText: {
-    // center the text
     color: DARK_GRAY,
     fontSize: 30,
     textAlign: 'center',
-    // bold
     fontWeight: 'bold',
+    // box shadow
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+    shadowColor: BLACK,
+    shadowOffset: { height: 0, width: 0 },
+
   },
 
   // COMPONENT - MESSAGE
